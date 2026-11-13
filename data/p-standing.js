@@ -5,7 +5,7 @@ const HIPS = { a: { to: 'hip', bend: -1 }, b: { to: 'hip', bend: -1 } };
 export default [
   {
     id: 'mountain', sa: 'Tadasana', en: 'Mountain', he: 'תנוחת ההר', ru: 'Гора', cat: 'standing', sec: 'stand', flow: 10, d: 1, hold: 30, sides: 'single',
-    tags: ['relax', 'back', 'strength'], start: 'sit',
+    tags: ['relax', 'back', 'strength'], start: 'stand',
     kf: { t: 90, s: 90, h: 90, a: [-92, -90], l: ST },
     cue: {
       he: ['עמדו עם כפות רגליים ברוחב האגן ולחצו בעדינות לרצפה.', 'הניחו לברכיים להיות רכות, לא נעולות.', 'אורך בעמוד השדרה, כתפיים רפויות.', 'נשמו עמוק ורגיעו את הלסת.'],
@@ -38,7 +38,7 @@ export default [
   {
     id: 'warrior-1', sa: 'Virabhadrasana I', en: 'Warrior I', he: 'לוחם 1', ru: 'Воин один', cat: 'standing', sec: 'stand', flow: 30, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'], start: 'stand',
-    kf: { t: 90, s: 90, h: 92, a: [92, 92], ...W1 },
+    kf: { t: 92, s: 92, h: 94, a: [95, 95], l: [-22, -90, 0], m: [-142, -142, 0], z: { m: [1, 1, 0.5] }, fix: { m: { x: -118 } } },
     cue: {
       he: ['צעדו רחב, הברך הקדמית מעל הקרסול.', 'הרגל האחורית ישרה ועקב לחוץ לרצפה.', 'הרימו את הידיים והארכו את הגוף.', 'אגן ישר קדימה, נשימה רגועה.'],
       en: ['Step wide with the front knee over the ankle.', 'Keep the back leg straight and the heel pressing down.', 'Raise the arms and lengthen the body.', 'Square the hips forward and breathe calmly.'],
@@ -70,7 +70,7 @@ export default [
   {
     id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: 'מצעד גבוה', ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'], start: 'stand',
-    kf: { t: 92, s: 92, h: 95, a: [90, 90], l: [-20, -90, 0], m: [-140, -140, -60], fix: { m: { x: -120 } } },
+    kf: { t: 82, s: 82, h: 86, a: [80, 80], l: [-10, -90, 0], m: [-150, -150, -78], fix: { m: { x: -128 } } },
     cue: {
       he: ['צעד גדול קדימה, עקב אחורי מורם.', 'הברך הקדמית מעל הקרסול.', 'הרגל האחורית פעילה וישרה.', 'הרימו את הידיים והארכו את הגוף.'],
       en: ['Step far forward with the back heel lifted.', 'Front knee stays over the ankle.', 'Keep the back leg active and straight.', 'Raise the arms and lengthen the body.'],
@@ -94,7 +94,7 @@ export default [
     },
     safe: { he: 'בעיות שיווי משקל: עמדו ליד קיר. לא להניח את הכף על הברך.', en: 'Balance issues: stand beside a wall. Never press the foot against the knee.', ru: 'Если трудно держать равновесие, встаньте у стены. Не упирайте стопу в колено.' },
     v: [
-      { he: 'קצה כף הרגל נוגע ברצפה ליד הקרסול.', en: 'Toes rest on the floor beside the ankle.', ru: 'Носок касается пола рядом с лодыжкой.', kf: { m: [-80, -100, -40] } },
+      { he: 'קצה כף הרגל נוגע ברצפה ליד הקרסול.', en: 'Toes rest on the floor beside the ankle.', ru: 'Носок касается пола рядом с лодыжкой.', kf: { m: [-62, -110, -15] } },
       { he: 'כף הרגל על השוק, ידיים בחזה.', en: 'Foot on the calf, hands at the chest.', ru: 'Стопа на голени, руки у груди.', kf: {} },
       { he: 'כף הרגל על הירך וידיים בצורת V למעלה.', en: 'Foot on the thigh, arms in a V overhead.', ru: 'Стопа на бедре, руки вверх буквой V.', kf: { m: [-25, -155, -100], a: [70, 75], b: [110, 105] } },
     ],
@@ -166,7 +166,7 @@ export default [
   {
     id: 'revolved-chair', sa: 'Parivrtta Utkatasana', en: 'Revolved chair', he: 'כיסא מסתובב', ru: 'Стул со скручиванием', cat: 'twist', sec: 'stand', flow: 55, d: 2, hold: 20, sides: 'both',
     tags: ['strength', 'noback'], start: 'stand',
-    kf: { t: 62, s: 66, h: 80, a: [-75, -80], b: [100, 95], l: [-35, -95, 0] },
+    kf: { t: 52, s: 64, h: 82, nz: 0.1, tw: 1.5, a: [-62, 38], b: [-50, 50], z: { a: [0.85, 1], b: [0.95, 1] }, l: [-28, -95, 0] },
     cue: {
       he: ['מכסא כופפים ברכיים ומסובבים את החזה הצידה.', 'יד אחת אל הרצפה, השנייה כלפי התקרה.', 'הסיבוב בא מהחזה, לא מהצוואר.', 'נשמו ופתחו את הכתפיים.'],
       en: ['From chair pose, twist the chest to one side.', 'One hand toward the floor, the other toward the ceiling.', 'The turn comes from the chest, not the neck.', 'Breathe and open the shoulders.'],
@@ -174,9 +174,9 @@ export default [
     },
     safe: { he: 'בעיות גב או ברכיים: סיבוב קל עם כפות ידיים בחזה. בהריון הימנעו מסיבוב עמוק.', en: 'Back or knee issues: use a gentle twist with palms at the chest. Pregnancy: avoid deep twists.', ru: 'При проблемах со спиной или коленями скручивайтесь мягко, ладони у груди. При беременности избегайте глубоких скручиваний.' },
     v: [
-      { he: 'כיסא רדוד וכפות ידיים בחזה.', en: 'Shallow chair, palms together.', ru: 'Неглубокий стул, ладони вместе.', kf: { l: [-55, -98, 0], t: 75, s: 75, a: [-60, 60], b: [-60, 60] } },
-      { he: 'יד למטה, יד למעלה.', en: 'One hand down, one hand up.', ru: 'Одна рука вниз, другая вверх.', kf: {} },
-      { he: 'כיסא עמוק וסיבוב רחב.', en: 'Deeper chair and wider twist.', ru: 'Стул глубже, скручивание шире.', kf: { l: [-15, -100, 0], t: 50, s: 55, a: [-85, -85], b: [95, 95] } },
+      { he: 'כיסא רדוד וכפות ידיים בחזה.', en: 'Shallow chair, palms together.', ru: 'Неглубокий стул, ладони вместе.', kf: { l: [-52, -98, 0], t: 72, s: 80, h: 88, tw: 1.25, nz: 0.45, a: [-60, 62], b: [-50, 62], z: { a: [0.85, 1], b: [0.95, 1] } } },
+      { he: 'כפות ידיים יחד, המרפק מחוץ לירך.', en: 'Palms together, elbow hooked outside the thigh.', ru: 'Ладони вместе, локоть снаружи бедра.', kf: {} },
+      { he: 'כיסא עמוק וסיבוב רחב.', en: 'Deeper chair and wider twist.', ru: 'Стул глубже, скручивание шире.', kf: { l: [-12, -100, 0], t: 38, s: 50, h: 70, nz: 0, tw: 1.7, a: [-55, 28], b: [-45, 40], z: { a: [0.85, 1], b: [0.95, 1] } } },
     ],
   },
 ];

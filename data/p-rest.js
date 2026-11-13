@@ -13,13 +13,13 @@ export default [
     v: [
       { he: 'ברך אחת בכל פעם.', en: 'One knee at a time.', ru: 'По одному колену.', kf: { m: [20, -75, 0], s: 180, h: 180 } },
       { he: 'שתי ברכיים לחזה.', en: 'Both knees to the chest.', ru: 'Оба колена к груди.', kf: {} },
-      { he: 'הרימו גם את הראש לכיוון הברכיים.', en: 'Also lift the head toward the knees.', ru: 'Поднимите голову к коленям.', kf: { s: 150, h: 135, t: 175 } },
+      { he: 'הרימו גם את הראש לכיוון הברכיים.', en: 'Also lift the head toward the knees.', ru: 'Поднимите голову к коленям.', kf: { s: 138, h: 118, t: 172, l: [120, -168, -100] } },
     ],
   },
   {
     id: 'supine-twist', sa: 'Supta Matsyendrasana', en: 'Reclined twist', he: 'סיבוב בשכיבה', ru: 'Скручивание лёжа', cat: 'twist', sec: 'cool', flow: 70, d: 1, hold: 35, sides: 'both',
     tags: ['back', 'relax', 'flex'], start: 'lie',
-    kf: { t: 180, s: 180, h: 188, a: [-55, -50], b: [105, 110], l: [50, 10, 0], m: [58, 18, 0], z: { l: [0.85, 0.8, 0.7], m: [0.85, 0.8, 0.7], a: 0.3, b: 0.75 } },
+    kf: { t: 180, s: 180, h: 186, nz: 0.5, a: [-172, -170], b: [168, 172], l: [20, -12, 0], m: [30, -2, 0], z: { l: [0.62, 0.6, 0.7], m: [0.62, 0.6, 0.7], a: 0.55, b: 0.55 } },
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות.', 'הורידו את שתי הברכיים לצד אחד.', 'פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה.', 'הפנו את המבט לצד ההפוך ונשמו.'],
       en: ['Lie on your back with the knees bent.', 'Lower both knees to one side.', 'Open the arms wide and keep the shoulders on the floor.', 'Turn your gaze the other way and breathe.'],
@@ -27,9 +27,9 @@ export default [
     },
     safe: { he: 'כאבי גב תחתון או הריון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות.', en: 'Lower back pain or pregnancy: place a cushion under the knees and go only as far as comfortable.', ru: 'При боли в пояснице или беременности подложите подушку под колени и опускайтесь лишь до удобного предела.' },
     v: [
-      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', kf: { l: [75, -30, 0], m: [80, -25, 0], z: { l: [0.95, 0.9, 0.8], m: [0.95, 0.9, 0.8], a: 0.3, b: 0.85 }, a: [-45, -45], b: [95, 100] } },
+      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', kf: { l: [30, -4, 0], m: [40, 6, 0], z: { l: [0.7, 0.6, 0.7], m: [0.7, 0.6, 0.7], a: 0.55, b: 0.55 } } },
       { he: 'שתי ברכיים לצד.', en: 'Both knees to the side.', ru: 'Оба колена в сторону.', kf: {} },
-      { he: 'רגל אחת ישרה, יד אוחזת בברך.', en: 'One leg straight, hand on the bent knee.', ru: 'Одна нога прямая, рука на согнутом колене.', kf: { m: [0, 0, 80], z: { l: [0.85, 0.8, 0.7], m: 1, a: 0.3, b: 0.75 }, l: [45, 5, 0] } },
+      { he: 'רגל אחת ישרה, יד אוחזת בברך.', en: 'One leg straight, hand on the bent knee.', ru: 'Одна нога прямая, рука на согнутом колене.', kf: { m: [-2, -2, 80], z: { l: [0.5, 0.55, 0.7], m: 1, a: 0.55, b: 0.55 }, l: [10, -6, 0] } },
     ],
   },
   {

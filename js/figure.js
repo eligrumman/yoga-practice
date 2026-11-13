@@ -29,6 +29,7 @@ function ik(p0, target, L1, L2, bend) {
 
 // Optional depth cue: frame.z = { l, m, a, b } foreshortening of a limb (number, or per-segment array).
 // Used for twists, where a limb points toward/away from the viewer and so appears shorter.
+const tzOf = (z) => { const v = z && z.t; return v == null ? 1 : Array.isArray(v) ? v[0] : v; };
 const zv = (z, n) => (z == null ? [1, 1, 1] : Array.isArray(z) ? [z[0] ?? 1, z[1] ?? z[0] ?? 1, z[2] ?? z[1] ?? z[0] ?? 1] : [z, z, z]);
 function legPts(P, l, z) {
   const q = zv(z);
@@ -44,6 +45,7 @@ export function resolve(f) {
   };
   if (f.z) o.z = f.z;
   if (f.tw != null) o.tw = f.tw;
+  if (f.nz != null) o.nz = f.nz;
   const fx = f.fix;
   if (!fx) return o;
   const P = [0, 0];
@@ -65,7 +67,8 @@ export function resolve(f) {
     const [a1, a2] = ik(P, [dx, ay], D.th, D.sh, fx.m.bend ?? 1);
     o.m[0] = a1; o.m[1] = a2;
   }
-  const M = add(P, dir(o.t), D.tl), S = add(M, dir(o.s), D.tl);
+  const TL = D.tl * tzOf(f.z);
+  const M = add(P, dir(o.t), TL), S = add(M, dir(o.s), TL);
   const legs = { l: legPts(P, o.l, f.z?.l), m: legPts(P, o.m, f.z?.m) };
   const hc = add(S, dir(o.h), D.neck + D.head);
   let G = Math.max(P[1] + 13, M[1] + 13, S[1] + 13, hc[1] + 12);
@@ -95,9 +98,10 @@ export function resolve(f) {
 
 export function geometry(f) {
   const P = [0, 0];
-  const M = add(P, dir(f.t), D.tl), S = add(M, dir(f.s), D.tl);
-  const head = add(S, dir(f.h), D.neck + D.head);
   const z = f.z || {};
+  const TL = D.tl * tzOf(z);
+  const M = add(P, dir(f.t), TL), S = add(M, dir(f.s), TL);
+  const head = add(S, dir(f.h), D.neck + D.head);
   const arm = (a, zz) => { const q = zv(zz); const e = add(S, dir(a[0]), D.ua * q[0]); return [S, e, add(e, dir(a[1]), D.fa * q[1])]; };
   return { P, M, S, head, a: arm(f.a, z.a), b: arm(f.b, z.b), l: legPts(P, f.l, z.l), m: legPts(P, f.m, z.m) };
 }
@@ -125,9 +129,10 @@ const zl = (a, b, t) => {
 export function blend(f0, f1, t) {
   const z0 = f0.z || {}, z1 = f1.z || {};
   const zk = {};
-  for (const k of ['l', 'm', 'a', 'b']) if (z0[k] != null || z1[k] != null) zk[k] = zl(z0[k], z1[k], t);
-  const tw0 = f0.tw ?? 1, tw1 = f1.tw ?? 1;
+  for (const k of ['l', 'm', 'a', 'b', 't']) if (z0[k] != null || z1[k] != null) zk[k] = zl(z0[k], z1[k], t);
+  const tw0 = f0.tw ?? 1, tw1 = f1.tw ?? 1, nz0 = f0.nz ?? 1, nz1 = f1.nz ?? 1;
   return {
+    ...(nz0 !== 1 || nz1 !== 1 ? { nz: nz0 + (nz1 - nz0) * t } : {}),
     ...(Object.keys(zk).length ? { z: zk } : {}), ...(tw0 !== 1 || tw1 !== 1 ? { tw: tw0 + (tw1 - tw0) * t } : {}),
     t: lerpA(f0.t, f1.t, t), s: lerpA(f0.s, f1.s, t), h: lerpA(f0.h, f1.h, t),
     a: lerpArr(f0.a, f1.a, t), b: lerpArr(f0.b, f1.b, t),
@@ -200,7 +205,8 @@ export class Figure {
     };
     const s = this.s;
     const tw = (frame.tw ?? 1) * (1 + (breath || 0));
-    s.t1.setAttribute('stroke-width', W.torso * tw); s.t2.setAttribute('stroke-width', W.torso * tw);
+    // twist widens the chest more than the pelvis
+    s.t1.setAttribute('stroke-width', W.torso * (1 + (tw - 1) * 0.3)); s.t2.setAttribute('stroke-width', W.torso * tw);
     ln(s.bua, g.b[0], g.b[1]); ln(s.bfa, g.b[1], g.b[2]);
     ln(s.mth, g.m[0], g.m[1]); ln(s.msh, g.m[1], g.m[2]); ln(s.mft, g.m[2], g.m[3]);
     ln(s.t1, g.P, g.M); ln(s.t2, g.M, g.S);
@@ -210,7 +216,9 @@ export class Figure {
     const h = T(g.head);
     this.headEl.setAttribute('cx', h[0]); this.headEl.setAttribute('cy', h[1]);
     const nd = dir(frame.h - 90);
-    this.nose.setAttribute('cx', h[0] + nd[0] * 8.5); this.nose.setAttribute('cy', h[1] + nd[1] * 8.5 - 1);
+    // frame.nz: 1 = face in profile; 0 = face turned toward the viewer (twists)
+    const nzf = frame.nz ?? 1;
+    this.nose.setAttribute('cx', h[0] + nd[0] * 8.5 * nzf); this.nose.setAttribute('cy', h[1] + nd[1] * 8.5 * nzf - 1);
     this.root.setAttribute('transform', mirror ? `translate(${VBW},0) scale(-1,1)` : '');
     this.drawProps(props, g, T, e, lift);
   }

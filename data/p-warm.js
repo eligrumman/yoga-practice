@@ -4,7 +4,7 @@ export default [
   {
     id: 'tabletop', sa: 'Bharmanasana', en: 'Tabletop', he: 'שולחן', cat: 'warm-up', sec: 'warm', flow: 10, d: 1, hold: 30, sides: 'single',
     ru: 'Стол', tags: ['relax', 'back', 'flex'], start: 'kneel',
-    kf: { t: 15, s: 15, h: 20, a: [-90, -90], l: TABLE_LEGS, fix: { a: { x: 0, bend: -1 } } },
+    kf: { t: 22, s: 22, h: 28, a: [-90, -90], l: TABLE_LEGS, fix: { a: { x: 0, bend: -1 } } },
     cue: {
       he: ['ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.', 'גב ארוך ונייטרלי, מבט אל הרצפה.', 'לחצו בעדינות את כף היד אל הרצפה.', 'נשמו לאט אל הבטן.'],
       en: ['Hands under shoulders, knees under hips.', 'Keep a long, neutral spine and look at the floor.', 'Press your palms gently into the floor.', 'Breathe slowly into your belly.'],
