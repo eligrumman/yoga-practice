@@ -1,0 +1,50 @@
+{
+  "note": "DRAFT. Narration level -> segment ids and timing. <L> = the slot's selected level L0/L1/L2. t = seconds from hold start, remain = seconds left.",
+  "full": {
+    "label": "מלאה",
+    "intro": "session.intro.* composed by plan length (short<=14 min, medium 15-24, long>=25)",
+    "pose_first_side": [
+      {"t": 0,  "ids": ["pose.<id>.intro"]},
+      {"t": "+1", "ids": ["pose.<id>.entry.1..n"], "gap": "1.5 s between clips"},
+      {"t": "after entry", "ids": ["pose.<id>.mod.<L>"]},
+      {"t": "after mod, if budget", "ids": ["pose.<id>.align.1..n"], "gap": "3 s"},
+      {"t": "50% of hold (hold>=20 s)", "ids": ["pose.<id>.breath"]},
+      {"t": "every ~30 s of long holds (>=45 s)", "ids": ["common.breathe_slow"]},
+      {"t": "remain=8", "ids": ["pose.<id>.exit"]},
+      {"t": "remain=4", "ids": ["common.next", "pose.<nextId>.name"]}
+    ],
+    "pose_second_side": [
+      {"t": 0, "ids": ["common.switch_sides", "pose.<id>.side"]},
+      {"t": "after side line", "ids": ["pose.<id>.align.1"]},
+      {"t": "50% of hold", "ids": ["pose.<id>.breath"]}
+    ],
+    "budget": "speech <= 65% of hold; drop order when it does not fit: align.3, align.2, entry.3, exit, align.1, entry.2; never drop entry.1, mod.<L>, breath",
+    "savasana": ["pose.savasana.entry.*", "pose.savasana.breath", "session.close.enter", "session.close.scan.*", "(silence)", "session.close.out.1", "session.close.out.2", "session.close.line"],
+    "halfway": "common.halfway"
+  },
+  "short": {
+    "label": "קצרה",
+    "intro": "session.intro short variant (arrive, breath, safety, start) for every plan length",
+    "pose_first_side": [
+      {"t": 0, "ids": ["pose.<id>.intro"]},
+      {"t": "+1", "ids": ["pose.<id>.entry.1"]},
+      {"t": "if level L0", "ids": ["pose.<id>.mod.L0"]},
+      {"t": "50% of hold (hold>=25 s)", "ids": ["pose.<id>.breath"]}
+    ],
+    "pose_second_side": [{"t": 0, "ids": ["common.switch_sides"]}],
+    "savasana": ["pose.savasana.entry.1", "session.close.enter", "session.close.out.1", "session.close.out.2", "session.close.line"]
+  },
+  "name": {
+    "label": "שם התנוחה בלבד",
+    "intro": ["common.welcome"],
+    "pose_first_side": [{"t": 0, "ids": ["pose.<id>.intro"]}],
+    "pose_second_side": [{"t": 0, "ids": ["common.switch_sides"]}],
+    "savasana": ["common.savasana_end", "common.finish"],
+    "screen_text": "safety note shown on screen before start (not spoken)"
+  },
+  "off": {
+    "label": "ללא קריינות",
+    "all": [],
+    "screen_text": "safety note and pose cues shown on screen only; beeps unchanged"
+  }
+}

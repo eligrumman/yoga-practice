@@ -1,0 +1,3002 @@
+[
+ {
+  "id": "session.intro.arrive",
+  "he": "ברוכים הבאים. מצאו תנוחה נוחה והניחו לגוף להתיישב.",
+  "tier": "intro",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.breath",
+  "he": "שאפו עמוק דרך האף, ונשפו לאט.",
+  "tier": "intro",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.breath2",
+  "he": "עוד נשימה אחת, ובנשיפה הניחו לכתפיים לרדת.",
+  "tier": "intro",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.safety",
+  "he": "התרגול הזה אינו ייעוץ רפואי. זוזו רק בתוך מה שנוח לכם, ואם מופיע כאב, הקלו או עצרו.",
+  "tier": "intro",
+  "words": 17,
+  "secs": 13.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.props",
+  "he": "אם יש לכם בלוק, רצועה, כרית או שמיכה, הניחו אותם קרוב. אפשר גם בלעדיהם.",
+  "tier": "intro",
+  "words": 14,
+  "secs": 11.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.intention",
+  "he": "אם תרצו, בחרו כוונה פשוטה לתרגול, מילה אחת או תחושה אחת.",
+  "tier": "intro",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.intention2",
+  "he": "אולי רוגע, אולי יציבות. אין תשובה נכונה.",
+  "tier": "intro",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.intro.start",
+  "he": "בואו נתחיל.",
+  "tier": "intro",
+  "words": 2,
+  "secs": 3.6,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.enter",
+  "he": "עכשיו זה זמן מנוחה. אין מה לעשות ואין לאן ללכת.",
+  "tier": "close",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.scan.1",
+  "he": "הרגישו את כפות הרגליים והרגליים, והניחו להן להיות כבדות.",
+  "tier": "close",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.scan.2",
+  "he": "הרגישו את הגב, הבטן והחזה, ותנו להם להתרכך עם הנשימה.",
+  "tier": "close",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.scan.3",
+  "he": "הרפו את הידיים, הכתפיים והפנים.",
+  "tier": "close",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.scan.lite",
+  "he": "הרגישו את כל הגוף נח על הרצפה, וההרפיה מתפשטת.",
+  "tier": "close",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.out.1",
+  "he": "העמיקו לאט את הנשימה. הניעו את האצבעות בידיים וברגליים.",
+  "tier": "close",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.out.2",
+  "he": "כשתהיו מוכנים, התגלגלו על הצד ועלו לאט לישיבה.",
+  "tier": "close",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "session.close.line",
+  "he": "תודה שתרגלתם. קחו איתכם את השקט הזה להמשך היום.",
+  "tier": "close",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.entry.1",
+  "he": "בואו אל ארבע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.entry.2",
+  "he": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.tabletop.align.1",
+  "he": "הפיצו את האצבעות ולחצו בעדינות אל הרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.align.2",
+  "he": "גב ארוך ונייטרלי, מבט אל הרצפה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.tabletop.breath",
+  "he": "נשמו לאט אל הבטן.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.tabletop.mod.L0",
+  "he": "אם נוח לכם, רדו אל האמות או הניחו שמיכה מתחת לברכיים.",
+  "tier": "beginner",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.mod.L1",
+  "he": "הישארו בשולחן יציב על כפות הידיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.mod.L2",
+  "he": "אם מתאים לכם, הושיטו יד אחת קדימה ורגל נגדית לאחור.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tabletop.exit",
+  "he": "כשתהיו מוכנים, שחררו לאט וחזרו לשולחן רגוע.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.entry.1",
+  "he": "בואו אל ארבע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.entry.2",
+  "he": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cat-cow.align.1",
+  "he": "בשאיפה הורידו את הבטן והרימו את החזה, פרה.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cat-cow.align.2",
+  "he": "בנשיפה עגלו את הגב אל התקרה, חתול.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.breath",
+  "he": "תנועה אחת לכל נשימה, לאט.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.mod.L0",
+  "he": "אם נוח לכם, הקטינו את התנועה והניחו שמיכה מתחת לברכיים.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.mod.L1",
+  "he": "זרמו בתנועה מלאה עם הנשימה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.mod.L2",
+  "he": "אם מתאים לכם, העמיקו קצת והרימו מעט את המבט בפרה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat-cow.exit",
+  "he": "עצרו באמצע, גב ארוך, ונשמו.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.entry.1",
+  "he": "בואו אל ארבע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.entry.2",
+  "he": "ידיים מתחת לכתפיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.align.1",
+  "he": "הכניסו את הסנטר והשעינו את האגן קלות.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.align.2",
+  "he": "דחפו את הרצפה והרחיקו את השכמות זו מזו.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cat.breath",
+  "he": "בכל נשיפה עגלו מעט יותר, בלי לכפות.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.mod.L0",
+  "he": "אם נוח לכם, שמרו על תנועה קטנה ונעימה.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.mod.L1",
+  "he": "עגלו את הגב עיגול מלא.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.mod.L2",
+  "he": "אם מתאים לכם, העמיקו וכווצו את הבטן פנימה.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cat.exit",
+  "he": "בשאיפה חזרו לגב ארוך.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.entry.1",
+  "he": "בואו אל ארבע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.entry.2",
+  "he": "ידיים מתחת לכתפיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.align.1",
+  "he": "הרחיקו את הכתפיים מהאוזניים.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cow.align.2",
+  "he": "מבט קדימה או מעט למעלה, בלי להכביד על הצוואר.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cow.breath",
+  "he": "בכל שאיפה פתחו מעט את החזה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.mod.L0",
+  "he": "אם נוח לכם, עשו קשת קטנה והשאירו את המבט למטה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.mod.L1",
+  "he": "פתחו את החזה בקשת נינוחה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הקשת והרימו את המבט.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cow.exit",
+  "he": "בנשיפה חזרו לגב ארוך.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.entry.1",
+  "he": "עמדו עם כפות רגליים ברוחב האגן.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.upward-salute.entry.2",
+  "he": "בשאיפה הרימו את הידיים לצדדים ולמעלה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.upward-salute.align.1",
+  "he": "הרחיקו את הכתפיים מהאוזניים.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.upward-salute.align.2",
+  "he": "אורך בעמוד השדרה, ברכיים רכות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.breath",
+  "he": "נשמו רגוע ועמוק.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.mod.L0",
+  "he": "אם נוח לכם, הרימו את הידיים באלכסון, לא גבוה מדי.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.mod.L1",
+  "he": "הרימו את הידיים לאורך האוזניים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.mod.L2",
+  "he": "אם מתאים לכם, הוסיפו קשת עדינה לאחור ועלו על קצות האצבעות.",
+  "tier": "beginner",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.upward-salute.exit",
+  "he": "בנשיפה הורידו את הידיים לצדדים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.entry.1",
+  "he": "עמדו עם כפות רגליים ברוחב האגן.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.mountain.entry.2",
+  "he": "לחצו בעדינות את כפות הרגליים אל הרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.align.1",
+  "he": "ברכיים רכות, לא נעולות.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.align.2",
+  "he": "אורך בעמוד השדרה, כתפיים רפויות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.mountain.breath",
+  "he": "נשמו עמוק ורגיעו את הלסת.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.mountain.mod.L0",
+  "he": "אם נוח לכם, השאירו ברכיים רכות וידיים רפויות.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.mod.L1",
+  "he": "עמדו זקופים ויציבים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.mod.L2",
+  "he": "אם מתאים לכם, חברו כפות ידיים בחזה ועלו על קצות האצבעות.",
+  "tier": "beginner",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.mountain.exit",
+  "he": "כשתהיו מוכנים, שחררו את הידיים והרגישו את הרצפה.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.entry.1",
+  "he": "כופפו את הברכיים כאילו אתם יושבים אחורה על כיסא.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.entry.2",
+  "he": "הרימו את הידיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.align.1",
+  "he": "הברכיים מעל הקרסוליים, המשקל בעקבים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.align.2",
+  "he": "אורך בגב, הבטן קצת פנימה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.breath",
+  "he": "נשמו לאט וקבוע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.mod.L0",
+  "he": "אם נוח לכם, כופפו מעט וידיים קדימה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.mod.L1",
+  "he": "כיפוף בינוני וידיים מעל הראש.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הכיפוף.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.chair.exit",
+  "he": "דחפו דרך העקבים וחזרו לעמידה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.entry.1",
+  "he": "פסעו אחורה ברגל אחת, רחב.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.entry.2",
+  "he": "כופפו את הברך הקדמית מעל הקרסול.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.entry.3",
+  "he": "הרימו את הידיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.align.1",
+  "he": "הרגל האחורית ישרה, העקב לוחץ למטה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.align.2",
+  "he": "כוונו את האגן קדימה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.align.3",
+  "he": "אורך בגוף, הכתפיים רפויות.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.breath",
+  "he": "נשמו רגוע, ועם כל שאיפה התארכו.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.mod.L0",
+  "he": "אם נוח לכם, קצרו את הצעד והשאירו את כף הרגל האחורית שטוחה ופונה החוצה.",
+  "tier": "beginner",
+  "words": 14,
+  "secs": 11.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.mod.L1",
+  "he": "צעד רחב עם ידיים למעלה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הכיפוף ופתחו מעט את החזה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.exit",
+  "he": "דחפו את הרצפה וחזרו לעמידה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-1.side",
+  "he": "צד שני. פסעו אחורה ברגל השנייה והרימו ידיים.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.entry.1",
+  "he": "פסעו הצידה, רחב.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.entry.2",
+  "he": "כופפו את הברך הקדמית מעל הקרסול.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.entry.3",
+  "he": "פשטו את הידיים לצדדים בגובה הכתפיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.align.1",
+  "he": "הגוף זקוף, האגן במרכז בין הרגליים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.warrior-2.align.2",
+  "he": "הברך הקדמית עוקבת אחרי האצבעות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.align.3",
+  "he": "המבט מעל היד הקדמית.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.breath",
+  "he": "נשמו עמוק, הכתפיים רפויות.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.mod.L0",
+  "he": "אם נוח לכם, קצרו את הצעד וכופפו עדין.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.mod.L1",
+  "he": "צעד רחב וידיים ישרות.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הכיפוף עד שהירך כמעט מקבילה לרצפה.",
+  "tier": "beginner",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.exit",
+  "he": "ישרו את הברך והורידו את הידיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-2.side",
+  "he": "צד שני. פנו לצד השני וכופפו את הברך הקדמית.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.entry.1",
+  "he": "פסעו קדימה ברגל אחת, רחב.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.entry.2",
+  "he": "העקב האחורי מורם.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.entry.3",
+  "he": "הרימו את הידיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.align.1",
+  "he": "הברך הקדמית מעל הקרסול.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.high-lunge.align.2",
+  "he": "הרגל האחורית פעילה וישרה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.high-lunge.align.3",
+  "he": "אורך בגוף, האגן ישר.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.breath",
+  "he": "נשמו רגוע וקבוע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.mod.L0",
+  "he": "אם נוח לכם, קצרו את הצעד והישענו מעט קדימה.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.mod.L1",
+  "he": "ידיים למעלה ורגל אחורית ישרה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הכיפוף והוסיפו קשת קלה לאחור.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.exit",
+  "he": "הורידו את הידיים וחזרו לעמידה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.high-lunge.side",
+  "he": "צד שני. פסעו קדימה ברגל השנייה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.entry.1",
+  "he": "העבירו את המשקל לרגל אחת.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.entry.2",
+  "he": "הניחו את כף הרגל השנייה על השוק או הירך, לעולם לא על הברך.",
+  "tier": "rest",
+  "words": 13,
+  "secs": 10.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.align.1",
+  "he": "לחצו את רגל העמידה אל הרצפה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.align.2",
+  "he": "קבעו מבט בנקודה אחת לפניכם.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.breath",
+  "he": "חברו כפות ידיים בחזה ונשמו.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.tree.mod.L0",
+  "he": "אם נוח לכם, השאירו את קצה כף הרגל על הרצפה ליד הקרסול.",
+  "tier": "rest",
+  "words": 12,
+  "secs": 10.1,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.mod.L1",
+  "he": "כף הרגל על השוק וידיים בחזה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.mod.L2",
+  "he": "אם מתאים לכם, כף הרגל על הירך וידיים למעלה.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.exit",
+  "he": "שחררו לאט את כף הרגל חזרה לרצפה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.tree.side",
+  "he": "צד שני. העבירו משקל לרגל השנייה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.entry.1",
+  "he": "הישענו קדימה והרימו רגל אחת לאחור.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.warrior-3.entry.2",
+  "he": "פשטו את הידיים קדימה.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.align.1",
+  "he": "קו אחד ארוך מהראש ועד העקב.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.align.2",
+  "he": "ברך העמידה רכה.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.align.3",
+  "he": "מבט אל הרצפה.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.breath",
+  "he": "נשמו לאט, בלי לעצור.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.mod.L0",
+  "he": "אם נוח לכם, שימו ידיים במותניים והשאירו את הרגל נמוכה.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.mod.L1",
+  "he": "הגוף מקביל לרצפה.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.mod.L2",
+  "he": "אם מתאים לכם, הרימו את הרגל גבוה יותר.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.exit",
+  "he": "הורידו את הרגל לאט וחזרו לעמידה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.warrior-3.side",
+  "he": "צד שני. עמדו על הרגל השנייה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.entry.1",
+  "he": "עמדו על רגל אחת.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.entry.2",
+  "he": "אחזו בקרסול הנגדי מאחור.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.align.1",
+  "he": "לחצו את כף הרגל אל היד כשהחזה נפתח.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.align.2",
+  "he": "הושיטו את היד השנייה קדימה לשיווי משקל.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.align.3",
+  "he": "מבט קבוע בנקודה אחת.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.breath",
+  "he": "נשמו לאט ועמוק.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.mod.L0",
+  "he": "אם נוח לכם, הישארו זקופים במתיחת ירך בעמידה.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.mod.L1",
+  "he": "הרימו את הרגל לאחור והישענו מעט קדימה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את ההישענות והרימו את הרגל גבוה.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.exit",
+  "he": "שחררו את הרגל לאט וחזרו לעמידה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.dancer.side",
+  "he": "צד שני. עמדו על הרגל השנייה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.entry.1",
+  "he": "התקפלו קדימה מהירכיים, לא מהגב.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.entry.2",
+  "he": "כופפו את הברכיים כמה שצריך.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.align.1",
+  "he": "הניחו לראש ולצוואר להיות כבדים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.uttanasana.align.2",
+  "he": "הידיים רפויות או אוחזות במרפקים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.breath",
+  "he": "בכל נשיפה הניחו לגוף להתרכך.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים והניחו ידיים על השוקיים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.mod.L1",
+  "he": "רגליים ישרות וידיים לכיוון הרצפה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.mod.L2",
+  "he": "אם מתאים לכם, אחזו בבהונות וקרבו את החזה לירכיים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.uttanasana.exit",
+  "he": "עלו לאט, חוליה אחר חוליה, וראש אחרון.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.entry.1",
+  "he": "מהקיפול, בשאיפה הניחו ידיים על השוקיים או הירכיים.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.entry.2",
+  "he": "הארכו את הגב קדימה עד שהוא שטוח.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.align.1",
+  "he": "צוואר ארוך, מבט אל הרצפה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.align.2",
+  "he": "הרגישו את עמוד השדרה מתארך.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.breath",
+  "he": "בכל שאיפה התארכו עוד קצת.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים והניחו ידיים על הירכיים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.mod.L1",
+  "he": "גב שטוח וידיים על השוקיים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.mod.L2",
+  "he": "אם מתאים לכם, הניחו את קצות האצבעות על הרצפה.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-lift.exit",
+  "he": "בנשיפה התקפלו חזרה פנימה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.entry.1",
+  "he": "מתנוחת הכיסא, חברו כפות ידיים בחזה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.entry.2",
+  "he": "סובבו את החזה לצד אחד.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.align.1",
+  "he": "הסיבוב בא מהחזה, לא מהצוואר.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.revolved-chair.align.2",
+  "he": "הברכיים נשארות קרובות זו לזו.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.align.3",
+  "he": "פתחו את הכתפיים.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.breath",
+  "he": "בשאיפה התארכו, בנשיפה סובבו קצת יותר.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.mod.L0",
+  "he": "אם נוח לכם, כופפו פחות והשאירו כפות ידיים בחזה.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.mod.L1",
+  "he": "המרפק מחוץ לירך.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הכיסא והרחיבו את הסיבוב.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.exit",
+  "he": "חזרו למרכז וקומו לעמידה.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.revolved-chair.side",
+  "he": "צד שני. סובבו לצד השני.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.entry.1",
+  "he": "מהשולחן, הרימו את האגן למעלה ואחורה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.align.1",
+  "he": "לחצו את כפות הידיים והאריכו את עמוד השדרה.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.align.2",
+  "he": "הרפו את הראש והצוואר.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.downward-dog.breath",
+  "he": "נשמו לאט, הרגישו את הגב מתארך.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים ותנו לעקבים להיות באוויר.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.mod.L1",
+  "he": "רגליים כמעט ישרות והאגן גבוה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.mod.L2",
+  "he": "אם מתאים לכם, הורידו את העקבים לכיוון הרצפה ופתחו כתפיים.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.downward-dog.exit",
+  "he": "כופפו ברכיים והורידו אותן לרצפה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.entry.1",
+  "he": "כפות ידיים מתחת לכתפיים.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.entry.2",
+  "he": "גוף בקו אחד.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.align.1",
+  "he": "כווצו את הבטן, האגן לא צונח.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.align.2",
+  "he": "דחפו את הרצפה והאריכו את העקבים לאחור.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.breath",
+  "he": "נשימות קצרות ויציבות.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.mod.L0",
+  "he": "אם נוח לכם, רדו אל הברכיים.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.mod.L1",
+  "he": "קרש מלא על קצות האצבעות.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.mod.L2",
+  "he": "אם מתאים לכם, הרימו רגל אחת לאחור.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.plank.exit",
+  "he": "הורידו את הברכיים ונוחו.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobra.entry.1",
+  "he": "שכבו על הבטן, כפות ידיים מתחת לכתפיים.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cobra.entry.2",
+  "he": "בשאיפה הרימו את החזה בעדינות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cobra.align.1",
+  "he": "המרפקים קרובים לגוף, הכתפיים רחוקות מהאוזניים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cobra.align.2",
+  "he": "הרגליים נשארות על הרצפה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.cobra.breath",
+  "he": "נשמו לאט, והניחו לחזה להיפתח.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobra.mod.L0",
+  "he": "אם נוח לכם, הישארו על האמות עם חזה נמוך.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobra.mod.L1",
+  "he": "כפות ידיים לרצפה וחזה מורם.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobra.mod.L2",
+  "he": "אם מתאים לכם, הרימו גבוה יותר עם זרועות ישרות יותר.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobra.exit",
+  "he": "בנשיפה הורידו את החזה לאט אל הרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.entry.1",
+  "he": "שכבו על הבטן, ידיים לצדי הגוף.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.entry.2",
+  "he": "הרימו חזה ורגליים יחד.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.align.1",
+  "he": "הארכו מהראש ועד העקבים.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.align.2",
+  "he": "הצוואר ארוך, בלי לדחוס אותו.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.breath",
+  "he": "נשמו רגוע, ואז הורידו לאט.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.locust.mod.L0",
+  "he": "אם נוח לכם, הרימו רק את החזה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.mod.L1",
+  "he": "הרימו חזה ורגליים.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.mod.L2",
+  "he": "אם מתאים לכם, פשטו ידיים קדימה והרימו גבוה יותר.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.locust.exit",
+  "he": "הורידו לאט והניחו את הלחי על הרצפה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.entry.1",
+  "he": "עמדו על הברכיים, האגן מעל הברכיים.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.entry.2",
+  "he": "הניחו ידיים על הגב התחתון.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.align.1",
+  "he": "הרימו את החזה ופתחו אותו אל התקרה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.align.2",
+  "he": "הראש והצוואר נינוחים.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.breath",
+  "he": "נשמו לאט, ואל תעצרו נשימה.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.mod.L0",
+  "he": "אם נוח לכם, השאירו ידיים על הגב התחתון וקשת קטנה.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.mod.L1",
+  "he": "קשת בינונית וידיים לכיוון העקבים.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הקשת והטו את המבט לאחור.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.camel.exit",
+  "he": "בשאיפה הרימו את החזה וחזרו לזקוף.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.entry.1",
+  "he": "שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.bridge.entry.2",
+  "he": "לחצו את כפות הרגליים והרימו את האגן.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.bridge.align.1",
+  "he": "הברכיים ברוחב האגן.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.align.2",
+  "he": "הראש נשאר על הרצפה והצוואר רפוי.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.breath",
+  "he": "נשמו עמוק אל החזה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.mod.L0",
+  "he": "אם נוח לכם, הרימו את האגן מעט.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.mod.L1",
+  "he": "גשר יציב עם ידיים ליד הגוף.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.mod.L2",
+  "he": "אם מתאים לכם, הרימו גבוה יותר ולחצו את הידיים אל הרצפה.",
+  "tier": "beginner",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.bridge.exit",
+  "he": "הורידו לאט, חוליה אחר חוליה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.entry.1",
+  "he": "שבו לאחור על העקבים.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.entry.2",
+  "he": "הניחו את החזה על הירכיים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.align.1",
+  "he": "הושיטו ידיים קדימה והניחו אותן על הרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.child.align.2",
+  "he": "הניחו לכתפיים ולמצח להתרכך.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.breath",
+  "he": "נשמו אל הגב התחתון.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.child.mod.L0",
+  "he": "אם נוח לכם, הניחו כרית מתחת לאגן או השאירו ידיים לצדי הגוף.",
+  "tier": "beginner",
+  "words": 12,
+  "secs": 10.1,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.mod.L1",
+  "he": "ידיים קדימה והמצח למטה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.mod.L2",
+  "he": "אם מתאים לכם, הורידו את האגן אל העקבים והרחיקו ידיים.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.child.exit",
+  "he": "כשתהיו מוכנים, עלו לאט בגלגול.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.entry.1",
+  "he": "מהשולחן, פסעו ברגל אחת קדימה בין הידיים.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.entry.2",
+  "he": "הברך האחורית על הרצפה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.align.1",
+  "he": "הברך הקדמית מעל הקרסול.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.low-lunge.align.2",
+  "he": "הרימו את הגוף והרימו ידיים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.align.3",
+  "he": "הניחו לאגן לשקוע קדימה בעדינות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.breath",
+  "he": "נשמו עמוק ורגוע.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.mod.L0",
+  "he": "אם נוח לכם, הניחו ידיים על בלוקים משני צדי הרגל.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.mod.L1",
+  "he": "ידיים למעלה וחזה פתוח.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.mod.L2",
+  "he": "אם מתאים לכם, הוסיפו קשת לאחור ושתי ידיים מעל הראש.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.exit",
+  "he": "החזירו ידיים לרצפה וחזרו לשולחן.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.low-lunge.side",
+  "he": "צד שני. פסעו קדימה ברגל השנייה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.entry.1",
+  "he": "מכריעה, ישרו רגל אחת קדימה כשהעקב על הרצפה.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.entry.2",
+  "he": "האגן מעל הברך האחורית.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.half-split.align.1",
+  "he": "הושיטו את הגב קדימה והניחו ידיים על הרגל או הרצפה.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.align.2",
+  "he": "כופו את כף הרגל הקדמית אליכם.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.breath",
+  "he": "בכל נשיפה התרככו קצת יותר.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.mod.L0",
+  "he": "אם נוח לכם, הניחו ידיים על הירך והשאירו את הגב זקוף.",
+  "tier": "rest",
+  "words": 11,
+  "secs": 9.4,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.mod.L1",
+  "he": "ידיים על בלוקים וגב ארוך.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הקיפול ואחזו בכף הרגל.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.exit",
+  "he": "כופפו את הברך וחזרו לכריעה.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.half-split.side",
+  "he": "צד שני. ישרו את הרגל השנייה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.entry.1",
+  "he": "שבו בישיבה מוצלבת נוחה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.align.1",
+  "he": "הרימו את האגן מעל הברכיים אם צריך.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.align.2",
+  "he": "אורך בעמוד השדרה, כתפיים רפויות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.easy-seat.breath",
+  "he": "אם נוח לכם, עצמו עיניים ונשמו לאט.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.mod.L0",
+  "he": "אם נוח לכם, שבו על כרית וידיים על הברכיים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.mod.L1",
+  "he": "שבו על הרצפה.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.mod.L2",
+  "he": "אם מתאים לכם, חברו כפות ידיים בחזה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.easy-seat.exit",
+  "he": "כשתהיו מוכנים, פתחו עיניים לאט.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.entry.1",
+  "he": "שבו וחברו את כפות הרגליים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.entry.2",
+  "he": "הניחו לברכיים ליפול החוצה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.align.1",
+  "he": "אחזו בקרסוליים והאריכו את הגב.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.align.2",
+  "he": "התקפלו קדימה מעט מהירכיים.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.breath",
+  "he": "בכל נשיפה התרככו קצת יותר.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.mod.L0",
+  "he": "אם נוח לכם, שבו על כרית עם גב זקוף.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.mod.L1",
+  "he": "קיפול קל קדימה.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הקיפול והמצח לכיוון כפות הרגליים.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.cobbler.exit",
+  "he": "עלו לאט והניחו לברכיים להתקרב.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.entry.1",
+  "he": "שבו עם רגליים ישרות לפניכם.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.entry.2",
+  "he": "בשאיפה התארכו.",
+  "tier": "beginner",
+  "words": 2,
+  "secs": 3.6,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.align.1",
+  "he": "בנשיפה התקפלו מהירכיים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.align.2",
+  "he": "אחזו בשוקיים, בקרסוליים או ברצועה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.seated-fold.align.3",
+  "he": "הראש והצוואר רפויים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.breath",
+  "he": "נשמו לאט, ועם כל נשיפה התרככו.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים והשתמשו ברצועה סביב כפות הרגליים.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.mod.L1",
+  "he": "רגליים ישרות וידיים על השוקיים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.mod.L2",
+  "he": "אם מתאים לכם, קפלו עמוק יותר ואחזו בכפות הרגליים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-fold.exit",
+  "he": "עלו לאט בגב ארוך.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.entry.1",
+  "he": "שבו עם רגל אחת ישרה ורגל אחת כפופה, כף הרגל על הרצפה.",
+  "tier": "beginner",
+  "words": 12,
+  "secs": 10.1,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.entry.2",
+  "he": "בשאיפה התארכו.",
+  "tier": "beginner",
+  "words": 2,
+  "secs": 3.6,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.align.1",
+  "he": "בנשיפה סובבו את החזה אל הברך המורמת.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.align.2",
+  "he": "הסיבוב בא מהחזה.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.align.3",
+  "he": "מבט רך מעל הכתף.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.breath",
+  "he": "בכל שאיפה התארכו, בכל נשיפה סובבו קצת.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.mod.L0",
+  "he": "אם נוח לכם, שמרו על שתי הרגליים ישרות וסיבוב קל.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.mod.L1",
+  "he": "ברך מורמת ויד סביב הברך.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.mod.L2",
+  "he": "אם מתאים לכם, העמיקו את הסיבוב וחבקו את הברך.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.exit",
+  "he": "התירו את הסיבוב לאט וחזרו למרכז.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.seated-twist.side",
+  "he": "צד שני. החליפו רגליים וסובבו לצד השני.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.entry.1",
+  "he": "שבו עם ברכיים כפופות והישענו מעט אחורה.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.entry.2",
+  "he": "הרימו את כפות הרגליים.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.align.1",
+  "he": "הגב ארוך.",
+  "tier": "rest",
+  "words": 2,
+  "secs": 3.6,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.align.2",
+  "he": "הושיטו ידיים קדימה, מקבילות לרצפה.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.align.3",
+  "he": "הבטן פעילה.",
+  "tier": "rest",
+  "words": 2,
+  "secs": 3.6,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.breath",
+  "he": "נשמו רגוע, בלי לעצור.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.mod.L0",
+  "he": "אם נוח לכם, השאירו ידיים מאחורי הירכיים.",
+  "tier": "rest",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.mod.L1",
+  "he": "שוקיים מקבילות לרצפה.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.mod.L2",
+  "he": "אם מתאים לכם, ישרו את הרגליים לצורת וי.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.boat.exit",
+  "he": "הורידו את כפות הרגליים לרצפה ונוחו.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.entry.1",
+  "he": "שכבו על הגב.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.entry.2",
+  "he": "קרבו את שתי הברכיים אל החזה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.align.1",
+  "he": "חבקו את הברכיים או את השוקיים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.knees-to-chest.align.2",
+  "he": "הכתפיים והראש נחים על הרצפה.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.breath",
+  "he": "נשמו עמוק, ואפשר לנדנד בעדינות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L0",
+  "he": "אם נוח לכם, קרבו ברך אחת בכל פעם.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L1",
+  "he": "שתי ברכיים אל החזה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L2",
+  "he": "אם מתאים לכם, הרימו גם את הראש לכיוון הברכיים.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.knees-to-chest.exit",
+  "he": "שחררו לאט והניחו את כפות הרגליים לרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.entry.1",
+  "he": "שכבו על הגב, ברכיים כפופות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.supine-twist.entry.2",
+  "he": "הורידו את שתי הברכיים לצד אחד.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.supine-twist.align.1",
+  "he": "פתחו ידיים לצדדים.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.align.2",
+  "he": "הכתפיים נשארות על הרצפה.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.align.3",
+  "he": "הפנו את המבט לצד השני.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.breath",
+  "he": "נשמו עמוק, והניחו לגוף להתרכך.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.mod.L0",
+  "he": "אם נוח לכם, הניחו כרית מתחת לברכיים וסובבו מעט.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.mod.L1",
+  "he": "שתי ברכיים לצד.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.mod.L2",
+  "he": "אם מתאים לכם, ישרו רגל אחת ואחזו בברך השנייה.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.exit",
+  "he": "בשאיפה החזירו את הברכיים למרכז.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.supine-twist.side",
+  "he": "צד שני. הורידו את הברכיים לצד השני.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.entry.1",
+  "he": "שכבו על הגב.",
+  "tier": "beginner",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.entry.2",
+  "he": "קרבו את הברכיים אל בתי השחי.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.align.1",
+  "he": "אחזו בקצוות החיצוניים של כפות הרגליים.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.align.2",
+  "he": "האגן והגב התחתון נחים על הרצפה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.breath",
+  "he": "נשמו לאט, ואפשר לנדנד מצד לצד.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.mod.L0",
+  "he": "אם נוח לכם, אחזו בשוקיים.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.mod.L1",
+  "he": "אחזו בקצוות כפות הרגליים.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.mod.L2",
+  "he": "אם מתאים לכם, פתחו את הברכיים רחב וקרבו אותן לצלעות.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.happy-baby.exit",
+  "he": "שחררו את הרגליים לאט וחבקו את הברכיים.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.entry.1",
+  "he": "שכבו על הגב, ברכיים כפופות.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.figure-four.entry.2",
+  "he": "הניחו קרסול אחד על הירך הנגדית.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.figure-four.align.1",
+  "he": "קרבו את רגל התמיכה אל החזה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.align.2",
+  "he": "לחצו בעדינות את הברך החיצונית הצידה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.breath",
+  "he": "בכל נשיפה שחררו קצת יותר.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.mod.L0",
+  "he": "אם נוח לכם, השאירו את כף הרגל התחתונה על הרצפה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.mod.L1",
+  "he": "הרימו את הרגל התחתונה וחבקו את הירך.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.mod.L2",
+  "he": "אם מתאים לכם, קרבו את הרגל עוד אל החזה.",
+  "tier": "beginner",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.exit",
+  "he": "שחררו לאט והניחו את כפות הרגליים לרצפה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.figure-four.side",
+  "he": "צד שני. הצליבו את הקרסול השני.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.entry.1",
+  "he": "שכבו על הגב.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.entry.2",
+  "he": "הרימו רגל אחת למעלה.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.align.1",
+  "he": "הניחו רצועה סביב כף הרגל.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.align.2",
+  "he": "הרגל השנייה פעילה על הרצפה.",
+  "tier": "rest",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.align.3",
+  "he": "הגב לא מתעגל.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.breath",
+  "he": "משכו קלות ונשמו.",
+  "tier": "rest",
+  "words": 3,
+  "secs": 4.3,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L0",
+  "he": "אם נוח לכם, כופפו מעט את הברך המורמת והשתמשו ברצועה.",
+  "tier": "rest",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L1",
+  "he": "רגל ישרה עם רצועה.",
+  "tier": "rest",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L2",
+  "he": "אם מתאים לכם, קרבו את הרגל לפנים ואחזו בבוהן.",
+  "tier": "rest",
+  "words": 9,
+  "secs": 8.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.exit",
+  "he": "כופפו את הברך והורידו את כף הרגל לרצפה.",
+  "tier": "rest",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.hand-to-toe.side",
+  "he": "צד שני. הרימו את הרגל השנייה.",
+  "tier": "rest",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.entry.1",
+  "he": "שבו ליד הקיר ושכבו לאחור.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.entry.2",
+  "he": "הניחו את הרגליים על הקיר, האגן קרוב אליו.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.legs-up-wall.align.1",
+  "he": "ידיים רפויות לצדדים, כפות ידיים כלפי מעלה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.align.2",
+  "he": "הניחו לצוואר ולכתפיים להתרכך.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.breath",
+  "he": "אם נוח לכם, עצמו עיניים ונשמו לאט.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים על הקיר.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L1",
+  "he": "רגליים ישרות על הקיר.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L2",
+  "he": "אם מתאים לכם, הניחו ידיים מעל הראש ופתחו את החזה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.legs-up-wall.exit",
+  "he": "כופפו ברכיים, התגלגלו לצד והישארו רגע.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.savasana.entry.1",
+  "he": "שכבו על הגב ופרשו את הרגליים קלות.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.savasana.entry.2",
+  "he": "ידיים לצדדים, כפות ידיים כלפי מעלה.",
+  "tier": "beginner",
+  "words": 6,
+  "secs": 6.2,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.savasana.align.1",
+  "he": "הרפו את הפנים, הלסת והבטן.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.savasana.align.2",
+  "he": "הניחו לגוף להיות כבד.",
+  "tier": "beginner",
+  "words": 4,
+  "secs": 4.9,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.savasana.breath",
+  "he": "הניחו לנשימה לחזור לקצב טבעי.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": true
+ },
+ {
+  "id": "pose.savasana.mod.L0",
+  "he": "אם נוח לכם, כופפו ברכיים והשאירו כפות רגליים על הרצפה.",
+  "tier": "beginner",
+  "words": 10,
+  "secs": 8.8,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.savasana.mod.L1",
+  "he": "רגליים ישרות וידיים ליד הגוף.",
+  "tier": "beginner",
+  "words": 5,
+  "secs": 5.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.savasana.mod.L2",
+  "he": "אם מתאים לכם, הרחיקו ידיים מהגוף ועצמו עיניים.",
+  "tier": "beginner",
+  "words": 8,
+  "secs": 7.5,
+  "reusesExistingCueText": false
+ },
+ {
+  "id": "pose.savasana.exit",
+  "he": "אין צורך לזוז עד שאזמין אתכם בחזרה.",
+  "tier": "beginner",
+  "words": 7,
+  "secs": 6.8,
+  "reusesExistingCueText": false
+ }
+]
