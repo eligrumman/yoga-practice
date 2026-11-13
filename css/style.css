@@ -78,8 +78,12 @@ input[type=search]{flex:1;min-width:180px}
 .item.dragging{z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:none;border-color:var(--brand)}
 .handle{border:0;background:transparent;font-size:1.5rem;cursor:grab;touch-action:none;padding:.2rem .5rem;color:var(--muted);min-width:36px;min-height:44px}
 .item-main{flex:1;min-width:0}.item-name{font-weight:600;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
-.item-ctl{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}.item-ctl select,.item-ctl input{min-height:38px;padding:.25rem .4rem}.amt{width:5rem}
-.item-btns{display:flex;gap:2px;flex-wrap:wrap;max-width:100px;justify-content:flex-end}.item-btns .btn{min-height:38px;min-width:38px;padding:0}
+.item-ctl{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem;align-items:center}.item-ctl select,.item-ctl input{min-height:40px;padding:.25rem .4rem}.amt{width:5rem}
+.clamp-note{flex-basis:100%;grid-column:1/-1;font-size:.85rem;color:var(--danger);min-height:0}.clamp-note:empty{display:none}
+.plan-meta{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.save-state{color:var(--muted);font-size:.9rem;transition:color .3s}.save-state.flash{color:var(--brand);font-weight:600}
+.pose-info .row-btns select{flex:1 1 14rem;width:100%;min-width:0;max-width:none}
+.item-btns{display:flex;gap:2px;flex-wrap:wrap;max-width:100px;justify-content:flex-end}.item-btns .btn{min-height:40px;min-width:40px;padding:0}
 .add-row{display:flex;gap:.5rem;flex-wrap:wrap}.add-row select{flex:1;min-width:200px}
 .hist{padding-inline-start:1.2rem;color:var(--muted)}.stat{font-weight:600}
 .settings .row{max-width:34rem}
@@ -112,7 +116,19 @@ body.in-player .foot,body.in-player .top nav{display:none}
 @media(max-width:760px){
   .pose-page,.p-stage{grid-template-columns:1fr}
   h1{font-size:1.45rem}.count{font-size:2.4rem}.p-name{font-size:1.5rem}
-  .item{flex-wrap:wrap}.item-btns{max-width:none;flex-direction:row}
+  /* plan row = two-line card: [handle | name | up down remove] then [level | hold | unit] full width */
+  .item{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"handle name btns" "ctl ctl ctl";gap:.3rem .4rem;align-items:center;padding:8px}
+  .item-fig-wrap{display:none}
+  .item-main{display:contents}
+  .handle{grid-area:handle;min-width:40px;min-height:40px;padding:0}
+  .item-name{grid-area:name;min-width:0;overflow-wrap:anywhere}
+  .item-btns{grid-area:btns;max-width:none;flex-direction:row;flex-wrap:nowrap;gap:2px}
+  .item-btns .dup{display:none}
+  .item-btns .btn{min-width:40px;min-height:40px}
+  .item-ctl{grid-area:ctl;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr) minmax(0,1.2fr);gap:.4rem;margin-top:.2rem}
+  .item-ctl select,.item-ctl input{width:100%;min-height:44px;min-width:0}
+  .amt{width:100%}
+  .plan-head input{min-width:0;flex-basis:100%}
   .cards{grid-template-columns:1fr}.poses{grid-template-columns:repeat(2,1fr)}
   .top nav{order:3;width:100%}
   .p-ctrl{position:fixed;left:0;right:0;bottom:0;padding-inline:12px!important;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;padding:.4rem 0}

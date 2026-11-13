@@ -2,10 +2,11 @@
 import { POSES, POSE_BY_ID } from '../data/poses.js';
 import { SEGMENTS, LANGS, segText, cueIds } from '../data/narration.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
-import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID } from '../js/plan.js';
+import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID, holdSeconds, clampAmount, dropIndex, reorder } from '../js/plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from '../js/generator.js';
 import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
-import { streak } from '../js/store.js';
+import { streak, countsForStreak, histMinutes } from '../js/store.js';
+import { nPoses } from '../js/i18n.js';
 
 let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log('FAIL', m); } };
@@ -77,6 +78,42 @@ const av = generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoi
 ok(!av.items.some((i) => ['downward-dog', 'tree', 'cobra'].includes(i.pose)), 'avoid list respected');
 ok(Math.abs(planSeconds(av.items) / 60 - 20) <= 1, 'avoid plan still ~20 min');
 
+// ---- beginner plans: only difficulty-1 poses, 30-60 s holds, fewer poses
+for (const f of FOCUSES) {
+  const g20 = generatePlan({ minutes: 20, focus: f, level: 'beginner' });
+  const body = g20.items.slice(0, -1);
+  ok(g20.items.length >= 10 && g20.items.length <= 15, `beginner 20 min ${f}: ${g20.items.length} items (10-15 incl. savasana)`);
+  for (const m of LENGTHS) {
+    const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
+    ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1), `beginner ${m}/${f} only difficulty-1 poses`);
+    ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
+    ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
+  }
+  if (f === 'general') ok(body.every((i) => { const s = holdSeconds(i); return s >= 30 && s <= 60; }), 'beginner 20 min holds are 30-60 s');
+  const g10 = generatePlan({ minutes: 10, focus: f, level: 'beginner' });
+  ok(g10.items.slice(0, -1).every((i) => { const s = holdSeconds(i); return s >= 30 && s <= 60; }), `beginner 10 min ${f} holds 30-60 s`);
+}
+ok(generatePlan({ minutes: 20, level: 'gentle' }).items.length > 15, 'gentle level keeps the longer, richer plan');
+
+// ---- builder helpers
+ok(JSON.stringify(reorder(['a', 'b', 'c', 'd'], 2, 0)) === '["c","a","b","d"]', 'reorder: item 3 to position 1');
+ok(JSON.stringify(reorder(['a', 'b', 'c', 'd'], 0, 3)) === '["b","c","d","a"]', 'reorder: first to last');
+ok(JSON.stringify(reorder(['a', 'b', 'c'], 1, 1)) === '["a","b","c"]', 'reorder: same index is a no-op');
+const cs = [30, 90, 150, 210]; // row centres, rows 60 px high
+ok(dropIndex(cs, cs[2] - 120) === 0, 'drop: item 3 dragged exactly onto item 1 -> index 0 (was 1)');
+ok(dropIndex(cs, cs[2] - 100) === 0, 'drop: item 3 dragged near item 1 -> 0');
+ok(dropIndex(cs, cs[2] - 60) === 1, 'drop: one row up -> 1');
+ok(dropIndex(cs, cs[0] + 400) === 3 && dropIndex(cs, -50) === 0, 'drop: clamped at both ends');
+ok(dropIndex(cs, cs[1]) === 1, 'drop: no movement stays put');
+ok(clampAmount(0, 'sec').value === 5 && clampAmount(0, 'sec').clamped === 'min', 'clamp 0 s -> min 5');
+ok(clampAmount(99999, 'sec').value === 600 && clampAmount(99999, 'sec').clamped === 'max', 'clamp huge -> max 600');
+ok(clampAmount('abc', 'breath').value === 1 && clampAmount(7, 'breath').clamped === null, 'clamp breaths');
+
+// ---- plurals
+ok(nPoses(1, 'he') === 'תנוחה אחת' && nPoses(5, 'he') === '5 תנוחות', 'he plural');
+ok(nPoses(1, 'en') === '1 pose' && nPoses(0, 'en') === '0 poses' && nPoses(12, 'en') === '12 poses', 'en plural');
+ok([[1, '1 поза'], [2, '2 позы'], [4, '4 позы'], [5, '5 поз'], [11, '11 поз'], [14, '14 поз'], [21, '21 поза'], [22, '22 позы'], [25, '25 поз'], [101, '101 поза']].every(([n, t]) => nPoses(n, 'ru') === t), 'ru plural 1/2-4/5+');
+
 // ---- export / import round trip + validation
 const plan = { name: 'Test', items: generatePlan({ minutes: 10 }).items };
 const txt = exportPlanJSON(plan); const back = parsePlanJSON(txt);
@@ -91,6 +128,13 @@ const d = (n) => { const x = new Date(2026, 10, 13); x.setDate(x.getDate() - n);
 ok(streak([{ date: d(0) }, { date: d(1) }, { date: d(2) }, { date: d(4) }], new Date(2026, 10, 13)) === 3, 'streak counts consecutive days');
 ok(streak([{ date: d(1) }], new Date(2026, 10, 13)) === 1, 'streak not broken before today practice');
 ok(streak([], new Date()) === 0, 'empty streak');
+// practice log: actual time decides whether a day counts (>= 50% of plan or >= 5 min)
+ok(!countsForStreak(120, 1200), '2 min of a 20 min plan does not count');
+ok(countsForStreak(600, 1200) && countsForStreak(300, 1800) && !countsForStreak(299, 1800), 'half the plan, or 5 minutes, counts');
+ok(countsForStreak(100, 180) && !countsForStreak(80, 180), 'short plan: 50% rule');
+ok(streak([{ date: d(0), counted: false }, { date: d(1) }], new Date(2026, 10, 13)) === 1, 'uncounted session adds no streak day');
+ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only an uncounted session today -> streak 0');
+ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

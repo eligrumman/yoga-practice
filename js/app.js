@@ -1,10 +1,10 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic } from './figure.js';
-import { planSeconds, fmtTime, itemSeconds, exportPlanJSON, parsePlanJSON, cleanItem, BREATH_SEC, holdSeconds } from './plan.js';
+import { planSeconds, fmtTime, itemSeconds, exportPlanJSON, parsePlanJSON, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
-import { store, streak, DEFAULT_SETTINGS } from './store.js';
-import { tr, UI_LANGS, DIR } from './i18n.js';
+import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
+import { tr, UI_LANGS, DIR, nPoses } from './i18n.js';
 import { Narrator } from './narrator.js';
 import { Player } from './player.js';
 
@@ -97,7 +97,7 @@ function presetCard(p) {
   const mins = p.minutes;
   return el('article', { class: 'card preset' },
     el('div', { class: 'preset-top' },
-      el('h3', {}, p.day ? `${T('day')} ${p.day} · ${p.name[lang]}` : p.name[lang]),
+      el('h3', {}, p.name[lang]), // starter names already begin with "Day N:"
       el('div', { class: 'meta' }, el('span', { class: 'badge' }, `${mins} ${T('min')}`), levelBadge(p.level))),
     el('p', {}, p.desc[lang]),
     el('div', { class: 'row-btns' },
@@ -117,7 +117,7 @@ function viewHome() {
     settingsSection(),
     el('section', {}, el('h2', {}, T('history')),
       hist.length ? el('div', {}, el('p', { class: 'stat' }, `${T('streak')}: ${st}`),
-        el('ul', { class: 'hist' }, hist.slice(0, 8).map((h) => el('li', {}, `${h.date} · ${h.plan} · ${h.minutes} ${T('min')}`)))) : el('p', { class: 'hint' }, T('noHistory'))));
+        el('ul', { class: 'hist' }, hist.slice(0, 8).map((h) => el('li', {}, `${h.date} · ${h.plan} · ${histMinutes(h)} ${T('min')}`)))) : el('p', { class: 'hint' }, T('noHistory'))));
   return null;
 }
 function settingsSection() {
@@ -172,14 +172,14 @@ function viewLibrary() {
           el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), el('span', { class: 'dots', title: T('difficulty') }, stars(p.difficulty)), favs.includes(p.id) ? el('span', { class: 'fav-on', 'aria-label': T('star') }, '★') : null)));
     }));
     if (!list.length) grid.append(el('p', { class: 'empty' }, T('none')));
-    count.textContent = `${list.length} ${T('count')}`;
+    count.textContent = nPoses(list.length, lang);
   };
-  const sel = (id, opts, fn) => { const s = el('select', { id, onchange: (e) => fn(e.target.value) }); for (const [v, t] of opts) s.append(el('option', { value: v }, t)); return s; };
+  const sel = (id, label, opts, fn) => { const s = el('select', { id, 'aria-label': label, onchange: (e) => fn(e.target.value) }); for (const [v, t] of opts) s.append(el('option', { value: v }, t)); return s; };
   main.append(el('h1', {}, T('navLibrary')),
     el('div', { class: 'filters' },
       el('input', { type: 'search', id: 'q', placeholder: T('search'), 'aria-label': T('search'), oninput: (e) => { q.text = e.target.value; draw(); } }),
-      sel('f-cat', [['', T('allCats')], ...CATEGORIES.map((c) => [c, CATEGORY_LABELS[c][lang]])], (v) => { q.cat = v; draw(); }),
-      sel('f-lvl', [['', T('allLevels')], ['1', LEVEL_LABELS[0][lang]], ['2', LEVEL_LABELS[1][lang]], ['3', LEVEL_LABELS[2][lang]]], (v) => { q.lvl = v; draw(); }),
+      sel('f-cat', T('category'), [['', T('allCats')], ...CATEGORIES.map((c) => [c, CATEGORY_LABELS[c][lang]])], (v) => { q.cat = v; draw(); }),
+      sel('f-lvl', T('levels'), [['', T('allLevels')], ['1', LEVEL_LABELS[0][lang]], ['2', LEVEL_LABELS[1][lang]], ['3', LEVEL_LABELS[2][lang]]], (v) => { q.lvl = v; draw(); }),
       el('label', { class: 'chip' }, el('input', { type: 'checkbox', id: 'f-fav', onchange: (e) => { q.fav = e.target.checked; draw(); } }), el('span', {}, '★ ' + T('favOnly')))),
     count, grid);
   draw(); return null;
@@ -197,6 +197,7 @@ function viewPose(id) {
   const playBtn = el('button', { class: 'btn', id: 'pp', onclick: () => { anim.setPlaying(!anim.playing); playBtn.textContent = anim.playing ? '⏸ ' + T('pause') : '▶ ' + T('resume'); } }, '⏸ ' + T('pause'));
   const setLevel = (n) => {
     level = n; anim.set(p, n, { mode: 'loop' });
+    anim.time = 3.4; anim.frame(anim.time); // open on the finished pose, not on the loop's start frame
     for (const b of tabs.children) { b.setAttribute('aria-selected', b.dataset.l == n); }
     const v = p.variations[n];
     varText.textContent = v[lang];
@@ -256,7 +257,7 @@ function viewPlans() {
   const draw = () => {
     const plans = store.plans;
     list.replaceChildren(...(plans.length ? plans.map((p) => el('article', { class: 'card plan-card' },
-      el('h3', {}, p.name), el('div', { class: 'meta' }, el('span', { class: 'badge' }, `${p.items.length} ${T('items')}`), el('span', { class: 'badge' }, `${fmtTime(planSeconds(p.items))}`)),
+      el('h3', {}, p.name), el('div', { class: 'meta' }, el('span', { class: 'badge' }, nPoses(p.items.length, lang)), el('span', { class: 'badge' }, `${fmtTime(planSeconds(p.items))}`)),
       el('div', { class: 'row-btns' },
         el('a', { class: 'btn primary', href: `#/player/${p.id}` }, '▶ ' + T('play')),
         el('a', { class: 'btn', href: `#/plan/${p.id}` }, T('open')),
@@ -269,7 +270,7 @@ function viewPlans() {
       el('button', { class: 'btn', onclick: openGenerator }, '✨ ' + T('firstPlan')),
       el('button', { class: 'btn', onclick: () => fileIn.click() }, T('import')), fileIn),
     list, el('h2', {}, T('history')),
-    store.history.length ? el('ul', { class: 'hist' }, store.history.slice(0, 20).map((h) => el('li', {}, `${h.date} · ${h.plan} · ${h.minutes} ${T('min')}`))) : el('p', { class: 'hint' }, T('noHistory')));
+    store.history.length ? el('ul', { class: 'hist' }, store.history.slice(0, 20).map((h) => el('li', {}, `${h.date} · ${h.plan} · ${histMinutes(h)} ${T('min')}`))) : el('p', { class: 'hint' }, T('noHistory')));
   draw(); return null;
 }
 
@@ -279,25 +280,40 @@ function viewPlan(id) {
   if (!plan) { main.append(el('p', { class: 'empty' }, T('notFound'))); return null; }
   const listEl = el('ol', { class: 'items', id: 'items' });
   const totalEl = el('div', { class: 'total', id: 'total' });
-  const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} · ${plan.items.length} ${T('items')}`; };
-  const move = (i, d) => { const j = i + d; if (j < 0 || j >= plan.items.length) return; [plan.items[i], plan.items[j]] = [plan.items[j], plan.items[i]]; save(); draw(); };
+  const savedEl = el('span', { class: 'save-state', id: 'save-state', role: 'status', 'aria-live': 'polite' }, T('savedAuto'));
+  const flashSaved = () => { savedEl.textContent = T('savedAuto'); savedEl.classList.add('flash'); clearTimeout(flashSaved.t); flashSaved.t = setTimeout(() => savedEl.classList.remove('flash'), 1500); };
+  const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} \u00b7 ${nPoses(plan.items.length, lang)}`; flashSaved(); };
+  const move = (i, d) => { const j = i + d; if (j < 0 || j >= plan.items.length) return; plan.items = reorder(plan.items, i, j); save(); draw(); };
   const row = (it, i) => {
     const p = POSE_BY_ID[it.pose];
     const svg = svgEl('fig item-fig'); renderStatic(svg, p, it.level);
+    const note = el('div', { class: 'clamp-note', role: 'status', 'aria-live': 'polite' });
+    const amt = el('input', { class: 'amt', type: 'number', inputmode: 'numeric', min: amountRangeOf(it.unit).min, max: amountRangeOf(it.unit).max, value: it.amount, 'aria-label': T('hold') });
+    const applyAmount = () => {
+      const r = clampAmount(amt.value, it.unit);
+      it.amount = r.value; amt.value = r.value;
+      amt.min = r.range.min; amt.max = r.range.max;
+      const u = it.unit === 'breath' ? T('unitBreath') : T('sec');
+      note.textContent = r.clamped ? `${T('valueAdjusted')}: ${T(r.clamped === 'min' ? 'atLeast' : 'atMost')} ${r.range[r.clamped]} ${u}` : '';
+      clearTimeout(note.t); if (r.clamped) note.t = setTimeout(() => { note.textContent = ''; }, 4000);
+      save();
+    };
+    amt.addEventListener('change', applyAmount);
     const li = el('li', { class: 'item', 'data-i': i },
-      el('button', { class: 'handle', 'aria-label': T('drag'), title: T('drag') }, '⠿'),
+      el('button', { class: 'handle', 'aria-label': T('drag'), title: T('drag') }, '\u283f'),
       el('a', { href: `#/pose/${p.id}`, class: 'item-fig-wrap', tabindex: -1 }, svg),
       el('div', { class: 'item-main' },
-        el('div', { class: 'item-name' }, `${i + 1}. ${poseName(p)}`, p.sides === 'both' ? el('span', { class: 'badge' }, '×2') : null),
+        el('div', { class: 'item-name' }, `${i + 1}. ${poseName(p)}`, p.sides === 'both' ? el('span', { class: 'badge' }, '\u00d72') : null),
         el('div', { class: 'item-ctl' },
           el('select', { class: 'lv', 'aria-label': T('levels'), onchange: (e) => { it.level = +e.target.value; save(); draw(); } }, [0, 1, 2].map((n) => el('option', { value: n, selected: it.level === n }, LEVEL_LABELS[n][lang]))),
-          el('input', { class: 'amt', type: 'number', min: 1, max: 600, value: it.amount, 'aria-label': T('hold'), onchange: (e) => { it.amount = Math.max(1, Math.min(600, Math.round(+e.target.value) || 1)); e.target.value = it.amount; save(); } }),
-          el('select', { class: 'unit', 'aria-label': T('hold'), onchange: (e) => { it.unit = e.target.value; save(); } }, el('option', { value: 'sec', selected: it.unit === 'sec' }, T('unitSec')), el('option', { value: 'breath', selected: it.unit === 'breath' }, T('unitBreath'))))),
+          amt,
+          el('select', { class: 'unit', 'aria-label': T('hold'), onchange: (e) => { it.unit = e.target.value; applyAmount(); } }, el('option', { value: 'sec', selected: it.unit === 'sec' }, T('unitSec')), el('option', { value: 'breath', selected: it.unit === 'breath' }, T('unitBreath'))),
+          note)),
       el('div', { class: 'item-btns' },
-        el('button', { class: 'btn icon', 'aria-label': T('up'), title: T('up'), onclick: () => move(i, -1) }, '↑'),
-        el('button', { class: 'btn icon', 'aria-label': T('down'), title: T('down'), onclick: () => move(i, 1) }, '↓'),
-        el('button', { class: 'btn icon', 'aria-label': T('dup'), title: T('dup'), onclick: () => { plan.items.splice(i + 1, 0, { ...it }); save(); draw(); } }, '⧉'),
-        el('button', { class: 'btn icon danger', 'aria-label': T('remove'), title: T('remove'), onclick: () => { plan.items.splice(i, 1); save(); draw(); } }, '✕')));
+        el('button', { class: 'btn icon', 'aria-label': T('up'), title: T('up'), onclick: () => move(i, -1) }, '\u2191'),
+        el('button', { class: 'btn icon', 'aria-label': T('down'), title: T('down'), onclick: () => move(i, 1) }, '\u2193'),
+        el('button', { class: 'btn icon dup', 'aria-label': T('dup'), title: T('dup'), onclick: () => { plan.items.splice(i + 1, 0, { ...it }); save(); draw(); } }, '\u29c9'),
+        el('button', { class: 'btn icon danger', 'aria-label': T('remove'), title: T('remove'), onclick: () => { plan.items.splice(i, 1); save(); draw(); } }, '\u2715')));
     enableDrag(li, i);
     return li;
   };
@@ -307,17 +323,17 @@ function viewPlan(id) {
     h.addEventListener('pointerdown', (ev) => {
       ev.preventDefault(); h.setPointerCapture(ev.pointerId);
       const items = [...listEl.children]; const rects = items.map((x) => x.getBoundingClientRect());
+      const centers = rects.map((r) => r.top + r.height / 2);
       const startY = ev.clientY; let to = from;
       li.classList.add('dragging');
       const onMove = (e) => {
         const dy = e.clientY - startY; li.style.transform = `translateY(${dy}px)`;
-        const mid = rects[from].top + rects[from].height / 2 + dy;
-        to = rects.findIndex((r) => mid < r.top + r.height / 2); if (to < 0) to = rects.length - 1;
+        to = dropIndex(centers, centers[from] + dy);
         items.forEach((x, k) => { if (x === li) return; let shift = 0; if (from < to && k > from && k <= to) shift = -rects[from].height; if (from > to && k >= to && k < from) shift = rects[from].height; x.style.transform = shift ? `translateY(${shift}px)` : ''; });
       };
       const end = () => {
         h.removeEventListener('pointermove', onMove); h.removeEventListener('pointerup', end); h.removeEventListener('pointercancel', end);
-        if (to !== from) { const [m] = plan.items.splice(from, 1); plan.items.splice(to, 0, m); save(); }
+        if (to !== from) { plan.items = reorder(plan.items, from, to); save(); }
         draw();
       };
       h.addEventListener('pointermove', onMove); h.addEventListener('pointerup', end); h.addEventListener('pointercancel', end);
@@ -325,14 +341,14 @@ function viewPlan(id) {
   }
   const draw = () => {
     listEl.replaceChildren(...(plan.items.length ? plan.items.map(row) : [el('li', { class: 'empty' }, T('empty'))]));
-    totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} · ${plan.items.length} ${T('items')}`;
+    totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} \u00b7 ${nPoses(plan.items.length, lang)}`;
   };
   // picker
   const pick = el('select', { id: 'pick', 'aria-label': T('addPose') }, POSES.map((p) => el('option', { value: p.id }, `${poseName(p)} — ${p.sanskrit}`)));
-  const nameIn = el('input', { type: 'text', id: 'plan-name', value: plan.name, maxlength: 80, 'aria-label': T('planName'), oninput: (e) => { plan.name = e.target.value || T('newPlan'); store.upsertPlan(plan); } });
+  const nameIn = el('input', { type: 'text', id: 'plan-name', value: plan.name, maxlength: 80, 'aria-label': T('planName'), oninput: (e) => { plan.name = e.target.value || T('newPlan'); store.upsertPlan(plan); flashSaved(); } });
   main.append(
     el('a', { class: 'back', href: '#/plans' }, (DIR[lang] === 'rtl' ? '→ ' : '← ') + T('plansTitle')),
-    el('div', { class: 'plan-head' }, nameIn, totalEl),
+    el('div', { class: 'plan-head' }, nameIn, el('div', { class: 'plan-meta' }, totalEl, savedEl)),
     el('div', { class: 'row-btns' },
       el('a', { class: 'btn primary', id: 'play-plan', href: `#/player/${plan.id}` }, '▶ ' + T('playPlan')),
       el('button', { class: 'btn', id: 'export', onclick: () => downloadText(`${slug(plan.name)}.json`, exportPlanJSON(plan)) }, T('export')),

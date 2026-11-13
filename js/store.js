@@ -41,9 +41,11 @@ export const store = {
 
   // history: [{date 'YYYY-MM-DD', plan, minutes}]
   get history() { return get('history', []); },
-  addHistory(plan, minutes) {
+  // actualSec = time really practised (pauses excluded); plannedSec = length of the plan.
+  addHistory(plan, actualSec, plannedSec) {
     const h = this.history;
-    h.unshift({ date: dayKey(new Date()), plan, minutes: Math.max(1, Math.round(minutes)) });
+    const sec = Math.max(0, Math.round(actualSec));
+    h.unshift({ date: dayKey(new Date()), plan, minutes: Math.max(1, Math.round(sec / 60)), seconds: sec, planned: Math.round(plannedSec / 60), counted: countsForStreak(sec, plannedSec) });
     set('history', h.slice(0, 400));
   },
   setHistory(h) { set('history', h); },
@@ -52,8 +54,14 @@ export const store = {
 
 export const dayKey = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
+// A session counts towards the streak if at least half of the plan was practised, or at least 5 minutes.
+export const STREAK_MIN_SEC = 300, STREAK_MIN_FRACTION = 0.5;
+export const countsForStreak = (actualSec, plannedSec) => actualSec >= STREAK_MIN_SEC || (plannedSec > 0 && actualSec >= plannedSec * STREAK_MIN_FRACTION);
+// Display minutes for a history entry: "<1" for very short sessions.
+export const histMinutes = (h) => (h.seconds != null && h.seconds < 60 ? '<1' : String(h.minutes));
+
 export function streak(history, today = new Date()) {
-  const days = new Set(history.map((h) => h.date));
+  const days = new Set(history.filter((h) => h.counted !== false).map((h) => h.date)); // old entries have no flag: they count
   let n = 0; const d = new Date(today);
   if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1); // today not yet practiced does not break the streak
   while (days.has(dayKey(d))) { n++; d.setDate(d.getDate() - 1); }

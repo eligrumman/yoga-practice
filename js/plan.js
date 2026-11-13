@@ -64,3 +64,31 @@ export function parsePlanJSON(text) {
   if (err) return { error: err };
   return { plan: { name: o.plan.name.trim().slice(0, 80), items: o.plan.items.map(cleanItem) } };
 }
+
+// ---- builder helpers (pure) ----
+// Allowed range for the hold amount per unit (seconds: 5-600, breaths: 1-120 = 5-600 s).
+export const amountRange = (unit) => (unit === 'breath' ? { min: 1, max: 120 } : { min: 5, max: 600 });
+// Returns { value, clamped: null | 'min' | 'max', range }.
+export function clampAmount(raw, unit) {
+  const range = amountRange(unit);
+  const n = Math.round(Number(raw));
+  if (!Number.isFinite(n) || n < range.min) return { value: range.min, clamped: 'min', range };
+  if (n > range.max) return { value: range.max, clamped: 'max', range };
+  return { value: n, clamped: null, range };
+}
+
+// Where a dragged row lands: index of the row whose centre is nearest to the dragged row's centre.
+// (Centre-to-centre means "drop item 3 onto item 1" gives index 0.)
+export function dropIndex(centers, y) {
+  let best = 0;
+  for (let i = 1; i < centers.length; i++) if (Math.abs(centers[i] - y) < Math.abs(centers[best] - y)) best = i;
+  return best;
+}
+// Move arr[from] to position `to` (returns a new array).
+export function reorder(arr, from, to) {
+  const out = arr.slice();
+  if (from === to || from < 0 || from >= out.length) return out;
+  const [m] = out.splice(from, 1);
+  out.splice(Math.max(0, Math.min(out.length, to)), 0, m);
+  return out;
+}

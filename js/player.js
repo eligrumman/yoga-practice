@@ -2,7 +2,7 @@
 import { Figure, Animator, renderStatic } from './figure.js';
 import { slots, planSeconds, fmtTime } from './plan.js';
 import { tr } from './i18n.js';
-import { store, streak } from './store.js';
+import { store, streak, countsForStreak } from './store.js';
 import { cueIds } from '../data/narration.js';
 import { LEVEL_LABELS } from '../data/poses.js';
 
@@ -24,7 +24,7 @@ export class Player {
     this.mult = this.st.holdMult; this.trans = this.st.transition;
     this.list = slots(plan.items);
     this.idx = 0; this.phase = 'hold'; this.paused = false; this.done = false;
-    this.holdTotal = 0; this.remain = 0; this.elapsedAll = 0; this.totalAll = planSeconds(plan.items, this.trans, this.mult);
+    this.holdTotal = 0; this.remain = 0; this.elapsedAll = 0; this.actualSec = 0; this.totalAll = planSeconds(plan.items, this.trans, this.mult);
     this.halfSaid = false; this.nextSaid = false; this.midSaid = false; this.t0 = 0; this.timer = 0;
     this.audioCtx = null; this.wake = null;
     this.build();
@@ -170,7 +170,7 @@ export class Player {
   tick() {
     const now = performance.now(); const dt = Math.min(1, (now - this.t0) / 1000); this.t0 = now;
     if (this.paused || this.done) return;
-    this.remain -= dt; this.elapsedAll += dt;
+    this.remain -= dt; this.elapsedAll += dt; this.actualSec += dt; // actualSec: real practice time, never rewound by skips, not counted while paused
     if (this.phase === 'hold') {
       const s = this.slot();
       if (!this.midSaid && this.holdTotal >= 20 && this.remain <= this.holdTotal / 2 && this.st.density === 'full') {
@@ -225,16 +225,19 @@ export class Player {
     if (this.done) return; this.done = true;
     clearInterval(this.timer); this.anim.stop();
     this.nar.say(['common.finish'], { flush: true });
-    const minutes = this.totalAll / 60;
-    store.addHistory(this.plan.name, minutes);
+    const actual = this.actualSec;
+    store.addHistory(this.plan.name, actual, this.totalAll);
+    const counted = countsForStreak(actual, this.totalAll);
     const st = streak(store.history);
+    const shown = actual < 60 ? '<1' : String(Math.round(actual / 60));
     this.beep(660, 0.3);
     this.root.innerHTML = '';
     this.root.append(el('div', { class: 'finish' },
       el('div', { class: 'finish-mark', 'aria-hidden': 'true' }, '🪷'),
       el('h2', {}, this.T('finishTitle')),
       el('p', {}, this.T('finishText')),
-      el('p', { class: 'stat' }, `${Math.round(minutes)} ${this.T('minutes')} · ${this.T('streak')}: ${st}`),
+      el('p', { class: 'stat', id: 'finish-stat' }, `${this.T('practiced')}: ${shown} ${this.T('minutes')} · ${this.T('streak')}: ${st}`),
+      el('p', { class: 'small', id: 'finish-planned' }, `${this.T('planned')}: ${Math.round(this.totalAll / 60)} ${this.T('minutes')}` + (counted ? '' : ` · ${this.T('notCounted')}`)),
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary', onclick: () => this.again() }, this.T('again')),
         el('button', { class: 'btn', onclick: () => this.exit(true) }, this.T('home')))));

@@ -89,6 +89,14 @@ const T = {
   saved: { he: 'נשמר', ru: 'Сохранено', en: 'Saved' },
   playPlan: { he: 'נגן תכנית', ru: 'Запустить', en: 'Play plan' },
   addPose: { he: 'הוספת תנוחה', ru: 'Добавить позу', en: 'Add a pose' },
+  practiced: { he: 'תרגלתם בפועל', ru: 'Практика', en: 'Practised' },
+  planned: { he: 'מתוכנן', ru: 'По плану', en: 'Planned' },
+  notCounted: { he: 'תרגול קצר מדי, לא נספר ברצף', ru: 'слишком коротко, в серию не засчитано', en: 'too short to count towards the streak' },
+  category: { he: 'קטגוריה', ru: 'Категория', en: 'Category' },
+  atLeast: { he: 'מינימום', ru: 'минимум', en: 'min' },
+  atMost: { he: 'מקסימום', ru: 'максимум', en: 'max' },
+  valueAdjusted: { he: 'הערך תוקן', ru: 'Значение изменено', en: 'Value adjusted' },
+  savedAuto: { he: 'נשמר ✓', ru: 'Сохранено ✓', en: 'Saved ✓' },
   both: { he: 'פעמיים (שני צדדים)', ru: 'дважды (обе стороны)', en: 'twice (both sides)' },
   // player
   next: { he: 'הבאה', ru: 'Далее', en: 'Next' },
@@ -145,5 +153,15 @@ export function tr(key, lang, sub) {
   if (sub != null && v) v = v[sub];
   if (!v) return key;
   return v[lang] || v.en;
+}
+// "1 pose" / "2 poses"; Russian uses 1 поза / 2-4 позы / 5+ поз (11-14 are "поз").
+export function nPoses(n, lang) {
+  if (lang === 'he') return n === 1 ? 'תנוחה אחת' : n === 2 ? 'שתי תנוחות' : `${n} תנוחות`;
+  if (lang === 'ru') {
+    const a = Math.abs(n) % 100, b = a % 10;
+    const w = a > 10 && a < 15 ? 'поз' : b === 1 ? 'поза' : b >= 2 && b <= 4 ? 'позы' : 'поз';
+    return `${n} ${w}`;
+  }
+  return `${n} ${n === 1 ? 'pose' : 'poses'}`;
 }
 export { T };
