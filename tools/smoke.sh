@@ -16,7 +16,9 @@ $AB reload >/dev/null; sleep 2
 $AB errors --clear >/dev/null 2>&1
 PNAME=$($AB eval "document.querySelector('.p-name')?.textContent || ''" | tr -d '"')
 [ -n "$PNAME" ] || fail "player did not render a pose name"
-for i in 1 2; do
+# Hebrew starts with an intro phase (the first skip only skips the intro), so skip until the finish screen shows (max 6 clicks)
+for i in 1 2 3 4 5 6; do
+  [ "$($AB eval "!!document.querySelector('.finish')")" = true ] && break
   $AB eval "(document.querySelector('#p-ctrl button:last-child')).click()" >/dev/null || fail "skip click failed"
   sleep 1
 done
