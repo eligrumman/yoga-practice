@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Screenshot helper (NOT the pilot): draws OUR current figure (2D svg or 3D three.js) for a pose at L1.
+     ?p=<id>&m=2d|3d. Imports the site's own modules, so serve from the repo root. -->
+<html><head><meta charset="utf-8"><title>ours</title>
+<link rel="stylesheet" href="../../css/style.css">
+<style>html,body{margin:0;background:#f6f1e7}#h{position:relative;width:640px;height:640px;background:#f6f1e7}svg.fig{width:640px;height:640px;display:block}</style></head>
+<body><div id="h"></div>
+<script type="module">
+import { Renderer2D, fitView } from '../../js/figure2d.js';
+import { Renderer3D, loadThree } from '../../js/figure3d.js';
+import { loadSpec } from '../../js/specs.js';
+const q = new URLSearchParams(location.search), id = q.get('p') || 'tree', m = q.get('m') || '2d', L = 1;
+const spec = await loadSpec(id), lv = spec.levels[L], cam = lv.camera || spec.camera, host = document.getElementById('h');
+if (m === '2d') {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'fig'); host.append(svg);
+  new Renderer2D(svg).draw(lv.hold, { props: lv.props, view: fitView([lv.hold], cam) });
+} else {
+  const THREE = await loadThree();
+  const r = new Renderer3D(host, THREE, { floor: true });
+  r.draw(lv.hold, { props: lv.props, cam });
+  r.resize();
+  r.draw(lv.hold, { props: lv.props, cam });
+}
+document.title = 'ready';
+</script></body></html>

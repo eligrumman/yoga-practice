@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>anidoodle pilot</title>
+<style>body{margin:0;background:#f6f1e7;font:14px system-ui;color:#222}.row{display:flex;flex-wrap:wrap;gap:12px;padding:12px}figure{margin:0}canvas{width:320px;height:320px;display:block;background:#f6f1e7}</style></head>
+<body>
+<!-- Standalone pilot. Needs: dist/pilot.js (bundle incl. anidoodle code, Apache-2.0, see LICENSE/NOTICE). Loads nothing from the site. -->
+<div class="row" id="row"></div>
+<script src="dist/pilot.js"></script>
+<script>
+  const q = new URLSearchParams(location.search), size = +q.get('s') || 640;
+  const poses = q.get('p') ? [q.get('p')] : ['warrior-2', 'downward-dog', 'tree'];
+  const hands = q.get('h') ? [q.get('h')] : ['marker', 'storybook'];
+  for (const p of poses) for (const h of hands) {
+    const f = document.createElement('figure'), c = document.createElement('canvas');
+    c.id = `c-${p}-${h}`; f.append(c, Object.assign(document.createElement('figcaption'), { textContent: `${p} / ${h}` }));
+    document.getElementById('row').append(f);
+    drawPose(c, p, h, 1);
+    if (q.get('p')) { c.style.width = c.style.height = '640px'; document.body.style.margin = '0'; document.getElementById('row').style.padding = '0'; f.querySelector('figcaption').remove(); }
+  }
+  document.title = 'ready';
+</script></body></html>
