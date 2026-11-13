@@ -150,7 +150,7 @@ export class Player {
   renderInfo(s) {
     const L = this.lang, p = s.pose;
     this.elName.textContent = p[L];
-    this.elSub.textContent = `${p.sanskrit} · ${LEVEL_LABELS[s.level][L]}` + (s.sides > 1 ? ` · ${this.T('side')} ${this.T('sideLR')[s.side][L]}` : '');
+    this.elSub.textContent = `${p.sanskrit} · ${LEVEL_LABELS[s.level][L]}` + (s.sides > 1 ? ` · ${this.T('side')} ${this.T('sideLR', s.side)}` : '');
     this.elCues.innerHTML = '';
     for (const c of p.cues[L]) this.elCues.append(el('li', {}, c));
     const easy = p.variations[0];
@@ -164,7 +164,7 @@ export class Player {
     if (!n) { this.elNext.hidden = true; return; }
     this.elNext.hidden = false;
     renderStatic(this.nextSvg, n.pose, n.level, { mirror: n.side === 1, floor: true });
-    this.elNextName.textContent = n.pose[this.lang] + (n.sides > 1 && n.side === 1 ? ` (${this.T('side')} ${this.T('sideLR')[1][this.lang]})` : '');
+    this.elNextName.textContent = n.pose[this.lang] + (n.sides > 1 && n.side === 1 ? ` (${this.T('side')} ${this.T('sideLR', 1)})` : '');
   }
 
   tick() {

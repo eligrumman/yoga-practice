@@ -6,7 +6,7 @@ import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, 
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from '../js/generator.js';
 import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
-import { nPoses } from '../js/i18n.js';
+import { nPoses, tr } from '../js/i18n.js';
 
 let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log('FAIL', m); } };
@@ -108,6 +108,8 @@ ok(dropIndex(cs, cs[1]) === 1, 'drop: no movement stays put');
 ok(clampAmount(0, 'sec').value === 5 && clampAmount(0, 'sec').clamped === 'min', 'clamp 0 s -> min 5');
 ok(clampAmount(99999, 'sec').value === 600 && clampAmount(99999, 'sec').clamped === 'max', 'clamp huge -> max 600');
 ok(clampAmount('abc', 'breath').value === 1 && clampAmount(7, 'breath').clamped === null, 'clamp breaths');
+
+ok(['he', 'ru', 'en'].every((l) => typeof tr('sideLR', l, 0) === 'string' && typeof tr('sideLR', l, 1) === 'string'), 'side labels (first/second) resolve per language');
 
 // ---- plurals
 ok(nPoses(1, 'he') === 'תנוחה אחת' && nPoses(5, 'he') === '5 תנוחות', 'he plural');
