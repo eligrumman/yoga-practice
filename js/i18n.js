@@ -4,25 +4,25 @@ export const DIR = { he: 'rtl', ru: 'ltr', en: 'ltr' };
 
 const T = {
   appName: { he: 'יוגה בבית', ru: 'Йога дома', en: 'Home Yoga Flow' },
-  tagline: { he: 'תרגול יוגה בקצב שלכם: תנוחות מונפשות, תכניות מוכנות והסבר קולי', ru: 'Йога в Вашем темпе: анимированные позы, готовые программы и голосовые подсказки', en: 'Yoga at your own pace: animated poses, ready-made plans and voice guidance' },
+  tagline: { he: 'תרגול יוגה בקצב שלכם: תנוחות מונפשות, תכניות מוכנות והסבר קולי', ru: 'Йога в вашем темпе: анимированные позы, готовые программы и голосовые подсказки', en: 'Yoga at your own pace: animated poses, ready-made plans and voice guidance' },
   navHome: { he: 'בית', ru: 'Главная', en: 'Home' },
   navLibrary: { he: 'תנוחות', ru: 'Позы', en: 'Poses' },
   navPlans: { he: 'התכניות שלי', ru: 'Мои планы', en: 'My plans' },
   presets: { he: 'תכניות מוכנות', ru: 'Готовые программы', en: 'Ready-made plans' },
-  starter: { he: 'מסלול פתיחה של 7 ימים', ru: 'Стартовый путь на 7 дней', en: '7-day starter path' },
-  starterHint: { he: 'שבעה תרגולים קצרים, מיום 1 עד יום 7, בהדרגה.', ru: 'Семь коротких практик, с 1-го по 7-й день, постепенно.', en: 'Seven short sessions, day 1 to day 7, gently progressive.' },
+  starter: { he: 'מסלול פתיחה של 7 ימים', ru: 'Семидневный курс для начинающих', en: '7-day starter path' },
+  starterHint: { he: 'שבעה תרגולים קצרים, מיום 1 עד יום 7, בהדרגה.', ru: 'Семь коротких практик с постепенным усложнением.', en: 'Seven short sessions, day 1 to day 7, gently progressive.' },
   day: { he: 'יום', ru: 'День', en: 'Day' },
   min: { he: 'דק׳', ru: 'мин', en: 'min' },
   play: { he: 'התחילו', ru: 'Начать', en: 'Start' },
   copy: { he: 'העתק לתכניות שלי', ru: 'Скопировать в мои планы', en: 'Copy to my plans' },
   copied: { he: 'הועתק לתכניות שלי', ru: 'Скопировано в мои планы', en: 'Copied to my plans' },
-  firstPlan: { he: 'צור לי תכנית לפעם ראשונה', ru: 'Создать мою первую программу', en: 'Create my first-time plan' },
+  firstPlan: { he: 'צרו תכנית לפעם הראשונה', ru: 'Создать первую программу', en: 'Create my first-time plan' },
   genTitle: { he: 'תכנית לפעם ראשונה', ru: 'Первая программа', en: 'First-time plan' },
   genLength: { he: 'אורך', ru: 'Длительность', en: 'Length' },
   genFocus: { he: 'מיקוד', ru: 'Фокус', en: 'Focus' },
   genLevel: { he: 'רמה', ru: 'Уровень', en: 'Level' },
   genAvoid: { he: 'תנוחות להימנע מהן', ru: 'Позы, которых нужно избегать', en: 'Poses to avoid' },
-  genGo: { he: 'צרו תכנית', ru: 'Составить', en: 'Generate' },
+  genGo: { he: 'צרו תכנית', ru: 'Составить программу', en: 'Generate' },
   focus: {
     general: { he: 'כללי', ru: 'Общий', en: 'General' },
     flexibility: { he: 'גמישות', ru: 'Гибкость', en: 'Flexibility' },
@@ -32,7 +32,7 @@ const T = {
   },
   glevel: {
     beginner: { he: 'מתחילים', ru: 'Начинающий', en: 'Beginner' },
-    gentle: { he: 'בינוני עדין', ru: 'Мягкий средний', en: 'Gentle intermediate' },
+    gentle: { he: 'בינוני עדין', ru: 'Средний, щадящий', en: 'Gentle intermediate' },
   },
   search: { he: 'חיפוש תנוחה…', ru: 'Поиск позы…', en: 'Search poses…' },
   allCats: { he: 'כל הקטגוריות', ru: 'Все категории', en: 'All categories' },
@@ -42,19 +42,19 @@ const T = {
   none: { he: 'לא נמצאו תנוחות', ru: 'Ничего не найдено', en: 'No poses found' },
   back: { he: 'חזרה', ru: 'Назад', en: 'Back' },
   levels: { he: 'רמה', ru: 'Уровень', en: 'Level' },
-  props: { he: 'עזרים', ru: 'Опоры', en: 'Props' },
+  props: { he: 'עזרים', ru: 'Инвентарь', en: 'Props' },
   prop: {
     block: { he: 'בלוק', ru: 'блок', en: 'block' },
     strap: { he: 'רצועה', ru: 'ремень', en: 'strap' },
     cushion: { he: 'כרית', ru: 'подушка', en: 'cushion' },
     wall: { he: 'קיר', ru: 'стена', en: 'wall' },
   },
-  noProps: { he: 'בלי עזרים', ru: 'без опор', en: 'no props' },
+  noProps: { he: 'בלי עזרים', ru: 'без инвентаря', en: 'no props' },
   cues: { he: 'הנחיות', ru: 'Подсказки', en: 'Cues' },
   safety: { he: 'בטיחות', ru: 'Безопасность', en: 'Safety' },
   easier: { he: 'אפשרות קלה יותר', ru: 'Облегчённый вариант', en: 'Easier option' },
   variation: { he: 'וריאציה', ru: 'Вариант', en: 'Variation' },
-  sides: { single: { he: 'צד אחד', ru: 'одна сторона', en: 'one side' }, both: { he: 'שני צדדים', ru: 'обе стороны', en: 'both sides' } },
+  sides: { single: { he: '', ru: '', en: '' }, both: { he: 'שני הצדדים', ru: 'обе стороны', en: 'both sides' } },
   hold: { he: 'החזקה', ru: 'Удержание', en: 'Hold' },
   sec: { he: 'שנ׳', ru: 'с', en: 's' },
   breaths: { he: 'נשימות', ru: 'вдохов', en: 'breaths' },
@@ -71,7 +71,7 @@ const T = {
   import: { he: 'ייבוא קובץ', ru: 'Импорт файла', en: 'Import file' },
   export: { he: 'ייצוא JSON', ru: 'Экспорт JSON', en: 'Export JSON' },
   importOk: { he: 'התכנית יובאה', ru: 'План импортирован', en: 'Plan imported' },
-  importBad: { he: 'הקובץ לא תקין', ru: 'Файл недопустим', en: 'Invalid file' },
+  importBad: { he: 'הקובץ לא תקין', ru: 'Неверный формат файла', en: 'Invalid file' },
   open: { he: 'פתח', ru: 'Открыть', en: 'Open' },
   del: { he: 'מחק', ru: 'Удалить', en: 'Delete' },
   confirmDel: { he: 'למחוק את התכנית?', ru: 'Удалить план?', en: 'Delete this plan?' },
@@ -103,15 +103,15 @@ const T = {
   skip: { he: 'דלג', ru: 'Пропустить', en: 'Skip' },
   prev: { he: 'הקודמת', ru: 'Назад', en: 'Previous' },
   plus10: { he: '+10 שנ׳', ru: '+10 с', en: '+10s' },
-  restart: { he: 'התחל תנוחה מחדש', ru: 'Заново', en: 'Restart pose' },
-  replayEntry: { he: 'הצג כניסה שוב', ru: 'Показать вход', en: 'Replay entry' },
+  restart: { he: 'התחל תנוחה מחדש', ru: 'Начать позу заново', en: 'Restart pose' },
+  replayEntry: { he: 'הצג כניסה שוב', ru: 'Показать вход в позу', en: 'Replay entry' },
   side: { he: 'צד', ru: 'Сторона', en: 'Side' },
   sideLR: [{ he: 'ראשון', ru: 'первая', en: 'first' }, { he: 'שני', ru: 'вторая', en: 'second' }],
   switchSides: { he: 'החליפו צד', ru: 'Смените сторону', en: 'Switch sides' },
   getReady: { he: 'התכוננו', ru: 'Приготовьтесь', en: 'Get ready' },
   finishTitle: { he: 'כל הכבוד!', ru: 'Отлично!', en: 'Well done!' },
   finishText: { he: 'סיימתם את התרגול.', ru: 'Вы завершили практику.', en: 'You finished the practice.' },
-  streak: { he: 'רצף ימים', ru: 'Серия дней', en: 'Day streak' },
+  streak: { he: 'רצף ימים', ru: 'Дней подряд', en: 'Day streak' },
   again: { he: 'שוב', ru: 'Ещё раз', en: 'Again' },
   home: { he: 'לדף הבית', ru: 'На главную', en: 'Home' },
   exit: { he: 'יציאה', ru: 'Выйти', en: 'Exit' },
@@ -122,8 +122,8 @@ const T = {
   unmute: { he: 'הפעל קול', ru: 'Включить звук', en: 'Unmute' },
   volume: { he: 'עוצמה', ru: 'Громкость', en: 'Volume' },
   beep: { he: 'צליל מעבר', ru: 'Звуковой сигнал', en: 'Transition beep' },
-  density: { he: 'פירוט ההסבר', ru: 'Подробность', en: 'Narration detail' },
-  dens: { minimal: { he: 'מינימלי (שם בלבד)', ru: 'Минимум (название)', en: 'Minimal (name only)' }, standard: { he: 'רגיל (שם + 2 הנחיות)', ru: 'Обычный (название + 2 подсказки)', en: 'Standard (name + 2 cues)' }, full: { he: 'מלא (כל ההנחיות + נשימה)', ru: 'Полный (все подсказки + дыхание)', en: 'Full (all cues + breath)' } },
+  density: { he: 'פירוט ההסבר', ru: 'Подробность подсказок', en: 'Narration detail' },
+  dens: { minimal: { he: 'מינימלי (שם בלבד)', ru: 'Минимальный (только название)', en: 'Minimal (name only)' }, standard: { he: 'רגיל (שם + 2 הנחיות)', ru: 'Обычный (название + 2 подсказки)', en: 'Standard (name + 2 cues)' }, full: { he: 'מלא (כל ההנחיות + נשימה)', ru: 'Полный (все подсказки + дыхание)', en: 'Full (all cues + breath)' } },
   pace: { he: 'קצב', ru: 'Темп', en: 'Pace' },
   holdMult: { he: 'זמן החזקה', ru: 'Время удержания', en: 'Hold time' },
   transition: { he: 'מעבר בין תנוחות', ru: 'Время перехода', en: 'Transition time' },
@@ -136,10 +136,10 @@ const T = {
   minutes: { he: 'דקות', ru: 'минут', en: 'minutes' },
   disclaimer: {
     he: 'המידע באתר אינו ייעוץ רפואי. אם אתם בהריון, פצועים או סובלים ממצב רפואי, התייעצו עם איש מקצוע לפני התרגול. עצרו אם מופיע כאב.',
-    ru: 'Материалы сайта не являются медицинским советом. Если Вы беременны, травмированы или у Вас есть заболевания, проконсультируйтесь со специалистом перед практикой. При боли прекратите.',
+    ru: 'Материалы сайта не являются медицинским советом. Если вы беременны, травмированы или у вас есть заболевания, проконсультируйтесь со специалистом перед практикой. Если появилась боль, прекратите занятие.',
     en: 'This site is not medical advice. If you are pregnant, injured or have a medical condition, consult a professional before practicing. Stop if you feel pain.',
   },
-  privacy: { he: 'הכל נשמר רק במכשיר שלכם. בלי חשבונות ובלי מעקב.', ru: 'Всё хранится только на Вашем устройстве. Без аккаунтов и слежки.', en: 'Everything stays on your device. No accounts, no tracking.' },
+  privacy: { he: 'הכל נשמר רק במכשיר שלכם. בלי חשבונות ובלי מעקב.', ru: 'Всё хранится только на вашем устройстве. Без аккаунтов и слежки.', en: 'Everything stays on your device. No accounts, no tracking.' },
   notFound: { he: 'העמוד לא נמצא', ru: 'Страница не найдена', en: 'Page not found' },
   mine: { he: 'שלי', ru: 'мой', en: 'mine' },
   close: { he: 'סגור', ru: 'Закрыть', en: 'Close' },
@@ -154,14 +154,23 @@ export function tr(key, lang, sub) {
   if (!v) return key;
   return v[lang] || v.en;
 }
-// "1 pose" / "2 poses"; Russian uses 1 поза / 2-4 позы / 5+ поз (11-14 are "поз").
-export function nPoses(n, lang) {
-  if (lang === 'he') return n === 1 ? 'תנוחה אחת' : n === 2 ? 'שתי תנוחות' : `${n} תנוחות`;
-  if (lang === 'ru') {
-    const a = Math.abs(n) % 100, b = a % 10;
-    const w = a > 10 && a < 15 ? 'поз' : b === 1 ? 'поза' : b >= 2 && b <= 4 ? 'позы' : 'поз';
-    return `${n} ${w}`;
-  }
-  return `${n} ${n === 1 ? 'pose' : 'poses'}`;
+// Russian plural forms via Intl.PluralRules (one / few / many).
+const RU_FORMS = {
+  pose: ['поза', 'позы', 'поз'], breath: ['вдох', 'вдоха', 'вдохов'], minute: ['минута', 'минуты', 'минут'],
+  second: ['секунда', 'секунды', 'секунд'], day: ['день', 'дня', 'дней'],
+};
+const RU_PR = new Intl.PluralRules('ru');
+export function ruPlural(n, kind) {
+  const f = RU_FORMS[kind]; const c = RU_PR.select(Math.abs(n));
+  return f[c === 'one' ? 0 : c === 'few' ? 1 : 2];
 }
+// "1 pose" / "2 poses" in he / ru / en for kinds pose, breath, minute, second, day.
+const HE = { pose: ['תנוחה אחת', 'שתי תנוחות', 'תנוחות'], breath: ['נשימה אחת', 'שתי נשימות', 'נשימות'], minute: ['דקה אחת', 'שתי דקות', 'דקות'], second: ['שנייה אחת', 'שתי שניות', 'שניות'], day: ['יום אחד', 'יומיים', 'ימים'] };
+const EN = { pose: ['pose', 'poses'], breath: ['breath', 'breaths'], minute: ['minute', 'minutes'], second: ['second', 'seconds'], day: ['day', 'days'] };
+export function nCount(n, kind, lang) {
+  if (lang === 'he') { const h = HE[kind]; return n === 1 ? h[0] : n === 2 ? h[1] : `${n} ${h[2]}`; }
+  if (lang === 'ru') return `${n} ${ruPlural(n, kind)}`;
+  return `${n} ${EN[kind][n === 1 ? 0 : 1]}`;
+}
+export const nPoses = (n, lang) => nCount(n, 'pose', lang);
 export { T };

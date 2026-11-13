@@ -222,7 +222,7 @@ export const STARTER_PATH = [
     name: { he: 'יום 7: הכול ביחד', ru: 'День 7: всё вместе', en: 'Day 7: putting it together' },
     desc: {
       he: 'חוזרים על מה שלמדתם בשבוע, מחימום ועד שכיבת מנוחה.',
-      ru: 'Повторяем всё, что Вы освоили за неделю, от разминки до отдыха.',
+      ru: 'Повторяем всё, что вы освоили за неделю, от разминки до отдыха.',
       en: 'A review of the week, from warm-up to final rest.',
     },
     items: [

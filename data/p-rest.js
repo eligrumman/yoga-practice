@@ -23,9 +23,9 @@ export default [
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות.', 'הורידו את שתי הברכיים לצד אחד.', 'פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה.', 'הפנו את המבט לצד ההפוך ונשמו.'],
       en: ['Lie on your back with the knees bent.', 'Lower both knees to one side.', 'Open the arms wide and keep the shoulders on the floor.', 'Turn your gaze the other way and breathe.'],
-      ru: ['Лягте на спину, колени согнуты.', 'Опустите оба колена в одну сторону.', 'Раскройте руки в стороны, плечи остаются на полу.', 'Поверните взгляд в другую сторону и дышите.'],
+      ru: ['Лягте на спину, колени согнуты.', 'Опустите оба колена в одну сторону.', 'Раскройте руки в стороны, плечи остаются на полу.', 'Поверните голову в другую сторону и дышите.'],
     },
-    safe: { he: 'כאבי גב תחתון או הריון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות.', en: 'Lower back pain or pregnancy: place a cushion under the knees and go only as far as comfortable.', ru: 'При боли в пояснице или беременности подложите подушку под колени и опускайтесь лишь до удобного предела.' },
+    safe: { he: 'כאבי גב תחתון או הריון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות.', en: 'Lower back pain or pregnancy: place a cushion under the knees and go only as far as comfortable.', ru: 'При боли в пояснице или беременности подложите подушку под колени и опускайте их лишь до комфортного уровня.' },
     v: [
       { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', kf: { l: [30, -4, 0], m: [40, 6, 0], z: { l: [0.7, 0.6, 0.7], m: [0.7, 0.6, 0.7], a: 0.55, b: 0.55 } } },
       { he: 'שתי ברכיים לצד.', en: 'Both knees to the side.', ru: 'Оба колена в сторону.', kf: {} },
@@ -49,15 +49,15 @@ export default [
     ],
   },
   {
-    id: 'figure-four', sa: 'Supta Kapotasana', en: 'Reclined figure four', he: 'ארבע שכובה', ru: 'Лёжа, ноги «четвёркой»', cat: 'hip opener', sec: 'cool', flow: 90, d: 2, hold: 30, sides: 'both',
+    id: 'figure-four', sa: 'Supta Kapotasana', en: 'Reclined figure four', he: 'ארבע שכובה', ru: 'Четвёрка лёжа', cat: 'hip opener', sec: 'cool', flow: 90, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'], start: 'lie',
     kf: { t: 180, s: 178, h: 175, a: [-10, -8], l: [55, -80, 0], m: [125, -20, -90], z: { m: [0.95, 0.9, 0.9] }, fix: { m: { to: 'l', pt: 'knee', bend: 1 } } },
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'משכו את הרגל התומכת לעבר החזה.', 'לחצו קלות את הברך שבחוץ והרפו.'],
       en: ['Lie on your back with the knees bent.', 'Cross one ankle over the opposite thigh.', 'Draw the supporting leg toward your chest.', 'Gently press the outer knee away and release.'],
-      ru: ['Лягте на спину, колени согнуты.', 'Положите одну лодыжку на противоположное бедро.', 'Подтяните опорную ногу к груди.', 'Мягко отведите наружное колено и расслабьтесь.'],
+      ru: ['Лягте на спину, колени согнуты.', 'Положите одну лодыжку на противоположное бедро.', 'Подтяните нижнюю ногу к груди.', 'Мягко отведите колено верхней ноги от себя и расслабьтесь.'],
     },
-    safe: { he: 'כאבי ברכיים: כופפו את כף הרגל העליונה ואל תלחצו על הברך. אפשר להשאיר את כף הרגל התחתונה על הרצפה.', en: 'Knee pain: flex the top foot and never press the knee. You may keep the lower foot on the floor.', ru: 'При боли в коленях согните верхнюю стопу и не давите на колено. Нижнюю стопу можно оставить на полу.' },
+    safe: { he: 'כאבי ברכיים: כופפו את כף הרגל העליונה ואל תלחצו על הברך. אפשר להשאיר את כף הרגל התחתונה על הרצפה.', en: 'Knee pain: flex the top foot and never press the knee. You may keep the lower foot on the floor.', ru: 'При боли в коленях потяните носок верхней ноги на себя и не давите на колено. Нижнюю стопу можно оставить на полу.' },
     v: [
       { he: 'כף רגל תחתונה על הרצפה.', en: 'Lower foot on the floor.', ru: 'Нижняя стопа на полу.', kf: {} },
       { he: 'רגל תחתונה באוויר, ידיים סביב הירך.', en: 'Lower leg lifted, hands around the thigh.', ru: 'Нижняя нога поднята, руки обхватывают бедро.', kf: { l: [90, 5, 0] } },
@@ -65,19 +65,19 @@ export default [
     ],
   },
   {
-    id: 'hand-to-toe', sa: 'Supta Padangusthasana', en: 'Reclined hand-to-toe', he: 'יד לבוהן בשכיבה', ru: 'Лёжа, рука к стопе', cat: 'supine', sec: 'cool', flow: 50, d: 2, hold: 30, sides: 'both',
+    id: 'hand-to-toe', sa: 'Supta Padangusthasana', en: 'Reclined hand-to-toe', he: 'יד לבוהן בשכיבה', ru: 'Рука к стопе лёжа', cat: 'supine', sec: 'cool', flow: 50, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'], start: 'lie',
     kf: { t: 180, s: 180, h: 178, a: [58, 50], l: [82, 82, 95], m: [-3, -3, 80] },
     cue: {
       he: ['שכבו על הגב, הרימו רגל אחת למעלה.', 'השתמשו ברצועה סביב כף הרגל.', 'הרגל השנייה נשארת פעילה על הרצפה.', 'משכו קלות ונשמו, בלי לעגל את הגב.'],
       en: ['Lie on your back and raise one leg.', 'Use a strap around the foot.', 'The other leg stays active on the floor.', 'Pull lightly and breathe; do not round the back.'],
-      ru: ['Лягте на спину и поднимите одну ногу.', 'Используйте ремень вокруг стопы.', 'Другая нога остаётся активной на полу.', 'Слегка потяните и дышите, не округляя спину.'],
+      ru: ['Лягте на спину и поднимите одну ногу.', 'Накиньте ремень на стопу.', 'Другая нога прямая и прижата к полу.', 'Слегка потяните и дышите, не округляя спину.'],
     },
     safe: { he: 'כאבי גב תחתון: כופפו ברך שעל הרצפה. אל תכפו את הרגל המורמת.', en: 'Lower back pain: bend the knee on the floor. Do not force the raised leg.', ru: 'При боли в пояснице согните колено на полу. Не форсируйте поднятую ногу.' },
     v: [
       { he: 'ברך מורמת כפופה, רצועה.', en: 'Raised knee bent, with a strap.', ru: 'Поднятое колено согнуто, с ремнём.', props: [{ type: 'strap', arm: 'a', leg: 'l' }], kf: { l: [75, 35, 60] } },
       { he: 'רגל ישרה עם רצועה.', en: 'Straight leg with a strap.', ru: 'Нога прямая, с ремнём.', props: [{ type: 'strap', arm: 'a', leg: 'l' }], kf: {} },
-      { he: 'הרגל קרובה לפנים, אחיזה בבוהן.', en: 'Leg close to the face, holding the toe.', ru: 'Нога ближе к лицу, рука держит палец.', kf: { l: [100, 100, 100], s: 160, h: 150, fix: { a: { to: 'l', pt: 'toe', bend: 1 } } } },
+      { he: 'הרגל קרובה לפנים, אחיזה בבוהן.', en: 'Leg close to the face, holding the toe.', ru: 'Нога ближе к лицу, рука держит большой палец ноги.', kf: { l: [100, 100, 100], s: 160, h: 150, fix: { a: { to: 'l', pt: 'toe', bend: 1 } } } },
     ],
   },
   {

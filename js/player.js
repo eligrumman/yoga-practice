@@ -236,8 +236,8 @@ export class Player {
       el('div', { class: 'finish-mark', 'aria-hidden': 'true' }, '🪷'),
       el('h2', {}, this.T('finishTitle')),
       el('p', {}, this.T('finishText')),
-      el('p', { class: 'stat', id: 'finish-stat' }, `${this.T('practiced')}: ${shown} ${this.T('minutes')} · ${this.T('streak')}: ${st}`),
-      el('p', { class: 'small', id: 'finish-planned' }, `${this.T('planned')}: ${Math.round(this.totalAll / 60)} ${this.T('minutes')}` + (counted ? '' : ` · ${this.T('notCounted')}`)),
+      el('p', { class: 'stat', id: 'finish-stat' }, `${this.T('practiced')}: ${shown === '<1' ? '<1 ' + this.T('min') : nCount(+shown, 'minute', this.lang)} · ${this.T('streak')}: ${st}`),
+      el('p', { class: 'small', id: 'finish-planned' }, `${this.T('planned')}: ${nCount(Math.round(this.totalAll / 60), 'minute', this.lang)}` + (counted ? '' : ` · ${this.T('notCounted')}`)),
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary', onclick: () => this.again() }, this.T('again')),
         el('button', { class: 'btn', onclick: () => this.exit(true) }, this.T('home')))));

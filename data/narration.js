@@ -17,7 +17,7 @@ const COMMON = {
   breathe_slow: { he: 'המשיכו לנשום לאט.', ru: 'Продолжайте дышать медленно.', en: 'Keep breathing slowly.' },
   ease_off: {
     he: 'אם מופיע כאב, הקלו או צאו מהתנוחה.',
-    ru: 'Если появляется боль, ослабьте позу или выйдите из неё.',
+    ru: 'Если появилась боль, смягчите позу или выйдите из неё.',
     en: 'If you feel pain, ease off or come out of the pose.',
   },
   switch_sides: { he: 'החליפו צד.', ru: 'Смените сторону.', en: 'Switch sides.' },
@@ -30,7 +30,7 @@ const COMMON = {
   },
   finish: {
     he: 'כל הכבוד. התרגול הסתיים. הקדישו רגע להרגיש את הגוף.',
-    ru: 'Отлично. Практика окончена. Побудьте минуту, чувствуя своё тело.',
+    ru: 'Отлично. Практика окончена. Побудьте немного в тишине и прислушайтесь к своему телу.',
     en: 'Well done. The practice is complete. Take a moment to notice how your body feels.',
   },
 };
@@ -43,7 +43,7 @@ const SPOKEN_NAME = {
 };
 const INTRO = {
   he: (n) => (n.startsWith('תנוחת') ? `${n}.` : `תנוחת ${n}.`),
-  ru: (n) => `Поза: ${n}.`,
+  ru: (n) => (n.startsWith('Поза') ? `${n}.` : `Поза: ${n}.`),
   en: (n) => `Pose: ${n}.`,
 };
 

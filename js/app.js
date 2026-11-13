@@ -226,7 +226,7 @@ function viewPose(id) {
         el('div', { class: 'title-row' }, el('h1', {}, poseName(p)), fav),
         el('div', { class: 'sans' }, `${p.sanskrit} · ${p.en}`),
         el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), el('span', { class: 'dots' }, stars(p.difficulty)),
-          el('span', { class: 'badge' }, `${T('hold')}: ${p.holdSeconds} ${T('sec')} · ${T('sides', p.sides)}`)),
+          el('span', { class: 'badge' }, `${T('hold')}: ${p.holdSeconds} ${T('sec')}` + (p.sides === 'both' ? ` · ${T('sides', 'both')}` : ''))),
         el('h3', {}, T('cues')), el('ol', { class: 'cues' }, p.cues[lang].map((c) => el('li', {}, c))),
         el('div', { class: 'note safety' }, el('strong', {}, '⚠ ' + T('safety') + ': '), p.safety[lang]),
         el('div', { class: 'note easier' }, el('strong', {}, '✓ ' + T('easier') + ': '), p.variations[0][lang]),

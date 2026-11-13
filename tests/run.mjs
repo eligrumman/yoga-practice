@@ -6,7 +6,7 @@ import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, 
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from '../js/generator.js';
 import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
-import { nPoses, tr } from '../js/i18n.js';
+import { nPoses, nCount, tr } from '../js/i18n.js';
 
 let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log('FAIL', m); } };
@@ -137,6 +137,16 @@ ok(countsForStreak(100, 180) && !countsForStreak(80, 180), 'short plan: 50% rule
 ok(streak([{ date: d(0), counted: false }, { date: d(1) }], new Date(2026, 10, 13)) === 1, 'uncounted session adds no streak day');
 ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only an uncounted session today -> streak 0');
 ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
+
+// ---- two-sided poses and sides label
+const BOTH = ['warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'hand-to-toe'];
+const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
+ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 13 two-sided poses (got ${gotBoth.join(',')})`);
+ok(POSE_BY_ID.mountain.start === 'stand', 'mountain.start === stand');
+for (const l of LANGS) ok(tr('sides', l, 'single') === '' && tr('sides', l, 'both').length > 0, `sides label ${l}: none for single, text for both`);
+// ---- Russian plurals
+ok(nCount(1, 'minute', 'ru') === '1 минута' && nCount(3, 'minute', 'ru') === '3 минуты' && nCount(5, 'minute', 'ru') === '5 минут' && nCount(11, 'minute', 'ru') === '11 минут' && nCount(21, 'minute', 'ru') === '21 минута', 'ru minute plurals');
+ok(nCount(2, 'day', 'ru') === '2 дня' && nCount(7, 'day', 'ru') === '7 дней' && nCount(22, 'breath', 'ru') === '22 вдоха' && nCount(12, 'second', 'ru') === '12 секунд', 'ru day/breath/second plurals');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
