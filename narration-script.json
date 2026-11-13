@@ -1,0 +1,3392 @@
+[
+ {
+  "id": "common.welcome",
+  "lang": "he",
+  "text": "ברוכים הבאים. נתחיל בתרגול. התמקמו בנוחות וקחו נשימה עמוקה."
+ },
+ {
+  "id": "common.welcome",
+  "lang": "ru",
+  "text": "Добро пожаловать. Начинаем практику. Устройтесь удобно и сделайте глубокий вдох."
+ },
+ {
+  "id": "common.welcome",
+  "lang": "en",
+  "text": "Welcome. Let us begin the practice. Settle in comfortably and take a deep breath."
+ },
+ {
+  "id": "common.breathe_in",
+  "lang": "he",
+  "text": "שאפו."
+ },
+ {
+  "id": "common.breathe_in",
+  "lang": "ru",
+  "text": "Вдох."
+ },
+ {
+  "id": "common.breathe_in",
+  "lang": "en",
+  "text": "Breathe in."
+ },
+ {
+  "id": "common.breathe_out",
+  "lang": "he",
+  "text": "נשפו."
+ },
+ {
+  "id": "common.breathe_out",
+  "lang": "ru",
+  "text": "Выдох."
+ },
+ {
+  "id": "common.breathe_out",
+  "lang": "en",
+  "text": "Breathe out."
+ },
+ {
+  "id": "common.breathe_slow",
+  "lang": "he",
+  "text": "המשיכו לנשום לאט."
+ },
+ {
+  "id": "common.breathe_slow",
+  "lang": "ru",
+  "text": "Продолжайте дышать медленно."
+ },
+ {
+  "id": "common.breathe_slow",
+  "lang": "en",
+  "text": "Keep breathing slowly."
+ },
+ {
+  "id": "common.ease_off",
+  "lang": "he",
+  "text": "אם מופיע כאב, הקלו או צאו מהתנוחה."
+ },
+ {
+  "id": "common.ease_off",
+  "lang": "ru",
+  "text": "Если появляется боль, ослабьте позу или выйдите из неё."
+ },
+ {
+  "id": "common.ease_off",
+  "lang": "en",
+  "text": "If you feel pain, ease off or come out of the pose."
+ },
+ {
+  "id": "common.switch_sides",
+  "lang": "he",
+  "text": "החליפו צד."
+ },
+ {
+  "id": "common.switch_sides",
+  "lang": "ru",
+  "text": "Смените сторону."
+ },
+ {
+  "id": "common.switch_sides",
+  "lang": "en",
+  "text": "Switch sides."
+ },
+ {
+  "id": "common.next",
+  "lang": "he",
+  "text": "התנוחה הבאה."
+ },
+ {
+  "id": "common.next",
+  "lang": "ru",
+  "text": "Следующая поза."
+ },
+ {
+  "id": "common.next",
+  "lang": "en",
+  "text": "Next pose."
+ },
+ {
+  "id": "common.halfway",
+  "lang": "he",
+  "text": "עברתם חצי מהתרגול."
+ },
+ {
+  "id": "common.halfway",
+  "lang": "ru",
+  "text": "Вы прошли половину практики."
+ },
+ {
+  "id": "common.halfway",
+  "lang": "en",
+  "text": "You are halfway through."
+ },
+ {
+  "id": "common.savasana_end",
+  "lang": "he",
+  "text": "העמיקו לאט את הנשימה. הניעו את האצבעות בידיים וברגליים. כשתהיו מוכנים, התגלגלו על הצד ועלו לישיבה."
+ },
+ {
+  "id": "common.savasana_end",
+  "lang": "ru",
+  "text": "Медленно углубите дыхание. Пошевелите пальцами рук и ног. Когда будете готовы, перекатитесь на бок и сядьте."
+ },
+ {
+  "id": "common.savasana_end",
+  "lang": "en",
+  "text": "Slowly deepen your breath. Wiggle your fingers and toes. When you are ready, roll onto your side and come up to sitting."
+ },
+ {
+  "id": "common.finish",
+  "lang": "he",
+  "text": "כל הכבוד. התרגול הסתיים. הקדישו רגע להרגיש את הגוף."
+ },
+ {
+  "id": "common.finish",
+  "lang": "ru",
+  "text": "Отлично. Практика окончена. Побудьте минуту, чувствуя своё тело."
+ },
+ {
+  "id": "common.finish",
+  "lang": "en",
+  "text": "Well done. The practice is complete. Take a moment to notice how your body feels."
+ },
+ {
+  "id": "pose.tabletop.name",
+  "lang": "he",
+  "text": "שולחן"
+ },
+ {
+  "id": "pose.tabletop.name",
+  "lang": "ru",
+  "text": "Стол"
+ },
+ {
+  "id": "pose.tabletop.name",
+  "lang": "en",
+  "text": "Tabletop"
+ },
+ {
+  "id": "pose.tabletop.intro",
+  "lang": "he",
+  "text": "תנוחת שולחן."
+ },
+ {
+  "id": "pose.tabletop.intro",
+  "lang": "ru",
+  "text": "Поза: Стол."
+ },
+ {
+  "id": "pose.tabletop.intro",
+  "lang": "en",
+  "text": "Pose: Tabletop."
+ },
+ {
+  "id": "pose.tabletop.cue.1",
+  "lang": "he",
+  "text": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים."
+ },
+ {
+  "id": "pose.tabletop.cue.1",
+  "lang": "ru",
+  "text": "Ладони под плечами, колени под бёдрами."
+ },
+ {
+  "id": "pose.tabletop.cue.1",
+  "lang": "en",
+  "text": "Hands under shoulders, knees under hips."
+ },
+ {
+  "id": "pose.tabletop.cue.2",
+  "lang": "he",
+  "text": "גב ארוך ונייטרלי, מבט אל הרצפה."
+ },
+ {
+  "id": "pose.tabletop.cue.2",
+  "lang": "ru",
+  "text": "Держите спину длинной и ровной, смотрите в пол."
+ },
+ {
+  "id": "pose.tabletop.cue.2",
+  "lang": "en",
+  "text": "Keep a long, neutral spine and look at the floor."
+ },
+ {
+  "id": "pose.tabletop.cue.3",
+  "lang": "he",
+  "text": "לחצו בעדינות את כף היד אל הרצפה."
+ },
+ {
+  "id": "pose.tabletop.cue.3",
+  "lang": "ru",
+  "text": "Мягко надавите ладонями на пол."
+ },
+ {
+  "id": "pose.tabletop.cue.3",
+  "lang": "en",
+  "text": "Press your palms gently into the floor."
+ },
+ {
+  "id": "pose.tabletop.cue.4",
+  "lang": "he",
+  "text": "נשמו לאט אל הבטן."
+ },
+ {
+  "id": "pose.tabletop.cue.4",
+  "lang": "ru",
+  "text": "Дышите медленно, в живот."
+ },
+ {
+  "id": "pose.tabletop.cue.4",
+  "lang": "en",
+  "text": "Breathe slowly into your belly."
+ },
+ {
+  "id": "pose.cat.name",
+  "lang": "he",
+  "text": "חתול"
+ },
+ {
+  "id": "pose.cat.name",
+  "lang": "ru",
+  "text": "Кошка"
+ },
+ {
+  "id": "pose.cat.name",
+  "lang": "en",
+  "text": "Cat"
+ },
+ {
+  "id": "pose.cat.intro",
+  "lang": "he",
+  "text": "תנוחת חתול."
+ },
+ {
+  "id": "pose.cat.intro",
+  "lang": "ru",
+  "text": "Поза: Кошка."
+ },
+ {
+  "id": "pose.cat.intro",
+  "lang": "en",
+  "text": "Pose: Cat."
+ },
+ {
+  "id": "pose.cat.cue.1",
+  "lang": "he",
+  "text": "בנשיפה עגלו את הגב כלפי התקרה."
+ },
+ {
+  "id": "pose.cat.cue.1",
+  "lang": "ru",
+  "text": "На выдохе округлите спину к потолку."
+ },
+ {
+  "id": "pose.cat.cue.1",
+  "lang": "en",
+  "text": "Exhale and round your back toward the ceiling."
+ },
+ {
+  "id": "pose.cat.cue.2",
+  "lang": "he",
+  "text": "הכניסו את הסנטר אל החזה והשעינו את האגן."
+ },
+ {
+  "id": "pose.cat.cue.2",
+  "lang": "ru",
+  "text": "Подтяните подбородок к груди и подвиньте таз вперёд."
+ },
+ {
+  "id": "pose.cat.cue.2",
+  "lang": "en",
+  "text": "Tuck your chin and tilt your pelvis under."
+ },
+ {
+  "id": "pose.cat.cue.3",
+  "lang": "he",
+  "text": "דחפו את הרצפה והרחיקו את השכמות זו מזו."
+ },
+ {
+  "id": "pose.cat.cue.3",
+  "lang": "ru",
+  "text": "Оттолкнитесь от пола и разведите лопатки."
+ },
+ {
+  "id": "pose.cat.cue.3",
+  "lang": "en",
+  "text": "Push the floor away and spread the shoulder blades."
+ },
+ {
+  "id": "pose.cat.cue.4",
+  "lang": "he",
+  "text": "חזרו לנוע לאט עם הנשימה."
+ },
+ {
+  "id": "pose.cat.cue.4",
+  "lang": "ru",
+  "text": "Двигайтесь медленно, в ритме дыхания."
+ },
+ {
+  "id": "pose.cat.cue.4",
+  "lang": "en",
+  "text": "Keep moving slowly with your breath."
+ },
+ {
+  "id": "pose.cow.name",
+  "lang": "he",
+  "text": "פרה"
+ },
+ {
+  "id": "pose.cow.name",
+  "lang": "ru",
+  "text": "Корова"
+ },
+ {
+  "id": "pose.cow.name",
+  "lang": "en",
+  "text": "Cow"
+ },
+ {
+  "id": "pose.cow.intro",
+  "lang": "he",
+  "text": "תנוחת פרה."
+ },
+ {
+  "id": "pose.cow.intro",
+  "lang": "ru",
+  "text": "Поза: Корова."
+ },
+ {
+  "id": "pose.cow.intro",
+  "lang": "en",
+  "text": "Pose: Cow."
+ },
+ {
+  "id": "pose.cow.cue.1",
+  "lang": "he",
+  "text": "בשאיפה הניחו לבטן לרדת והרימו את החזה."
+ },
+ {
+  "id": "pose.cow.cue.1",
+  "lang": "ru",
+  "text": "На вдохе опустите живот и поднимите грудь."
+ },
+ {
+  "id": "pose.cow.cue.1",
+  "lang": "en",
+  "text": "Inhale, let the belly drop and lift your chest."
+ },
+ {
+  "id": "pose.cow.cue.2",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים."
+ },
+ {
+  "id": "pose.cow.cue.2",
+  "lang": "ru",
+  "text": "Держите плечи подальше от ушей."
+ },
+ {
+  "id": "pose.cow.cue.2",
+  "lang": "en",
+  "text": "Keep your shoulders away from your ears."
+ },
+ {
+  "id": "pose.cow.cue.3",
+  "lang": "he",
+  "text": "מבט קדימה או מעט למעלה, בלי להכביד על הצוואר."
+ },
+ {
+  "id": "pose.cow.cue.3",
+  "lang": "ru",
+  "text": "Смотрите вперёд или чуть выше, не напрягая шею."
+ },
+ {
+  "id": "pose.cow.cue.3",
+  "lang": "en",
+  "text": "Look forward or slightly up without straining the neck."
+ },
+ {
+  "id": "pose.cow.cue.4",
+  "lang": "he",
+  "text": "התחלפו בין חתול לפרה בקצב הנשימה."
+ },
+ {
+  "id": "pose.cow.cue.4",
+  "lang": "ru",
+  "text": "Чередуйте с кошкой в ритме дыхания."
+ },
+ {
+  "id": "pose.cow.cue.4",
+  "lang": "en",
+  "text": "Alternate with cat at the pace of your breath."
+ },
+ {
+  "id": "pose.upward-salute.name",
+  "lang": "he",
+  "text": "הרמת ידיים למעלה"
+ },
+ {
+  "id": "pose.upward-salute.name",
+  "lang": "ru",
+  "text": "Руки вверх"
+ },
+ {
+  "id": "pose.upward-salute.name",
+  "lang": "en",
+  "text": "Upward salute"
+ },
+ {
+  "id": "pose.upward-salute.intro",
+  "lang": "he",
+  "text": "תנוחת הרמת ידיים למעלה."
+ },
+ {
+  "id": "pose.upward-salute.intro",
+  "lang": "ru",
+  "text": "Поза: Руки вверх."
+ },
+ {
+  "id": "pose.upward-salute.intro",
+  "lang": "en",
+  "text": "Pose: Upward salute."
+ },
+ {
+  "id": "pose.upward-salute.cue.1",
+  "lang": "he",
+  "text": "עמדו עם כפות רגליים ברוחב האגן."
+ },
+ {
+  "id": "pose.upward-salute.cue.1",
+  "lang": "ru",
+  "text": "Встаньте, стопы на ширине таза."
+ },
+ {
+  "id": "pose.upward-salute.cue.1",
+  "lang": "en",
+  "text": "Stand with feet hip-width apart."
+ },
+ {
+  "id": "pose.upward-salute.cue.2",
+  "lang": "he",
+  "text": "בשאיפה הרימו את הידיים לצדדים ולמעלה."
+ },
+ {
+  "id": "pose.upward-salute.cue.2",
+  "lang": "ru",
+  "text": "На вдохе поднимите руки через стороны вверх."
+ },
+ {
+  "id": "pose.upward-salute.cue.2",
+  "lang": "en",
+  "text": "Inhale and sweep your arms out and up."
+ },
+ {
+  "id": "pose.upward-salute.cue.3",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים."
+ },
+ {
+  "id": "pose.upward-salute.cue.3",
+  "lang": "ru",
+  "text": "Держите плечи подальше от ушей."
+ },
+ {
+  "id": "pose.upward-salute.cue.3",
+  "lang": "en",
+  "text": "Keep your shoulders away from your ears."
+ },
+ {
+  "id": "pose.upward-salute.cue.4",
+  "lang": "he",
+  "text": "אורך בעמוד השדרה, נשימה רגועה."
+ },
+ {
+  "id": "pose.upward-salute.cue.4",
+  "lang": "ru",
+  "text": "Вытяните позвоночник и дышите спокойно."
+ },
+ {
+  "id": "pose.upward-salute.cue.4",
+  "lang": "en",
+  "text": "Lengthen the spine and breathe calmly."
+ },
+ {
+  "id": "pose.mountain.name",
+  "lang": "he",
+  "text": "תנוחת ההר"
+ },
+ {
+  "id": "pose.mountain.name",
+  "lang": "ru",
+  "text": "Гора"
+ },
+ {
+  "id": "pose.mountain.name",
+  "lang": "en",
+  "text": "Mountain"
+ },
+ {
+  "id": "pose.mountain.intro",
+  "lang": "he",
+  "text": "תנוחת ההר."
+ },
+ {
+  "id": "pose.mountain.intro",
+  "lang": "ru",
+  "text": "Поза: Гора."
+ },
+ {
+  "id": "pose.mountain.intro",
+  "lang": "en",
+  "text": "Pose: Mountain."
+ },
+ {
+  "id": "pose.mountain.cue.1",
+  "lang": "he",
+  "text": "עמדו עם כפות רגליים ברוחב האגן ולחצו בעדינות לרצפה."
+ },
+ {
+  "id": "pose.mountain.cue.1",
+  "lang": "ru",
+  "text": "Встаньте, стопы на ширине таза, мягко надавите ими на пол."
+ },
+ {
+  "id": "pose.mountain.cue.1",
+  "lang": "en",
+  "text": "Stand with feet hip-width apart and press gently into the floor."
+ },
+ {
+  "id": "pose.mountain.cue.2",
+  "lang": "he",
+  "text": "הניחו לברכיים להיות רכות, לא נעולות."
+ },
+ {
+  "id": "pose.mountain.cue.2",
+  "lang": "ru",
+  "text": "Колени держите мягкими, не запирайте их."
+ },
+ {
+  "id": "pose.mountain.cue.2",
+  "lang": "en",
+  "text": "Keep the knees soft, not locked."
+ },
+ {
+  "id": "pose.mountain.cue.3",
+  "lang": "he",
+  "text": "אורך בעמוד השדרה, כתפיים רפויות."
+ },
+ {
+  "id": "pose.mountain.cue.3",
+  "lang": "ru",
+  "text": "Вытяните позвоночник, расслабьте плечи."
+ },
+ {
+  "id": "pose.mountain.cue.3",
+  "lang": "en",
+  "text": "Lengthen the spine and relax the shoulders."
+ },
+ {
+  "id": "pose.mountain.cue.4",
+  "lang": "he",
+  "text": "נשמו עמוק ורגיעו את הלסת."
+ },
+ {
+  "id": "pose.mountain.cue.4",
+  "lang": "ru",
+  "text": "Дышите глубоко и расслабьте челюсть."
+ },
+ {
+  "id": "pose.mountain.cue.4",
+  "lang": "en",
+  "text": "Breathe deeply and soften the jaw."
+ },
+ {
+  "id": "pose.chair.name",
+  "lang": "he",
+  "text": "כיסא"
+ },
+ {
+  "id": "pose.chair.name",
+  "lang": "ru",
+  "text": "Стул"
+ },
+ {
+  "id": "pose.chair.name",
+  "lang": "en",
+  "text": "Chair"
+ },
+ {
+  "id": "pose.chair.intro",
+  "lang": "he",
+  "text": "תנוחת כיסא."
+ },
+ {
+  "id": "pose.chair.intro",
+  "lang": "ru",
+  "text": "Поза: Стул."
+ },
+ {
+  "id": "pose.chair.intro",
+  "lang": "en",
+  "text": "Pose: Chair."
+ },
+ {
+  "id": "pose.chair.cue.1",
+  "lang": "he",
+  "text": "כופפו ברכיים כאילו אתם יושבים אחורה על כיסא."
+ },
+ {
+  "id": "pose.chair.cue.1",
+  "lang": "ru",
+  "text": "Согните колени, как будто садитесь на стул."
+ },
+ {
+  "id": "pose.chair.cue.1",
+  "lang": "en",
+  "text": "Bend the knees as if sitting back onto a chair."
+ },
+ {
+  "id": "pose.chair.cue.2",
+  "lang": "he",
+  "text": "הברכיים מעל הקרסוליים, המשקל על העקבים."
+ },
+ {
+  "id": "pose.chair.cue.2",
+  "lang": "ru",
+  "text": "Колени над лодыжками, вес на пятках."
+ },
+ {
+  "id": "pose.chair.cue.2",
+  "lang": "en",
+  "text": "Keep the knees over the ankles and weight in the heels."
+ },
+ {
+  "id": "pose.chair.cue.3",
+  "lang": "he",
+  "text": "הרימו את הידיים ואריכו את הגב."
+ },
+ {
+  "id": "pose.chair.cue.3",
+  "lang": "ru",
+  "text": "Поднимите руки и вытяните спину."
+ },
+ {
+  "id": "pose.chair.cue.3",
+  "lang": "en",
+  "text": "Raise the arms and lengthen the back."
+ },
+ {
+  "id": "pose.chair.cue.4",
+  "lang": "he",
+  "text": "כווצו קלות את הבטן ונשמו."
+ },
+ {
+  "id": "pose.chair.cue.4",
+  "lang": "ru",
+  "text": "Слегка подтяните живот и дышите."
+ },
+ {
+  "id": "pose.chair.cue.4",
+  "lang": "en",
+  "text": "Draw the belly in slightly and breathe."
+ },
+ {
+  "id": "pose.warrior-1.name",
+  "lang": "he",
+  "text": "לוחם אחד"
+ },
+ {
+  "id": "pose.warrior-1.name",
+  "lang": "ru",
+  "text": "Воин один"
+ },
+ {
+  "id": "pose.warrior-1.name",
+  "lang": "en",
+  "text": "Warrior one"
+ },
+ {
+  "id": "pose.warrior-1.intro",
+  "lang": "he",
+  "text": "תנוחת לוחם אחד."
+ },
+ {
+  "id": "pose.warrior-1.intro",
+  "lang": "ru",
+  "text": "Поза: Воин один."
+ },
+ {
+  "id": "pose.warrior-1.intro",
+  "lang": "en",
+  "text": "Pose: Warrior one."
+ },
+ {
+  "id": "pose.warrior-1.cue.1",
+  "lang": "he",
+  "text": "צעדו רחב, הברך הקדמית מעל הקרסול."
+ },
+ {
+  "id": "pose.warrior-1.cue.1",
+  "lang": "ru",
+  "text": "Сделайте широкий шаг, передняя нога согнута, колено над лодыжкой."
+ },
+ {
+  "id": "pose.warrior-1.cue.1",
+  "lang": "en",
+  "text": "Step wide with the front knee over the ankle."
+ },
+ {
+  "id": "pose.warrior-1.cue.2",
+  "lang": "he",
+  "text": "הרגל האחורית ישרה ועקב לחוץ לרצפה."
+ },
+ {
+  "id": "pose.warrior-1.cue.2",
+  "lang": "ru",
+  "text": "Задняя нога прямая, пятка прижата к полу."
+ },
+ {
+  "id": "pose.warrior-1.cue.2",
+  "lang": "en",
+  "text": "Keep the back leg straight and the heel pressing down."
+ },
+ {
+  "id": "pose.warrior-1.cue.3",
+  "lang": "he",
+  "text": "הרימו את הידיים והארכו את הגוף."
+ },
+ {
+  "id": "pose.warrior-1.cue.3",
+  "lang": "ru",
+  "text": "Поднимите руки и вытяните корпус."
+ },
+ {
+  "id": "pose.warrior-1.cue.3",
+  "lang": "en",
+  "text": "Raise the arms and lengthen the body."
+ },
+ {
+  "id": "pose.warrior-1.cue.4",
+  "lang": "he",
+  "text": "אגן ישר קדימה, נשימה רגועה."
+ },
+ {
+  "id": "pose.warrior-1.cue.4",
+  "lang": "ru",
+  "text": "Таз направьте вперёд и дышите ровно."
+ },
+ {
+  "id": "pose.warrior-1.cue.4",
+  "lang": "en",
+  "text": "Square the hips forward and breathe calmly."
+ },
+ {
+  "id": "pose.warrior-2.name",
+  "lang": "he",
+  "text": "לוחם שניים"
+ },
+ {
+  "id": "pose.warrior-2.name",
+  "lang": "ru",
+  "text": "Воин два"
+ },
+ {
+  "id": "pose.warrior-2.name",
+  "lang": "en",
+  "text": "Warrior two"
+ },
+ {
+  "id": "pose.warrior-2.intro",
+  "lang": "he",
+  "text": "תנוחת לוחם שניים."
+ },
+ {
+  "id": "pose.warrior-2.intro",
+  "lang": "ru",
+  "text": "Поза: Воин два."
+ },
+ {
+  "id": "pose.warrior-2.intro",
+  "lang": "en",
+  "text": "Pose: Warrior two."
+ },
+ {
+  "id": "pose.warrior-2.cue.1",
+  "lang": "he",
+  "text": "רגליים רחבות, הברך הקדמית מכופפת מעל הקרסול."
+ },
+ {
+  "id": "pose.warrior-2.cue.1",
+  "lang": "ru",
+  "text": "Ноги широко, передняя согнута, колено над лодыжкой."
+ },
+ {
+  "id": "pose.warrior-2.cue.1",
+  "lang": "en",
+  "text": "Feet wide apart, front knee bent over the ankle."
+ },
+ {
+  "id": "pose.warrior-2.cue.2",
+  "lang": "he",
+  "text": "פשטו ידיים לצדדים בגובה כתפיים."
+ },
+ {
+  "id": "pose.warrior-2.cue.2",
+  "lang": "ru",
+  "text": "Разведите руки в стороны на уровне плеч."
+ },
+ {
+  "id": "pose.warrior-2.cue.2",
+  "lang": "en",
+  "text": "Extend the arms to the sides at shoulder height."
+ },
+ {
+  "id": "pose.warrior-2.cue.3",
+  "lang": "he",
+  "text": "הגוף זקוף, האגן במרכז בין הרגליים."
+ },
+ {
+  "id": "pose.warrior-2.cue.3",
+  "lang": "ru",
+  "text": "Корпус прямой, таз по центру между ногами."
+ },
+ {
+  "id": "pose.warrior-2.cue.3",
+  "lang": "en",
+  "text": "Keep the torso upright, hips centered between the legs."
+ },
+ {
+  "id": "pose.warrior-2.cue.4",
+  "lang": "he",
+  "text": "מבט מעל היד הקדמית."
+ },
+ {
+  "id": "pose.warrior-2.cue.4",
+  "lang": "ru",
+  "text": "Смотрите поверх передней руки."
+ },
+ {
+  "id": "pose.warrior-2.cue.4",
+  "lang": "en",
+  "text": "Gaze over the front hand."
+ },
+ {
+  "id": "pose.high-lunge.name",
+  "lang": "he",
+  "text": "מצעד גבוה"
+ },
+ {
+  "id": "pose.high-lunge.name",
+  "lang": "ru",
+  "text": "Высокий выпад"
+ },
+ {
+  "id": "pose.high-lunge.name",
+  "lang": "en",
+  "text": "High lunge"
+ },
+ {
+  "id": "pose.high-lunge.intro",
+  "lang": "he",
+  "text": "תנוחת מצעד גבוה."
+ },
+ {
+  "id": "pose.high-lunge.intro",
+  "lang": "ru",
+  "text": "Поза: Высокий выпад."
+ },
+ {
+  "id": "pose.high-lunge.intro",
+  "lang": "en",
+  "text": "Pose: High lunge."
+ },
+ {
+  "id": "pose.high-lunge.cue.1",
+  "lang": "he",
+  "text": "צעד גדול קדימה, עקב אחורי מורם."
+ },
+ {
+  "id": "pose.high-lunge.cue.1",
+  "lang": "ru",
+  "text": "Сделайте большой шаг вперёд, задняя пятка приподнята."
+ },
+ {
+  "id": "pose.high-lunge.cue.1",
+  "lang": "en",
+  "text": "Step far forward with the back heel lifted."
+ },
+ {
+  "id": "pose.high-lunge.cue.2",
+  "lang": "he",
+  "text": "הברך הקדמית מעל הקרסול."
+ },
+ {
+  "id": "pose.high-lunge.cue.2",
+  "lang": "ru",
+  "text": "Переднее колено над лодыжкой."
+ },
+ {
+  "id": "pose.high-lunge.cue.2",
+  "lang": "en",
+  "text": "Front knee stays over the ankle."
+ },
+ {
+  "id": "pose.high-lunge.cue.3",
+  "lang": "he",
+  "text": "הרגל האחורית פעילה וישרה."
+ },
+ {
+  "id": "pose.high-lunge.cue.3",
+  "lang": "ru",
+  "text": "Задняя нога прямая и сильная."
+ },
+ {
+  "id": "pose.high-lunge.cue.3",
+  "lang": "en",
+  "text": "Keep the back leg active and straight."
+ },
+ {
+  "id": "pose.high-lunge.cue.4",
+  "lang": "he",
+  "text": "הרימו את הידיים והארכו את הגוף."
+ },
+ {
+  "id": "pose.high-lunge.cue.4",
+  "lang": "ru",
+  "text": "Поднимите руки и вытяните корпус."
+ },
+ {
+  "id": "pose.high-lunge.cue.4",
+  "lang": "en",
+  "text": "Raise the arms and lengthen the body."
+ },
+ {
+  "id": "pose.tree.name",
+  "lang": "he",
+  "text": "עץ"
+ },
+ {
+  "id": "pose.tree.name",
+  "lang": "ru",
+  "text": "Дерево"
+ },
+ {
+  "id": "pose.tree.name",
+  "lang": "en",
+  "text": "Tree"
+ },
+ {
+  "id": "pose.tree.intro",
+  "lang": "he",
+  "text": "תנוחת עץ."
+ },
+ {
+  "id": "pose.tree.intro",
+  "lang": "ru",
+  "text": "Поза: Дерево."
+ },
+ {
+  "id": "pose.tree.intro",
+  "lang": "en",
+  "text": "Pose: Tree."
+ },
+ {
+  "id": "pose.tree.cue.1",
+  "lang": "he",
+  "text": "העבירו את המשקל לרגל אחת ולחצו אותה לרצפה."
+ },
+ {
+  "id": "pose.tree.cue.1",
+  "lang": "ru",
+  "text": "Перенесите вес на одну ногу и прижмите её к полу."
+ },
+ {
+  "id": "pose.tree.cue.1",
+  "lang": "en",
+  "text": "Shift your weight onto one leg and press it into the floor."
+ },
+ {
+  "id": "pose.tree.cue.2",
+  "lang": "he",
+  "text": "הניחו את כף הרגל השנייה על השוק או הירך, לא על הברך."
+ },
+ {
+  "id": "pose.tree.cue.2",
+  "lang": "ru",
+  "text": "Другую стопу поставьте на голень или бедро, но не на колено."
+ },
+ {
+  "id": "pose.tree.cue.2",
+  "lang": "en",
+  "text": "Place the other foot on the calf or thigh, never on the knee."
+ },
+ {
+  "id": "pose.tree.cue.3",
+  "lang": "he",
+  "text": "קבעו נקודת מבט מולכם."
+ },
+ {
+  "id": "pose.tree.cue.3",
+  "lang": "ru",
+  "text": "Смотрите в одну точку перед собой."
+ },
+ {
+  "id": "pose.tree.cue.3",
+  "lang": "en",
+  "text": "Fix your gaze on a point in front of you."
+ },
+ {
+  "id": "pose.tree.cue.4",
+  "lang": "he",
+  "text": "חברו כפות ידיים בחזה ונשמו."
+ },
+ {
+  "id": "pose.tree.cue.4",
+  "lang": "ru",
+  "text": "Соедините ладони у груди и дышите."
+ },
+ {
+  "id": "pose.tree.cue.4",
+  "lang": "en",
+  "text": "Bring palms together at the chest and breathe."
+ },
+ {
+  "id": "pose.warrior-3.name",
+  "lang": "he",
+  "text": "לוחם שלוש"
+ },
+ {
+  "id": "pose.warrior-3.name",
+  "lang": "ru",
+  "text": "Воин три"
+ },
+ {
+  "id": "pose.warrior-3.name",
+  "lang": "en",
+  "text": "Warrior three"
+ },
+ {
+  "id": "pose.warrior-3.intro",
+  "lang": "he",
+  "text": "תנוחת לוחם שלוש."
+ },
+ {
+  "id": "pose.warrior-3.intro",
+  "lang": "ru",
+  "text": "Поза: Воин три."
+ },
+ {
+  "id": "pose.warrior-3.intro",
+  "lang": "en",
+  "text": "Pose: Warrior three."
+ },
+ {
+  "id": "pose.warrior-3.cue.1",
+  "lang": "he",
+  "text": "הישענו קדימה והרימו רגל אחת לאחור."
+ },
+ {
+  "id": "pose.warrior-3.cue.1",
+  "lang": "ru",
+  "text": "Наклонитесь вперёд и поднимите одну ногу назад."
+ },
+ {
+  "id": "pose.warrior-3.cue.1",
+  "lang": "en",
+  "text": "Lean forward and lift one leg behind you."
+ },
+ {
+  "id": "pose.warrior-3.cue.2",
+  "lang": "he",
+  "text": "צרו קו ישר מהראש ועד העקב."
+ },
+ {
+  "id": "pose.warrior-3.cue.2",
+  "lang": "ru",
+  "text": "Вытяните тело в одну линию от макушки до пятки."
+ },
+ {
+  "id": "pose.warrior-3.cue.2",
+  "lang": "en",
+  "text": "Make one long line from head to heel."
+ },
+ {
+  "id": "pose.warrior-3.cue.3",
+  "lang": "he",
+  "text": "ברך הרגל התומכת רכה."
+ },
+ {
+  "id": "pose.warrior-3.cue.3",
+  "lang": "ru",
+  "text": "Опорное колено оставьте мягким."
+ },
+ {
+  "id": "pose.warrior-3.cue.3",
+  "lang": "en",
+  "text": "Keep the standing knee soft."
+ },
+ {
+  "id": "pose.warrior-3.cue.4",
+  "lang": "he",
+  "text": "הושיטו ידיים קדימה והביטו לרצפה."
+ },
+ {
+  "id": "pose.warrior-3.cue.4",
+  "lang": "ru",
+  "text": "Руки вытяните вперёд, смотрите в пол."
+ },
+ {
+  "id": "pose.warrior-3.cue.4",
+  "lang": "en",
+  "text": "Reach the arms forward and gaze at the floor."
+ },
+ {
+  "id": "pose.dancer.name",
+  "lang": "he",
+  "text": "רקדן"
+ },
+ {
+  "id": "pose.dancer.name",
+  "lang": "ru",
+  "text": "Танцор"
+ },
+ {
+  "id": "pose.dancer.name",
+  "lang": "en",
+  "text": "Dancer"
+ },
+ {
+  "id": "pose.dancer.intro",
+  "lang": "he",
+  "text": "תנוחת רקדן."
+ },
+ {
+  "id": "pose.dancer.intro",
+  "lang": "ru",
+  "text": "Поза: Танцор."
+ },
+ {
+  "id": "pose.dancer.intro",
+  "lang": "en",
+  "text": "Pose: Dancer."
+ },
+ {
+  "id": "pose.dancer.cue.1",
+  "lang": "he",
+  "text": "עמדו על רגל אחת ואחזו בקרסול הנגדי מאחור."
+ },
+ {
+  "id": "pose.dancer.cue.1",
+  "lang": "ru",
+  "text": "Встаньте на одну ногу и возьмите другую за лодыжку сзади."
+ },
+ {
+  "id": "pose.dancer.cue.1",
+  "lang": "en",
+  "text": "Stand on one leg and hold the opposite ankle behind you."
+ },
+ {
+  "id": "pose.dancer.cue.2",
+  "lang": "he",
+  "text": "דחפו את כף הרגל אל היד, והחזה נפתח."
+ },
+ {
+  "id": "pose.dancer.cue.2",
+  "lang": "ru",
+  "text": "Прижимайте стопу к руке, грудь раскрывается."
+ },
+ {
+  "id": "pose.dancer.cue.2",
+  "lang": "en",
+  "text": "Press the foot into the hand as the chest opens."
+ },
+ {
+  "id": "pose.dancer.cue.3",
+  "lang": "he",
+  "text": "הושיטו יד קדימה לשיווי משקל."
+ },
+ {
+  "id": "pose.dancer.cue.3",
+  "lang": "ru",
+  "text": "Вторую руку вытяните вперёд для равновесия."
+ },
+ {
+  "id": "pose.dancer.cue.3",
+  "lang": "en",
+  "text": "Reach the other arm forward for balance."
+ },
+ {
+  "id": "pose.dancer.cue.4",
+  "lang": "he",
+  "text": "מבט קבוע לנקודה אחת."
+ },
+ {
+  "id": "pose.dancer.cue.4",
+  "lang": "ru",
+  "text": "Смотрите в одну точку."
+ },
+ {
+  "id": "pose.dancer.cue.4",
+  "lang": "en",
+  "text": "Keep a steady gaze on one point."
+ },
+ {
+  "id": "pose.uttanasana.name",
+  "lang": "he",
+  "text": "קיפול קדימה בעמידה"
+ },
+ {
+  "id": "pose.uttanasana.name",
+  "lang": "ru",
+  "text": "Наклон вперёд стоя"
+ },
+ {
+  "id": "pose.uttanasana.name",
+  "lang": "en",
+  "text": "Standing forward fold"
+ },
+ {
+  "id": "pose.uttanasana.intro",
+  "lang": "he",
+  "text": "תנוחת קיפול קדימה בעמידה."
+ },
+ {
+  "id": "pose.uttanasana.intro",
+  "lang": "ru",
+  "text": "Поза: Наклон вперёд стоя."
+ },
+ {
+  "id": "pose.uttanasana.intro",
+  "lang": "en",
+  "text": "Pose: Standing forward fold."
+ },
+ {
+  "id": "pose.uttanasana.cue.1",
+  "lang": "he",
+  "text": "כופפו מהירכיים, לא מהגב."
+ },
+ {
+  "id": "pose.uttanasana.cue.1",
+  "lang": "ru",
+  "text": "Наклоняйтесь от бёдер, а не от спины."
+ },
+ {
+  "id": "pose.uttanasana.cue.1",
+  "lang": "en",
+  "text": "Fold from the hips, not from the back."
+ },
+ {
+  "id": "pose.uttanasana.cue.2",
+  "lang": "he",
+  "text": "הניחו לראש ולצוואר להיות כבדים."
+ },
+ {
+  "id": "pose.uttanasana.cue.2",
+  "lang": "ru",
+  "text": "Пусть голова и шея свободно свисают."
+ },
+ {
+  "id": "pose.uttanasana.cue.2",
+  "lang": "en",
+  "text": "Let the head and neck hang heavy."
+ },
+ {
+  "id": "pose.uttanasana.cue.3",
+  "lang": "he",
+  "text": "כופפו ברכיים כמה שצריך."
+ },
+ {
+  "id": "pose.uttanasana.cue.3",
+  "lang": "ru",
+  "text": "Согните колени настолько, насколько нужно."
+ },
+ {
+  "id": "pose.uttanasana.cue.3",
+  "lang": "en",
+  "text": "Bend the knees as much as you need."
+ },
+ {
+  "id": "pose.uttanasana.cue.4",
+  "lang": "he",
+  "text": "הרימו לאט כשאתם מסיימים."
+ },
+ {
+  "id": "pose.uttanasana.cue.4",
+  "lang": "ru",
+  "text": "В конце поднимайтесь медленно."
+ },
+ {
+  "id": "pose.uttanasana.cue.4",
+  "lang": "en",
+  "text": "Rise slowly when you finish."
+ },
+ {
+  "id": "pose.half-lift.name",
+  "lang": "he",
+  "text": "חצי הרמה"
+ },
+ {
+  "id": "pose.half-lift.name",
+  "lang": "ru",
+  "text": "Полунаклон"
+ },
+ {
+  "id": "pose.half-lift.name",
+  "lang": "en",
+  "text": "Half lift"
+ },
+ {
+  "id": "pose.half-lift.intro",
+  "lang": "he",
+  "text": "תנוחת חצי הרמה."
+ },
+ {
+  "id": "pose.half-lift.intro",
+  "lang": "ru",
+  "text": "Поза: Полунаклон."
+ },
+ {
+  "id": "pose.half-lift.intro",
+  "lang": "en",
+  "text": "Pose: Half lift."
+ },
+ {
+  "id": "pose.half-lift.cue.1",
+  "lang": "he",
+  "text": "כופפו קדימה מהירכיים עד גב שטוח."
+ },
+ {
+  "id": "pose.half-lift.cue.1",
+  "lang": "ru",
+  "text": "Наклонитесь от бёдер, пока спина не станет ровной."
+ },
+ {
+  "id": "pose.half-lift.cue.1",
+  "lang": "en",
+  "text": "Hinge forward from the hips until the back is flat."
+ },
+ {
+  "id": "pose.half-lift.cue.2",
+  "lang": "he",
+  "text": "ידיים על השוקיים או הירכיים."
+ },
+ {
+  "id": "pose.half-lift.cue.2",
+  "lang": "ru",
+  "text": "Руки на голенях или бёдрах."
+ },
+ {
+  "id": "pose.half-lift.cue.2",
+  "lang": "en",
+  "text": "Rest hands on shins or thighs."
+ },
+ {
+  "id": "pose.half-lift.cue.3",
+  "lang": "he",
+  "text": "הצוואר ארוך, מבט כלפי הרצפה."
+ },
+ {
+  "id": "pose.half-lift.cue.3",
+  "lang": "ru",
+  "text": "Шея длинная, взгляд к полу."
+ },
+ {
+  "id": "pose.half-lift.cue.3",
+  "lang": "en",
+  "text": "Keep the neck long, gaze toward the floor."
+ },
+ {
+  "id": "pose.half-lift.cue.4",
+  "lang": "he",
+  "text": "הרגישו את הגב מתארך עם השאיפה."
+ },
+ {
+  "id": "pose.half-lift.cue.4",
+  "lang": "ru",
+  "text": "На вдохе чувствуйте, как вытягивается спина."
+ },
+ {
+  "id": "pose.half-lift.cue.4",
+  "lang": "en",
+  "text": "Feel the spine lengthen as you inhale."
+ },
+ {
+  "id": "pose.revolved-chair.name",
+  "lang": "he",
+  "text": "כיסא מסתובב"
+ },
+ {
+  "id": "pose.revolved-chair.name",
+  "lang": "ru",
+  "text": "Стул со скручиванием"
+ },
+ {
+  "id": "pose.revolved-chair.name",
+  "lang": "en",
+  "text": "Revolved chair"
+ },
+ {
+  "id": "pose.revolved-chair.intro",
+  "lang": "he",
+  "text": "תנוחת כיסא מסתובב."
+ },
+ {
+  "id": "pose.revolved-chair.intro",
+  "lang": "ru",
+  "text": "Поза: Стул со скручиванием."
+ },
+ {
+  "id": "pose.revolved-chair.intro",
+  "lang": "en",
+  "text": "Pose: Revolved chair."
+ },
+ {
+  "id": "pose.revolved-chair.cue.1",
+  "lang": "he",
+  "text": "מכסא כופפים ברכיים ומסובבים את החזה הצידה."
+ },
+ {
+  "id": "pose.revolved-chair.cue.1",
+  "lang": "ru",
+  "text": "Из позы стула разверните грудную клетку в сторону."
+ },
+ {
+  "id": "pose.revolved-chair.cue.1",
+  "lang": "en",
+  "text": "From chair pose, twist the chest to one side."
+ },
+ {
+  "id": "pose.revolved-chair.cue.2",
+  "lang": "he",
+  "text": "יד אחת אל הרצפה, השנייה כלפי התקרה."
+ },
+ {
+  "id": "pose.revolved-chair.cue.2",
+  "lang": "ru",
+  "text": "Одна рука к полу, другая к потолку."
+ },
+ {
+  "id": "pose.revolved-chair.cue.2",
+  "lang": "en",
+  "text": "One hand toward the floor, the other toward the ceiling."
+ },
+ {
+  "id": "pose.revolved-chair.cue.3",
+  "lang": "he",
+  "text": "הסיבוב בא מהחזה, לא מהצוואר."
+ },
+ {
+  "id": "pose.revolved-chair.cue.3",
+  "lang": "ru",
+  "text": "Поворот идёт от груди, а не от шеи."
+ },
+ {
+  "id": "pose.revolved-chair.cue.3",
+  "lang": "en",
+  "text": "The turn comes from the chest, not the neck."
+ },
+ {
+  "id": "pose.revolved-chair.cue.4",
+  "lang": "he",
+  "text": "נשמו ופתחו את הכתפיים."
+ },
+ {
+  "id": "pose.revolved-chair.cue.4",
+  "lang": "ru",
+  "text": "Дышите и раскрывайте плечи."
+ },
+ {
+  "id": "pose.revolved-chair.cue.4",
+  "lang": "en",
+  "text": "Breathe and open the shoulders."
+ },
+ {
+  "id": "pose.downward-dog.name",
+  "lang": "he",
+  "text": "כלב מביט מטה"
+ },
+ {
+  "id": "pose.downward-dog.name",
+  "lang": "ru",
+  "text": "Собака мордой вниз"
+ },
+ {
+  "id": "pose.downward-dog.name",
+  "lang": "en",
+  "text": "Downward dog"
+ },
+ {
+  "id": "pose.downward-dog.intro",
+  "lang": "he",
+  "text": "תנוחת כלב מביט מטה."
+ },
+ {
+  "id": "pose.downward-dog.intro",
+  "lang": "ru",
+  "text": "Поза: Собака мордой вниз."
+ },
+ {
+  "id": "pose.downward-dog.intro",
+  "lang": "en",
+  "text": "Pose: Downward dog."
+ },
+ {
+  "id": "pose.downward-dog.cue.1",
+  "lang": "he",
+  "text": "מעמד שולחן: הרימו את האגן למעלה ואחורה."
+ },
+ {
+  "id": "pose.downward-dog.cue.1",
+  "lang": "ru",
+  "text": "Из позы стола поднимите таз вверх и назад."
+ },
+ {
+  "id": "pose.downward-dog.cue.1",
+  "lang": "en",
+  "text": "From tabletop, lift your hips up and back."
+ },
+ {
+  "id": "pose.downward-dog.cue.2",
+  "lang": "he",
+  "text": "לחצו את כפות הידיים לרצפה והאריכו את הגב."
+ },
+ {
+  "id": "pose.downward-dog.cue.2",
+  "lang": "ru",
+  "text": "Надавите ладонями на пол и вытяните спину."
+ },
+ {
+  "id": "pose.downward-dog.cue.2",
+  "lang": "en",
+  "text": "Press your palms down and lengthen the spine."
+ },
+ {
+  "id": "pose.downward-dog.cue.3",
+  "lang": "he",
+  "text": "הברכיים יכולות להישאר כפופות."
+ },
+ {
+  "id": "pose.downward-dog.cue.3",
+  "lang": "ru",
+  "text": "Колени могут оставаться согнутыми."
+ },
+ {
+  "id": "pose.downward-dog.cue.3",
+  "lang": "en",
+  "text": "The knees may stay bent."
+ },
+ {
+  "id": "pose.downward-dog.cue.4",
+  "lang": "he",
+  "text": "הרפו את הראש והצוואר ונשמו."
+ },
+ {
+  "id": "pose.downward-dog.cue.4",
+  "lang": "ru",
+  "text": "Расслабьте голову и шею и дышите."
+ },
+ {
+  "id": "pose.downward-dog.cue.4",
+  "lang": "en",
+  "text": "Relax the head and neck and breathe."
+ },
+ {
+  "id": "pose.plank.name",
+  "lang": "he",
+  "text": "קרש"
+ },
+ {
+  "id": "pose.plank.name",
+  "lang": "ru",
+  "text": "Планка"
+ },
+ {
+  "id": "pose.plank.name",
+  "lang": "en",
+  "text": "Plank"
+ },
+ {
+  "id": "pose.plank.intro",
+  "lang": "he",
+  "text": "תנוחת קרש."
+ },
+ {
+  "id": "pose.plank.intro",
+  "lang": "ru",
+  "text": "Поза: Планка."
+ },
+ {
+  "id": "pose.plank.intro",
+  "lang": "en",
+  "text": "Pose: Plank."
+ },
+ {
+  "id": "pose.plank.cue.1",
+  "lang": "he",
+  "text": "כפות ידיים מתחת לכתפיים, גוף בקו אחד."
+ },
+ {
+  "id": "pose.plank.cue.1",
+  "lang": "ru",
+  "text": "Ладони под плечами, тело в одну линию."
+ },
+ {
+  "id": "pose.plank.cue.1",
+  "lang": "en",
+  "text": "Palms under the shoulders, body in one line."
+ },
+ {
+  "id": "pose.plank.cue.2",
+  "lang": "he",
+  "text": "כווצו את הבטן ואל תתנו לאגן לצנוח."
+ },
+ {
+  "id": "pose.plank.cue.2",
+  "lang": "ru",
+  "text": "Напрягите живот и не давайте тазу провисать."
+ },
+ {
+  "id": "pose.plank.cue.2",
+  "lang": "en",
+  "text": "Engage the belly and do not let the hips sag."
+ },
+ {
+  "id": "pose.plank.cue.3",
+  "lang": "he",
+  "text": "דחפו את הרצפה והרחיקו את העקבים לאחור."
+ },
+ {
+  "id": "pose.plank.cue.3",
+  "lang": "ru",
+  "text": "Оттолкнитесь от пола и тянитесь пятками назад."
+ },
+ {
+  "id": "pose.plank.cue.3",
+  "lang": "en",
+  "text": "Press the floor away and reach the heels back."
+ },
+ {
+  "id": "pose.plank.cue.4",
+  "lang": "he",
+  "text": "נשמו קצר וקבוע."
+ },
+ {
+  "id": "pose.plank.cue.4",
+  "lang": "ru",
+  "text": "Дышите коротко и ровно."
+ },
+ {
+  "id": "pose.plank.cue.4",
+  "lang": "en",
+  "text": "Keep your breath short and steady."
+ },
+ {
+  "id": "pose.cobra.name",
+  "lang": "he",
+  "text": "קוברה"
+ },
+ {
+  "id": "pose.cobra.name",
+  "lang": "ru",
+  "text": "Кобра"
+ },
+ {
+  "id": "pose.cobra.name",
+  "lang": "en",
+  "text": "Cobra"
+ },
+ {
+  "id": "pose.cobra.intro",
+  "lang": "he",
+  "text": "תנוחת קוברה."
+ },
+ {
+  "id": "pose.cobra.intro",
+  "lang": "ru",
+  "text": "Поза: Кобра."
+ },
+ {
+  "id": "pose.cobra.intro",
+  "lang": "en",
+  "text": "Pose: Cobra."
+ },
+ {
+  "id": "pose.cobra.cue.1",
+  "lang": "he",
+  "text": "שכבו על הבטן, כפות ידיים מתחת לכתפיים."
+ },
+ {
+  "id": "pose.cobra.cue.1",
+  "lang": "ru",
+  "text": "Лягте на живот, ладони под плечами."
+ },
+ {
+  "id": "pose.cobra.cue.1",
+  "lang": "en",
+  "text": "Lie on your belly with palms under the shoulders."
+ },
+ {
+  "id": "pose.cobra.cue.2",
+  "lang": "he",
+  "text": "בשאיפה הרימו את החזה בעדינות."
+ },
+ {
+  "id": "pose.cobra.cue.2",
+  "lang": "ru",
+  "text": "На вдохе мягко приподнимите грудь."
+ },
+ {
+  "id": "pose.cobra.cue.2",
+  "lang": "en",
+  "text": "Inhale and lift the chest gently."
+ },
+ {
+  "id": "pose.cobra.cue.3",
+  "lang": "he",
+  "text": "המרפקים קרובים לגוף, הכתפיים רחוקות מהאוזניים."
+ },
+ {
+  "id": "pose.cobra.cue.3",
+  "lang": "ru",
+  "text": "Локти прижаты, плечи подальше от ушей."
+ },
+ {
+  "id": "pose.cobra.cue.3",
+  "lang": "en",
+  "text": "Keep the elbows close and shoulders away from the ears."
+ },
+ {
+  "id": "pose.cobra.cue.4",
+  "lang": "he",
+  "text": "הרגליים נשארות על הרצפה."
+ },
+ {
+  "id": "pose.cobra.cue.4",
+  "lang": "ru",
+  "text": "Ноги остаются на полу."
+ },
+ {
+  "id": "pose.cobra.cue.4",
+  "lang": "en",
+  "text": "Legs stay on the floor."
+ },
+ {
+  "id": "pose.locust.name",
+  "lang": "he",
+  "text": "ארבה"
+ },
+ {
+  "id": "pose.locust.name",
+  "lang": "ru",
+  "text": "Саранча"
+ },
+ {
+  "id": "pose.locust.name",
+  "lang": "en",
+  "text": "Locust"
+ },
+ {
+  "id": "pose.locust.intro",
+  "lang": "he",
+  "text": "תנוחת ארבה."
+ },
+ {
+  "id": "pose.locust.intro",
+  "lang": "ru",
+  "text": "Поза: Саранча."
+ },
+ {
+  "id": "pose.locust.intro",
+  "lang": "en",
+  "text": "Pose: Locust."
+ },
+ {
+  "id": "pose.locust.cue.1",
+  "lang": "he",
+  "text": "שכבו על הבטן וידיים לצדי הגוף."
+ },
+ {
+  "id": "pose.locust.cue.1",
+  "lang": "ru",
+  "text": "Лягте на живот, руки вдоль тела."
+ },
+ {
+  "id": "pose.locust.cue.1",
+  "lang": "en",
+  "text": "Lie on your belly with arms by your sides."
+ },
+ {
+  "id": "pose.locust.cue.2",
+  "lang": "he",
+  "text": "הרימו חזה ורגליים יחד, מבלי להרים את הצוואר."
+ },
+ {
+  "id": "pose.locust.cue.2",
+  "lang": "ru",
+  "text": "Поднимите грудь и ноги вместе, не запрокидывая шею."
+ },
+ {
+  "id": "pose.locust.cue.2",
+  "lang": "en",
+  "text": "Lift chest and legs together without cranking the neck."
+ },
+ {
+  "id": "pose.locust.cue.3",
+  "lang": "he",
+  "text": "הארכו את הגוף מהראש ועד העקבים."
+ },
+ {
+  "id": "pose.locust.cue.3",
+  "lang": "ru",
+  "text": "Вытягивайтесь от макушки до пяток."
+ },
+ {
+  "id": "pose.locust.cue.3",
+  "lang": "en",
+  "text": "Lengthen from the head to the heels."
+ },
+ {
+  "id": "pose.locust.cue.4",
+  "lang": "he",
+  "text": "נשמו רגוע, ואז הורידו לאט."
+ },
+ {
+  "id": "pose.locust.cue.4",
+  "lang": "ru",
+  "text": "Дышите спокойно, затем медленно опуститесь."
+ },
+ {
+  "id": "pose.locust.cue.4",
+  "lang": "en",
+  "text": "Breathe calmly, then lower slowly."
+ },
+ {
+  "id": "pose.camel.name",
+  "lang": "he",
+  "text": "גמל"
+ },
+ {
+  "id": "pose.camel.name",
+  "lang": "ru",
+  "text": "Верблюд"
+ },
+ {
+  "id": "pose.camel.name",
+  "lang": "en",
+  "text": "Camel"
+ },
+ {
+  "id": "pose.camel.intro",
+  "lang": "he",
+  "text": "תנוחת גמל."
+ },
+ {
+  "id": "pose.camel.intro",
+  "lang": "ru",
+  "text": "Поза: Верблюд."
+ },
+ {
+  "id": "pose.camel.intro",
+  "lang": "en",
+  "text": "Pose: Camel."
+ },
+ {
+  "id": "pose.camel.cue.1",
+  "lang": "he",
+  "text": "כרעו על הברכיים, ירכיים מעל הברכיים."
+ },
+ {
+  "id": "pose.camel.cue.1",
+  "lang": "ru",
+  "text": "Встаньте на колени, бёдра над коленями."
+ },
+ {
+  "id": "pose.camel.cue.1",
+  "lang": "en",
+  "text": "Kneel with the hips over the knees."
+ },
+ {
+  "id": "pose.camel.cue.2",
+  "lang": "he",
+  "text": "כפות הידיים על הגב התחתון, אצבעות כלפי מטה."
+ },
+ {
+  "id": "pose.camel.cue.2",
+  "lang": "ru",
+  "text": "Положите руки на поясницу, пальцы вниз."
+ },
+ {
+  "id": "pose.camel.cue.2",
+  "lang": "en",
+  "text": "Place the hands on your lower back, fingers down."
+ },
+ {
+  "id": "pose.camel.cue.3",
+  "lang": "he",
+  "text": "הרימו את החזה והרחיבו אותו לתקרה."
+ },
+ {
+  "id": "pose.camel.cue.3",
+  "lang": "ru",
+  "text": "Поднимите грудь и раскройте её к потолку."
+ },
+ {
+  "id": "pose.camel.cue.3",
+  "lang": "en",
+  "text": "Lift the chest and open it toward the ceiling."
+ },
+ {
+  "id": "pose.camel.cue.4",
+  "lang": "he",
+  "text": "הניחו לראש ולצוואר להישאר נוחים."
+ },
+ {
+  "id": "pose.camel.cue.4",
+  "lang": "ru",
+  "text": "Голова и шея остаются в удобном положении."
+ },
+ {
+  "id": "pose.camel.cue.4",
+  "lang": "en",
+  "text": "Keep the head and neck comfortable."
+ },
+ {
+  "id": "pose.bridge.name",
+  "lang": "he",
+  "text": "גשר"
+ },
+ {
+  "id": "pose.bridge.name",
+  "lang": "ru",
+  "text": "Мост"
+ },
+ {
+  "id": "pose.bridge.name",
+  "lang": "en",
+  "text": "Bridge"
+ },
+ {
+  "id": "pose.bridge.intro",
+  "lang": "he",
+  "text": "תנוחת גשר."
+ },
+ {
+  "id": "pose.bridge.intro",
+  "lang": "ru",
+  "text": "Поза: Мост."
+ },
+ {
+  "id": "pose.bridge.intro",
+  "lang": "en",
+  "text": "Pose: Bridge."
+ },
+ {
+  "id": "pose.bridge.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן."
+ },
+ {
+  "id": "pose.bridge.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину, колени согнуты, пятки у таза."
+ },
+ {
+  "id": "pose.bridge.cue.1",
+  "lang": "en",
+  "text": "Lie on your back, knees bent, heels near the hips."
+ },
+ {
+  "id": "pose.bridge.cue.2",
+  "lang": "he",
+  "text": "לחצו את כפות הרגליים והרימו את האגן."
+ },
+ {
+  "id": "pose.bridge.cue.2",
+  "lang": "ru",
+  "text": "Надавите стопами на пол и поднимите таз."
+ },
+ {
+  "id": "pose.bridge.cue.2",
+  "lang": "en",
+  "text": "Press the feet down and lift the hips."
+ },
+ {
+  "id": "pose.bridge.cue.3",
+  "lang": "he",
+  "text": "הרחיקו את הברכיים זו מזו קלות, לא יותר מרוחב האגן."
+ },
+ {
+  "id": "pose.bridge.cue.3",
+  "lang": "ru",
+  "text": "Колени держите на ширине таза."
+ },
+ {
+  "id": "pose.bridge.cue.3",
+  "lang": "en",
+  "text": "Keep the knees hip-width apart."
+ },
+ {
+  "id": "pose.bridge.cue.4",
+  "lang": "he",
+  "text": "הורידו אחרי כמה נשימות, חוליה אחר חוליה."
+ },
+ {
+  "id": "pose.bridge.cue.4",
+  "lang": "ru",
+  "text": "Через несколько вдохов опускайтесь по одному позвонку."
+ },
+ {
+  "id": "pose.bridge.cue.4",
+  "lang": "en",
+  "text": "Lower after a few breaths, one vertebra at a time."
+ },
+ {
+  "id": "pose.child.name",
+  "lang": "he",
+  "text": "תנוחת הילד"
+ },
+ {
+  "id": "pose.child.name",
+  "lang": "ru",
+  "text": "Поза ребёнка"
+ },
+ {
+  "id": "pose.child.name",
+  "lang": "en",
+  "text": "Child's pose"
+ },
+ {
+  "id": "pose.child.intro",
+  "lang": "he",
+  "text": "תנוחת הילד."
+ },
+ {
+  "id": "pose.child.intro",
+  "lang": "ru",
+  "text": "Поза: Поза ребёнка."
+ },
+ {
+  "id": "pose.child.intro",
+  "lang": "en",
+  "text": "Pose: Child's pose."
+ },
+ {
+  "id": "pose.child.cue.1",
+  "lang": "he",
+  "text": "שבו על העקבים והניחו את החזה על הירכיים."
+ },
+ {
+  "id": "pose.child.cue.1",
+  "lang": "ru",
+  "text": "Сядьте на пятки и положите грудь на бёдра."
+ },
+ {
+  "id": "pose.child.cue.1",
+  "lang": "en",
+  "text": "Sit back on your heels and rest the chest on the thighs."
+ },
+ {
+  "id": "pose.child.cue.2",
+  "lang": "he",
+  "text": "הושיטו ידיים קדימה והניחו אותן על הרצפה."
+ },
+ {
+  "id": "pose.child.cue.2",
+  "lang": "ru",
+  "text": "Вытяните руки вперёд и положите на пол."
+ },
+ {
+  "id": "pose.child.cue.2",
+  "lang": "en",
+  "text": "Reach the arms forward and rest them on the floor."
+ },
+ {
+  "id": "pose.child.cue.3",
+  "lang": "he",
+  "text": "הרפו את הכתפיים והמצח לרצפה."
+ },
+ {
+  "id": "pose.child.cue.3",
+  "lang": "ru",
+  "text": "Расслабьте плечи и лоб."
+ },
+ {
+  "id": "pose.child.cue.3",
+  "lang": "en",
+  "text": "Let the shoulders and forehead soften."
+ },
+ {
+  "id": "pose.child.cue.4",
+  "lang": "he",
+  "text": "נשמו אל הגב התחתון."
+ },
+ {
+  "id": "pose.child.cue.4",
+  "lang": "ru",
+  "text": "Дышите в поясницу."
+ },
+ {
+  "id": "pose.child.cue.4",
+  "lang": "en",
+  "text": "Breathe into your lower back."
+ },
+ {
+  "id": "pose.low-lunge.name",
+  "lang": "he",
+  "text": "מצעד נמוך"
+ },
+ {
+  "id": "pose.low-lunge.name",
+  "lang": "ru",
+  "text": "Низкий выпад"
+ },
+ {
+  "id": "pose.low-lunge.name",
+  "lang": "en",
+  "text": "Low lunge"
+ },
+ {
+  "id": "pose.low-lunge.intro",
+  "lang": "he",
+  "text": "תנוחת מצעד נמוך."
+ },
+ {
+  "id": "pose.low-lunge.intro",
+  "lang": "ru",
+  "text": "Поза: Низкий выпад."
+ },
+ {
+  "id": "pose.low-lunge.intro",
+  "lang": "en",
+  "text": "Pose: Low lunge."
+ },
+ {
+  "id": "pose.low-lunge.cue.1",
+  "lang": "he",
+  "text": "מעמד שולחן, צעדו עם רגל אחת קדימה בין הידיים."
+ },
+ {
+  "id": "pose.low-lunge.cue.1",
+  "lang": "ru",
+  "text": "Из позы стола поставьте одну стопу вперёд между руками."
+ },
+ {
+  "id": "pose.low-lunge.cue.1",
+  "lang": "en",
+  "text": "From tabletop, step one foot forward between the hands."
+ },
+ {
+  "id": "pose.low-lunge.cue.2",
+  "lang": "he",
+  "text": "הברך האחורית על הרצפה, הברך הקדמית מעל הקרסול."
+ },
+ {
+  "id": "pose.low-lunge.cue.2",
+  "lang": "ru",
+  "text": "Заднее колено на полу, переднее над лодыжкой."
+ },
+ {
+  "id": "pose.low-lunge.cue.2",
+  "lang": "en",
+  "text": "Back knee on the floor, front knee over the ankle."
+ },
+ {
+  "id": "pose.low-lunge.cue.3",
+  "lang": "he",
+  "text": "הרימו את הגוף ואת הידיים כלפי מעלה."
+ },
+ {
+  "id": "pose.low-lunge.cue.3",
+  "lang": "ru",
+  "text": "Поднимите корпус и руки вверх."
+ },
+ {
+  "id": "pose.low-lunge.cue.3",
+  "lang": "en",
+  "text": "Lift the torso and raise the arms."
+ },
+ {
+  "id": "pose.low-lunge.cue.4",
+  "lang": "he",
+  "text": "לחצו את האגן קלות קדימה ונשמו."
+ },
+ {
+  "id": "pose.low-lunge.cue.4",
+  "lang": "ru",
+  "text": "Мягко опустите таз вперёд и дышите."
+ },
+ {
+  "id": "pose.low-lunge.cue.4",
+  "lang": "en",
+  "text": "Sink the hips gently forward and breathe."
+ },
+ {
+  "id": "pose.half-split.name",
+  "lang": "he",
+  "text": "חצי פיצול"
+ },
+ {
+  "id": "pose.half-split.name",
+  "lang": "ru",
+  "text": "Полуразножка"
+ },
+ {
+  "id": "pose.half-split.name",
+  "lang": "en",
+  "text": "Half split"
+ },
+ {
+  "id": "pose.half-split.intro",
+  "lang": "he",
+  "text": "תנוחת חצי פיצול."
+ },
+ {
+  "id": "pose.half-split.intro",
+  "lang": "ru",
+  "text": "Поза: Полуразножка."
+ },
+ {
+  "id": "pose.half-split.intro",
+  "lang": "en",
+  "text": "Pose: Half split."
+ },
+ {
+  "id": "pose.half-split.cue.1",
+  "lang": "he",
+  "text": "מעמד כריעה, ישרו רגל אחת קדימה והעקב על הרצפה."
+ },
+ {
+  "id": "pose.half-split.cue.1",
+  "lang": "ru",
+  "text": "Из положения на коленях выпрямите одну ногу вперёд, пятка на полу."
+ },
+ {
+  "id": "pose.half-split.cue.1",
+  "lang": "en",
+  "text": "From kneeling, straighten one leg forward with the heel on the floor."
+ },
+ {
+  "id": "pose.half-split.cue.2",
+  "lang": "he",
+  "text": "האגן מעל הברך האחורית."
+ },
+ {
+  "id": "pose.half-split.cue.2",
+  "lang": "ru",
+  "text": "Таз над задним коленом."
+ },
+ {
+  "id": "pose.half-split.cue.2",
+  "lang": "en",
+  "text": "Keep the hips above the back knee."
+ },
+ {
+  "id": "pose.half-split.cue.3",
+  "lang": "he",
+  "text": "הארכו את הגב קדימה והניחו ידיים על הרגל או הרצפה."
+ },
+ {
+  "id": "pose.half-split.cue.3",
+  "lang": "ru",
+  "text": "Вытяните спину вперёд, руки на ногу или на пол."
+ },
+ {
+  "id": "pose.half-split.cue.3",
+  "lang": "en",
+  "text": "Lengthen the spine forward and rest hands on the leg or floor."
+ },
+ {
+  "id": "pose.half-split.cue.4",
+  "lang": "he",
+  "text": "כופפו את כף הרגל הקדמית אליכם ונשמו."
+ },
+ {
+  "id": "pose.half-split.cue.4",
+  "lang": "ru",
+  "text": "Потяните стопу на себя и дышите."
+ },
+ {
+  "id": "pose.half-split.cue.4",
+  "lang": "en",
+  "text": "Flex the front foot toward you and breathe."
+ },
+ {
+  "id": "pose.easy-seat.name",
+  "lang": "he",
+  "text": "ישיבה נוחה"
+ },
+ {
+  "id": "pose.easy-seat.name",
+  "lang": "ru",
+  "text": "Удобная поза"
+ },
+ {
+  "id": "pose.easy-seat.name",
+  "lang": "en",
+  "text": "Easy seat"
+ },
+ {
+  "id": "pose.easy-seat.intro",
+  "lang": "he",
+  "text": "תנוחת ישיבה נוחה."
+ },
+ {
+  "id": "pose.easy-seat.intro",
+  "lang": "ru",
+  "text": "Поза: Удобная поза."
+ },
+ {
+  "id": "pose.easy-seat.intro",
+  "lang": "en",
+  "text": "Pose: Easy seat."
+ },
+ {
+  "id": "pose.easy-seat.cue.1",
+  "lang": "he",
+  "text": "שבו עם רגליים משוכלות בנוחות."
+ },
+ {
+  "id": "pose.easy-seat.cue.1",
+  "lang": "ru",
+  "text": "Сядьте, удобно скрестив ноги."
+ },
+ {
+  "id": "pose.easy-seat.cue.1",
+  "lang": "en",
+  "text": "Sit with your legs crossed comfortably."
+ },
+ {
+  "id": "pose.easy-seat.cue.2",
+  "lang": "he",
+  "text": "הושיבו את האגן גבוה מהברכיים אם צריך."
+ },
+ {
+  "id": "pose.easy-seat.cue.2",
+  "lang": "ru",
+  "text": "При необходимости поднимите таз выше колен."
+ },
+ {
+  "id": "pose.easy-seat.cue.2",
+  "lang": "en",
+  "text": "Raise the hips above the knees if you need to."
+ },
+ {
+  "id": "pose.easy-seat.cue.3",
+  "lang": "he",
+  "text": "הארכו את עמוד השדרה והרפו את הכתפיים."
+ },
+ {
+  "id": "pose.easy-seat.cue.3",
+  "lang": "ru",
+  "text": "Вытяните позвоночник и расслабьте плечи."
+ },
+ {
+  "id": "pose.easy-seat.cue.3",
+  "lang": "en",
+  "text": "Lengthen the spine and relax the shoulders."
+ },
+ {
+  "id": "pose.easy-seat.cue.4",
+  "lang": "he",
+  "text": "עצמו עיניים ונשמו לאט."
+ },
+ {
+  "id": "pose.easy-seat.cue.4",
+  "lang": "ru",
+  "text": "Закройте глаза и дышите медленно."
+ },
+ {
+  "id": "pose.easy-seat.cue.4",
+  "lang": "en",
+  "text": "Close your eyes and breathe slowly."
+ },
+ {
+  "id": "pose.cobbler.name",
+  "lang": "he",
+  "text": "סנדלר"
+ },
+ {
+  "id": "pose.cobbler.name",
+  "lang": "ru",
+  "text": "Бабочка"
+ },
+ {
+  "id": "pose.cobbler.name",
+  "lang": "en",
+  "text": "Cobbler"
+ },
+ {
+  "id": "pose.cobbler.intro",
+  "lang": "he",
+  "text": "תנוחת סנדלר."
+ },
+ {
+  "id": "pose.cobbler.intro",
+  "lang": "ru",
+  "text": "Поза: Бабочка."
+ },
+ {
+  "id": "pose.cobbler.intro",
+  "lang": "en",
+  "text": "Pose: Cobbler."
+ },
+ {
+  "id": "pose.cobbler.cue.1",
+  "lang": "he",
+  "text": "שבו וחברו את כפות הרגליים זו לזו."
+ },
+ {
+  "id": "pose.cobbler.cue.1",
+  "lang": "ru",
+  "text": "Сядьте и соедините стопы подошвами."
+ },
+ {
+  "id": "pose.cobbler.cue.1",
+  "lang": "en",
+  "text": "Sit and bring the soles of the feet together."
+ },
+ {
+  "id": "pose.cobbler.cue.2",
+  "lang": "he",
+  "text": "הניחו לברכיים לרדת לצדדים."
+ },
+ {
+  "id": "pose.cobbler.cue.2",
+  "lang": "ru",
+  "text": "Пусть колени опускаются в стороны."
+ },
+ {
+  "id": "pose.cobbler.cue.2",
+  "lang": "en",
+  "text": "Let the knees fall out to the sides."
+ },
+ {
+  "id": "pose.cobbler.cue.3",
+  "lang": "he",
+  "text": "אחזו בקרסוליים והאריכו את עמוד השדרה."
+ },
+ {
+  "id": "pose.cobbler.cue.3",
+  "lang": "ru",
+  "text": "Возьмитесь за лодыжки и вытяните позвоночник."
+ },
+ {
+  "id": "pose.cobbler.cue.3",
+  "lang": "en",
+  "text": "Hold the ankles and lengthen the spine."
+ },
+ {
+  "id": "pose.cobbler.cue.4",
+  "lang": "he",
+  "text": "קפלו קדימה מעט מהירכיים, בנשימה."
+ },
+ {
+  "id": "pose.cobbler.cue.4",
+  "lang": "ru",
+  "text": "С дыханием слегка наклонитесь вперёд от бёдер."
+ },
+ {
+  "id": "pose.cobbler.cue.4",
+  "lang": "en",
+  "text": "Fold forward slightly from the hips with your breath."
+ },
+ {
+  "id": "pose.seated-fold.name",
+  "lang": "he",
+  "text": "קיפול קדימה בישיבה"
+ },
+ {
+  "id": "pose.seated-fold.name",
+  "lang": "ru",
+  "text": "Наклон вперёд сидя"
+ },
+ {
+  "id": "pose.seated-fold.name",
+  "lang": "en",
+  "text": "Seated forward fold"
+ },
+ {
+  "id": "pose.seated-fold.intro",
+  "lang": "he",
+  "text": "תנוחת קיפול קדימה בישיבה."
+ },
+ {
+  "id": "pose.seated-fold.intro",
+  "lang": "ru",
+  "text": "Поза: Наклон вперёд сидя."
+ },
+ {
+  "id": "pose.seated-fold.intro",
+  "lang": "en",
+  "text": "Pose: Seated forward fold."
+ },
+ {
+  "id": "pose.seated-fold.cue.1",
+  "lang": "he",
+  "text": "שבו עם רגליים ישרות קדימה."
+ },
+ {
+  "id": "pose.seated-fold.cue.1",
+  "lang": "ru",
+  "text": "Сядьте, ноги прямо перед собой."
+ },
+ {
+  "id": "pose.seated-fold.cue.1",
+  "lang": "en",
+  "text": "Sit with your legs straight in front of you."
+ },
+ {
+  "id": "pose.seated-fold.cue.2",
+  "lang": "he",
+  "text": "בשאיפה הארכו את הגב, בנשיפה כופפו מהירכיים."
+ },
+ {
+  "id": "pose.seated-fold.cue.2",
+  "lang": "ru",
+  "text": "На вдохе вытяните спину, на выдохе наклонитесь от бёдер."
+ },
+ {
+  "id": "pose.seated-fold.cue.2",
+  "lang": "en",
+  "text": "Inhale to lengthen, exhale to fold from the hips."
+ },
+ {
+  "id": "pose.seated-fold.cue.3",
+  "lang": "he",
+  "text": "אחזו בשוקיים, בקרסוליים או ברצועה."
+ },
+ {
+  "id": "pose.seated-fold.cue.3",
+  "lang": "ru",
+  "text": "Возьмитесь за голени, лодыжки или ремень."
+ },
+ {
+  "id": "pose.seated-fold.cue.3",
+  "lang": "en",
+  "text": "Hold the shins, ankles or a strap."
+ },
+ {
+  "id": "pose.seated-fold.cue.4",
+  "lang": "he",
+  "text": "הרפו את הראש והצוואר."
+ },
+ {
+  "id": "pose.seated-fold.cue.4",
+  "lang": "ru",
+  "text": "Расслабьте голову и шею."
+ },
+ {
+  "id": "pose.seated-fold.cue.4",
+  "lang": "en",
+  "text": "Let the head and neck relax."
+ },
+ {
+  "id": "pose.seated-twist.name",
+  "lang": "he",
+  "text": "סיבוב בישיבה"
+ },
+ {
+  "id": "pose.seated-twist.name",
+  "lang": "ru",
+  "text": "Скручивание сидя"
+ },
+ {
+  "id": "pose.seated-twist.name",
+  "lang": "en",
+  "text": "Seated twist"
+ },
+ {
+  "id": "pose.seated-twist.intro",
+  "lang": "he",
+  "text": "תנוחת סיבוב בישיבה."
+ },
+ {
+  "id": "pose.seated-twist.intro",
+  "lang": "ru",
+  "text": "Поза: Скручивание сидя."
+ },
+ {
+  "id": "pose.seated-twist.intro",
+  "lang": "en",
+  "text": "Pose: Seated twist."
+ },
+ {
+  "id": "pose.seated-twist.cue.1",
+  "lang": "he",
+  "text": "שבו עם רגל אחת ישרה והשנייה כפופה כשכף הרגל על הרצפה."
+ },
+ {
+  "id": "pose.seated-twist.cue.1",
+  "lang": "ru",
+  "text": "Сядьте: одна нога прямая, другая согнута, стопа на полу."
+ },
+ {
+  "id": "pose.seated-twist.cue.1",
+  "lang": "en",
+  "text": "Sit with one leg straight and one bent, foot on the floor."
+ },
+ {
+  "id": "pose.seated-twist.cue.2",
+  "lang": "he",
+  "text": "הארכו את עמוד השדרה בשאיפה."
+ },
+ {
+  "id": "pose.seated-twist.cue.2",
+  "lang": "ru",
+  "text": "На вдохе вытяните позвоночник."
+ },
+ {
+  "id": "pose.seated-twist.cue.2",
+  "lang": "en",
+  "text": "Inhale to lengthen the spine."
+ },
+ {
+  "id": "pose.seated-twist.cue.3",
+  "lang": "he",
+  "text": "בנשיפה סובבו את החזה לכיוון הברך המורמת."
+ },
+ {
+  "id": "pose.seated-twist.cue.3",
+  "lang": "ru",
+  "text": "На выдохе поверните грудь к поднятому колену."
+ },
+ {
+  "id": "pose.seated-twist.cue.3",
+  "lang": "en",
+  "text": "Exhale and turn the chest toward the raised knee."
+ },
+ {
+  "id": "pose.seated-twist.cue.4",
+  "lang": "he",
+  "text": "הסיבוב מגיע מהחזה. מבט עדין מעבר לכתף."
+ },
+ {
+  "id": "pose.seated-twist.cue.4",
+  "lang": "ru",
+  "text": "Поворот идёт от груди. Мягко смотрите через плечо."
+ },
+ {
+  "id": "pose.seated-twist.cue.4",
+  "lang": "en",
+  "text": "The turn comes from the chest. Gaze softly over the shoulder."
+ },
+ {
+  "id": "pose.boat.name",
+  "lang": "he",
+  "text": "סירה"
+ },
+ {
+  "id": "pose.boat.name",
+  "lang": "ru",
+  "text": "Лодка"
+ },
+ {
+  "id": "pose.boat.name",
+  "lang": "en",
+  "text": "Boat"
+ },
+ {
+  "id": "pose.boat.intro",
+  "lang": "he",
+  "text": "תנוחת סירה."
+ },
+ {
+  "id": "pose.boat.intro",
+  "lang": "ru",
+  "text": "Поза: Лодка."
+ },
+ {
+  "id": "pose.boat.intro",
+  "lang": "en",
+  "text": "Pose: Boat."
+ },
+ {
+  "id": "pose.boat.cue.1",
+  "lang": "he",
+  "text": "שבו עם ברכיים כפופות והישענו מעט לאחור."
+ },
+ {
+  "id": "pose.boat.cue.1",
+  "lang": "ru",
+  "text": "Сядьте, колени согнуты, слегка отклонитесь назад."
+ },
+ {
+  "id": "pose.boat.cue.1",
+  "lang": "en",
+  "text": "Sit with knees bent and lean back slightly."
+ },
+ {
+  "id": "pose.boat.cue.2",
+  "lang": "he",
+  "text": "הרימו את הרגליים והישירו את הגב."
+ },
+ {
+  "id": "pose.boat.cue.2",
+  "lang": "ru",
+  "text": "Поднимите стопы и держите спину длинной."
+ },
+ {
+  "id": "pose.boat.cue.2",
+  "lang": "en",
+  "text": "Lift the feet and keep the back long."
+ },
+ {
+  "id": "pose.boat.cue.3",
+  "lang": "he",
+  "text": "הושיטו ידיים קדימה במקביל לרצפה."
+ },
+ {
+  "id": "pose.boat.cue.3",
+  "lang": "ru",
+  "text": "Вытяните руки вперёд, параллельно полу."
+ },
+ {
+  "id": "pose.boat.cue.3",
+  "lang": "en",
+  "text": "Reach the arms forward, parallel to the floor."
+ },
+ {
+  "id": "pose.boat.cue.4",
+  "lang": "he",
+  "text": "הבטן פעילה, הנשימה רגועה."
+ },
+ {
+  "id": "pose.boat.cue.4",
+  "lang": "ru",
+  "text": "Живот напряжён, дыхание спокойное."
+ },
+ {
+  "id": "pose.boat.cue.4",
+  "lang": "en",
+  "text": "Keep the belly active and the breath calm."
+ },
+ {
+  "id": "pose.knees-to-chest.name",
+  "lang": "he",
+  "text": "ברכיים לחזה"
+ },
+ {
+  "id": "pose.knees-to-chest.name",
+  "lang": "ru",
+  "text": "Колени к груди"
+ },
+ {
+  "id": "pose.knees-to-chest.name",
+  "lang": "en",
+  "text": "Knees to chest"
+ },
+ {
+  "id": "pose.knees-to-chest.intro",
+  "lang": "he",
+  "text": "תנוחת ברכיים לחזה."
+ },
+ {
+  "id": "pose.knees-to-chest.intro",
+  "lang": "ru",
+  "text": "Поза: Колени к груди."
+ },
+ {
+  "id": "pose.knees-to-chest.intro",
+  "lang": "en",
+  "text": "Pose: Knees to chest."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב וקרבו את שתי הברכיים לחזה."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину и подтяните оба колена к груди."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.1",
+  "lang": "en",
+  "text": "Lie on your back and draw both knees toward the chest."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.2",
+  "lang": "he",
+  "text": "חבקו את הברכיים או את השוקיים."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.2",
+  "lang": "ru",
+  "text": "Обхватите колени или голени руками."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.2",
+  "lang": "en",
+  "text": "Hug the knees or the shins."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.3",
+  "lang": "he",
+  "text": "הרפו את הכתפיים והראש לרצפה."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.3",
+  "lang": "ru",
+  "text": "Пусть плечи и голова лежат на полу."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.3",
+  "lang": "en",
+  "text": "Let the shoulders and head rest on the floor."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.4",
+  "lang": "he",
+  "text": "נשמו עמוק, ואפשר להתנדנד קלות."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.4",
+  "lang": "ru",
+  "text": "Дышите глубоко, можно слегка покачаться."
+ },
+ {
+  "id": "pose.knees-to-chest.cue.4",
+  "lang": "en",
+  "text": "Breathe deeply; a gentle rock is fine."
+ },
+ {
+  "id": "pose.supine-twist.name",
+  "lang": "he",
+  "text": "סיבוב בשכיבה"
+ },
+ {
+  "id": "pose.supine-twist.name",
+  "lang": "ru",
+  "text": "Скручивание лёжа"
+ },
+ {
+  "id": "pose.supine-twist.name",
+  "lang": "en",
+  "text": "Reclined twist"
+ },
+ {
+  "id": "pose.supine-twist.intro",
+  "lang": "he",
+  "text": "תנוחת סיבוב בשכיבה."
+ },
+ {
+  "id": "pose.supine-twist.intro",
+  "lang": "ru",
+  "text": "Поза: Скручивание лёжа."
+ },
+ {
+  "id": "pose.supine-twist.intro",
+  "lang": "en",
+  "text": "Pose: Reclined twist."
+ },
+ {
+  "id": "pose.supine-twist.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות."
+ },
+ {
+  "id": "pose.supine-twist.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину, колени согнуты."
+ },
+ {
+  "id": "pose.supine-twist.cue.1",
+  "lang": "en",
+  "text": "Lie on your back with the knees bent."
+ },
+ {
+  "id": "pose.supine-twist.cue.2",
+  "lang": "he",
+  "text": "הורידו את שתי הברכיים לצד אחד."
+ },
+ {
+  "id": "pose.supine-twist.cue.2",
+  "lang": "ru",
+  "text": "Опустите оба колена в одну сторону."
+ },
+ {
+  "id": "pose.supine-twist.cue.2",
+  "lang": "en",
+  "text": "Lower both knees to one side."
+ },
+ {
+  "id": "pose.supine-twist.cue.3",
+  "lang": "he",
+  "text": "פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה."
+ },
+ {
+  "id": "pose.supine-twist.cue.3",
+  "lang": "ru",
+  "text": "Раскройте руки в стороны, плечи остаются на полу."
+ },
+ {
+  "id": "pose.supine-twist.cue.3",
+  "lang": "en",
+  "text": "Open the arms wide and keep the shoulders on the floor."
+ },
+ {
+  "id": "pose.supine-twist.cue.4",
+  "lang": "he",
+  "text": "הפנו את המבט לצד ההפוך ונשמו."
+ },
+ {
+  "id": "pose.supine-twist.cue.4",
+  "lang": "ru",
+  "text": "Поверните взгляд в другую сторону и дышите."
+ },
+ {
+  "id": "pose.supine-twist.cue.4",
+  "lang": "en",
+  "text": "Turn your gaze the other way and breathe."
+ },
+ {
+  "id": "pose.happy-baby.name",
+  "lang": "he",
+  "text": "תינוק שמח"
+ },
+ {
+  "id": "pose.happy-baby.name",
+  "lang": "ru",
+  "text": "Счастливый малыш"
+ },
+ {
+  "id": "pose.happy-baby.name",
+  "lang": "en",
+  "text": "Happy baby"
+ },
+ {
+  "id": "pose.happy-baby.intro",
+  "lang": "he",
+  "text": "תנוחת תינוק שמח."
+ },
+ {
+  "id": "pose.happy-baby.intro",
+  "lang": "ru",
+  "text": "Поза: Счастливый малыш."
+ },
+ {
+  "id": "pose.happy-baby.intro",
+  "lang": "en",
+  "text": "Pose: Happy baby."
+ },
+ {
+  "id": "pose.happy-baby.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב והרימו את הברכיים לכיוון בתי השחי."
+ },
+ {
+  "id": "pose.happy-baby.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину и подтяните колени к подмышкам."
+ },
+ {
+  "id": "pose.happy-baby.cue.1",
+  "lang": "en",
+  "text": "Lie on your back and draw the knees toward the armpits."
+ },
+ {
+  "id": "pose.happy-baby.cue.2",
+  "lang": "he",
+  "text": "אחזו בחלק החיצוני של כפות הרגליים."
+ },
+ {
+  "id": "pose.happy-baby.cue.2",
+  "lang": "ru",
+  "text": "Возьмитесь за внешние края стоп."
+ },
+ {
+  "id": "pose.happy-baby.cue.2",
+  "lang": "en",
+  "text": "Hold the outer edges of your feet."
+ },
+ {
+  "id": "pose.happy-baby.cue.3",
+  "lang": "he",
+  "text": "הניחו לאגן ולגב התחתון להישאר ברצפה."
+ },
+ {
+  "id": "pose.happy-baby.cue.3",
+  "lang": "ru",
+  "text": "Таз и поясница остаются на полу."
+ },
+ {
+  "id": "pose.happy-baby.cue.3",
+  "lang": "en",
+  "text": "Keep the pelvis and lower back resting on the floor."
+ },
+ {
+  "id": "pose.happy-baby.cue.4",
+  "lang": "he",
+  "text": "נדנדו מעט מצד לצד אם נעים."
+ },
+ {
+  "id": "pose.happy-baby.cue.4",
+  "lang": "ru",
+  "text": "Если приятно, слегка покачайтесь из стороны в сторону."
+ },
+ {
+  "id": "pose.happy-baby.cue.4",
+  "lang": "en",
+  "text": "Rock gently side to side if it feels good."
+ },
+ {
+  "id": "pose.figure-four.name",
+  "lang": "he",
+  "text": "ארבע שכובה"
+ },
+ {
+  "id": "pose.figure-four.name",
+  "lang": "ru",
+  "text": "Лёжа, ноги «четвёркой»"
+ },
+ {
+  "id": "pose.figure-four.name",
+  "lang": "en",
+  "text": "Reclined figure four"
+ },
+ {
+  "id": "pose.figure-four.intro",
+  "lang": "he",
+  "text": "תנוחת ארבע שכובה."
+ },
+ {
+  "id": "pose.figure-four.intro",
+  "lang": "ru",
+  "text": "Поза: Лёжа, ноги «четвёркой»."
+ },
+ {
+  "id": "pose.figure-four.intro",
+  "lang": "en",
+  "text": "Pose: Reclined figure four."
+ },
+ {
+  "id": "pose.figure-four.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות."
+ },
+ {
+  "id": "pose.figure-four.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину, колени согнуты."
+ },
+ {
+  "id": "pose.figure-four.cue.1",
+  "lang": "en",
+  "text": "Lie on your back with the knees bent."
+ },
+ {
+  "id": "pose.figure-four.cue.2",
+  "lang": "he",
+  "text": "הניחו קרסול אחד על הירך הנגדית."
+ },
+ {
+  "id": "pose.figure-four.cue.2",
+  "lang": "ru",
+  "text": "Положите одну лодыжку на противоположное бедро."
+ },
+ {
+  "id": "pose.figure-four.cue.2",
+  "lang": "en",
+  "text": "Cross one ankle over the opposite thigh."
+ },
+ {
+  "id": "pose.figure-four.cue.3",
+  "lang": "he",
+  "text": "משכו את הרגל התומכת לעבר החזה."
+ },
+ {
+  "id": "pose.figure-four.cue.3",
+  "lang": "ru",
+  "text": "Подтяните опорную ногу к груди."
+ },
+ {
+  "id": "pose.figure-four.cue.3",
+  "lang": "en",
+  "text": "Draw the supporting leg toward your chest."
+ },
+ {
+  "id": "pose.figure-four.cue.4",
+  "lang": "he",
+  "text": "לחצו קלות את הברך שבחוץ והרפו."
+ },
+ {
+  "id": "pose.figure-four.cue.4",
+  "lang": "ru",
+  "text": "Мягко отведите наружное колено и расслабьтесь."
+ },
+ {
+  "id": "pose.figure-four.cue.4",
+  "lang": "en",
+  "text": "Gently press the outer knee away and release."
+ },
+ {
+  "id": "pose.hand-to-toe.name",
+  "lang": "he",
+  "text": "יד לבוהן בשכיבה"
+ },
+ {
+  "id": "pose.hand-to-toe.name",
+  "lang": "ru",
+  "text": "Лёжа, рука к стопе"
+ },
+ {
+  "id": "pose.hand-to-toe.name",
+  "lang": "en",
+  "text": "Reclined hand-to-toe"
+ },
+ {
+  "id": "pose.hand-to-toe.intro",
+  "lang": "he",
+  "text": "תנוחת יד לבוהן בשכיבה."
+ },
+ {
+  "id": "pose.hand-to-toe.intro",
+  "lang": "ru",
+  "text": "Поза: Лёжа, рука к стопе."
+ },
+ {
+  "id": "pose.hand-to-toe.intro",
+  "lang": "en",
+  "text": "Pose: Reclined hand-to-toe."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב, הרימו רגל אחת למעלה."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину и поднимите одну ногу."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.1",
+  "lang": "en",
+  "text": "Lie on your back and raise one leg."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.2",
+  "lang": "he",
+  "text": "השתמשו ברצועה סביב כף הרגל."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.2",
+  "lang": "ru",
+  "text": "Используйте ремень вокруг стопы."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.2",
+  "lang": "en",
+  "text": "Use a strap around the foot."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.3",
+  "lang": "he",
+  "text": "הרגל השנייה נשארת פעילה על הרצפה."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.3",
+  "lang": "ru",
+  "text": "Другая нога остаётся активной на полу."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.3",
+  "lang": "en",
+  "text": "The other leg stays active on the floor."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.4",
+  "lang": "he",
+  "text": "משכו קלות ונשמו, בלי לעגל את הגב."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.4",
+  "lang": "ru",
+  "text": "Слегка потяните и дышите, не округляя спину."
+ },
+ {
+  "id": "pose.hand-to-toe.cue.4",
+  "lang": "en",
+  "text": "Pull lightly and breathe; do not round the back."
+ },
+ {
+  "id": "pose.legs-up-wall.name",
+  "lang": "he",
+  "text": "רגליים על הקיר"
+ },
+ {
+  "id": "pose.legs-up-wall.name",
+  "lang": "ru",
+  "text": "Ноги на стене"
+ },
+ {
+  "id": "pose.legs-up-wall.name",
+  "lang": "en",
+  "text": "Legs up the wall"
+ },
+ {
+  "id": "pose.legs-up-wall.intro",
+  "lang": "he",
+  "text": "תנוחת רגליים על הקיר."
+ },
+ {
+  "id": "pose.legs-up-wall.intro",
+  "lang": "ru",
+  "text": "Поза: Ноги на стене."
+ },
+ {
+  "id": "pose.legs-up-wall.intro",
+  "lang": "en",
+  "text": "Pose: Legs up the wall."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.1",
+  "lang": "he",
+  "text": "שבו ליד הקיר ושכבו על הגב."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.1",
+  "lang": "ru",
+  "text": "Сядьте у стены и лягте на спину."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.1",
+  "lang": "en",
+  "text": "Sit beside a wall and lie back."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.2",
+  "lang": "he",
+  "text": "הניחו את הרגליים על הקיר, האגן קרוב אליו."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.2",
+  "lang": "ru",
+  "text": "Положите ноги на стену, таз близко к ней."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.2",
+  "lang": "en",
+  "text": "Rest the legs up the wall with the hips close to it."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.3",
+  "lang": "he",
+  "text": "הידיים רפויות לצדדים, כפות ידיים כלפי מעלה."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.3",
+  "lang": "ru",
+  "text": "Руки свободно в стороны, ладони вверх."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.3",
+  "lang": "en",
+  "text": "Let the arms fall loosely to the sides, palms up."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.4",
+  "lang": "he",
+  "text": "עצמו עיניים ונשמו לאט."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.4",
+  "lang": "ru",
+  "text": "Закройте глаза и дышите медленно."
+ },
+ {
+  "id": "pose.legs-up-wall.cue.4",
+  "lang": "en",
+  "text": "Close the eyes and breathe slowly."
+ },
+ {
+  "id": "pose.savasana.name",
+  "lang": "he",
+  "text": "שכיבת מנוחה"
+ },
+ {
+  "id": "pose.savasana.name",
+  "lang": "ru",
+  "text": "Шавасана"
+ },
+ {
+  "id": "pose.savasana.name",
+  "lang": "en",
+  "text": "Final rest"
+ },
+ {
+  "id": "pose.savasana.intro",
+  "lang": "he",
+  "text": "תנוחת שכיבת מנוחה."
+ },
+ {
+  "id": "pose.savasana.intro",
+  "lang": "ru",
+  "text": "Поза: Шавасана."
+ },
+ {
+  "id": "pose.savasana.intro",
+  "lang": "en",
+  "text": "Pose: Final rest."
+ },
+ {
+  "id": "pose.savasana.cue.1",
+  "lang": "he",
+  "text": "שכבו על הגב ופרשו את הרגליים קלות."
+ },
+ {
+  "id": "pose.savasana.cue.1",
+  "lang": "ru",
+  "text": "Лягте на спину, ноги слегка разведены."
+ },
+ {
+  "id": "pose.savasana.cue.1",
+  "lang": "en",
+  "text": "Lie on your back with the legs slightly apart."
+ },
+ {
+  "id": "pose.savasana.cue.2",
+  "lang": "he",
+  "text": "ידיים לצדדים, כפות ידיים כלפי מעלה."
+ },
+ {
+  "id": "pose.savasana.cue.2",
+  "lang": "ru",
+  "text": "Руки вдоль тела, ладони вверх."
+ },
+ {
+  "id": "pose.savasana.cue.2",
+  "lang": "en",
+  "text": "Arms by your sides, palms up."
+ },
+ {
+  "id": "pose.savasana.cue.3",
+  "lang": "he",
+  "text": "הרפו את הפנים, הלסת והבטן."
+ },
+ {
+  "id": "pose.savasana.cue.3",
+  "lang": "ru",
+  "text": "Расслабьте лицо, челюсть и живот."
+ },
+ {
+  "id": "pose.savasana.cue.3",
+  "lang": "en",
+  "text": "Soften the face, jaw and belly."
+ },
+ {
+  "id": "pose.savasana.cue.4",
+  "lang": "he",
+  "text": "הניחו לנשימה לחזור לקצב טבעי."
+ },
+ {
+  "id": "pose.savasana.cue.4",
+  "lang": "ru",
+  "text": "Пусть дыхание вернётся к естественному ритму."
+ },
+ {
+  "id": "pose.savasana.cue.4",
+  "lang": "en",
+  "text": "Let the breath return to its natural rhythm."
+ }
+]

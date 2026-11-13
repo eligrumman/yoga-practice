@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>יוגה בבית · Home Yoga Flow</title>
+<meta name="description" content="Home Yoga Flow: animated yoga poses, ready-made plans and voice guidance in Hebrew, Russian and English. No accounts, no tracking.">
+<meta name="theme-color" content="#3f6f64">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233f6f64'/%3E%3Ccircle cx='16' cy='9' r='3.5' fill='%23fff'/%3E%3Cpath d='M16 13v8M9 17l7-3 7 3M12 27l4-6 4 6' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<header class="top">
+  <a class="brand" href="#/home" id="brand">יוגה בבית</a>
+  <nav aria-label="Main">
+    <a href="#/home" data-v="home" id="nav-home">בית</a>
+    <a href="#/library" data-v="library" id="nav-lib">תנוחות</a>
+    <a href="#/plans" data-v="plans" id="nav-plans">התכניות שלי</a>
+  </nav>
+  <div class="langs" role="group" aria-label="Language">
+    <button data-lang="he" aria-pressed="true">HE</button>
+    <button data-lang="ru" aria-pressed="false">RU</button>
+    <button data-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+<main id="app" tabindex="-1"></main>
+<footer class="foot">
+  <p id="disc"></p>
+  <p class="small" id="priv"></p>
+  <p class="small"><a href="https://github.com/eligrumman/yoga-practice">GitHub</a> · MIT</p>
+</footer>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:1rem">This app needs JavaScript.</p></noscript>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

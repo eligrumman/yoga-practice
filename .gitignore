@@ -1,0 +1,8 @@
+.env
+.env*
+tools/tts/run.log
+tools/tts/*.tmp
+
+research/
+dev/
+.DS_Store
