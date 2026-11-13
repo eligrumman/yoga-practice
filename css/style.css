@@ -147,3 +147,4 @@ body.in-player .foot,body.in-player .top nav{display:none}
 .pose-stage{position:relative}
 .view-toggle{position:absolute;inset-inline-start:10px;top:10px;z-index:3;min-height:32px;padding:2px 12px;font-weight:700;font-size:.85rem;opacity:.9}
 .view-toggle[hidden]{display:none}
+.skip-intro{display:block;margin:.4rem auto}.skip-intro[hidden]{display:none}

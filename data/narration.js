@@ -3,6 +3,7 @@
 // Rules: numbers as words, no Latin letters in he/ru text, short sentences, Russian addresses the listener as "Вы".
 // Composite announcements are separate segments: common.next + pose.<id>.name.
 import { POSES } from './poses.js';
+import { SEGMENTS_V2 } from './narration-he-v2.js';
 
 export const LANGS = ['he', 'ru', 'en'];
 
@@ -61,6 +62,8 @@ for (const p of POSES) {
   }
 }
 
-export const SEGMENT_BY_ID = Object.fromEntries(SEGMENTS.map((s) => [s.id, s]));
+// v2 Hebrew segments live in narration-he-v2.js; they are looked up here but are NOT part of SEGMENTS (ru/en are unchanged).
+export { SEGMENTS_V2 };
+export const SEGMENT_BY_ID = Object.fromEntries([...SEGMENTS, ...SEGMENTS_V2].map((s) => [s.id, s]));
 export const segText = (id, lang) => SEGMENT_BY_ID[id]?.[lang] || '';
 export const cueIds = (poseId) => SEGMENTS.filter((s) => s.id.startsWith(`pose.${poseId}.cue.`)).map((s) => s.id);

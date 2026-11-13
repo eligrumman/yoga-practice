@@ -1,4 +1,5 @@
 // All persistence in localStorage (this device only). Every access is guarded.
+import { resolveNarration } from './narration-plan.js';
 const K = 'hyf.';
 const mem = {};
 function get(key, def) {
@@ -9,12 +10,13 @@ function set(key, val) {
   try { localStorage.setItem(K + key, JSON.stringify(val)); } catch { /* private mode: memory only */ }
 }
 
-export const DEFAULT_SETTINGS = { holdMult: 1, transition: 5, density: 'standard', beep: true, mute: false, volume: 0.9, narrLang: '', wake: true };
+export const DEFAULT_SETTINGS = { holdMult: 1, transition: 5, beep: true, mute: false, volume: 0.9, narrLang: '', wake: true };
 
 export const store = {
   get lang() { return get('lang', 'he'); },
   set lang(v) { set('lang', v); },
-  get settings() { return { ...DEFAULT_SETTINGS, ...get('settings', {}) }; },
+  // `narration` (full|short|name|off) replaces the old `density` (minimal|standard|full): migrated on read, default 'full' for a first-ever session.
+  get settings() { const raw = get('settings', {}); return { ...DEFAULT_SETTINGS, ...raw, narration: resolveNarration(raw) }; },
   saveSettings(patch) { set('settings', { ...this.settings, ...patch }); },
 
   // plans: [{id, name, items, updated}]

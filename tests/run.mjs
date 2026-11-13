@@ -274,5 +274,158 @@ for (const [l, re] of [['he', /הראש נשאר על הרצפה/], ['ru', /Го
 ok(!/clasp|שלובות|сцеплен/.test(JSON.stringify(POSE_BY_ID.bridge.variations)), 'bridge L2 text does not promise clasped hands the figure cannot show');
 for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filters label ${l}`);
 
+// ================= Narration v2 (Hebrew) =================
+{
+  const { POSE_V2, SEGMENTS_V2, INTRO, CLOSE, INTRO_VARIANTS, CLOSE_VARIANTS } = await import('../data/narration-he-v2.js');
+  const NP = await import('../js/narration-plan.js');
+  const { store: st2 } = await import('../js/store.js');
+  const { SEGMENTS: SEGS_NOW, SEGMENT_BY_ID } = await import('../data/narration.js');
+  const { BEGINNER_EXTRA } = await import('../js/generator.js');
+  const dur = (id) => NP.estDur(segText(id, 'he'));
+
+  // coverage: every Hebrew pose has all parts, side lines exactly for two-sided poses
+  for (const p of POSES) {
+    const t = POSE_V2[p.id];
+    ok(!!t, `v2 ${p.id} exists`); if (!t) continue;
+    ok(t.entry.length >= 1 && t.entry.length <= 3, `v2 ${p.id} entry 1-3`);
+    ok(t.align.length >= 1 && t.align.length <= 3, `v2 ${p.id} align 1-3`);
+    ok(typeof t.breath === 'string' && t.breath.length > 3, `v2 ${p.id} breath`);
+    ok(t.mod.length === 3 && t.mod.every((m) => m && m.length > 3), `v2 ${p.id} mod L0-L2`);
+    ok(typeof t.exit === 'string' && t.exit.length > 3, `v2 ${p.id} exit`);
+    ok(!!t.side === (p.sides === 'both'), `v2 ${p.id} side line iff two-sided`);
+    for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
+  }
+  ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
+  ok(SEGMENTS_V2.length === 375, `375 v2 segments (have ${SEGMENTS_V2.length})`);
+  ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
+  for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
+  ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
+  ok(!SEGS_NOW.some((s) => s.id.startsWith('session.') || /\.(entry|align|breath|mod|exit|side)\b/.test(s.id)), 'old SEGMENTS list has no v2 ids');
+  ok(SEGMENT_BY_ID['session.intro.arrive'] && SEGMENT_BY_ID['pose.tree.side'], 'v2 ids resolvable through SEGMENT_BY_ID');
+
+  // ru/en narration unchanged (snapshot of the pre-v2 data)
+  const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
+  ok(JSON.stringify(SEGS_NOW) === JSON.stringify(legacy), 'ru/en/he legacy SEGMENTS identical to the snapshot');
+  ok(legacy.length === SEGS_NOW.length, 'legacy segment count unchanged');
+
+  // setting migration + defaults
+  ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
+  ok(NP.resolveNarration({}) === 'full' && NP.resolveNarration(undefined) === 'full', 'first-ever session defaults to full');
+  ok(NP.resolveNarration({ narration: 'off', density: 'full' }) === 'off' && NP.resolveNarration({ narration: 'bogus', density: 'standard' }) === 'short', 'explicit choice wins, invalid falls back to migration');
+  ok(st2.settings.narration === 'full', 'store default narration is full');
+  st2.saveSettings({ narration: 'name' }); ok(st2.settings.narration === 'name', 'store persists narration');
+  st2.saveSettings({ narration: 'full' });
+  ok(['full', 'short', 'name', 'off'].every((k) => tr('narrLvl', 'he', k) !== 'narrLvl' && tr('narrLvl', 'ru', k) && tr('narrLvl', 'en', k)), 'level labels he/ru/en');
+  ok(tr('narrLvl', 'he', 'full') === 'מלאה' && tr('narrLvl', 'he', 'short') === 'קצרה' && tr('narrLvl', 'he', 'name') === 'שם התנוחה בלבד' && tr('narrLvl', 'he', 'off') === 'ללא קריינות' && tr('narration', 'he') === 'רמת קריינות', 'Hebrew level labels');
+  ok(tr('narrLvl', 'ru', 'full') === 'Полная' && tr('narrLvl', 'ru', 'short') === 'Краткая' && tr('narrLvl', 'ru', 'name') === 'Только название' && tr('narrLvl', 'ru', 'off') === 'Без озвучки', 'Russian level labels');
+  ok(tr('narrLvl', 'en', 'full') === 'Full' && tr('narrLvl', 'en', 'short') === 'Short' && tr('narrLvl', 'en', 'name') === 'Pose name only' && tr('narrLvl', 'en', 'off') === 'Off', 'English level labels');
+
+  // intro/closing variants by plan length
+  ok(NP.introVariantKey(10) === 'short' && NP.introVariantKey(12) === 'short' && NP.introVariantKey(13) === 'medium' && NP.introVariantKey(24) === 'medium' && NP.introVariantKey(25) === 'long' && NP.introVariantKey(30) === 'long', 'intro variant by plan length');
+  const idsOf = (seq) => seq.map((x) => x.id);
+  ok(idsOf(NP.introSeq({ lang: 'he', level: 'full', minutes: 10 })).join() === INTRO_VARIANTS.short.keys.map((k) => INTRO[k].id).join(), 'full intro 10 min = short variant');
+  ok(idsOf(NP.introSeq({ lang: 'he', level: 'full', minutes: 20 })).length === 6 && idsOf(NP.introSeq({ lang: 'he', level: 'full', minutes: 30 })).length === 8, 'full intro 20/30 min = medium/long');
+  ok(idsOf(NP.introSeq({ lang: 'he', level: 'short', minutes: 30 })).length === 4, 'short level uses the short intro for every length');
+  ok(NP.introSeq({ lang: 'he', level: 'name', minutes: 30 }).length === 0 && NP.introSeq({ lang: 'he', level: 'off', minutes: 30 }).length === 0 && NP.introSeq({ lang: 'ru', level: 'full', minutes: 30 }).length === 0, 'no intro phase for name/off/ru/en');
+
+  // level -> segments mapping (tree: two-sided; hold long enough that nothing is dropped)
+  const base = { lang: 'he', poseId: 'tree', side: 0, sides: 2, hold: 60, lvl: 0, dur, announced: false, lastSavasana: false, minutes: 20 };
+  const P = (o) => NP.slotPlan({ ...base, ...o });
+  const full = P({ level: 'full', hold: 90 });
+  ok(full.ids[0] === 'pose.tree.intro' && full.ids.includes('pose.tree.entry.1') && full.ids.includes('pose.tree.mod.L0') && full.ids.includes('pose.tree.align.1') && full.ids.includes('pose.tree.breath') && full.ids.includes('pose.tree.exit'), 'full: intro, entry, mod, align, breath, exit');
+  ok(full.ids.indexOf('pose.tree.mod.L0') > full.ids.indexOf('pose.tree.entry.1') && full.ids.indexOf('pose.tree.mod.L0') < full.ids.indexOf('pose.tree.align.1'), 'full: mod comes after entry and before align');
+  ok(P({ level: 'full', hold: 90, lvl: 2 }).ids.includes('pose.tree.mod.L2') && !P({ level: 'full', hold: 90, lvl: 2 }).ids.includes('pose.tree.mod.L0'), 'full: mod follows the item level');
+  const shortL0 = P({ level: 'short', lvl: 0, hold: 60 }), shortL1 = P({ level: 'short', lvl: 1, hold: 30 });
+  ok(shortL0.ids.join() === 'pose.tree.intro,pose.tree.entry.1,pose.tree.mod.L0,pose.tree.breath', 'short L0: intro, entry.1, mod.L0, breath (hold>=25, budget allows)');
+  ok(shortL1.ids.join() === 'pose.tree.intro,pose.tree.entry.1,pose.tree.breath' && !P({ level: 'short', lvl: 0, hold: 20 }).ids.includes('pose.tree.breath'), 'short L1: no mod; no breath when hold < 25');
+  ok(P({ level: 'name' }).ids.join() === 'pose.tree.intro', 'name: pose name only');
+  ok(P({ level: 'off' }).ids.length === 0, 'off: silent');
+  ok(P({ level: 'name', side: 1 }).ids.join() === 'common.switch_sides' && P({ level: 'short', side: 1 }).ids.join() === 'common.switch_sides' && P({ level: 'name', side: 1, announced: true }).ids.length === 0, 'name/short side two: switch line only (not repeated when already announced)');
+  const s2 = P({ level: 'full', side: 1, hold: 40, announced: true });
+  ok(s2.ids.join() === 'pose.tree.side,pose.tree.align.1,pose.tree.breath', 'full side two: side line, one align, breath');
+  ok(P({ level: 'full', side: 1, hold: 40 }).ids[0] === 'common.switch_sides', 'full side two starts with the switch line when not yet announced');
+  const longHold = P({ level: 'full', hold: 180 });
+  ok(longHold.ids.filter((i) => i === 'common.breathe_slow').length >= 2, 'long hold: breath reminders about every 30 s');
+  ok(longHold.events.filter((e) => e.items[0].id === 'common.breathe_slow').every((e) => e.t % 30 === 0), 'reminders on the 30 s grid');
+  ok(!P({ level: 'full', hold: 30 }).ids.includes('common.breathe_slow'), 'no reminders in short holds');
+  // ru/en keep the existing behaviour
+  for (const l of ['ru', 'en']) {
+    const o = { lang: l, lvl: 0, poseId: 'mountain', hold: 30, side: 0, sides: 1 };
+    ok(P({ ...o, level: 'full' }).ids.join() === ['pose.mountain.intro', ...cueIds('mountain'), 'common.breathe_in', 'common.breathe_out'].join(), `${l} full = intro + all cues + mid breath`);
+    ok(P({ ...o, level: 'short' }).ids.join() === ['pose.mountain.intro', ...cueIds('mountain').slice(0, 2)].join(), `${l} short = intro + 2 cues`);
+    ok(P({ ...o, level: 'name' }).ids.join() === 'pose.mountain.intro', `${l} name = name only`);
+    ok(P({ ...o, level: 'off' }).ids.length === 0, `${l} off = silent`);
+  }
+  // events are time ordered and inside the hold
+  for (const lvl of ['full', 'short']) {
+    const e = P({ level: lvl, hold: 40 }).events;
+    ok(e.every((x, i) => i === 0 || e[i - 1].t <= x.t) && e.every((x) => x.t >= 0 && x.t < 40), `${lvl} events ordered and inside the hold`);
+  }
+
+  // budget rule: speech <= 65% of the hold in every generated plan (or only the never-dropped segments remain)
+  const never = (id, lvl) => /\.intro$/.test(id) || id.endsWith('.entry.1') || id.endsWith(`.mod.L${lvl}`) || id.endsWith('.side') || id === 'common.switch_sides';
+  const plans = [];
+  for (const m of LENGTHS) for (const f of FOCUSES) for (const g of GEN_LEVELS) plans.push([`gen ${m}/${f}/${g}`, generatePlan({ minutes: m, focus: f, level: g })]);
+  for (const pr of ALL_PRESETS) plans.push([`preset ${pr.id || pr.name?.en}`, pr]);
+  let slotsChecked = 0, tight = 0;
+  for (const [name, pl] of plans) {
+    const list = slots(pl.items);
+    for (const mult of [0.75, 1, 1.5]) list.forEach((s, i) => {
+      const hold = Math.max(5, Math.round(s.hold * mult));
+      const last = s.pose.id === 'savasana' && i === list.length - 1;
+      for (const lvl of ['full', 'short']) {
+        const r = NP.slotPlan({ lang: 'he', level: lvl, poseId: s.pose.id, side: s.side, sides: s.sides, hold, lvl: s.level, dur, announced: s.side === 1, lastSavasana: last, minutes: 20 });
+        slotsChecked++;
+        if (last) { // closing replaces savasana align/mod and fits the hold
+          ok(!r.ids.some((x) => /savasana\.(align|mod)/.test(x)), `${name} savasana closing replaces align/mod (${lvl})`);
+          if (hold >= 60) ok(r.ids.includes('session.close.line') && r.ids.includes('session.close.out.1'), `${name} savasana closing out lines present (${lvl}, hold ${hold})`);
+          continue;
+        }
+        const budget = NP.BUDGET * hold;
+        if (r.speech <= budget + 1e-9) continue;
+        tight++;
+        ok(r.ids.every((x) => never(x, s.level)), `${name} ${s.pose.id} hold ${hold} ${lvl}: speech ${r.speech.toFixed(1)} > ${budget.toFixed(1)} yet droppable ids remain: ${r.ids.join()}`);
+      }
+    });
+  }
+  ok(slotsChecked > 1000, `budget simulation covered ${slotsChecked} slots`);
+  // drop order: later aligns go first, then the breath line; never entry.1 / mod
+  const tight1 = NP.slotPlan({ ...base, level: 'full', hold: 28, lvl: 1, poseId: 'tree' });
+  ok(!tight1.ids.includes('pose.tree.align.2') || tight1.ids.includes('pose.tree.align.1'), 'drop order: align.2 never kept without align.1');
+  ok(tight1.ids.includes('pose.tree.entry.1') && tight1.ids.includes('pose.tree.mod.L1'), 'never drop entry.1 or mod');
+  const mid = NP.slotPlan({ ...base, level: 'full', hold: 40, lvl: 0, poseId: 'warrior-2', side: 0 });
+  ok(mid.speech <= 0.65 * 40 || mid.ids.every((x) => never(x, 0)), 'warrior-2 hold 40 within budget');
+  // real durations override the estimate
+  const r2 = NP.slotPlan({ ...base, level: 'full', hold: 40, dur: () => 20 });
+  ok(r2.ids.length <= 4 && r2.ids.includes('pose.tree.entry.1') && r2.ids.includes('pose.tree.mod.L0'), 'very long real clips drop everything droppable');
+
+  // savasana: closing variants by plan length, replaces align/mod, fits the hold
+  const sv = (o) => NP.slotPlan({ lang: 'he', level: 'full', poseId: 'savasana', side: 0, sides: 1, hold: 165, lvl: 0, dur, announced: false, lastSavasana: true, minutes: 20, ...o });
+  ok(sv({ hold: 220, minutes: 30 }).ids.includes('session.close.scan.lite') && sv({ hold: 220, minutes: 30 }).ids.includes('session.close.scan.3'), 'savasana 30 min: long closing');
+  ok(sv({ minutes: 20 }).ids.includes('session.close.scan.2') && !sv({ minutes: 20 }).ids.includes('session.close.scan.3'), 'savasana 20 min: medium closing');
+  ok(!sv({ hold: 60, minutes: 10 }).ids.some((x) => x.includes('.scan.')) && sv({ hold: 60, minutes: 10 }).ids.includes('session.close.enter'), 'savasana 10 min: short closing');
+  ok(sv({ level: 'short', minutes: 30 }).ids.join() === 'pose.savasana.intro,pose.savasana.entry.1,session.close.enter,session.close.out.1,session.close.out.2,session.close.line', 'short level savasana closing');
+  ok(sv({ level: 'name' }).ids.join() === 'pose.savasana.intro,common.savasana_end', 'name level savasana: name + savasana_end');
+  ok(sv({ level: 'off' }).ids.length === 0, 'off level savasana silent');
+  ok(sv({}).ids.indexOf('session.close.out.1') > sv({}).ids.indexOf('session.close.enter'), 'closing: enter before out');
+  for (const h of [60, 90, 120, 165, 225, 300]) for (const m of [10, 20, 30]) {
+    const r = sv({ hold: h, minutes: m });
+    const lastEv = r.events[r.events.length - 1];
+    ok(lastEv.t + lastEv.items.reduce((a, x) => a + dur(x.id) + x.pause, 0) <= h + 1e-6, `savasana closing finishes inside hold ${h}/${m}min`);
+  }
+  ok(NP.closingPlays({ lang: 'he', level: 'full', lastSavasana: true }) && !NP.closingPlays({ lang: 'he', level: 'name', lastSavasana: true }) && !NP.closingPlays({ lang: 'ru', level: 'full', lastSavasana: true }), 'closingPlays');
+  ok(Object.keys(CLOSE_VARIANTS).join() === 'short,medium,long', 'closing variants present');
+
+  // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
+  const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
+  const v2s = script.filter((s) => s.v2);
+  ok(v2s.length === 375 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 375 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 233 * 3, 'narration-script.json legacy entries unchanged (233 x 3)');
+  const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
+  ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
+  ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');
+  ok(script.every((s) => !s.v2 || (s.lang === 'he')), 'no ru/en v2 segments queued');
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

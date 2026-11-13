@@ -105,13 +105,19 @@ def plan_rank():
             rank.setdefault(m.group(1), len(rank))
     return rank
 
+V2_PRIO = {'intro': 0, 'close': 1, 'beginner': 2, 'rest': 3}
+
 def priority(seg, rank):
+    """Hebrew v2 segments first (intro -> close -> beginner-plan poses -> rest), then the old order (common, names, plan poses, rest)."""
     i = seg['id']; lang = LANG_ORDER.index(seg['lang']) if seg['lang'] in LANG_ORDER else 9
     m = re.match(r'pose\.([^.]+)\.(\w+)', i)
-    if i.startswith('common.'): tier, sub = 0, 0
-    elif m and m[2] == 'name': tier, sub = 1, rank.get(m[1], 9999)
-    elif m and m[1] in rank: tier, sub = 2, rank[m[1]]
-    else: tier, sub = 3, 0
+    if seg.get('v2'):
+        pr = V2_PRIO.get(seg.get('prio'), 3)
+        return (pr, 0, rank.get(m[1], 9999) if m else 0, 0)  # 0: stable sort keeps script (play) order inside a group
+    if i.startswith('common.'): tier, sub = 4, 0
+    elif m and m[2] == 'name': tier, sub = 5, rank.get(m[1], 9999)
+    elif m and m[1] in rank: tier, sub = 6, rank[m[1]]
+    else: tier, sub = 7, 0
     return (tier, lang, sub, i)
 
 def update_manifest(state):

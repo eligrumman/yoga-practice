@@ -31,7 +31,7 @@ export const POSITIONS = SEQ.map(([n]) => n);
 export const POSITION = {}; const SEQ_RANK = {};
 SEQ.forEach(([name, ids]) => ids.forEach((id) => { POSITION[id] = name; SEQ_RANK[id] = Object.keys(SEQ_RANK).length; }));
 // easy two-sided/standing poses a beginner may meet in the first weeks (beyond difficulty 1), to fill time without longer holds
-const BEGINNER_EXTRA = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
+export const BEGINNER_EXTRA = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
 export const CATCOW_CYCLES = 3, CATCOW_BREATHS = 3;
 const NAMES = {
   general: { he: 'תכנית ראשונה', ru: 'Первая практика', en: 'First-time plan' },

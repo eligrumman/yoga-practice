@@ -7,6 +7,7 @@ import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
 import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
 import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
+import { NARR_LEVELS } from './narration-plan.js';
 import { Player } from './player.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
@@ -129,7 +130,7 @@ function settingsSection() {
   return el('section', { class: 'card settings' }, el('h2', {}, T('pace')),
     el('label', { class: 'row' }, el('span', {}, T('holdMult')), sel([[0.75, '0.75×'], [1, '1×'], [1.5, '1.5×']], s.holdMult, (v) => store.saveSettings({ holdMult: +v }))),
     el('label', { class: 'row' }, el('span', {}, T('transition')), sel([[3, '3 ' + T('sec')], [5, '5 ' + T('sec')], [8, '8 ' + T('sec')]], s.transition, (v) => store.saveSettings({ transition: +v }))),
-    el('label', { class: 'row' }, el('span', {}, T('density')), sel(['minimal', 'standard', 'full'].map((d) => [d, T('dens', d)]), s.density, (v) => store.saveSettings({ density: v }))),
+    el('label', { class: 'row' }, el('span', {}, T('narration')), sel(NARR_LEVELS.map((d) => [d, T('narrLvl', d)]), s.narration, (v) => store.saveSettings({ narration: v }))),
     el('label', { class: 'row' }, el('span', {}, T('narrLang')), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], s.narrLang, (v) => { store.saveSettings({ narrLang: v }); applyNarr(); })));
 }
 

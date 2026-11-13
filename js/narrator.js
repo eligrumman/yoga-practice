@@ -1,5 +1,6 @@
 // Narrator: pre-generated mp3 (audio/<lang>/<id>.mp3 via audio/manifest.json) -> speechSynthesis -> captions only.
 import { segText } from '../data/narration.js';
+import { estDur } from './narration-plan.js';
 
 const LOCALE = { he: ['he-IL', 'he'], ru: ['ru-RU', 'ru'], en: ['en-US', 'en-GB', 'en'] };
 
@@ -11,6 +12,7 @@ export class Narrator {
     this.queue = []; this.busy = false; this.paused = false; this.current = null; this.gen = 0;
     this.spoken = []; // test hook: [{id, lang, via}]
     this.voices = [];
+    this.durCache = new Map(); // `${lang}/${id}` -> real mp3 duration (s), filled from HTMLAudioElement metadata
     if ('speechSynthesis' in window) {
       const load = () => { this.voices = speechSynthesis.getVoices(); };
       load(); try { speechSynthesis.addEventListener('voiceschanged', load); } catch { /* old browsers */ }
@@ -33,11 +35,32 @@ export class Narrator {
   }
   hasVoice(lang = this.lang) { return !!this.pickVoice(lang); }
   // ids: array of segment ids spoken one after another (composite announcements)
+  // entries: 'id' | {id, pause (s of silence after the clip)} | function (called when reached, e.g. end of the intro)
   say(ids, { flush = false } = {}) {
     if (!Array.isArray(ids)) ids = [ids];
     if (flush) this.cancel();
     this.queue.push(...ids);
     this.pump();
+  }
+  // Clip length: real mp3 duration when known, else the estimate (2.3 s + 0.65 s/word)
+  dur(id) {
+    const real = this.durCache.get(`${this.lang}/${id}`);
+    return real || estDur(segText(id, this.lang));
+  }
+  // Read mp3 metadata for ids that exist as audio; resolves when all are known or after maxMs.
+  preload(ids, maxMs = 0) {
+    const lang = this.lang;
+    const jobs = ids.filter((id) => this.manifest.has(`${lang}/${id}`) && !this.durCache.has(`${lang}/${id}`)).map((id) => new Promise((res) => {
+      try {
+        const a = new Audio(); a.preload = 'metadata';
+        a.onloadedmetadata = () => { if (Number.isFinite(a.duration) && a.duration > 0) this.durCache.set(`${lang}/${id}`, a.duration); res(); };
+        a.onerror = () => res();
+        a.src = `audio/${lang}/${id}.mp3`;
+      } catch { res(); }
+    }));
+    if (!jobs.length) return Promise.resolve();
+    const all = Promise.all(jobs);
+    return maxMs ? Promise.race([all, new Promise((r) => setTimeout(r, maxMs))]) : all;
   }
   cancel() {
     this.gen++; this.queue = []; this.busy = false; this.current = null;
@@ -57,8 +80,11 @@ export class Narrator {
   }
   async pump() {
     if (this.busy || this.paused) return;
-    const id = this.queue.shift();
+    let id = this.queue.shift();
     if (!id) return;
+    if (typeof id === 'function') { try { id(); } catch { /* callback error */ } return this.pump(); }
+    let pause = 0;
+    if (typeof id === 'object') { pause = id.pause || 0; id = id.id; }
     this.busy = true; const g = this.gen;
     const text = segText(id, this.lang);
     if (!text) { this.busy = false; return this.pump(); }
@@ -66,6 +92,7 @@ export class Narrator {
     if (this.mute) { await new Promise((r) => setTimeout(r, Math.min(4000, 400 + text.length * 45))); }
     else await this.speak(id, text, g);
     if (g !== this.gen) return;
+    if (pause > 0) { await new Promise((r) => setTimeout(r, pause * 1000)); if (g !== this.gen) return; }
     this.busy = false;
     this.pump();
   }

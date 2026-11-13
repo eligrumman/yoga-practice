@@ -3493,5 +3493,2630 @@
   "id": "pose.savasana.cue.4",
   "lang": "en",
   "text": "Let the breath return to its natural rhythm."
+ },
+ {
+  "id": "session.intro.arrive",
+  "lang": "he",
+  "text": "ברוכים הבאים. מצאו תנוחה נוחה והניחו לגוף להתיישב.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.breath",
+  "lang": "he",
+  "text": "שאפו עמוק דרך האף, ונשפו לאט.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.breath2",
+  "lang": "he",
+  "text": "עוד נשימה אחת, ובנשיפה הניחו לכתפיים לרדת.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.safety",
+  "lang": "he",
+  "text": "התרגול הזה אינו ייעוץ רפואי. זוזו רק בתוך מה שנוח לכם, ואם מופיע כאב, הקלו או עצרו.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.props",
+  "lang": "he",
+  "text": "אם יש לכם בלוק, רצועה, כרית או שמיכה, הניחו אותם קרוב. אפשר גם בלעדיהם.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.intention",
+  "lang": "he",
+  "text": "אם תרצו, בחרו כוונה פשוטה לתרגול, מילה אחת או תחושה אחת.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.intention2",
+  "lang": "he",
+  "text": "אולי רוגע, אולי יציבות. אין תשובה נכונה.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.intro.start",
+  "lang": "he",
+  "text": "בואו נתחיל.",
+  "v2": true,
+  "prio": "intro"
+ },
+ {
+  "id": "session.close.enter",
+  "lang": "he",
+  "text": "עכשיו זה זמן מנוחה. אין מה לעשות ואין לאן ללכת.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.scan.1",
+  "lang": "he",
+  "text": "הרגישו את כפות הרגליים והרגליים, והניחו להן להיות כבדות.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.scan.2",
+  "lang": "he",
+  "text": "הרגישו את הגב, הבטן והחזה, ותנו להם להתרכך עם הנשימה.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.scan.3",
+  "lang": "he",
+  "text": "הרפו את הידיים, הכתפיים והפנים.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.scan.lite",
+  "lang": "he",
+  "text": "הרגישו את כל הגוף נח על הרצפה, וההרפיה מתפשטת.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.out.1",
+  "lang": "he",
+  "text": "העמיקו לאט את הנשימה. הניעו את האצבעות בידיים וברגליים.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.out.2",
+  "lang": "he",
+  "text": "כשתהיו מוכנים, התגלגלו על הצד ועלו לאט לישיבה.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "session.close.line",
+  "lang": "he",
+  "text": "תודה שתרגלתם. קחו איתכם את השקט הזה להמשך היום.",
+  "v2": true,
+  "prio": "close"
+ },
+ {
+  "id": "pose.tabletop.entry.1",
+  "lang": "he",
+  "text": "בואו אל ארבע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.entry.2",
+  "lang": "he",
+  "text": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.align.1",
+  "lang": "he",
+  "text": "הפיצו את האצבעות ולחצו בעדינות אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.align.2",
+  "lang": "he",
+  "text": "גב ארוך ונייטרלי, מבט אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.breath",
+  "lang": "he",
+  "text": "נשמו לאט אל הבטן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, רדו אל האמות או הניחו שמיכה מתחת לברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.mod.L1",
+  "lang": "he",
+  "text": "הישארו בשולחן יציב על כפות הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הושיטו יד אחת קדימה ורגל נגדית לאחור.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tabletop.exit",
+  "lang": "he",
+  "text": "כשתהיו מוכנים, שחררו לאט וחזרו לשולחן רגוע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.entry.1",
+  "lang": "he",
+  "text": "בואו אל ארבע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.entry.2",
+  "lang": "he",
+  "text": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.align.1",
+  "lang": "he",
+  "text": "בשאיפה הורידו את הבטן והרימו את החזה, פרה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.align.2",
+  "lang": "he",
+  "text": "בנשיפה עגלו את הגב אל התקרה, חתול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.breath",
+  "lang": "he",
+  "text": "תנועה אחת לכל נשימה, לאט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הקטינו את התנועה והניחו שמיכה מתחת לברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.mod.L1",
+  "lang": "he",
+  "text": "זרמו בתנועה מלאה עם הנשימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו קצת והרימו מעט את המבט בפרה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat-cow.exit",
+  "lang": "he",
+  "text": "עצרו באמצע, גב ארוך, ונשמו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.entry.1",
+  "lang": "he",
+  "text": "בואו אל ארבע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.entry.2",
+  "lang": "he",
+  "text": "ידיים מתחת לכתפיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.align.1",
+  "lang": "he",
+  "text": "הכניסו את הסנטר והשעינו את האגן קלות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.align.2",
+  "lang": "he",
+  "text": "דחפו את הרצפה והרחיקו את השכמות זו מזו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.breath",
+  "lang": "he",
+  "text": "בכל נשיפה עגלו מעט יותר, בלי לכפות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, שמרו על תנועה קטנה ונעימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.mod.L1",
+  "lang": "he",
+  "text": "עגלו את הגב עיגול מלא.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו וכווצו את הבטן פנימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cat.exit",
+  "lang": "he",
+  "text": "בשאיפה חזרו לגב ארוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.entry.1",
+  "lang": "he",
+  "text": "בואו אל ארבע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.entry.2",
+  "lang": "he",
+  "text": "ידיים מתחת לכתפיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.align.1",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.align.2",
+  "lang": "he",
+  "text": "מבט קדימה או מעט למעלה, בלי להכביד על הצוואר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.breath",
+  "lang": "he",
+  "text": "בכל שאיפה פתחו מעט את החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, עשו קשת קטנה והשאירו את המבט למטה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.mod.L1",
+  "lang": "he",
+  "text": "פתחו את החזה בקשת נינוחה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הקשת והרימו את המבט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cow.exit",
+  "lang": "he",
+  "text": "בנשיפה חזרו לגב ארוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.entry.1",
+  "lang": "he",
+  "text": "עמדו עם כפות רגליים ברוחב האגן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.entry.2",
+  "lang": "he",
+  "text": "בשאיפה הרימו את הידיים לצדדים ולמעלה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.align.1",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.align.2",
+  "lang": "he",
+  "text": "אורך בעמוד השדרה, ברכיים רכות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.breath",
+  "lang": "he",
+  "text": "נשמו רגוע ועמוק.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הרימו את הידיים באלכסון, לא גבוה מדי.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.mod.L1",
+  "lang": "he",
+  "text": "הרימו את הידיים לאורך האוזניים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הוסיפו קשת עדינה לאחור ועלו על קצות האצבעות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-salute.exit",
+  "lang": "he",
+  "text": "בנשיפה הורידו את הידיים לצדדים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.entry.1",
+  "lang": "he",
+  "text": "עמדו עם כפות רגליים ברוחב האגן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.entry.2",
+  "lang": "he",
+  "text": "לחצו בעדינות את כפות הרגליים אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.align.1",
+  "lang": "he",
+  "text": "ברכיים רכות, לא נעולות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.align.2",
+  "lang": "he",
+  "text": "אורך בעמוד השדרה, כתפיים רפויות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.breath",
+  "lang": "he",
+  "text": "נשמו עמוק ורגיעו את הלסת.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, השאירו ברכיים רכות וידיים רפויות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.mod.L1",
+  "lang": "he",
+  "text": "עמדו זקופים ויציבים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, חברו כפות ידיים בחזה ועלו על קצות האצבעות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.mountain.exit",
+  "lang": "he",
+  "text": "כשתהיו מוכנים, שחררו את הידיים והרגישו את הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.entry.1",
+  "lang": "he",
+  "text": "כופפו את הברכיים כאילו אתם יושבים אחורה על כיסא.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.entry.2",
+  "lang": "he",
+  "text": "הרימו את הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.align.1",
+  "lang": "he",
+  "text": "הברכיים מעל הקרסוליים, המשקל בעקבים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.align.2",
+  "lang": "he",
+  "text": "אורך בגב, הבטן קצת פנימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.breath",
+  "lang": "he",
+  "text": "נשמו לאט וקבוע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו מעט וידיים קדימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.mod.L1",
+  "lang": "he",
+  "text": "כיפוף בינוני וידיים מעל הראש.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיפוף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.chair.exit",
+  "lang": "he",
+  "text": "דחפו דרך העקבים וחזרו לעמידה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.entry.1",
+  "lang": "he",
+  "text": "פסעו אחורה ברגל אחת, רחב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.entry.2",
+  "lang": "he",
+  "text": "כופפו את הברך הקדמית מעל הקרסול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.entry.3",
+  "lang": "he",
+  "text": "הרימו את הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.align.1",
+  "lang": "he",
+  "text": "הרגל האחורית ישרה, העקב לוחץ למטה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.align.2",
+  "lang": "he",
+  "text": "כוונו את האגן קדימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.align.3",
+  "lang": "he",
+  "text": "אורך בגוף, הכתפיים רפויות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.breath",
+  "lang": "he",
+  "text": "נשמו רגוע, ועם כל שאיפה התארכו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, קצרו את הצעד והשאירו את כף הרגל האחורית שטוחה ופונה החוצה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.mod.L1",
+  "lang": "he",
+  "text": "צעד רחב עם ידיים למעלה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיפוף ופתחו מעט את החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.exit",
+  "lang": "he",
+  "text": "דחפו את הרצפה וחזרו לעמידה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-1.side",
+  "lang": "he",
+  "text": "צד שני. פסעו אחורה ברגל השנייה והרימו ידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.entry.1",
+  "lang": "he",
+  "text": "פסעו הצידה, רחב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.entry.2",
+  "lang": "he",
+  "text": "כופפו את הברך הקדמית מעל הקרסול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.entry.3",
+  "lang": "he",
+  "text": "פשטו את הידיים לצדדים בגובה הכתפיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.align.1",
+  "lang": "he",
+  "text": "הגוף זקוף, האגן במרכז בין הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.align.2",
+  "lang": "he",
+  "text": "הברך הקדמית עוקבת אחרי האצבעות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.align.3",
+  "lang": "he",
+  "text": "המבט מעל היד הקדמית.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.breath",
+  "lang": "he",
+  "text": "נשמו עמוק, הכתפיים רפויות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, קצרו את הצעד וכופפו עדין.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.mod.L1",
+  "lang": "he",
+  "text": "צעד רחב וידיים ישרות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיפוף עד שהירך כמעט מקבילה לרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.exit",
+  "lang": "he",
+  "text": "ישרו את הברך והורידו את הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-2.side",
+  "lang": "he",
+  "text": "צד שני. פנו לצד השני וכופפו את הברך הקדמית.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.entry.1",
+  "lang": "he",
+  "text": "פסעו קדימה ברגל אחת, רחב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.entry.2",
+  "lang": "he",
+  "text": "העקב האחורי מורם.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.entry.3",
+  "lang": "he",
+  "text": "הרימו את הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.align.1",
+  "lang": "he",
+  "text": "הברך הקדמית מעל הקרסול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.align.2",
+  "lang": "he",
+  "text": "הרגל האחורית פעילה וישרה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.align.3",
+  "lang": "he",
+  "text": "אורך בגוף, האגן ישר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.breath",
+  "lang": "he",
+  "text": "נשמו רגוע וקבוע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, קצרו את הצעד והישענו מעט קדימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.mod.L1",
+  "lang": "he",
+  "text": "ידיים למעלה ורגל אחורית ישרה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיפוף והוסיפו קשת קלה לאחור.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.exit",
+  "lang": "he",
+  "text": "הורידו את הידיים וחזרו לעמידה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.high-lunge.side",
+  "lang": "he",
+  "text": "צד שני. פסעו קדימה ברגל השנייה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.tree.entry.1",
+  "lang": "he",
+  "text": "העבירו את המשקל לרגל אחת.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.entry.2",
+  "lang": "he",
+  "text": "הניחו את כף הרגל השנייה על השוק או הירך, לעולם לא על הברך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.align.1",
+  "lang": "he",
+  "text": "לחצו את רגל העמידה אל הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.align.2",
+  "lang": "he",
+  "text": "קבעו מבט בנקודה אחת לפניכם.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.breath",
+  "lang": "he",
+  "text": "חברו כפות ידיים בחזה ונשמו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, השאירו את קצה כף הרגל על הרצפה ליד הקרסול.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.mod.L1",
+  "lang": "he",
+  "text": "כף הרגל על השוק וידיים בחזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, כף הרגל על הירך וידיים למעלה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.exit",
+  "lang": "he",
+  "text": "שחררו לאט את כף הרגל חזרה לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.tree.side",
+  "lang": "he",
+  "text": "צד שני. העבירו משקל לרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.entry.1",
+  "lang": "he",
+  "text": "הישענו קדימה והרימו רגל אחת לאחור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.entry.2",
+  "lang": "he",
+  "text": "פשטו את הידיים קדימה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.align.1",
+  "lang": "he",
+  "text": "קו אחד ארוך מהראש ועד העקב.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.align.2",
+  "lang": "he",
+  "text": "ברך העמידה רכה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.align.3",
+  "lang": "he",
+  "text": "מבט אל הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.breath",
+  "lang": "he",
+  "text": "נשמו לאט, בלי לעצור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, שימו ידיים במותניים והשאירו את הרגל נמוכה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.mod.L1",
+  "lang": "he",
+  "text": "הגוף מקביל לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו את הרגל גבוה יותר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.exit",
+  "lang": "he",
+  "text": "הורידו את הרגל לאט וחזרו לעמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-3.side",
+  "lang": "he",
+  "text": "צד שני. עמדו על הרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.entry.1",
+  "lang": "he",
+  "text": "עמדו על רגל אחת.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.entry.2",
+  "lang": "he",
+  "text": "אחזו בקרסול הנגדי מאחור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.align.1",
+  "lang": "he",
+  "text": "לחצו את כף הרגל אל היד כשהחזה נפתח.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.align.2",
+  "lang": "he",
+  "text": "הושיטו את היד השנייה קדימה לשיווי משקל.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.align.3",
+  "lang": "he",
+  "text": "מבט קבוע בנקודה אחת.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.breath",
+  "lang": "he",
+  "text": "נשמו לאט ועמוק.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הישארו זקופים במתיחת ירך בעמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.mod.L1",
+  "lang": "he",
+  "text": "הרימו את הרגל לאחור והישענו מעט קדימה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את ההישענות והרימו את הרגל גבוה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.exit",
+  "lang": "he",
+  "text": "שחררו את הרגל לאט וחזרו לעמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.dancer.side",
+  "lang": "he",
+  "text": "צד שני. עמדו על הרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.uttanasana.entry.1",
+  "lang": "he",
+  "text": "התקפלו קדימה מהירכיים, לא מהגב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.entry.2",
+  "lang": "he",
+  "text": "כופפו את הברכיים כמה שצריך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.align.1",
+  "lang": "he",
+  "text": "הניחו לראש ולצוואר להיות כבדים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.align.2",
+  "lang": "he",
+  "text": "הידיים רפויות או אוחזות במרפקים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.breath",
+  "lang": "he",
+  "text": "בכל נשיפה הניחו לגוף להתרכך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים והניחו ידיים על השוקיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.mod.L1",
+  "lang": "he",
+  "text": "רגליים ישרות וידיים לכיוון הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, אחזו בבהונות וקרבו את החזה לירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.uttanasana.exit",
+  "lang": "he",
+  "text": "עלו לאט, חוליה אחר חוליה, וראש אחרון.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.entry.1",
+  "lang": "he",
+  "text": "מהקיפול, בשאיפה הניחו ידיים על השוקיים או הירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.entry.2",
+  "lang": "he",
+  "text": "הארכו את הגב קדימה עד שהוא שטוח.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.align.1",
+  "lang": "he",
+  "text": "צוואר ארוך, מבט אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.align.2",
+  "lang": "he",
+  "text": "הרגישו את עמוד השדרה מתארך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.breath",
+  "lang": "he",
+  "text": "בכל שאיפה התארכו עוד קצת.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים והניחו ידיים על הירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.mod.L1",
+  "lang": "he",
+  "text": "גב שטוח וידיים על השוקיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הניחו את קצות האצבעות על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-lift.exit",
+  "lang": "he",
+  "text": "בנשיפה התקפלו חזרה פנימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.revolved-chair.entry.1",
+  "lang": "he",
+  "text": "מתנוחת הכיסא, חברו כפות ידיים בחזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.entry.2",
+  "lang": "he",
+  "text": "סובבו את החזה לצד אחד.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.align.1",
+  "lang": "he",
+  "text": "הסיבוב בא מהחזה, לא מהצוואר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.align.2",
+  "lang": "he",
+  "text": "הברכיים נשארות קרובות זו לזו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.align.3",
+  "lang": "he",
+  "text": "פתחו את הכתפיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.breath",
+  "lang": "he",
+  "text": "בשאיפה התארכו, בנשיפה סובבו קצת יותר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו פחות והשאירו כפות ידיים בחזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.mod.L1",
+  "lang": "he",
+  "text": "המרפק מחוץ לירך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיסא והרחיבו את הסיבוב.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.exit",
+  "lang": "he",
+  "text": "חזרו למרכז וקומו לעמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.revolved-chair.side",
+  "lang": "he",
+  "text": "צד שני. סובבו לצד השני.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.downward-dog.entry.1",
+  "lang": "he",
+  "text": "מהשולחן, הרימו את האגן למעלה ואחורה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.align.1",
+  "lang": "he",
+  "text": "לחצו את כפות הידיים והאריכו את עמוד השדרה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.align.2",
+  "lang": "he",
+  "text": "הרפו את הראש והצוואר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.breath",
+  "lang": "he",
+  "text": "נשמו לאט, הרגישו את הגב מתארך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים ותנו לעקבים להיות באוויר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.mod.L1",
+  "lang": "he",
+  "text": "רגליים כמעט ישרות והאגן גבוה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הורידו את העקבים לכיוון הרצפה ופתחו כתפיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.downward-dog.exit",
+  "lang": "he",
+  "text": "כופפו ברכיים והורידו אותן לרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.plank.entry.1",
+  "lang": "he",
+  "text": "כפות ידיים מתחת לכתפיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.entry.2",
+  "lang": "he",
+  "text": "גוף בקו אחד.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.align.1",
+  "lang": "he",
+  "text": "כווצו את הבטן, האגן לא צונח.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.align.2",
+  "lang": "he",
+  "text": "דחפו את הרצפה והאריכו את העקבים לאחור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.breath",
+  "lang": "he",
+  "text": "נשימות קצרות ויציבות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, רדו אל הברכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.mod.L1",
+  "lang": "he",
+  "text": "קרש מלא על קצות האצבעות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו רגל אחת לאחור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.plank.exit",
+  "lang": "he",
+  "text": "הורידו את הברכיים ונוחו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.cobra.entry.1",
+  "lang": "he",
+  "text": "שכבו על הבטן, כפות ידיים מתחת לכתפיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.entry.2",
+  "lang": "he",
+  "text": "בשאיפה הרימו את החזה בעדינות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.align.1",
+  "lang": "he",
+  "text": "המרפקים קרובים לגוף, הכתפיים רחוקות מהאוזניים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.align.2",
+  "lang": "he",
+  "text": "הרגליים נשארות על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.breath",
+  "lang": "he",
+  "text": "נשמו לאט, והניחו לחזה להיפתח.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הישארו על האמות עם חזה נמוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.mod.L1",
+  "lang": "he",
+  "text": "כפות ידיים לרצפה וחזה מורם.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו גבוה יותר עם זרועות ישרות יותר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobra.exit",
+  "lang": "he",
+  "text": "בנשיפה הורידו את החזה לאט אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.locust.entry.1",
+  "lang": "he",
+  "text": "שכבו על הבטן, ידיים לצדי הגוף.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.entry.2",
+  "lang": "he",
+  "text": "הרימו חזה ורגליים יחד.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.align.1",
+  "lang": "he",
+  "text": "הארכו מהראש ועד העקבים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.align.2",
+  "lang": "he",
+  "text": "הצוואר ארוך, בלי לדחוס אותו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.breath",
+  "lang": "he",
+  "text": "נשמו רגוע, ואז הורידו לאט.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הרימו רק את החזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.mod.L1",
+  "lang": "he",
+  "text": "הרימו חזה ורגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, פשטו ידיים קדימה והרימו גבוה יותר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.locust.exit",
+  "lang": "he",
+  "text": "הורידו לאט והניחו את הלחי על הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.entry.1",
+  "lang": "he",
+  "text": "עמדו על הברכיים, האגן מעל הברכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.entry.2",
+  "lang": "he",
+  "text": "הניחו ידיים על הגב התחתון.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.align.1",
+  "lang": "he",
+  "text": "הרימו את החזה ופתחו אותו אל התקרה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.align.2",
+  "lang": "he",
+  "text": "הראש והצוואר נינוחים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.breath",
+  "lang": "he",
+  "text": "נשמו לאט, ואל תעצרו נשימה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, השאירו ידיים על הגב התחתון וקשת קטנה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.mod.L1",
+  "lang": "he",
+  "text": "קשת בינונית וידיים לכיוון העקבים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הקשת והטו את המבט לאחור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.camel.exit",
+  "lang": "he",
+  "text": "בשאיפה הרימו את החזה וחזרו לזקוף.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.bridge.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.entry.2",
+  "lang": "he",
+  "text": "לחצו את כפות הרגליים והרימו את האגן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.align.1",
+  "lang": "he",
+  "text": "הברכיים ברוחב האגן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.align.2",
+  "lang": "he",
+  "text": "הראש נשאר על הרצפה והצוואר רפוי.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.breath",
+  "lang": "he",
+  "text": "נשמו עמוק אל החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הרימו את האגן מעט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.mod.L1",
+  "lang": "he",
+  "text": "גשר יציב עם ידיים ליד הגוף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו גבוה יותר ולחצו את הידיים אל הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.bridge.exit",
+  "lang": "he",
+  "text": "הורידו לאט, חוליה אחר חוליה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.entry.1",
+  "lang": "he",
+  "text": "שבו לאחור על העקבים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.entry.2",
+  "lang": "he",
+  "text": "הניחו את החזה על הירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.align.1",
+  "lang": "he",
+  "text": "הושיטו ידיים קדימה והניחו אותן על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.align.2",
+  "lang": "he",
+  "text": "הניחו לכתפיים ולמצח להתרכך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.breath",
+  "lang": "he",
+  "text": "נשמו אל הגב התחתון.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הניחו כרית מתחת לאגן או השאירו ידיים לצדי הגוף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.mod.L1",
+  "lang": "he",
+  "text": "ידיים קדימה והמצח למטה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הורידו את האגן אל העקבים והרחיקו ידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.child.exit",
+  "lang": "he",
+  "text": "כשתהיו מוכנים, עלו לאט בגלגול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.entry.1",
+  "lang": "he",
+  "text": "מהשולחן, פסעו ברגל אחת קדימה בין הידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.entry.2",
+  "lang": "he",
+  "text": "הברך האחורית על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.align.1",
+  "lang": "he",
+  "text": "הברך הקדמית מעל הקרסול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.align.2",
+  "lang": "he",
+  "text": "הרימו את הגוף והרימו ידיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.align.3",
+  "lang": "he",
+  "text": "הניחו לאגן לשקוע קדימה בעדינות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.breath",
+  "lang": "he",
+  "text": "נשמו עמוק ורגוע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הניחו ידיים על בלוקים משני צדי הרגל.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.mod.L1",
+  "lang": "he",
+  "text": "ידיים למעלה וחזה פתוח.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הוסיפו קשת לאחור ושתי ידיים מעל הראש.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.exit",
+  "lang": "he",
+  "text": "החזירו ידיים לרצפה וחזרו לשולחן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.low-lunge.side",
+  "lang": "he",
+  "text": "צד שני. פסעו קדימה ברגל השנייה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.half-split.entry.1",
+  "lang": "he",
+  "text": "מכריעה, ישרו רגל אחת קדימה כשהעקב על הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.entry.2",
+  "lang": "he",
+  "text": "האגן מעל הברך האחורית.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.align.1",
+  "lang": "he",
+  "text": "הושיטו את הגב קדימה והניחו ידיים על הרגל או הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.align.2",
+  "lang": "he",
+  "text": "כופו את כף הרגל הקדמית אליכם.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.breath",
+  "lang": "he",
+  "text": "בכל נשיפה התרככו קצת יותר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הניחו ידיים על הירך והשאירו את הגב זקוף.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.mod.L1",
+  "lang": "he",
+  "text": "ידיים על בלוקים וגב ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הקיפול ואחזו בכף הרגל.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.exit",
+  "lang": "he",
+  "text": "כופפו את הברך וחזרו לכריעה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-split.side",
+  "lang": "he",
+  "text": "צד שני. ישרו את הרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.easy-seat.entry.1",
+  "lang": "he",
+  "text": "שבו בישיבה מוצלבת נוחה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.align.1",
+  "lang": "he",
+  "text": "הרימו את האגן מעל הברכיים אם צריך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.align.2",
+  "lang": "he",
+  "text": "אורך בעמוד השדרה, כתפיים רפויות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.breath",
+  "lang": "he",
+  "text": "אם נוח לכם, עצמו עיניים ונשמו לאט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, שבו על כרית וידיים על הברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.mod.L1",
+  "lang": "he",
+  "text": "שבו על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, חברו כפות ידיים בחזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.easy-seat.exit",
+  "lang": "he",
+  "text": "כשתהיו מוכנים, פתחו עיניים לאט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.entry.1",
+  "lang": "he",
+  "text": "שבו וחברו את כפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.entry.2",
+  "lang": "he",
+  "text": "הניחו לברכיים ליפול החוצה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.align.1",
+  "lang": "he",
+  "text": "אחזו בקרסוליים והאריכו את הגב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.align.2",
+  "lang": "he",
+  "text": "התקפלו קדימה מעט מהירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.breath",
+  "lang": "he",
+  "text": "בכל נשיפה התרככו קצת יותר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, שבו על כרית עם גב זקוף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.mod.L1",
+  "lang": "he",
+  "text": "קיפול קל קדימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הקיפול והמצח לכיוון כפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.cobbler.exit",
+  "lang": "he",
+  "text": "עלו לאט והניחו לברכיים להתקרב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.entry.1",
+  "lang": "he",
+  "text": "שבו עם רגליים ישרות לפניכם.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.entry.2",
+  "lang": "he",
+  "text": "בשאיפה התארכו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.align.1",
+  "lang": "he",
+  "text": "בנשיפה התקפלו מהירכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.align.2",
+  "lang": "he",
+  "text": "אחזו בשוקיים, בקרסוליים או ברצועה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.align.3",
+  "lang": "he",
+  "text": "הראש והצוואר רפויים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.breath",
+  "lang": "he",
+  "text": "נשמו לאט, ועם כל נשיפה התרככו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים והשתמשו ברצועה סביב כפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.mod.L1",
+  "lang": "he",
+  "text": "רגליים ישרות וידיים על השוקיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, קפלו עמוק יותר ואחזו בכפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-fold.exit",
+  "lang": "he",
+  "text": "עלו לאט בגב ארוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.entry.1",
+  "lang": "he",
+  "text": "שבו עם רגל אחת ישרה ורגל אחת כפופה, כף הרגל על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.entry.2",
+  "lang": "he",
+  "text": "בשאיפה התארכו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.align.1",
+  "lang": "he",
+  "text": "בנשיפה סובבו את החזה אל הברך המורמת.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.align.2",
+  "lang": "he",
+  "text": "הסיבוב בא מהחזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.align.3",
+  "lang": "he",
+  "text": "מבט רך מעל הכתף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.breath",
+  "lang": "he",
+  "text": "בכל שאיפה התארכו, בכל נשיפה סובבו קצת.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, שמרו על שתי הרגליים ישרות וסיבוב קל.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.mod.L1",
+  "lang": "he",
+  "text": "ברך מורמת ויד סביב הברך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הסיבוב וחבקו את הברך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.exit",
+  "lang": "he",
+  "text": "התירו את הסיבוב לאט וחזרו למרכז.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.seated-twist.side",
+  "lang": "he",
+  "text": "צד שני. החליפו רגליים וסובבו לצד השני.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.boat.entry.1",
+  "lang": "he",
+  "text": "שבו עם ברכיים כפופות והישענו מעט אחורה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.entry.2",
+  "lang": "he",
+  "text": "הרימו את כפות הרגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.align.1",
+  "lang": "he",
+  "text": "הגב ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.align.2",
+  "lang": "he",
+  "text": "הושיטו ידיים קדימה, מקבילות לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.align.3",
+  "lang": "he",
+  "text": "הבטן פעילה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.breath",
+  "lang": "he",
+  "text": "נשמו רגוע, בלי לעצור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, השאירו ידיים מאחורי הירכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.mod.L1",
+  "lang": "he",
+  "text": "שוקיים מקבילות לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, ישרו את הרגליים לצורת וי.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.boat.exit",
+  "lang": "he",
+  "text": "הורידו את כפות הרגליים לרצפה ונוחו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.knees-to-chest.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.entry.2",
+  "lang": "he",
+  "text": "קרבו את שתי הברכיים אל החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.align.1",
+  "lang": "he",
+  "text": "חבקו את הברכיים או את השוקיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.align.2",
+  "lang": "he",
+  "text": "הכתפיים והראש נחים על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.breath",
+  "lang": "he",
+  "text": "נשמו עמוק, ואפשר לנדנד בעדינות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, קרבו ברך אחת בכל פעם.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L1",
+  "lang": "he",
+  "text": "שתי ברכיים אל החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו גם את הראש לכיוון הברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.knees-to-chest.exit",
+  "lang": "he",
+  "text": "שחררו לאט והניחו את כפות הרגליים לרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.entry.2",
+  "lang": "he",
+  "text": "הורידו את שתי הברכיים לצד אחד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.align.1",
+  "lang": "he",
+  "text": "פתחו ידיים לצדדים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.align.2",
+  "lang": "he",
+  "text": "הכתפיים נשארות על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.align.3",
+  "lang": "he",
+  "text": "הפנו את המבט לצד השני.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.breath",
+  "lang": "he",
+  "text": "נשמו עמוק, והניחו לגוף להתרכך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, הניחו כרית מתחת לברכיים וסובבו מעט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.mod.L1",
+  "lang": "he",
+  "text": "שתי ברכיים לצד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, ישרו רגל אחת ואחזו בברך השנייה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.exit",
+  "lang": "he",
+  "text": "בשאיפה החזירו את הברכיים למרכז.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.supine-twist.side",
+  "lang": "he",
+  "text": "צד שני. הורידו את הברכיים לצד השני.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.entry.2",
+  "lang": "he",
+  "text": "קרבו את הברכיים אל בתי השחי.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.align.1",
+  "lang": "he",
+  "text": "אחזו בקצוות החיצוניים של כפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.align.2",
+  "lang": "he",
+  "text": "האגן והגב התחתון נחים על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.breath",
+  "lang": "he",
+  "text": "נשמו לאט, ואפשר לנדנד מצד לצד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, אחזו בשוקיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.mod.L1",
+  "lang": "he",
+  "text": "אחזו בקצוות כפות הרגליים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, פתחו את הברכיים רחב וקרבו אותן לצלעות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.happy-baby.exit",
+  "lang": "he",
+  "text": "שחררו את הרגליים לאט וחבקו את הברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב, ברכיים כפופות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.entry.2",
+  "lang": "he",
+  "text": "הניחו קרסול אחד על הירך הנגדית.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.align.1",
+  "lang": "he",
+  "text": "קרבו את רגל התמיכה אל החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.align.2",
+  "lang": "he",
+  "text": "לחצו בעדינות את הברך החיצונית הצידה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.breath",
+  "lang": "he",
+  "text": "בכל נשיפה שחררו קצת יותר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, השאירו את כף הרגל התחתונה על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.mod.L1",
+  "lang": "he",
+  "text": "הרימו את הרגל התחתונה וחבקו את הירך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, קרבו את הרגל עוד אל החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.exit",
+  "lang": "he",
+  "text": "שחררו לאט והניחו את כפות הרגליים לרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.figure-four.side",
+  "lang": "he",
+  "text": "צד שני. הצליבו את הקרסול השני.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.hand-to-toe.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.entry.2",
+  "lang": "he",
+  "text": "הרימו רגל אחת למעלה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.align.1",
+  "lang": "he",
+  "text": "הניחו רצועה סביב כף הרגל.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.align.2",
+  "lang": "he",
+  "text": "הרגל השנייה פעילה על הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.align.3",
+  "lang": "he",
+  "text": "הגב לא מתעגל.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.breath",
+  "lang": "he",
+  "text": "משכו קלות ונשמו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו מעט את הברך המורמת והשתמשו ברצועה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L1",
+  "lang": "he",
+  "text": "רגל ישרה עם רצועה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, קרבו את הרגל לפנים ואחזו בבוהן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.exit",
+  "lang": "he",
+  "text": "כופפו את הברך והורידו את כף הרגל לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.hand-to-toe.side",
+  "lang": "he",
+  "text": "צד שני. הרימו את הרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.legs-up-wall.entry.1",
+  "lang": "he",
+  "text": "שבו ליד הקיר ושכבו לאחור.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.entry.2",
+  "lang": "he",
+  "text": "הניחו את הרגליים על הקיר, האגן קרוב אליו.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.align.1",
+  "lang": "he",
+  "text": "ידיים רפויות לצדדים, כפות ידיים כלפי מעלה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.align.2",
+  "lang": "he",
+  "text": "הניחו לצוואר ולכתפיים להתרכך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.breath",
+  "lang": "he",
+  "text": "אם נוח לכם, עצמו עיניים ונשמו לאט.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים על הקיר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L1",
+  "lang": "he",
+  "text": "רגליים ישרות על הקיר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הניחו ידיים מעל הראש ופתחו את החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.legs-up-wall.exit",
+  "lang": "he",
+  "text": "כופפו ברכיים, התגלגלו לצד והישארו רגע.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.entry.1",
+  "lang": "he",
+  "text": "שכבו על הגב ופרשו את הרגליים קלות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.entry.2",
+  "lang": "he",
+  "text": "ידיים לצדדים, כפות ידיים כלפי מעלה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.align.1",
+  "lang": "he",
+  "text": "הרפו את הפנים, הלסת והבטן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.align.2",
+  "lang": "he",
+  "text": "הניחו לגוף להיות כבד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.breath",
+  "lang": "he",
+  "text": "הניחו לנשימה לחזור לקצב טבעי.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, כופפו ברכיים והשאירו כפות רגליים על הרצפה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.mod.L1",
+  "lang": "he",
+  "text": "רגליים ישרות וידיים ליד הגוף.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרחיקו ידיים מהגוף ועצמו עיניים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana.exit",
+  "lang": "he",
+  "text": "אין צורך לזוז עד שאזמין אתכם בחזרה.",
+  "v2": true,
+  "prio": "beginner"
  }
 ]
