@@ -1,0 +1,65 @@
+<!doctype html><meta charset=utf-8><title>ink sheet</title>
+<link rel=stylesheet href="../css/style.css">
+<style>
+body{font:13px sans-serif;margin:6px;background:var(--bg)}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.c{border:1px solid var(--line);position:relative}
+.lb{padding:2px 6px;background:#fff;color:#222}
+svg.fig{width:100%;display:block;background:var(--bg)}
+.h3{position:relative;aspect-ratio:4/3;background:var(--bg)}
+</style><div class=g id=g></div>
+<script type=module>
+// Preview sheet: current vs ink, one row per pose. ?mode=2d|3d  ?p=id:level,id:level  ?zoom=1 (close-up of head+hands, 2D only via viewBox)
+import { Renderer2D, fitView } from '../js/figure2d.js';
+import { project } from '../js/rig.js';
+import { THREE_URL } from '../js/figure3d.js';
+document.documentElement.dataset.theme = 'light';
+const q = new URLSearchParams(location.search);
+const mode = q.get('mode') || '2d'; const zoom = q.get('zoom');
+const list = (q.get('p') || 'warrior-2:1,downward-dog:1,tree:1,cobra:1,child:1,seated-twist:1').split(',').map((s) => s.split(':'));
+const g = document.getElementById('g');
+let G3 = null, T = null;
+if (mode === '3d') { G3 = await import('../js/figure3d.js'); T = await G3.loadThree(); }
+let n = 0; window.R = [];
+for (const [id, l] of list) {
+  const spec = await (await fetch(`../poses/${id}.json`)).json();
+  const lvl = spec.levels[+l];
+  const cam = lvl.camera || spec.camera;
+  for (const ink of [false, true]) {
+    const d = document.createElement('div'); d.className = 'c';
+    d.innerHTML = `<div class=lb>${id} L${l} - ${ink ? 'ink' : 'current'} (${mode})</div>`;
+    g.append(d);
+    if (mode === '2d') {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.setAttribute('class', 'fig'); d.append(svg);
+      const view = fitView([lvl.hold], cam);
+      const r = new Renderer2D(svg, { ink }); const S = r.draw(lvl.hold, { props: lvl.props, view });
+      if (zoom) {
+        const t = zoom === 'face' ? S.head.c : S.J.wristR;
+        const s = project(view.cam, t), x = 200 + (s[0] - view.cx) * view.scale, y = 262 - s[1] * view.scale;
+        const w = zoom === 'face' ? 60 : 80;
+        svg.setAttribute('viewBox', `${x - w / 2} ${y - w * 0.375} ${w} ${w * 0.75}`);
+      }
+    } else {
+      const h = document.createElement('div'); h.className = 'h3'; d.append(h);
+      const r = new G3.Renderer3D(h, T, { ink });
+      r.draw(lvl.hold, { props: lvl.props, cam }); r.resize(); r.draw(lvl.hold, { props: lvl.props, cam }); window.R.push(r);
+      if (zoom) { const t = zoom === 'face' ? r.S.head.c : r.S.J.wristR; r.target.set(t[0], t[1], t[2]); r.fitR = zoom === 'face' ? 16 : 22; r.renderNow(); }
+    }
+  }
+  n++;
+}
+window.DONE = n;
+if (q.get('bench') && mode === '3d') {
+  const out = [];
+  const spec = await (await fetch('../poses/warrior-2.json')).json(); const lv = spec.levels[1];
+  for (const [i, name] of [[0, 'current'], [1, 'ink']]) {
+    const r = window.R[i]; const gl = r.renderer.getContext();
+    for (let k = 0; k < 20; k++) r.draw(lv.hold, { props: [], cam: spec.camera });
+    gl.finish(); const t0 = performance.now(); const N = 300;
+    for (let k = 0; k < N; k++) r.draw(lv.hold, { props: [], cam: spec.camera, breath: Math.sin(k / 10) * 0.03 });
+    gl.finish(); const ms = (performance.now() - t0) / N;
+    out.push(`${name}: ${ms.toFixed(2)} ms/frame (draw+render, ${(1000 / ms).toFixed(0)} fps max), draw calls ${r.renderer.info.render.calls}, tris ${r.renderer.info.render.triangles}`);
+  }
+  const d = document.createElement('pre'); d.id = 'bench'; d.style.cssText = 'font-size:22px;background:#fff;padding:8px'; d.textContent = out.join('\n'); document.body.prepend(d);
+}
+</script>
