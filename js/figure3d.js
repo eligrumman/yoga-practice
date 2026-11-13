@@ -1,7 +1,7 @@
 // 3D (three.js) renderer. Draws the SAME solved primitives (rig.js solve()) as the 2D SVG renderer.
 // three.js is loaded lazily from a pinned CDN URL; callers fall back to 2D if loadThree() rejects.
 // Render-on-demand: the caller drives animation by calling draw() each frame (draw() renders).
-import { solve } from './rig.js';
+import { solve, FACE } from './rig.js';
 
 export const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
@@ -26,6 +26,7 @@ const FALLBACK = { sk: '#e2b393', tp: '#4f8678', lg: '#4a5875', hr: '#523a2c' };
 const rad = (d) => (d * Math.PI) / 180;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
+const HW = 36, HH = 24; // sphere-hull mesh resolution
 export class Renderer3D {
   constructor(host, THREE, { floor = true } = {}) {
     this.T = THREE; this.host = host; this.floorOn = floor;
@@ -47,6 +48,10 @@ export class Renderer3D {
     this.sphereG = new T.SphereGeometry(1, 28, 20);
     this.cylG = new T.CylinderGeometry(1, 1, 1, 24, 1, true);
     this.geoms = [this.sphereG, this.cylG];
+    // unit directions for the sphere-hull meshes (each hull owns a copy of this sphere and moves its vertices)
+    this.hullG = new T.SphereGeometry(1, HW, HH);
+    this.hullDirs = Float32Array.from(this.hullG.attributes.position.array);
+    this.geoms.push(this.hullG);
     this.mats = {};
     for (const [m, v] of Object.entries(MATS)) {
       this.mats[m] = new T.MeshStandardMaterial({ color: FALLBACK[v], roughness: m === 'hair' ? 0.7 : 0.82, metalness: 0 });
@@ -120,32 +125,22 @@ export class Renderer3D {
     this.faceMats = {
       ink: new T.MeshBasicMaterial({ color: '#4a3328' }),
       mouth: new T.MeshBasicMaterial({ color: '#9a5a4c' }),
-      cheek: new T.MeshBasicMaterial({ color: '#e58c7e', transparent: true, opacity: 0.5, depthWrite: false }),
+      cheek: new T.MeshBasicMaterial({ color: '#e58c7e', transparent: true, opacity: 0.32, depthWrite: false }),
     };
     this.faceG = new T.Group(); this.faceG.matrixAutoUpdate = false; this.faceG.matrixWorldNeedsUpdate = true;
     this.scene.add(this.faceG);
-    const rx = 11, ry = 13.5, rz = 8.8;
-    // point on the head ellipsoid surface (slightly proud), head-local coords
-    const surf = (y, z, lift = 0.35) => {
-      const k = 1 - (y / ry) ** 2 - (z / rz) ** 2;
-      return new T.Vector3(rx * Math.sqrt(Math.max(0.02, k)) + lift, y, z);
-    };
-    const arc = (pts, rad0, mat, segs = 10) => {
-      const g = new T.TubeGeometry(new T.CatmullRomCurve3(pts), segs, rad0, 6, false);
+    // the shared FACE definition (head-local coordinates): thin tubes for the strokes, soft discs for the blush
+    for (const k of FACE.strokes) {
+      const g = new T.TubeGeometry(new T.CatmullRomCurve3(k.pts.map((v) => new T.Vector3(v[0], v[1], v[2]))), 10, k.w * 0.42, 6, false);
       this.geoms.push(g);
-      const m = new T.Mesh(g, mat); this.faceG.add(m); return m;
-    };
-    for (const s of [1, -1]) {
-      const zc = 3.8 * s;
-      // closed calm eye: a downward-curving arc
-      arc([surf(1.9, zc - 1.9 * s), surf(1.0, zc), surf(1.9, zc + 1.9 * s)], 0.34, this.faceMats.ink);
-      arc([surf(4.6, zc - 2.4 * s), surf(5.3, zc), surf(4.4, zc + 2.6 * s)], 0.28, this.faceMats.ink);
+      this.faceG.add(new T.Mesh(g, k.cls === 'mouth' ? this.faceMats.mouth : this.faceMats.ink));
+    }
+    for (const k of FACE.cheeks) {
       const ch = new T.Mesh(this.sphereG, this.faceMats.cheek);
-      const p = surf(-2.6, 5.6 * s, -0.4);
-      ch.position.copy(p); ch.scale.set(0.6, 1.6, 2.4); ch.rotation.y = -s * 0.5;
+      ch.position.set(k.c[0], k.c[1], k.c[2]); ch.scale.set(0.5, k.ry, k.rz);
+      ch.quaternion.setFromUnitVectors(new T.Vector3(1, 0, 0), new T.Vector3(k.n[0], k.n[1], k.n[2]).normalize());
       this.faceG.add(ch);
     }
-    arc([surf(-5.9, -2.2), surf(-6.7, 0), surf(-5.9, 2.2)], 0.3, this.faceMats.mouth);
   }
 
   _bind() {
@@ -240,7 +235,7 @@ export class Renderer3D {
     if (cam) this.setDefaultCamera(cam.az, cam.el);
     const S = solve(frame, { breath });
     this.S = S;
-    for (const p of S.prims) (p.kind === 'cap' ? this._cap(p) : this._ell(p));
+    for (const p of S.prims) (p.kind === 'hull' ? this._hull(p) : p.kind === 'cap' ? this._cap(p) : this._ell(p));
     this._face(S);
     this._props(props, S, e);
     this._ground(S);
@@ -258,6 +253,43 @@ export class Renderer3D {
     const [a, b, c] = p.ax, o = p.c;
     it.mesh.matrix.set(a[0], b[0], c[0], o[0], a[1], b[1], c[1], o[1], a[2], b[2], c[2], o[2], 0, 0, 0, 1);
     it.mesh.matrixWorldNeedsUpdate = true;
+  }
+
+  // convex hull of spheres: every vertex direction d maps to the support point c_i + r_i * d of the
+  // sphere that reaches furthest along d; the surface normal there is d itself, so the normals never change
+  _hull(p) {
+    let it = this.items.get(p.id);
+    if (!it) {
+      const g = this.hullG.clone();
+      const mesh = new this.T.Mesh(g, this.mats[p.mat] || this.mats.skin);
+      mesh.matrixAutoUpdate = false; mesh.frustumCulled = false;
+      this.figure.add(mesh); it = { mesh, own: g }; this.items.set(p.id, it);
+    }
+    const pos = it.own.attributes.position, a = pos.array, D = this.hullDirs, pts = p.pts, n = pts.length;
+    for (let i = 0; i < a.length; i += 3) {
+      const dx = D[i], dy = D[i + 1], dz = D[i + 2];
+      let best = -1e9, c = pts[0];
+      for (let k = 0; k < n; k++) { const q = pts[k], v = q[0] * dx + q[1] * dy + q[2] * dz + q[3]; if (v > best) { best = v; c = q; } }
+      a[i] = c[0] + c[3] * dx; a[i + 1] = c[1] + c[3] * dy; a[i + 2] = c[2] + c[3] * dz;
+    }
+    pos.needsUpdate = true;
+    // geometric normals (the bridging triangles between spheres are long, so the sphere directions would shade them in streaks),
+    // then weld the normals along the sphere's seam and at its poles
+    it.own.computeVertexNormals();
+    const nr = it.own.attributes.normal.array, W1 = HW + 1;
+    for (let iy = 0; iy <= HH; iy++) {
+      const r = iy * W1 * 3;
+      if (iy === 0 || iy === HH) {
+        let x = 0, y = 0, z = 0;
+        for (let ix = 0; ix < W1; ix++) { x += nr[r + ix * 3]; y += nr[r + ix * 3 + 1]; z += nr[r + ix * 3 + 2]; }
+        const l = Math.hypot(x, y, z) || 1;
+        for (let ix = 0; ix < W1; ix++) { nr[r + ix * 3] = x / l; nr[r + ix * 3 + 1] = y / l; nr[r + ix * 3 + 2] = z / l; }
+      } else {
+        const e = r + HW * 3, x = nr[r] + nr[e], y = nr[r + 1] + nr[e + 1], z = nr[r + 2] + nr[e + 2], l = Math.hypot(x, y, z) || 1;
+        nr[r] = nr[e] = x / l; nr[r + 1] = nr[e + 1] = y / l; nr[r + 2] = nr[e + 2] = z / l;
+      }
+    }
+    it.own.attributes.normal.needsUpdate = true;
   }
 
   _cap(p) {

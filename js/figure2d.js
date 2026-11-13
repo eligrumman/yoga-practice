@@ -1,7 +1,7 @@
 // 2D SVG renderer. Draws the SAME solved primitives (rig.js solve()) that the 3D renderer uses.
-// Tapered capsules and ellipsoids are projected orthographically, sorted by depth (painter's
-// algorithm) and filled with soft radial gradients lit from the upper left.
-import { solve, camera, project, app, primBox } from './rig.js';
+// Sphere-hulls, tapered capsules and ellipsoids are projected orthographically, sorted by depth
+// (painter's algorithm) and filled with soft gradients lit from the upper left.
+import { solve, camera, project, app, FACE } from './rig.js';
 
 export const VBW = 400, VBH = 300, FLOOR = 262;
 const NS = 'http://www.w3.org/2000/svg';
@@ -54,10 +54,10 @@ export function framesBounds(frames, cam) {
   for (const f of frames) {
     const S = solve(f);
     for (const p of S.prims) {
-      const pts = p.kind === 'cap' ? [p.p0, p.p1] : [p.c];
-      const r = p.kind === 'cap' ? Math.max(p.r0, p.r1) : Math.max(...p.ax.map((a) => Math.hypot(a[0], a[1], a[2])));
+      const pts = p.kind === 'cap' ? [p.p0, p.p1] : p.kind === 'hull' ? p.pts : [p.c];
+      const r0 = p.kind === 'cap' ? Math.max(p.r0, p.r1) : p.kind === 'hull' ? 0 : Math.max(...p.ax.map((a) => Math.hypot(a[0], a[1], a[2])));
       for (const q of pts) {
-        const s = project(cam, q);
+        const s = project(cam, q), r = p.kind === 'hull' ? q[3] : r0;
         sx0 = Math.min(sx0, s[0] - r); sx1 = Math.max(sx1, s[0] + r);
         sy1 = Math.max(sy1, s[1] + r); sy0 = Math.min(sy0, s[1] - r);
       }
@@ -86,6 +86,20 @@ const capPath = (x0, y0, r0, x1, y1, r1) => {
   return `M${f(a0)}L${f(a1)}A${r1} ${r1} 0 1 0 ${f(b1)}L${f(b0)}A${r0} ${r0} 0 1 0 ${f(a0)}z`;
 };
 
+// outline of the convex hull of circles [[x, y, r], ...] (support mapping, sampled directions)
+const NH = 48, HC = [], HS = [];
+for (let k = 0; k < NH; k++) { HC.push(Math.cos((k / NH) * 2 * Math.PI)); HS.push(Math.sin((k / NH) * 2 * Math.PI)); }
+const hullPath = (cs) => {
+  let d = '';
+  for (let k = 0; k < NH; k++) {
+    const dx = HC[k], dy = HS[k]; let best = -1e9, c = cs[0];
+    for (let i = 0; i < cs.length; i++) { const v = cs[i][0] * dx + cs[i][1] * dy + cs[i][2]; if (v > best) { best = v; c = cs[i]; } }
+    d += (k ? 'L' : 'M') + (c[0] + c[2] * dx).toFixed(2) + ' ' + (c[1] + c[2] * dy).toFixed(2);
+  }
+  return d + 'z';
+};
+const TORSO = new Set(['pelvis', 'waist', 'chest', 'trap', 'neck']);
+
 export class Renderer2D {
   constructor(svg, { floor = true } = {}) {
     ensureDefs();
@@ -104,13 +118,8 @@ export class Renderer2D {
     this.front = mk('g', { class: 'fig-props' }, this.root);
     this.els = new Map();
     this.order = '';
-    this.eyeL = mk('path', { class: 'fig-eye' }, this.faceG);
-    this.eyeR = mk('path', { class: 'fig-eye' }, this.faceG);
-    this.browL = mk('path', { class: 'fig-brow' }, this.faceG);
-    this.browR = mk('path', { class: 'fig-brow' }, this.faceG);
-    this.mouth = mk('path', { class: 'fig-mouth' }, this.faceG);
-    this.cheekL = mk('ellipse', { class: 'fig-cheek' }, this.faceG);
-    this.cheekR = mk('ellipse', { class: 'fig-cheek' }, this.faceG);
+    this.cheeks = FACE.cheeks.map(() => mk('ellipse', { class: 'fig-cheek' }, this.faceG));
+    this.strokes = FACE.strokes.map((k) => mk('path', { class: 'fig-' + k.cls }, this.faceG));
   }
 
   // frame: full frame; props: [{type,...}]; e: 0..1 prop visibility; view from fitView
@@ -127,7 +136,11 @@ export class Renderer2D {
     const items = [];
     for (const p of S.prims) {
       let key, d;
-      if (p.kind === 'cap') {
+      if (p.kind === 'hull') {
+        const cs = p.pts.map((q) => { const s = PX(q); return [s[0], s[1], q[3] * scale, s[2]]; });
+        key = 0; let wz = 0; for (let i = 0; i < cs.length; i++) { key += cs[i][3]; wz += p.pts[i][2]; }
+        items.push({ p, key: key / cs.length + (p.bias || 0), hull: true, cs, d: hullPath(cs), wz: wz / cs.length });
+      } else if (p.kind === 'cap') {
         const a = PX(p.p0), b = PX(p.p1);
         key = (a[2] + b[2]) / 2; d = capPath(a[0], a[1], p.r0 * scale, b[0], b[1], p.r1 * scale);
         items.push({ p, key: key + (p.bias || 0), cap: true, d });
@@ -147,10 +160,28 @@ export class Renderer2D {
     for (const it of items) {
       const id = it.p.id;
       let el = this.els.get(id);
-      const tag = it.cap ? 'path' : 'ellipse';
+      const tag = it.cap || it.hull ? 'path' : 'ellipse';
       if (!el) {
-        el = mk(tag, { class: 'fp fp-' + it.p.mat + (id.startsWith('h_hair') || id.startsWith('h_fringe') || id.startsWith('h_bun') ? ' fp-hair' : id.startsWith('h_') ? ' fp-head' : '') });
+        el = mk(tag, { class: 'fp fp-' + it.p.mat + (it.p.mat === 'hair' ? ' fp-hair' : id === 'h_head' ? ' fp-head' : '') });
         this.els.set(id, el);
+      }
+      if (it.hull) {
+        el.setAttribute('d', it.d);
+        const farH = !TORSO.has(id) && !id.startsWith('h_') && it.wz < S.J.pelvis[2] - 3 && it.key < dref - 4;
+        if (it.p.g === 'rad') { el.setAttribute('fill', mat(it.p.mat, farH)); continue; }
+        // shaded across the hull's long axis (first -> last sphere), light from the upper left
+        const cs = it.cs, a = cs[0], b = cs[cs.length - 1], dx = b[0] - a[0], dy = b[1] - a[1], dl = Math.hypot(dx, dy);
+        let nx = -0.5 / 0.986, ny = -0.85 / 0.986;
+        if (dl > 0.35 * (a[2] + b[2])) { nx = -dy / dl; ny = dx / dl; if (nx * -0.5 + ny * -0.85 < 0) { nx = -nx; ny = -ny; } }
+        let hi = -1e9, lo = 1e9;
+        for (const c of cs) { const v = c[0] * nx + c[1] * ny; hi = Math.max(hi, v + c[2]); lo = Math.min(lo, v - c[2]); }
+        const gk = id + (farH ? 'f' : 'n');
+        let g = this.lgs.get(gk);
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${gk}`, MATS[it.p.mat], farH); this.lgs.set(gk, g); }
+        g.setAttribute('x1', (nx * hi).toFixed(2)); g.setAttribute('y1', (ny * hi).toFixed(2));
+        g.setAttribute('x2', (nx * lo).toFixed(2)); g.setAttribute('y2', (ny * lo).toFixed(2));
+        el.setAttribute('fill', `url(#${this.uid}-${gk})`);
+        continue;
       }
       const far = it.cap ? (it.p.p0[2] + it.p.p1[2]) / 2 < S.J.pelvis[2] - 3 && PX(it.p.p0)[2] < dref - 4 : false;
       const farEll = !it.cap && it.p.c[2] < S.J.pelvis[2] - 6 && it.key < dref - 4;
@@ -177,9 +208,9 @@ export class Renderer2D {
       el.setAttribute('fill', fill);
     }
     if (sig !== this.order) {
-      // the face group sits right after the head/jaw/nose, below the hair fringe
+      // the face features sit right on top of the face piece
       const ids = items.map((i) => i.p.id);
-      const at = Math.max(ids.indexOf('h_head'), ids.indexOf('h_jaw'));
+      const at = ids.indexOf('h_head');
       ids.forEach((id, i) => { this.body.appendChild(this.els.get(id)); if (i === at) this.body.appendChild(this.faceG); });
       this.order = sig;
     }
@@ -201,29 +232,24 @@ export class Renderer2D {
     return S;
   }
 
-  drawFace(S, cam, PX, scale, items) {
-    const { c, F, rx, ry, rz } = S.head;
+  // closed eyes, brows, mouth and a hint of blush: the shared FACE definition (head-local), faded out as it turns away
+  drawFace(S, cam, PX, scale) {
+    const { c, F } = S.head;
     const P = (v) => { const w = app(F, v); return PX([c[0] + w[0], c[1] + w[1], c[2] + w[2]]); };
-    const vis = (v) => {
-      const n = app(F, [v[0] / (rx * rx), v[1] / (ry * ry), v[2] / (rz * rz)]);
-      const l = Math.hypot(n[0], n[1], n[2]) || 1;
-      return (n[0] * cam.toCam[0] + n[1] * cam.toCam[1] + n[2] * cam.toCam[2]) / l;
-    };
-    const set = (el, d, op) => { el.setAttribute('d', d); el.setAttribute('opacity', op.toFixed(2)); };
-    const xs = 9.6;
-    const seg = (a, m, b) => { const A = P(a), M = P(m), B = P(b); return `M${A[0].toFixed(2)} ${A[1].toFixed(2)}Q${(2 * M[0] - (A[0] + B[0]) / 2).toFixed(2)} ${(2 * M[1] - (A[1] + B[1]) / 2).toFixed(2)} ${B[0].toFixed(2)} ${B[1].toFixed(2)}`; };
-    const op = (v) => Math.max(0, Math.min(1, (vis(v) - 0.08) * 5));
-    for (const [s, eye, brow, ch] of [[1, this.eyeR, this.browR, this.cheekR], [-1, this.eyeL, this.browL, this.cheekL]]) {
-      const zc = 3.8 * s;
-      const ve = [xs, 1.6, zc];
-      set(eye, seg([xs - 0.4, 1.9, zc - 1.9 * s], [xs, 0.9, zc], [xs - 0.4, 1.9, zc + 1.9 * s]), op(ve));
-      set(brow, seg([xs - 0.6, 4.6, zc - 2.4 * s], [xs - 0.2, 5.2, zc], [xs - 0.8, 4.4, zc + 2.6 * s]), op(ve) * 0.8);
-      const cp = P([xs - 0.6, -2.6, 5.6 * s]);
-      ch.setAttribute('cx', cp[0]); ch.setAttribute('cy', cp[1]);
-      ch.setAttribute('rx', 2.4 * scale); ch.setAttribute('ry', 1.6 * scale);
-      ch.setAttribute('opacity', (op([xs, -2.6, 5.6 * s]) * 0.55).toFixed(2));
-    }
-    set(this.mouth, seg([xs - 0.6, -5.9, -2.2], [xs - 0.2, -6.6, 0], [xs - 0.6, -5.9, 2.2]), op([xs, -6, 0]));
+    const vis = (n) => { const w = app(F, n); return Math.max(0, Math.min(1, (w[0] * cam.toCam[0] + w[1] * cam.toCam[1] + w[2] * cam.toCam[2] - 0.1) * 4)); };
+    const f = (n) => n.toFixed(2);
+    FACE.strokes.forEach((k, i) => {
+      const [A, M, B] = k.pts.map(P), el = this.strokes[i];
+      el.setAttribute('d', `M${f(A[0])} ${f(A[1])}Q${f(2 * M[0] - (A[0] + B[0]) / 2)} ${f(2 * M[1] - (A[1] + B[1]) / 2)} ${f(B[0])} ${f(B[1])}`);
+      el.setAttribute('opacity', f(vis(k.n) * (k.cls === 'brow' ? 0.75 : 1)));
+      el.style.strokeWidth = f(Math.max(0.55, k.w * scale));
+    });
+    FACE.cheeks.forEach((k, i) => {
+      const p = P(k.c), el = this.cheeks[i];
+      el.setAttribute('cx', f(p[0])); el.setAttribute('cy', f(p[1]));
+      el.setAttribute('rx', f(k.rz * scale)); el.setAttribute('ry', f(k.ry * scale));
+      el.setAttribute('opacity', f(vis(k.n) * 0.4));
+    });
   }
 
   // ---- props: blocks, cushion, wall, strap (projected 3D boxes)

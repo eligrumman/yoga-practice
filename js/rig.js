@@ -33,7 +33,7 @@ export const LIMITS = {
   head: { x: [-30, 30], y: [-45, 45], z: [-40, 45] },
   shoulder: { x: [-45, 185], y: [-180, 180], z: [-100, 185] },
   elbow: { x: [0, 0], y: [-90, 90], z: [-5, 150] },
-  wrist: { x: [-80, 80], y: [-95, 95], z: [-35, 95] },
+  wrist: { x: [-90, 80], y: [-95, 95], z: [-35, 95] },
   hip: { x: [-50, 90], y: [-50, 95], z: [-35, 165] },
   knee: { x: [-5, 5], y: [-15, 15], z: [-5, 155] },
   ankle: { x: [-35, 30], y: [-40, 40], z: [-95, 35] },
@@ -158,7 +158,51 @@ export function blendFrames(a, b, u, { stagger = true } = {}) {
 
 // ---------------------------------------------------------------- forward kinematics
 const D = DIMS;
-// returns { J: joint points, prims: drawable primitives, head: {...}, minY, ext }
+const sm = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+
+// ---- head shape (head-local: x = face forward, y = up, z = the figure's right; origin = head centre)
+// The skin "face" piece sits on the front of the hair-coloured cranium, so its outline is the hairline
+// from every direction (2D painter's order and the 3D depth buffer agree).
+const FACE_HULL = [
+  [5.4, 4.4, 2.6, 4.9], [5.4, 4.4, -2.6, 4.9],     // forehead / brow
+  [4.4, -3.4, 3.8, 4.9], [4.4, -3.4, -3.8, 4.9],   // cheekbones
+  [5.5, -10.2, 0, 3.2],                            // chin
+  [0.6, -0.8, 4.6, 4.8], [0.6, -0.8, -4.6, 4.8],   // temples (skin reaches the ear in profile)
+  [-0.4, -6.2, 5.1, 3.0], [-0.4, -6.2, -5.1, 3.0], // jaw angles
+];
+const HAIR_HULL = [[-1.6, 3.8, 0, 10.0], [-4.8, -3.6, 0, 6.4]];
+// frontmost x of a sphere-hull at (y, z), and the surface normal there (support-function minimisation)
+function hullFront(pts, y, z) {
+  let best = 1e9, bn = [1, 0, 0];
+  for (let i = -30; i <= 30; i++) for (let j = -30; j <= 30; j++) {
+    const a = (i / 30) * 1.25, b = (j / 30) * 1.25;
+    const d = [Math.cos(a) * Math.cos(b), Math.sin(a), Math.cos(a) * Math.sin(b)];
+    let h = -1e9;
+    for (const p of pts) h = Math.max(h, p[0] * d[0] + p[1] * d[1] + p[2] * d[2] + p[3]);
+    const x = (h - y * d[1] - z * d[2]) / d[0];
+    if (x < best) { best = x; bn = d; }
+  }
+  return { x: best, n: bn };
+}
+const r2 = (v) => v.map((x) => Math.round(x * 100) / 100);
+const onFace = (y, z, lift = 0.22) => { const f = hullFront(FACE_HULL, y, z); return { p: r2([f.x + lift, y, z]), n: r2(f.n) }; };
+// Face features, defined once (head-local) and drawn by both renderers. Closed, relaxed eyes; soft brows; a small calm mouth.
+export const FACE = (() => {
+  const strokes = [], cheeks = [];
+  const stroke = (id, cls, w, yz) => { const q = yz.map(([y, z]) => onFace(y, z)); strokes.push({ id, cls, w, pts: q.map((v) => v.p), n: q[1].n }); };
+  for (const [s, k] of [[1, 'R'], [-1, 'L']]) {
+    stroke('eye' + k, 'eye', 0.62, [[0.1, 1.9 * s], [-0.75, 3.7 * s], [0.0, 5.45 * s]]);
+    stroke('brow' + k, 'brow', 0.5, [[2.75, 1.7 * s], [3.45, 3.6 * s], [2.85, 5.7 * s]]);
+    const c = onFace(-4.0, 5.3 * s, -0.25);
+    cheeks.push({ id: 'cheek' + k, c: c.p, n: c.n, ry: 1.45, rz: 2.1 });
+  }
+  stroke('mouth', 'mouth', 0.55, [[-7.85, -1.75], [-8.35, 0], [-7.85, 1.75]]);
+  return { strokes, cheeks };
+})();
+
+// returns { J: joint points, prims: drawable primitives, head: {...}, hands, feet, F, bounds, lift }
+// Primitive kinds: 'cap' (tapered capsule p0,p1,r0,r1), 'ell' (ellipsoid c, ax[3]) and
+// 'hull' (convex hull of spheres pts = [[x,y,z,r],...]; g: 'rad' = round shading, else shaded across pts[0] -> pts[last]).
 export function solve(frame, { breath = 0 } = {}) {
   const f = frame;
   const J = {};
@@ -201,71 +245,130 @@ export function solve(frame, { breath = 0 } = {}) {
   const prims = [];
   const cap = (id, mat, a, b, r0, r1, bias = 0) => prims.push({ id, kind: 'cap', mat, p0: a, p1: b, r0, r1, bias });
   const ell = (id, mat, c, M, rx, ry, rz, bias = 0) => prims.push({ id, kind: 'ell', mat, c, ax: [app(M, [rx, 0, 0]), app(M, [0, ry, 0]), app(M, [0, 0, rz])], bias });
-  const br = 1 + breath;
-  ell('pelvis', 'legs', add(P0, app(Fp, [0, 6, 0])), Fp, 12.2, 12.4, 17.8, 0.5);
-  cap('waist', 'top', add(P0, app(Fp, [0, 9, 0])), add(p2, app(F3, [0, 5, 0])), 10.6, 11.4, -0.4);
-  ell('abdomen', 'top', p1, F2, 10.8 * (1 + breath * 1.5), 14.5, 14.2 * (1 + breath * 0.6), 0);
-  ell('chest', 'top', add(p2, app(F3, [0, 8.5, 0])), F3, 12 * br, 17, 16.5 * br, 0);
-  cap('neck', 'skin', add(p3, app(Fn, [0, -3, 0])), pn, 5.8, 4.9);
+  const hull = (id, mat, pts, bias = 0, g) => { const p = { id, kind: 'hull', mat, pts: pts.map((q) => [...q]), bias }; if (g) p.g = g; prims.push(p); return p; };
+  // sphere at o + M*v
+  const sp = (o, M, v, r) => { const w = app(M, v); return [o[0] + w[0], o[1] + w[1], o[2] + w[2], r]; };
+  const br = 1 + breath, bb = 1 + breath * 1.5;
+
+  // torso: pelvis (leggings, with glutes) -> waist -> rib cage with the shoulder line; neighbours share spheres
+  hull('pelvis', 'legs', [
+    sp(P0, Fp, [0.8, 12, 5.8], 7.7), sp(P0, Fp, [0.8, 12, -5.8], 7.7),
+    sp(P0, Fp, [3.0, 4, 0], 9.0 * bb),
+    sp(P0, Fp, [0, -1, 9], 9.8), sp(P0, Fp, [0, -1, -9], 9.8),
+    sp(P0, Fp, [-4.2, -1.8, 6.5], 9.2), sp(P0, Fp, [-4.2, -1.8, -6.5], 9.2),
+  ], 0.5, 'rad');
+  const rib = [sp(p2, F3, [1, 0, 7.2], 8.2 * br), sp(p2, F3, [1, 0, -7.2], 8.2 * br)];
+  hull('waist', 'top', [
+    sp(P0, Fp, [0.8, 11, 5.8], 7.5), sp(P0, Fp, [0.8, 11, -5.8], 7.5),
+    sp(p1, F2, [0.6 + breath * 12, 2, 5.5], 7.4), sp(p1, F2, [0.6 + breath * 12, 2, -5.5], 7.4),
+    ...rib,
+  ], -0.4);
+  hull('chest', 'top', [
+    ...rib,
+    sp(p2, F3, [3.4, 7.5, 6.2], 8.0 * br), sp(p2, F3, [3.4, 7.5, -6.2], 8.0 * br),
+    sp(p2, F3, [-2.6, 9, 7], 8.0), sp(p2, F3, [-2.6, 9, -7], 8.0),
+    sp(p3, F3, [0, -4.6, 19], 5.4), sp(p3, F3, [0, -4.6, -19], 5.4),
+  ], 0);
+  hull('trap', 'skin', [sp(p3, F3, [-1.5, -0.6, 8.5], 3.6), sp(p3, F3, [-1.5, -0.6, -8.5], 3.6), sp(p3, Fn, [-0.3, 4.2, 0], 5.0)], -0.3, 'rad');
+  cap('neck', 'skin', add(p3, app(Fn, [0, -2, 0])), add(pn, app(Fh, [0.4, 2.5, 0])), 5.1, 4.6, -0.2);
+
+  const tips = []; // finger / toe hulls are added after the first floor estimate
   for (const s of ['R', 'L']) {
     const { Fs, Fe, Fw, Fi, Fk, Fa } = fr[s];
+    const z = s === 'R' ? 1 : -1;
     const sh = J['shoulder' + s], el = J['elbow' + s], wr = J['wrist' + s], hip = J['hip' + s], kn = J['knee' + s], an = J['ankle' + s];
-    ell('delt' + s, 'skin', add(sh, app(F3, [0, 0, -(s === 'R' ? 1 : -1) * 1.2])), F3, 5.2, 5.4, 5.2, 0.2);
-    cap('uarm' + s, 'skin', sh, el, 5.4, 4.5);
-    cap('farm' + s, 'skin', el, wr, 4.5, 3.2);
-    ell('palm' + s, 'skin', add(wr, app(Fw, [0, -6, 0])), Fw, 4.1, 6.4, 2.5);
-    ell('fing' + s, 'skin', add(wr, app(Fw, [0, -15.3, 0])), Fw, 3.7, 5.9, 2.05);
-    cap('thumb' + s, 'skin', add(wr, app(Fw, [2.2, -3.4, 0])), add(wr, app(Fw, [5.2, -10.8, 0.4])), 1.9, 1.35);
-    cap('thigh' + s, 'legs', hip, kn, 9.4, 7.0, -0.1);
-    cap('shank' + s, 'legs', kn, an, 7.0, 4.6);
-    ell('ankle' + s, 'skin', add(an, app(Fa, [1, -3.2, 0])), Fa, 11.5, 5.4, 4.2);
-    cap('heel' + s, 'skin', add(an, app(Fa, [-D.footB + 1.5, -D.ankleH + 3.8, 0])), add(an, app(Fa, [13, -D.ankleH + 3.3, 0])), 3.8, 3.4);
-    cap('toes' + s, 'skin', add(an, app(Fa, [13, -D.ankleH + 3.3, 0])), add(an, app(Fa, [D.footF - 2.4, -D.ankleH + 2.7, 0])), 3.4, 2.7);
+    // arm: deltoid cap blended into the upper arm, forearm with a soft bulge below the elbow, flat wrist
+    hull('uarm' + s, 'skin', [sp(sh, Fs, [0, -1.2, 0.8 * z], 6.0), sp(sh, Fs, [0.5, -15, 0], 4.9), sp(el, Fs, [0, 0, 0], 4.0)], 0.3);
+    const wA = sp(wr, Fw, [1.3, 0, 0], 2.4), wB = sp(wr, Fw, [-1.3, 0, 0], 2.4);
+    hull('farm' + s, 'skin', [sp(el, Fe, [0, 0, 0], 4.0), sp(el, Fe, [0.3, -7.5, 0], 4.3), wA, wB], 0.1);
+    // hand (hand-local: fingers along -y, thumb side +x, palm faces -z*s). The palm side is one flat plane 2.5 under the wrist.
+    const PZ = (r) => -z * (2.5 - r);
+    const kI = sp(wr, Fw, [2.8, -10.6, PZ(1.9)], 1.9), kP = sp(wr, Fw, [-3.0, -9.8, PZ(1.75)], 1.75);
+    hull('palm' + s, 'skin', [wA, wB, sp(wr, Fw, [2.3, -4.6, PZ(2.2)], 2.2), sp(wr, Fw, [-2.5, -4.6, PZ(2.1)], 2.1), kI, kP], 0.15);
+    cap('thumb' + s, 'skin', add(wr, app(Fw, [2.5, -3.9, PZ(2.0)])), add(wr, app(Fw, [6.0, -9.9, PZ(1.4)])), 2.0, 1.4, 0.1);
+    tips.push({ kind: 'hand', s, z, wr, Fw, kI, kP, PZ });
+    // leg
+    hull('thigh' + s, 'legs', [sp(hip, Fi, [0, -0.5, 0], 10.0), sp(hip, Fi, [1.2, -20, 0], 8.8), sp(kn, Fi, [0, 0, 0], 6.5)], -0.1);
+    hull('shank' + s, 'legs', [sp(kn, Fk, [0, 0, 0], 6.4), sp(kn, Fk, [-1.8, -14, 0], 6.2), sp(an, Fk, [0, 1, 0], 3.7)], 0);
+    // foot (foot-local: toes +x, sole at y = -ankleH, big toe on the inner side)
+    const m = -z, Y = (r) => -D.ankleH + r;
+    const inst = sp(an, Fa, [1, -2.2, 0], 3.7);
+    const bI = sp(an, Fa, [15.4, Y(2.4), 2.4 * m], 2.4), bO = sp(an, Fa, [13.6, Y(2.1), -2.9 * m], 2.1);
+    hull('foot' + s, 'skin', [sp(an, Fa, [-2.8, Y(3.3), 0], 3.3), inst, sp(an, Fa, [8, -3.7, 0.3 * m], 3.0), bI, bO], 0.05);
+    tips.push({ kind: 'foot', s, m, an, Fa, bI, bO, Y });
   }
   // head (all ids start with 'h_' so renderers can group them)
-  const rx = 11, ry = 13.5, rz = 8.8;
-  ell('h_head', 'skin', hc, Fh, rx, ry, rz, 0);
-  ell('h_jaw', 'skin', add(hc, app(Fh, [3.4, -6.4, 0])), Fh, 7.2, 6.4, 6.4, 0);
-  ell('h_hair', 'hair', add(hc, app(Fh, [-3.4, 2.6, 0])), Fh, rx * 1.04, ry * 1.01, rz * 1.1, -0.5);
-  ell('h_fringe', 'hair', add(hc, app(Fh, [1.4, 6.4, 0])), Fh, 9.8, 7.4, 8.9, 0.4);
-  ell('h_bun', 'hair', add(hc, app(Fh, [-10.8, 10.6, 0])), Fh, 5.4, 5.4, 5.4, -0.6);
-  ell('h_nose', 'skin', add(hc, app(Fh, [10.2, -1.6, 0])), Fh, 2.4, 3.1, 1.7, 0.3);
-  ell('h_earR', 'skin', add(hc, app(Fh, [-1.2, -1.6, 8.4])), Fh, 2.4, 3.4, 1.3, 0.1);
-  ell('h_earL', 'skin', add(hc, app(Fh, [-1.2, -1.6, -8.4])), Fh, 2.4, 3.4, 1.3, 0.1);
-  const head = { c: hc, F: Fh, rx, ry, rz };
+  const hp = (v) => sp(hc, Fh, [v[0], v[1], v[2]], v[3]);
+  hull('h_hair', 'hair', HAIR_HULL.map(hp), -0.2, 'rad');
+  ell('h_bun', 'hair', add(hc, app(Fh, [-11.2, -2.6, 0])), Fh, 4.4, 4.6, 4.6, -0.5);
+  hull('h_head', 'skin', FACE_HULL.map(hp), 0.2, 'rad');
+  hull('h_nose', 'skin', [hp([8.9, 0.2, 0, 0.9]), hp([9.9, -3.4, 0, 1.25])], 0.6, 'rad');
+  ell('h_earR', 'skin', add(hc, app(Fh, [-1.7, -1.6, 9.1])), Fh, 1.7, 2.7, 1.1, 0.9);
+  ell('h_earL', 'skin', add(hc, app(Fh, [-1.7, -1.6, -9.1])), Fh, 1.7, 2.7, 1.1, 0.9);
+  const head = { c: hc, F: Fh, rx: 11, ry: 13.5, rz: 8.8 };
+
+  // first floor estimate without fingers and toes, then lay those flat where the palm / ball of the foot rests on the floor
+  let floor0 = 1e9;
+  for (const p of prims) floor0 = Math.min(floor0, primBox(p).lo);
+  const hands = {}, feet = {};
+  for (const t of tips) {
+    if (t.kind === 'hand') {
+      const { s, z, wr, Fw, kI, kP, PZ } = t;
+      const n = app(Fw, [0, 0, -z]), d = app(Fw, [0, -1, 0]);
+      const low = Math.min(kI[1] - kI[3], kP[1] - kP[3], wr[1] - 2.5) - floor0;
+      const w = (1 - sm(1.5, 6, low)) * sm(0.45, 0.8, -n[1]);
+      const flat = Math.max(-0.8, Math.min(0.6, Math.atan2(d[1], -n[1] || 1e-6)));
+      const a1 = 0.17 * (1 - w) + flat * w, a2 = a1 + 0.26 * (1 - w);
+      // finger chain in the (along, toward-palm) plane, hinged at the knuckles
+      const fp = (x, y0, l1, l2, r, seg) => {
+        const u = seg === 1 ? l1 * Math.cos(a1) : l1 * Math.cos(a1) + l2 * Math.cos(a2);
+        const v = seg === 1 ? l1 * Math.sin(a1) : l1 * Math.sin(a1) + l2 * Math.sin(a2);
+        return sp(wr, Fw, [x, y0 - u, PZ(r) - z * v], r);
+      };
+      hull('fing' + s, 'skin', [kI, kP,
+        fp(2.6, -10.6, 5.4, 4.3, 1.6, 1), fp(-2.9, -9.8, 4.6, 3.4, 1.45, 1),
+        fp(1.5, -10.6, 5.4, 3.9, 1.35, 2), fp(-0.4, -10.4, 5.6, 4.3, 1.35, 2), fp(-2.6, -9.8, 4.6, 3.4, 1.2, 2)], 0.2);
+      hands[s] = { n, d, flat: w };
+    } else {
+      const { s, m, an, Fa, bI, bO, Y } = t;
+      const n = app(Fa, [0, -1, 0]), d = app(Fa, [1, 0, 0]);
+      const low = Math.min(bI[1] - bI[3], bO[1] - bO[3]) - floor0;
+      const w = (1 - sm(1.5, 6, low)) * sm(0.15, 0.45, -n[1]);
+      const b = w * Math.max(0, Math.min(1.5, Math.atan2(-d[1], -n[1] || 1e-6)));
+      const tp = (x, zz, r) => { const dx = x - 14.5; return sp(an, Fa, [14.5 + dx * Math.cos(b), Y(r) + dx * Math.sin(b), zz], r); };
+      hull('toes' + s, 'skin', [bI, bO, tp(22.6, 2.7 * m, 1.5), tp(21.6, 0.2 * m, 1.4), tp(18.8, -3.7 * m, 1.3)], 0.1);
+      feet[s] = { n, d, flat: w };
+    }
+  }
   // ground: lowest point of any primitive
   let minY = 1e9, minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, maxY = -1e9;
   for (const p of prims) {
-    let lo, hi, xl, xh, zl, zh;
-    if (p.kind === 'cap') {
-      lo = Math.min(p.p0[1] - p.r0, p.p1[1] - p.r1); hi = Math.max(p.p0[1] + p.r0, p.p1[1] + p.r1);
-      xl = Math.min(p.p0[0] - p.r0, p.p1[0] - p.r1); xh = Math.max(p.p0[0] + p.r0, p.p1[0] + p.r1);
-      zl = Math.min(p.p0[2] - p.r0, p.p1[2] - p.r1); zh = Math.max(p.p0[2] + p.r0, p.p1[2] + p.r1);
-    } else {
-      const e = (i) => Math.hypot(p.ax[0][i], p.ax[1][i], p.ax[2][i]);
-      lo = p.c[1] - e(1); hi = p.c[1] + e(1); xl = p.c[0] - e(0); xh = p.c[0] + e(0); zl = p.c[2] - e(2); zh = p.c[2] + e(2);
-    }
-    if (p.id === 'bun') { /* decoration, still counts */ }
-    minY = Math.min(minY, lo); maxY = Math.max(maxY, hi); minX = Math.min(minX, xl); maxX = Math.max(maxX, xh); minZ = Math.min(minZ, zl); maxZ = Math.max(maxZ, zh);
+    const b = primBox(p);
+    minY = Math.min(minY, b.lo); maxY = Math.max(maxY, b.hi); minX = Math.min(minX, b.xl); maxX = Math.max(maxX, b.xh); minZ = Math.min(minZ, b.zl); maxZ = Math.max(maxZ, b.zh);
   }
   const lift = f.pelvis.pos[1] || 0;
   const dy = -minY + lift;
   const shift = (v) => [v[0], v[1] + dy, v[2]];
   for (const k of Object.keys(J)) J[k] = shift(J[k]);
   for (const p of prims) {
-    if (p.kind === 'cap') { p.p0 = shift(p.p0); p.p1 = shift(p.p1); } else p.c = shift(p.c);
+    if (p.kind === 'cap') { p.p0 = shift(p.p0); p.p1 = shift(p.p1); } else if (p.kind === 'hull') { for (const q of p.pts) q[1] += dy; } else p.c = shift(p.c);
   }
   head.c = shift(head.c);
-  return { J, prims, head, F: { pelvis: Fp, chest: F3 }, bounds: { minX, maxX, minY: 0, maxY: maxY + dy, minZ, maxZ }, lift };
+  return { J, prims, head, hands, feet, F: { pelvis: Fp, chest: F3 }, bounds: { minX, maxX, minY: 0, maxY: maxY + dy, minZ, maxZ }, lift };
 }
 
 // vertical / horizontal extent of one primitive
 export function primBox(p) {
   if (p.kind === 'cap') {
-    return { lo: Math.min(p.p0[1] - p.r0, p.p1[1] - p.r1), hi: Math.max(p.p0[1] + p.r0, p.p1[1] + p.r1), xl: Math.min(p.p0[0] - p.r0, p.p1[0] - p.r1), xh: Math.max(p.p0[0] + p.r0, p.p1[0] + p.r1) };
+    return { lo: Math.min(p.p0[1] - p.r0, p.p1[1] - p.r1), hi: Math.max(p.p0[1] + p.r0, p.p1[1] + p.r1), xl: Math.min(p.p0[0] - p.r0, p.p1[0] - p.r1), xh: Math.max(p.p0[0] + p.r0, p.p1[0] + p.r1), zl: Math.min(p.p0[2] - p.r0, p.p1[2] - p.r1), zh: Math.max(p.p0[2] + p.r0, p.p1[2] + p.r1) };
+  }
+  if (p.kind === 'hull') {
+    const b = { lo: 1e9, hi: -1e9, xl: 1e9, xh: -1e9, zl: 1e9, zh: -1e9 };
+    for (const q of p.pts) { b.lo = Math.min(b.lo, q[1] - q[3]); b.hi = Math.max(b.hi, q[1] + q[3]); b.xl = Math.min(b.xl, q[0] - q[3]); b.xh = Math.max(b.xh, q[0] + q[3]); b.zl = Math.min(b.zl, q[2] - q[3]); b.zh = Math.max(b.zh, q[2] + q[3]); }
+    return b;
   }
   const e = (i) => Math.hypot(p.ax[0][i], p.ax[1][i], p.ax[2][i]);
-  return { lo: p.c[1] - e(1), hi: p.c[1] + e(1), xl: p.c[0] - e(0), xh: p.c[0] + e(0) };
+  return { lo: p.c[1] - e(1), hi: p.c[1] + e(1), xl: p.c[0] - e(0), xh: p.c[0] + e(0), zl: p.c[2] - e(2), zh: p.c[2] + e(2) };
 }
 
 // ---------------------------------------------------------------- camera / projection (orthographic)
