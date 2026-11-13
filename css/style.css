@@ -103,7 +103,8 @@ dialog::backdrop{background:rgba(0,0,0,.45)}.dlg-body{padding:18px}fieldset{bord
 .caption{min-height:2.6em;text-align:center;font-size:1.05rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.4rem .7rem}
 .notice{background:var(--lv1);padding:.4rem .7rem;border-radius:8px;font-size:.9rem}
 .next{display:flex;align-items:center;gap:.7rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 10px}.next-label{color:var(--muted)}.next-name{font-weight:600}
-.p-ctrl{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;position:sticky;bottom:0;background:var(--bg);padding:.5rem 0}
+.p-ctrl{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;position:sticky;bottom:0;background:var(--bg);padding:.5rem 0;z-index:5}
+.player{padding-bottom:var(--bar-h,0px)}
 .big-btn{min-width:110px;background:var(--brand);color:var(--brand-ink);font-weight:700}
 .p-settings{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.5rem .8rem}
 .finish{text-align:center;padding:3rem 0}.finish-mark{font-size:4rem}
@@ -114,5 +115,8 @@ body.in-player .foot,body.in-player .top nav{display:none}
   .item{flex-wrap:wrap}.item-btns{max-width:none;flex-direction:row}
   .cards{grid-template-columns:1fr}.poses{grid-template-columns:repeat(2,1fr)}
   .top nav{order:3;width:100%}
+  .p-ctrl{position:fixed;left:0;right:0;bottom:0;padding-inline:12px!important;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;padding:.4rem 0}
+  .p-ctrl .btn{padding:.4rem .2rem;font-size:.8rem;min-width:0;min-height:40px}
+  .p-ctrl .big-btn{min-width:0}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}

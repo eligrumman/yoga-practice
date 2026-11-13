@@ -142,7 +142,7 @@ export default [
     },
     safe: { he: 'בעיות גב או דיסק, לחץ דם גבוה, גלאוקומה: כופפו ברכיים או הימנעו.', en: 'Back or disc problems, high blood pressure, glaucoma: bend the knees or skip.', ru: 'При проблемах со спиной, высоком давлении или глаукоме сгибайте колени либо пропустите позу.' },
     v: [
-      { he: 'ברכיים כפופות וידיים על השוקיים.', en: 'Bent knees, hands on shins.', ru: 'Колени согнуты, руки на голенях.', kf: { l: [-70, -110, 0], t: -55, s: -75, fix: { a: { to: 'l', pt: 'knee', bend: -1 }, b: { to: 'l', pt: 'knee', bend: -1 } } } },
+      { he: 'ברכיים כפופות וידיים על השוקיים.', en: 'Bent knees, hands on shins.', ru: 'Колени согнуты, руки на голенях.', kf: { l: [-70, -105, 0], t: -50, s: -70, h: -80, fix: { a: { to: 'l', pt: 'ankle', bend: -1 }, b: { to: 'l', pt: 'ankle', bend: -1 } } } },
       { he: 'רגליים ישרות, ידיים לרצפה.', en: 'Legs straight, hands toward the floor.', ru: 'Ноги прямые, руки к полу.', kf: {} },
       { he: 'אחיזה בבהונות והצמדת החזה לירכיים.', en: 'Hold the big toes and draw the chest to the thighs.', ru: 'Возьмитесь за большие пальцы ног, грудь к бёдрам.', kf: { t: -75, s: -110, h: -110, fix: { a: { to: 'l', pt: 'toe', bend: -1 }, b: { to: 'l', pt: 'toe', bend: -1 } } } },
     ],

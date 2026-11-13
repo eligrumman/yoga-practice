@@ -28,7 +28,7 @@ export default [
     },
     safe: { he: 'כאבי פרקי כף יד, כתף או גב תחתון: רדו לברכיים. עצרו אם הגב התחתון צונח.', en: 'Wrist, shoulder or lower-back pain: drop to the knees. Stop if the lower back sags.', ru: 'При боли в запястьях, плечах или пояснице опуститесь на колени. Остановитесь, если поясница проваливается.' },
     v: [
-      { he: 'על הברכיים.', en: 'On the knees.', ru: 'На коленях.', kf: { t: 55, s: 55, h: 50, l: [-160, 170, 175] } },
+      { he: 'על הברכיים.', en: 'On the knees.', ru: 'На коленях.', kf: { t: 38, s: 38, h: 40, l: [-142, 180, 180] } },
       { he: 'קרש מלא על קצות האצבעות.', en: 'Full plank on the toes.', ru: 'Полная планка на носках.', kf: {} },
       { he: 'הרמת רגל אחת לאחור.', en: 'Lift one leg behind you.', ru: 'Поднимите одну ногу назад.', kf: { m: [172, 172, 150] } },
     ],
@@ -68,7 +68,7 @@ export default [
   {
     id: 'camel', sa: 'Ustrasana', en: 'Camel', he: 'גמל', ru: 'Верблюд', cat: 'backbend', sec: 'floor', flow: 50, d: 3, hold: 15, sides: 'single',
     tags: ['flex', 'noback'], start: 'kneel',
-    kf: { t: 96, s: 125, h: 140, a: [-125, -130], l: [-90, 180, 180], fix: { a: { to: 'l', pt: 'ankle', bend: 1 } } },
+    kf: { t: 104, s: 138, h: 150, a: [-125, -130], l: [-90, 180, 180], fix: { a: { to: 'l', pt: 'ankle', bend: 1 } } },
     cue: {
       he: ['כרעו על הברכיים, ירכיים מעל הברכיים.', 'כפות הידיים על הגב התחתון, אצבעות כלפי מטה.', 'הרימו את החזה והרחיבו אותו לתקרה.', 'הניחו לראש ולצוואר להישאר נוחים.'],
       en: ['Kneel with the hips over the knees.', 'Place the hands on your lower back, fingers down.', 'Lift the chest and open it toward the ceiling.', 'Keep the head and neck comfortable.'],
@@ -78,13 +78,13 @@ export default [
     v: [
       { he: 'ידיים במותניים, קשת קטנה.', en: 'Hands on the lower back, small arch.', ru: 'Руки на пояснице, небольшой прогиб.', kf: { t: 92, s: 105, h: 105, fix: { a: { to: 'hip', dx: -10, bend: -1 }, b: { to: 'hip', dx: -10, bend: -1 } } } },
       { he: 'קשת בינונית וידיים לכיוון העקבים.', en: 'Medium arch, hands toward the heels.', ru: 'Средний прогиб, руки тянутся к пяткам.', kf: {} },
-      { he: 'קשת עמוקה יותר, מבט לאחור.', en: 'Deeper arch, gaze back.', ru: 'Прогиб глубже, взгляд назад.', kf: { t: 100, s: 148, h: 165 } },
+      { he: 'קשת עמוקה יותר, מבט לאחור.', en: 'Deeper arch, gaze back.', ru: 'Прогиб глубже, взгляд назад.', kf: { t: 112, s: 156, h: 172 } },
     ],
   },
   {
     id: 'bridge', sa: 'Setu Bandhasana', en: 'Bridge', he: 'גשר', ru: 'Мост', cat: 'backbend', sec: 'floor', flow: 60, d: 1, hold: 20, sides: 'single',
     tags: ['back', 'strength', 'relax'], start: 'lie',
-    kf: { t: -140, s: -120, h: 180, a: [-5, -5], l: [-8, -82, 0], fix: { a: { x: 38, bend: -1 } } },
+    kf: { t: -135, s: -118, h: -172, a: [-5, -5], l: [-22, -118, 0], fix: { a: { x: 72, bend: -1 } } },
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן.', 'לחצו את כפות הרגליים והרימו את האגן.', 'הרחיקו את הברכיים זו מזו קלות, לא יותר מרוחב האגן.', 'הורידו אחרי כמה נשימות, חוליה אחר חוליה.'],
       en: ['Lie on your back, knees bent, heels near the hips.', 'Press the feet down and lift the hips.', 'Keep the knees hip-width apart.', 'Lower after a few breaths, one vertebra at a time.'],
@@ -92,9 +92,9 @@ export default [
     },
     safe: { he: 'אל תסובבו את הראש בזמן ההחזקה. צוואר רגיש: הניחו שמיכה מתחת לכתפיים.', en: 'Do not turn the head while holding. Sensitive neck: place a folded blanket under the shoulders.', ru: 'Не поворачивайте голову во время удержания. Если шея чувствительна, подложите сложенное одеяло под плечи.' },
     v: [
-      { he: 'הרמה נמוכה של האגן.', en: 'Low lift of the hips.', ru: 'Небольшой подъём таза.', kf: { t: -152, s: -132, l: [-3, -77, 0], fix: { a: { x: 38, bend: -1 } } } },
+      { he: 'הרמה נמוכה של האגן.', en: 'Low lift of the hips.', ru: 'Небольшой подъём таза.', kf: { t: -148, s: -134, h: -165, l: [-8, -110, 0] } },
       { he: 'גשר יציב עם ידיים ליד הגוף.', en: 'Steady bridge with arms alongside.', ru: 'Устойчивый мост, руки вдоль тела.', kf: {} },
-      { he: 'גשר גבוה, ידיים שלובות מתחת לגוף.', en: 'High bridge, hands clasped beneath you.', ru: 'Высокий мост, руки сцеплены под спиной.', kf: { t: -130, s: -105, l: [-12, -88, 0], a: [-8, -8] } },
+      { he: 'גשר גבוה, ידיים שלובות מתחת לגוף.', en: 'High bridge, hands clasped beneath you.', ru: 'Высокий мост, руки сцеплены под спиной.', kf: { t: -125, s: -110, h: -175, l: [-28, -122, 0] } },
     ],
   },
   {
@@ -108,7 +108,7 @@ export default [
     },
     safe: { he: 'כאבי ברכיים או הריון: פתחו ברכיים והניחו כרית בין העקבים לאגן.', en: 'Knee pain or pregnancy: open the knees and place a cushion between heels and hips.', ru: 'При боли в коленях или беременности раздвиньте колени и положите подушку между пятками и тазом.' },
     v: [
-      { he: 'אגן גבוה יותר, ידיים לצד הגוף.', en: 'Hips higher, hands by your sides.', ru: 'Таз выше, руки вдоль тела.', kf: { l: [-40, 180, 180], t: 5, s: 0, a: [-175, -170], fix: { a: null } } },
+      { he: 'אגן גבוה יותר, ידיים לצד הגוף.', en: 'Hips higher, hands by your sides.', ru: 'Таз выше, руки вдоль тела.', kf: { l: [-40, 180, 180], t: -12, s: -22, h: -30, a: [-175, -170], fix: { a: null } } },
       { he: 'ידיים קדימה והמצח למטה.', en: 'Arms forward, forehead down.', ru: 'Руки вперёд, лоб вниз.', kf: {} },
       { he: 'אגן נמוך על העקבים, ידיים רחוקות קדימה.', en: 'Hips low on the heels, arms far forward.', ru: 'Таз низко на пятках, руки далеко вперёд.', kf: { l: [-15, 180, 180], t: -12, s: -15, fix: { a: { x: 80, bend: -1 } } } },
     ],
@@ -196,7 +196,7 @@ export default [
   {
     id: 'seated-twist', sa: 'Ardha Matsyendrasana', en: 'Seated twist', he: 'סיבוב בישיבה', ru: 'Скручивание сидя', cat: 'twist', sec: 'cool', flow: 50, d: 2, hold: 20, sides: 'both',
     tags: ['back', 'flex', 'noback'], start: 'sit',
-    kf: { t: 94, s: 100, h: 115, a: [-110, -85], b: [65, 20], l: [62, -110, 0], m: [-3, -3, 80], fix: { a: { x: -22, bend: -1 }, b: { to: 'l', pt: 'knee', bend: 1 } } },
+    kf: { t: 94, s: 100, h: 115, a: [-110, -85], b: [65, 20], l: [62, -110, 0], m: [-3, -3, 80], tw: 0.7, fix: { a: { x: -22, bend: -1 }, b: { to: 'l', pt: 'knee', bend: 1 } } },
     cue: {
       he: ['שבו עם רגל אחת ישרה והשנייה כפופה כשכף הרגל על הרצפה.', 'הארכו את עמוד השדרה בשאיפה.', 'בנשיפה סובבו את החזה לכיוון הברך המורמת.', 'הסיבוב מגיע מהחזה. מבט עדין מעבר לכתף.'],
       en: ['Sit with one leg straight and one bent, foot on the floor.', 'Inhale to lengthen the spine.', 'Exhale and turn the chest toward the raised knee.', 'The turn comes from the chest. Gaze softly over the shoulder.'],
@@ -204,9 +204,9 @@ export default [
     },
     safe: { he: 'בהריון, פיצול דיסק או בעיות בגב: סובבו מעט בלבד. אל תכפו.', en: 'Pregnancy, disc issues or back problems: twist only a little. Never force it.', ru: 'При беременности, проблемах с дисками или спиной скручивайтесь совсем немного. Не форсируйте.' },
     v: [
-      { he: 'שתי רגליים ישרות, סיבוב קל.', en: 'Both legs straight, gentle twist.', ru: 'Обе ноги прямые, лёгкое скручивание.', kf: { l: [-3, -3, 80], h: 100, t: 90, s: 92, fix: { a: { x: -22, bend: -1 }, b: { to: 'hip', dx: 12, bend: 1 } } } },
+      { he: 'שתי רגליים ישרות, סיבוב קל.', en: 'Both legs straight, gentle twist.', ru: 'Обе ноги прямые, лёгкое скручивание.', kf: { l: [-3, -3, 80], h: 100, t: 90, s: 92, tw: 0.9, fix: { a: { x: -22, bend: -1 }, b: { to: 'hip', dx: 12, bend: 1 } } } },
       { he: 'ברך מורמת, יד סביב הברך.', en: 'Knee raised, arm around the knee.', ru: 'Колено поднято, рука обхватывает колено.', kf: {} },
-      { he: 'סיבוב עמוק יותר עם חיבוק הברך.', en: 'Deeper twist, hugging the knee.', ru: 'Скручивание глубже, объятие колена.', kf: { s: 108, h: 125, b: [80, 40] } },
+      { he: 'סיבוב עמוק יותר עם חיבוק הברך.', en: 'Deeper twist, hugging the knee.', ru: 'Скручивание глубже, объятие колена.', kf: { s: 108, h: 125, b: [80, 40], tw: 0.5 } },
     ],
   },
   {

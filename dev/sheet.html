@@ -1,0 +1,15 @@
+<!doctype html><meta charset=utf-8><title>sheet</title>
+<style>
+body{font:11px sans-serif;margin:4px;background:#fff}
+.g{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+.c{border:1px solid #ddd}svg{width:100%;display:block;background:#f6f3ee}
+.seg{stroke:#8a5a44}.seg.far{stroke:#b89a8c}.seg.torso{stroke:#6d4636}.fig-head{fill:#6d4636}.fig-nose{fill:#f6f3ee}
+.fig-floor{stroke:#999;stroke-width:2}.prop-block{fill:#7ba7a0}.prop-strap{stroke:#c77;stroke-width:3}.prop-strap-loop{fill:none;stroke:#c77;stroke-width:3}.prop-cushion{fill:#c9a}.prop-wall{fill:#ccd}
+</style><div class=g id=g></div>
+<script type=module>
+import {POSES} from '../data/poses.js';import {renderStatic} from '../js/figure.js';
+const q=new URLSearchParams(location.search);const lv=q.get('l')?[+q.get('l')]:[0,1,2];
+const only=q.get('p');const g=document.getElementById('g');if(q.get('c'))g.style.gridTemplateColumns=`repeat(${q.get('c')},1fr)`;
+for(const p of POSES){if(only&&!only.split(',').includes(p.id))continue;for(const l of lv){const d=document.createElement('div');d.className='c';d.innerHTML=`<div>${p.id} L${l}</div><svg></svg>`;g.append(d);try{renderStatic(d.querySelector('svg'),p,l)}catch(e){d.append(e.message)}}}
+window.DONE=POSES.length
+</script>

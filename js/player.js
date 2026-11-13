@@ -68,12 +68,19 @@ export class Player {
           el('div', { class: 'p-info' }, this.elName, this.elSub, this.elCues, this.elDetails)),
         this.elCap, this.elNotice,
         this.elNext,
-        el('div', { class: 'p-ctrl' },
+        el('div', { class: 'p-ctrl', id: 'p-ctrl' },
           ib('⏮ ' + T('prev'), () => this.jump(-1)),
           ib('↺ ' + T('restart'), () => this.restartPose()),
+          ib('▷ ' + T('replayEntry'), () => this.anim.replay()),
           this.btnPause,
           ib(T('plus10'), () => this.plus10()),
           ib(T('skip') + ' ⏭', () => this.jump(1)))));
+    const ctrlEl = document.getElementById('p-ctrl');
+    if (ctrlEl && window.ResizeObserver) {
+      const pl = ctrlEl.parentElement;
+      this._ro = new ResizeObserver(() => pl.style.setProperty('--bar-h', ctrlEl.offsetHeight + 'px'));
+      this._ro.observe(ctrlEl);
+    }
     this.nar.onCaption = (t) => { this.elCap.textContent = t; };
     this.nar.onNotice = (k) => { this.elNotice.hidden = false; this.elNotice.textContent = k === 'novoice' ? T('noVoice') : T('noSpeech'); };
     this.refreshMute();
@@ -121,7 +128,7 @@ export class Player {
     this.nextSaid = false; this.midSaid = false;
     const lvl = s.level;
     const prevFrame = null;
-    this.anim.set(s.pose, lvl, { mirror: s.side === 1, mode: 'loop', from: prevFrame });
+    this.anim.set(s.pose, lvl, { mirror: s.side === 1, mode: 'once', from: prevFrame });
     this.anim.setPlaying(!this.paused);
     this.svg.setAttribute('aria-label', s.pose[this.lang]);
     this.renderInfo(s);
@@ -236,6 +243,6 @@ export class Player {
   }
   again() { this.destroy(); const p = new Player(this.root, { plan: this.plan, narrator: this.nar, lang: this.lang, onExit: this.onExit, onFinish: this.onFinish }); p.start(); this.successor = p; }
   releaseWake() { try { this.wake?.release(); } catch { /* none */ } this.wake = null; }
-  destroy() { clearInterval(this.timer); this.anim.stop(); this.nar.cancel(); this.releaseWake(); this.nar.onCaption = () => {}; }
+  destroy() { this._ro?.disconnect(); clearInterval(this.timer); this.anim.stop(); this.nar.cancel(); this.releaseWake(); this.nar.onCaption = () => {}; }
   exit(home) { this.destroy(); this.onExit?.(home); }
 }

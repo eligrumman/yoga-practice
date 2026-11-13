@@ -96,6 +96,7 @@ const T = {
   prev: { he: 'הקודמת', ru: 'Назад', en: 'Previous' },
   plus10: { he: '+10 שנ׳', ru: '+10 с', en: '+10s' },
   restart: { he: 'התחל תנוחה מחדש', ru: 'Заново', en: 'Restart pose' },
+  replayEntry: { he: 'הצג כניסה שוב', ru: 'Показать вход', en: 'Replay entry' },
   side: { he: 'צד', ru: 'Сторона', en: 'Side' },
   sideLR: [{ he: 'ראשון', ru: 'первая', en: 'first' }, { he: 'שני', ru: 'вторая', en: 'second' }],
   switchSides: { he: 'החליפו צד', ru: 'Смените сторону', en: 'Switch sides' },

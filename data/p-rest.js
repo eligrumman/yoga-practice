@@ -19,7 +19,7 @@ export default [
   {
     id: 'supine-twist', sa: 'Supta Matsyendrasana', en: 'Reclined twist', he: 'סיבוב בשכיבה', ru: 'Скручивание лёжа', cat: 'twist', sec: 'cool', flow: 70, d: 1, hold: 35, sides: 'both',
     tags: ['back', 'relax', 'flex'], start: 'lie',
-    kf: { t: 180, s: 180, h: 160, a: [-10, -8], b: [-10, -8], l: [30, -70, 0], m: [18, -80, 0] },
+    kf: { t: 180, s: 180, h: 188, a: [-55, -50], b: [105, 110], l: [50, 10, 0], m: [58, 18, 0], z: { l: [0.85, 0.8, 0.7], m: [0.85, 0.8, 0.7], a: 0.3, b: 0.75 } },
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות.', 'הורידו את שתי הברכיים לצד אחד.', 'פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה.', 'הפנו את המבט לצד ההפוך ונשמו.'],
       en: ['Lie on your back with the knees bent.', 'Lower both knees to one side.', 'Open the arms wide and keep the shoulders on the floor.', 'Turn your gaze the other way and breathe.'],
@@ -27,9 +27,9 @@ export default [
     },
     safe: { he: 'כאבי גב תחתון או הריון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות.', en: 'Lower back pain or pregnancy: place a cushion under the knees and go only as far as comfortable.', ru: 'При боли в пояснице или беременности подложите подушку под колени и опускайтесь лишь до удобного предела.' },
     v: [
-      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', kf: { l: [40, -60, 0], m: [32, -66, 0] } },
+      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', kf: { l: [75, -30, 0], m: [80, -25, 0], z: { l: [0.95, 0.9, 0.8], m: [0.95, 0.9, 0.8], a: 0.3, b: 0.85 }, a: [-45, -45], b: [95, 100] } },
       { he: 'שתי ברכיים לצד.', en: 'Both knees to the side.', ru: 'Оба колена в сторону.', kf: {} },
-      { he: 'רגל אחת ישרה, יד אוחזת בברך.', en: 'One leg straight, hand on the bent knee.', ru: 'Одна нога прямая, рука на согнутом колене.', kf: { m: [0, 0, 80], l: [20, -60, 0], b: [10, 15] } },
+      { he: 'רגל אחת ישרה, יד אוחזת בברך.', en: 'One leg straight, hand on the bent knee.', ru: 'Одна нога прямая, рука на согнутом колене.', kf: { m: [0, 0, 80], z: { l: [0.85, 0.8, 0.7], m: 1, a: 0.3, b: 0.75 }, l: [45, 5, 0] } },
     ],
   },
   {
@@ -51,7 +51,7 @@ export default [
   {
     id: 'figure-four', sa: 'Supta Kapotasana', en: 'Reclined figure four', he: 'ארבע שכובה', ru: 'Лёжа, ноги «четвёркой»', cat: 'hip opener', sec: 'cool', flow: 90, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'], start: 'lie',
-    kf: { t: 180, s: 175, h: 170, a: [60, 20], l: [90, 0, 0], m: [125, -165, -130], fix: { a: { to: 'l', pt: 'knee', bend: 1 } } },
+    kf: { t: 180, s: 178, h: 175, a: [-10, -8], l: [55, -80, 0], m: [125, -20, -90], z: { m: [0.95, 0.9, 0.9] }, fix: { m: { to: 'l', pt: 'knee', bend: 1 } } },
     cue: {
       he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'משכו את הרגל התומכת לעבר החזה.', 'לחצו קלות את הברך שבחוץ והרפו.'],
       en: ['Lie on your back with the knees bent.', 'Cross one ankle over the opposite thigh.', 'Draw the supporting leg toward your chest.', 'Gently press the outer knee away and release.'],
@@ -59,9 +59,9 @@ export default [
     },
     safe: { he: 'כאבי ברכיים: כופפו את כף הרגל העליונה ואל תלחצו על הברך. אפשר להשאיר את כף הרגל התחתונה על הרצפה.', en: 'Knee pain: flex the top foot and never press the knee. You may keep the lower foot on the floor.', ru: 'При боли в коленях согните верхнюю стопу и не давите на колено. Нижнюю стопу можно оставить на полу.' },
     v: [
-      { he: 'כף רגל תחתונה על הרצפה.', en: 'Lower foot on the floor.', ru: 'Нижняя стопа на полу.', kf: { l: [55, -75, 0], fix: { a: null }, a: [-10, -10] } },
-      { he: 'רגל תחתונה באוויר, ידיים סביב הירך.', en: 'Lower leg lifted, hands around the thigh.', ru: 'Нижняя нога поднята, руки обхватывают бедро.', kf: {} },
-      { he: 'משיכה קרובה יותר לחזה.', en: 'Draw the leg closer to the chest.', ru: 'Подтяните ногу ближе к груди.', kf: { l: [110, -10, 0], s: 155, h: 145 } },
+      { he: 'כף רגל תחתונה על הרצפה.', en: 'Lower foot on the floor.', ru: 'Нижняя стопа на полу.', kf: {} },
+      { he: 'רגל תחתונה באוויר, ידיים סביב הירך.', en: 'Lower leg lifted, hands around the thigh.', ru: 'Нижняя нога поднята, руки обхватывают бедро.', kf: { l: [90, 5, 0] } },
+      { he: 'משיכה קרובה יותר לחזה.', en: 'Draw the leg closer to the chest.', ru: 'Подтяните ногу ближе к груди.', kf: { l: [105, 15, 0], s: 160, h: 150, fix: { a: { to: 'l', pt: 'knee', bend: 1 } } } },
     ],
   },
   {
@@ -109,7 +109,7 @@ export default [
     v: [
       { he: 'ברכיים כפופות, כפות רגליים על הרצפה.', en: 'Knees bent, feet on the floor.', ru: 'Колени согнуты, стопы на полу.', kf: { l: [53, -76, 0] } },
       { he: 'רגליים ישרות, ידיים ליד הגוף.', en: 'Legs straight, arms by your sides.', ru: 'Ноги прямые, руки вдоль тела.', kf: {} },
-      { he: 'ידיים רחוקות מהגוף ועיניים עצומות.', en: 'Arms away from the body, eyes closed.', ru: 'Руки в стороны от тела, глаза закрыты.', kf: { a: [-16, -14] } },
+      { he: 'ידיים רחוקות מהגוף ועיניים עצומות.', en: 'Arms away from the body, eyes closed.', ru: 'Руки в стороны от тела, глаза закрыты.', kf: { a: [-9, -7] } },
     ],
   },
 ];

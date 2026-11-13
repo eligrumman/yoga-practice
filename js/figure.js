@@ -27,8 +27,12 @@ function ik(p0, target, L1, L2, bend) {
   return [a1, ang(e, tgt)];
 }
 
-function legPts(P, l) {
-  const k = add(P, dir(l[0]), D.th), a = add(k, dir(l[1]), D.sh), t = add(a, dir(l[2]), D.ft);
+// Optional depth cue: frame.z = { l, m, a, b } foreshortening of a limb (number, or per-segment array).
+// Used for twists, where a limb points toward/away from the viewer and so appears shorter.
+const zv = (z, n) => (z == null ? [1, 1, 1] : Array.isArray(z) ? [z[0] ?? 1, z[1] ?? z[0] ?? 1, z[2] ?? z[1] ?? z[0] ?? 1] : [z, z, z]);
+function legPts(P, l, z) {
+  const q = zv(z);
+  const k = add(P, dir(l[0]), D.th * q[0]), a = add(k, dir(l[1]), D.sh * q[1]), t = add(a, dir(l[2]), D.ft * q[2]);
   return [P, k, a, t];
 }
 
@@ -38,10 +42,19 @@ export function resolve(f) {
     t: f.t, s: f.s ?? f.t, h: f.h ?? f.s ?? f.t,
     a: [...f.a], b: [...(f.b || f.a)], l: [...f.l], m: [...(f.m || f.l)],
   };
+  if (f.z) o.z = f.z;
+  if (f.tw != null) o.tw = f.tw;
   const fx = f.fix;
   if (!fx) return o;
   const P = [0, 0];
-  if (fx.m) {
+  if (fx.m && fx.m.to) {
+    // far leg's ankle/knee/toe placed on a point of the near leg (e.g. figure-four), honouring foreshortening
+    const L1 = legPts(P, o.l, f.z?.l);
+    const tgt = L1[{ knee: 1, ankle: 2, toe: 3 }[fx.m.pt || 'knee']];
+    const q = zv(f.z?.m);
+    const [a1, a2] = ik(P, tgt, D.th * q[0], D.sh * q[1], fx.m.bend ?? 1);
+    o.m[0] = a1; o.m[1] = a2;
+  } else if (fx.m) {
     const L1 = legPts(P, o.l);
     const g1 = Math.max(L1[2][1], L1[3][1]);
     const toeOff = -Math.sin(rad(o.m[2])) * D.ft;
@@ -53,7 +66,7 @@ export function resolve(f) {
     o.m[0] = a1; o.m[1] = a2;
   }
   const M = add(P, dir(o.t), D.tl), S = add(M, dir(o.s), D.tl);
-  const legs = { l: legPts(P, o.l), m: legPts(P, o.m) };
+  const legs = { l: legPts(P, o.l, f.z?.l), m: legPts(P, o.m, f.z?.m) };
   const hc = add(S, dir(o.h), D.neck + D.head);
   let G = Math.max(P[1] + 13, M[1] + 13, S[1] + 13, hc[1] + 12);
   for (const q of Object.values(legs)) G = Math.max(G, q[1][1] + 8, q[2][1] + 7, q[3][1] + 4);
@@ -84,8 +97,9 @@ export function geometry(f) {
   const P = [0, 0];
   const M = add(P, dir(f.t), D.tl), S = add(M, dir(f.s), D.tl);
   const head = add(S, dir(f.h), D.neck + D.head);
-  const arm = (a) => { const e = add(S, dir(a[0]), D.ua); return [S, e, add(e, dir(a[1]), D.fa)]; };
-  return { P, M, S, head, a: arm(f.a), b: arm(f.b), l: legPts(P, f.l), m: legPts(P, f.m) };
+  const z = f.z || {};
+  const arm = (a, zz) => { const q = zv(zz); const e = add(S, dir(a[0]), D.ua * q[0]); return [S, e, add(e, dir(a[1]), D.fa * q[1])]; };
+  return { P, M, S, head, a: arm(f.a, z.a), b: arm(f.b, z.b), l: legPts(P, f.l, z.l), m: legPts(P, f.m, z.m) };
 }
 
 export function bottom(g) {
@@ -104,8 +118,17 @@ export function xExtent(g) {
 
 const lerpA = (a, b, t) => a + (((b - a + 540) % 360) - 180) * t;
 const lerpArr = (x, y, t) => x.map((v, i) => lerpA(v, y[i], t));
+const zl = (a, b, t) => {
+  const x = zv(a), y = zv(b);
+  return x.map((v, i) => v + (y[i] - v) * t);
+};
 export function blend(f0, f1, t) {
+  const z0 = f0.z || {}, z1 = f1.z || {};
+  const zk = {};
+  for (const k of ['l', 'm', 'a', 'b']) if (z0[k] != null || z1[k] != null) zk[k] = zl(z0[k], z1[k], t);
+  const tw0 = f0.tw ?? 1, tw1 = f1.tw ?? 1;
   return {
+    ...(Object.keys(zk).length ? { z: zk } : {}), ...(tw0 !== 1 || tw1 !== 1 ? { tw: tw0 + (tw1 - tw0) * t } : {}),
     t: lerpA(f0.t, f1.t, t), s: lerpA(f0.s, f1.s, t), h: lerpA(f0.h, f1.h, t),
     a: lerpArr(f0.a, f1.a, t), b: lerpArr(f0.b, f1.b, t),
     l: lerpArr(f0.l, f1.l, t), m: lerpArr(f0.m, f1.m, t),
@@ -163,7 +186,7 @@ export class Figure {
   }
 
   // props: [{type, ...}], e: 0..1 prop visibility, cx: horizontal centre (model x mapped to 200)
-  draw(frame, { mirror = false, props = [], e = 1, cx = null } = {}) {
+  draw(frame, { mirror = false, props = [], e = 1, cx = null, breath = 0 } = {}) {
     const g = geometry(frame);
     let lift = 0;
     for (const p of props) if (p.type === 'cushion') lift = (p.h || 12) * e;
@@ -176,6 +199,8 @@ export class Figure {
       el.setAttribute('x1', a[0]); el.setAttribute('y1', a[1]); el.setAttribute('x2', b[0]); el.setAttribute('y2', b[1]);
     };
     const s = this.s;
+    const tw = (frame.tw ?? 1) * (1 + (breath || 0));
+    s.t1.setAttribute('stroke-width', W.torso * tw); s.t2.setAttribute('stroke-width', W.torso * tw);
     ln(s.bua, g.b[0], g.b[1]); ln(s.bfa, g.b[1], g.b[2]);
     ln(s.mth, g.m[0], g.m[1]); ln(s.msh, g.m[1], g.m[2]); ln(s.mft, g.m[2], g.m[3]);
     ln(s.t1, g.P, g.M); ln(s.t2, g.M, g.S);
@@ -247,16 +272,20 @@ export class Animator {
       else e = 0;
     }
     let f = blend(c.start, c.end, e);
-    if (e > 0.98) { // breathing
-      const b = Math.sin((time * 2 * Math.PI) / 4.5);
-      f = { ...f, s: f.s + b * 1.4, h: f.h + b * 0.8 };
+    // Breathing during the hold: ~5 s cycle; chest widens/rises slightly, head follows.
+    let breath = 0;
+    const k = clamp((e - 0.92) / 0.08);
+    if (k > 0) {
+      const b = Math.sin((time * 2 * Math.PI) / 5);
+      breath = b * 0.045 * k;
+      f = { ...f, s: f.s + b * 1.8 * k, h: f.h + b * 1.0 * k };
     }
-    return { f, e };
+    return { f, e, breath };
   }
   frame(time) {
-    const { f, e } = this.frameAt(time);
+    const { f, e, breath } = this.frameAt(time);
     const c = this.cfg;
-    this.fig.draw(f, { mirror: c.mirror, props: c.props, e, cx: c.c0 + (c.c1 - c.c0) * e });
+    this.fig.draw(f, { mirror: c.mirror, props: c.props, e, breath, cx: c.c0 + (c.c1 - c.c0) * e });
   }
   loop = (now) => {
     if (!this.raf) return;
@@ -268,6 +297,7 @@ export class Animator {
   start() { if (this.raf) return; this.last = performance.now(); this.raf = requestAnimationFrame(this.loop); }
   stop() { cancelAnimationFrame(this.raf); this.raf = 0; }
   setPlaying(p) { this.playing = p; }
+  replay() { this.time = 0; }
   setSpeed(s) { this.speed = s; }
   currentFrame() { return this.frameAt(this.time).f; }
 }
