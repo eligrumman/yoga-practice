@@ -309,7 +309,7 @@ export class Renderer3D {
     // target: figure bounds centre; radius to fit
     const hx = (b.maxX - b.minX) / 2, hy = (b.maxY - b.minY) / 2, hz = (b.maxZ - b.minZ) / 2;
     this.target.set(cx, (b.minY + b.maxY) / 2 - 2, cz);
-    this.fitR = Math.max(112, Math.hypot(hx, hy, hz * 0.5) * 1.05);
+    this.fitR = Math.max(80, Math.hypot(hx, hy, hz * 0.5) * 1.05);
   }
 
   // ---------------------------------------------------------------- props
@@ -355,7 +355,8 @@ export class Renderer3D {
         const d = this.v1.set(f.x - w[0], f.y - w[1], f.z - w[2]); const len = Math.max(1e-3, d.length());
         this.q.setFromUnitVectors(this.up, d.divideScalar(len));
         o.line.position.set((w[0] + f.x) / 2, (w[1] + f.y) / 2, (w[2] + f.z) / 2);
-        o.line.quaternion.copy(this.q); o.line.scale.set(1.1, len, 1.1);
+        o.line.quaternion.copy(this.q); const ppu = Math.max(0.5, Math.min(this.w, this.h) / (2 * (this.fitR || 125) * (this.zoom || 1))); const sr = Math.max(1.0, Math.min(2.4, 2 / ppu)); // aim for ~4 px wide
+        o.line.scale.set(sr, len, sr);
         o.loop.position.copy(f); o.loop.scale.set(5.2, 7.5, 5.2);
         o.loop.rotation.set(0, 1.2, 0);
       }

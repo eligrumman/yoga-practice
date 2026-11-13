@@ -36,6 +36,17 @@ function ensureDefs() {
   document.body.appendChild(svg);
 }
 
+function linGrad(defs, id, v, far) {
+  const g = mk('linearGradient', { id, gradientUnits: 'userSpaceOnUse' }, defs);
+  const stop = (off, name) => {
+    const s = mk('stop', { offset: off }, g);
+    const c = far ? `color-mix(in srgb, var(--${name}) 80%, var(--fig-far, #1d1814))` : `var(--${name})`;
+    s.setAttribute('style', `stop-color:var(--${name});stop-color:${c}`);
+  };
+  stop('0', v); stop('.28', v + '-hi'); stop('.62', v); stop('1', v + '-lo');
+  return g;
+}
+
 // ------------------------------------------------------------ fitting
 // A view = { cam, scale, cx }: orthographic camera, px per model unit, model-space screen-x centre.
 export function framesBounds(frames, cam) {
@@ -54,7 +65,7 @@ export function framesBounds(frames, cam) {
   }
   return { sx0, sx1, sy0, sy1 };
 }
-export function fitView(frames, camSpec, { minScale = 0.7, maxScale = 1.45, pad = 1 } = {}) {
+export function fitView(frames, camSpec, { minScale = 0.7, maxScale = 2.1, pad = 1 } = {}) {
   const cam = camera(camSpec.az, camSpec.el);
   const b = framesBounds(frames, cam);
   const w = (b.sx1 - b.sx0) * pad + 14, h = Math.max(1, b.sy1) + 8;
@@ -83,6 +94,7 @@ export class Renderer2D {
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     svg.innerHTML = '';
     this.floorOn = floor;
+    this.defs = mk('defs', {}, svg); this.lgs = new Map(); this.uid = 'l' + (Renderer2D._n = (Renderer2D._n || 0) + 1);
     this.shadow = mk('ellipse', { fill: 'url(#fg-shadow)', class: 'fig-shadow' }, svg);
     if (floor) this.floor = mk('line', { x1: 10, x2: VBW - 10, y1: FLOOR, y2: FLOOR, class: 'fig-floor' }, svg);
     this.root = mk('g', {}, svg);
@@ -137,14 +149,27 @@ export class Renderer2D {
       let el = this.els.get(id);
       const tag = it.cap ? 'path' : 'ellipse';
       if (!el) {
-        el = mk(tag, { class: 'fp fp-' + it.p.mat + (id.startsWith('h_hair') || id.startsWith('h_fringe') || id.startsWith('h_bun') ? ' fp-hair' : '') });
+        el = mk(tag, { class: 'fp fp-' + it.p.mat + (id.startsWith('h_hair') || id.startsWith('h_fringe') || id.startsWith('h_bun') ? ' fp-hair' : id.startsWith('h_') ? ' fp-head' : '') });
         this.els.set(id, el);
       }
       const far = it.cap ? (it.p.p0[2] + it.p.p1[2]) / 2 < S.J.pelvis[2] - 3 && PX(it.p.p0)[2] < dref - 4 : false;
       const farEll = !it.cap && it.p.c[2] < S.J.pelvis[2] - 6 && it.key < dref - 4;
       const m = it.p.mat;
       const fill = mat(m, it.cap ? far : farEll && !id.startsWith('h_'));
-      if (it.cap) { el.setAttribute('d', it.d); } else {
+      if (it.cap) {
+        el.setAttribute('d', it.d);
+        // cylindrical shading: linear gradient across the limb axis, light from the upper left
+        const a = PX(it.p.p0), b = PX(it.p.p1), dx = b[0] - a[0], dy = b[1] - a[1], dl = Math.hypot(dx, dy) || 1;
+        let nx = -dy / dl, ny = dx / dl; if (nx * -0.5 + ny * -0.85 < 0) { nx = -nx; ny = -ny; }
+        const rr = Math.max(it.p.r0, it.p.r1) * scale, mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+        const key = id + (far ? 'f' : 'n');
+        let g = this.lgs.get(key);
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${key}`, MATS[m], far); this.lgs.set(key, g); }
+        g.setAttribute('x1', (mx + nx * rr).toFixed(2)); g.setAttribute('y1', (my + ny * rr).toFixed(2));
+        g.setAttribute('x2', (mx - nx * rr).toFixed(2)); g.setAttribute('y2', (my - ny * rr).toFixed(2));
+        el.setAttribute('fill', `url(#${this.uid}-${key})`);
+        continue;
+      } else {
         el.setAttribute('cx', it.c[0].toFixed(2)); el.setAttribute('cy', it.c[1].toFixed(2));
         el.setAttribute('rx', it.rx.toFixed(2)); el.setAttribute('ry', it.ry.toFixed(2));
         el.setAttribute('transform', `rotate(${it.ang.toFixed(2)} ${it.c[0].toFixed(2)} ${it.c[1].toFixed(2)})`);

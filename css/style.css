@@ -57,7 +57,7 @@ input[type=search]{flex:1;min-width:180px}
 .fig.big{aspect-ratio:4/3;background:linear-gradient(var(--bg),var(--surface));border:1px solid var(--line);border-radius:var(--r)}
 .fig.mini{width:84px;aspect-ratio:4/3;background:var(--bg);border-radius:8px;flex:none}
 .fig.item-fig{width:84px;aspect-ratio:4/3;background:var(--bg);border-radius:8px}
-.fp{stroke:var(--ol);stroke-width:.6;stroke-linejoin:round}.fp-hair{stroke:none}
+.fp{stroke:none}.fp-head{stroke:var(--ol);stroke-width:.5;stroke-linejoin:round}.fp-hair{stroke:none}
 .fig-eye,.fig-brow,.fig-mouth{stroke:var(--fig-ink);stroke-width:1.15;fill:none;stroke-linecap:round}.fig-brow{stroke-width:.9}.fig-mouth{stroke:#9a5a4c;stroke-width:1.1}
 .fig-cheek{fill:#e58c7e;stroke:none}
 .fig-floor{stroke:var(--floor);stroke-width:2.5;stroke-linecap:round}

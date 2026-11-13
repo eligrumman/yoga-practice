@@ -37,13 +37,13 @@
         "wristR": [0, 0, 0],
         "hipR": [0, 0, 55],
         "kneeR": [0, 0, -5],
-        "ankleR": [0, 0, -90],
+        "ankleR": [0, 0, 0],
         "shoulderL": [0, 0, -10],
         "elbowL": [0, 0, 2],
         "wristL": [0, 0, 0],
         "hipL": [0, 0, 55],
         "kneeL": [0, 0, -5],
-        "ankleL": [0, 0, -90]
+        "ankleL": [0, 0, 0]
       },
       "props": [{"type":"wall"}]
     },
@@ -61,13 +61,13 @@
         "wristR": [0, 0, 0],
         "hipR": [0, 0, 90],
         "kneeR": [0, 0, 0],
-        "ankleR": [0, 0, -90],
+        "ankleR": [0, 0, 0],
         "shoulderL": [0, 0, -9],
         "elbowL": [0, 0, 2],
         "wristL": [0, 0, 0],
         "hipL": [0, 0, 90],
         "kneeL": [0, 0, 0],
-        "ankleL": [0, 0, -90]
+        "ankleL": [0, 0, 0]
       },
       "props": [{"type":"wall"}]
     },
@@ -85,13 +85,13 @@
         "wristR": [0, 0, 0],
         "hipR": [0, 0, 90],
         "kneeR": [0, 0, 0],
-        "ankleR": [0, 0, -90],
+        "ankleR": [0, 0, 0],
         "shoulderL": [0, 0, 172],
         "elbowL": [0, 0, 3],
         "wristL": [0, 0, 0],
         "hipL": [0, 0, 90],
         "kneeL": [0, 0, 0],
-        "ankleL": [0, 0, -90]
+        "ankleL": [0, 0, 0]
       },
       "props": [{"type":"wall"}]
     }

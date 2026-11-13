@@ -171,7 +171,10 @@ export class Animator {
       hold = swapLR(hold); alt = alt && swapLR(alt); props = mirrorProps(props);
       if (!from) start = swapLR(start);
     }
-    this.cfg = { start: fullFrame(start), hold, alt, props, mode, intro, view: viewFor(pose, level, mirror), cam: P.camera };
+    const view = viewFor(pose, level, mirror);
+    // the hold view can be zoomed in far more than the standing start frame fits: ease the framing from the start view to the hold view
+    const sv = fitView([fullFrame(start)], P.camera, { maxScale: 1.45 });
+    this.cfg = { start: fullFrame(start), hold, alt, props, mode, intro, view, startView: sv.scale < view.scale ? sv : null, cam: P.camera };
     this.time = 0;
     this.frame(0);
   }
@@ -203,7 +206,9 @@ export class Animator {
   frame(time) {
     const { f, e, breath } = this.frameAt(time);
     const c = this.cfg;
-    this.fig.draw(f, { props: c.props, e, breath, view: c.view, cam: c.cam });
+    let view = c.view;
+    if (c.startView) { const k = Math.min(1, Math.max(0, e)); view = { cam: view.cam, scale: c.startView.scale + (view.scale - c.startView.scale) * k, cx: c.startView.cx + (view.cx - c.startView.cx) * k }; }
+    this.fig.draw(f, { props: c.props, e, breath, view, cam: c.cam });
   }
   loop = (now) => {
     if (!this.raf) return;

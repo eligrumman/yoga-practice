@@ -28,10 +28,10 @@ export const LIMITS = {
   pelvis: { x: [-180, 180], y: [-180, 180], z: [-180, 180] },
   spine1: { x: [-30, 30], y: [-25, 25], z: [-40, 55] },
   spine2: { x: [-30, 30], y: [-35, 35], z: [-30, 45] },
-  spine3: { x: [-25, 25], y: [-35, 35], z: [-25, 40] },
+  spine3: { x: [-25, 25], y: [-35, 35], z: [-32, 40] },
   neck: { x: [-45, 45], y: [-80, 80], z: [-60, 65] },
   head: { x: [-30, 30], y: [-45, 45], z: [-40, 45] },
-  shoulder: { x: [-45, 185], y: [-180, 180], z: [-70, 185] },
+  shoulder: { x: [-45, 185], y: [-180, 180], z: [-100, 185] },
   elbow: { x: [0, 0], y: [-90, 90], z: [-5, 150] },
   wrist: { x: [-80, 80], y: [-95, 95], z: [-35, 95] },
   hip: { x: [-50, 90], y: [-50, 95], z: [-35, 165] },
@@ -115,21 +115,42 @@ export const swapLR = (f) => {
   return o;
 };
 
-// Per-joint time offsets (fraction of the move) so distal joints trail a little: follow-through.
-const DELAY = { pelvis: 0, spine1: 0.02, spine2: 0.05, spine3: 0.08, neck: 0.11, head: 0.14, shoulder: 0.06, elbow: 0.1, wrist: 0.15, hip: 0, knee: 0.04, ankle: 0.09 };
-const MAXD = 0.15;
-const smooth = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * x * (x * (6 * x - 15) + 10));
+// Per-joint time offsets (fraction of the ~2.8 s entry) so distal joints trail a little: follow-through.
+// ~110 ms head, ~90 ms wrist, ~70 ms elbow, ~25 ms spine steps (at the default 2.8 s move).
+const DELAY = { pelvis: 0, spine1: 0.004, spine2: 0.009, spine3: 0.014, neck: 0.028, head: 0.04, shoulder: 0.014, elbow: 0.025, wrist: 0.032, hip: 0, knee: 0.008, ankle: 0.03 };
+const MAXD = 0.05;
+// cubic-bezier(0.4, 0, 0.2, 1) plus a slight anticipation (3% back) and settle (2.5% over, back to rest)
+const bez = (x1, y1, x2, y2) => (x) => {
+  if (x <= 0) return 0; if (x >= 1) return 1;
+  let t = x;
+  for (let i = 0; i < 8; i++) {
+    const cx = 3 * x1 * t * (1 - t) ** 2 + 3 * x2 * t * t * (1 - t) + t ** 3 - x;
+    const d = 3 * x1 * (1 - t) ** 2 + 6 * (x2 - x1) * t * (1 - t) + 3 * (1 - x2) * t * t;
+    if (Math.abs(d) < 1e-6) break; t -= cx / d;
+  }
+  t = Math.max(0, Math.min(1, t));
+  return 3 * y1 * t * (1 - t) ** 2 + 3 * y2 * t * t * (1 - t) + t ** 3;
+};
+const bezE = bez(0.4, 0, 0.2, 1);
+export const ease = (x) => {
+  if (x <= 0) return 0; if (x >= 1) return 1;
+  let v = bezE(x);
+  if (x < 0.14) v -= 0.03 * Math.sin((Math.PI * x) / 0.14) * (1 - x / 0.14);
+  if (x > 0.78) v += 0.025 * Math.sin((Math.PI * (x - 0.78)) / 0.22);
+  return v;
+};
 export function blendFrames(a, b, u, { stagger = true } = {}) {
   const o = zeroFrame();
-  const t = (j) => (stagger ? smooth((u * (1 + MAXD) - (DELAY[j.replace(/[RL]$/, '')] ?? 0)) / 1) : u);
+  const t = (j) => (stagger ? ease(u * (1 + MAXD) - (DELAY[j.replace(/[RL]$/, '')] ?? 0)) : u);
   const tt = Math.max(0, Math.min(1, u));
   for (let i = 0; i < 3; i++) {
-    o.pelvis.pos[i] = a.pelvis.pos[i] + (b.pelvis.pos[i] - a.pelvis.pos[i]) * tt;
-    o.pelvis.rot[i] = a.pelvis.rot[i] + (b.pelvis.rot[i] - a.pelvis.rot[i]) * (stagger ? Math.min(1, Math.max(0, tt)) : tt);
+    const te = stagger ? ease(tt) : tt;
+    o.pelvis.pos[i] = a.pelvis.pos[i] + (b.pelvis.pos[i] - a.pelvis.pos[i]) * te;
+    o.pelvis.rot[i] = a.pelvis.rot[i] + (b.pelvis.rot[i] - a.pelvis.rot[i]) * te;
   }
   for (const j of JOINTS) {
     if (j === 'pelvis') continue;
-    const k = Math.max(0, Math.min(1, t(j)));
+    const k = stagger ? t(j) : Math.max(0, Math.min(1, t(j)));
     for (let i = 0; i < 3; i++) o[j][i] = a[j][i] + (b[j][i] - a[j][i]) * k;
   }
   return o;
@@ -189,14 +210,14 @@ export function solve(frame, { breath = 0 } = {}) {
   for (const s of ['R', 'L']) {
     const { Fs, Fe, Fw, Fi, Fk, Fa } = fr[s];
     const sh = J['shoulder' + s], el = J['elbow' + s], wr = J['wrist' + s], hip = J['hip' + s], kn = J['knee' + s], an = J['ankle' + s];
-    ell('delt' + s, 'top', sh, F3, 6.6, 6.6, 6.6, 0.2);
-    cap('uarm' + s, 'skin', sh, el, 5.2, 4.3);
-    cap('farm' + s, 'skin', el, wr, 4.3, 3.1);
+    ell('delt' + s, 'skin', add(sh, app(F3, [0, 0, -(s === 'R' ? 1 : -1) * 1.2])), F3, 5.2, 5.4, 5.2, 0.2);
+    cap('uarm' + s, 'skin', sh, el, 5.4, 4.5);
+    cap('farm' + s, 'skin', el, wr, 4.5, 3.2);
     ell('palm' + s, 'skin', add(wr, app(Fw, [0, -6, 0])), Fw, 4.1, 6.4, 2.5);
     ell('fing' + s, 'skin', add(wr, app(Fw, [0, -15.3, 0])), Fw, 3.7, 5.9, 2.05);
     cap('thumb' + s, 'skin', add(wr, app(Fw, [2.2, -3.4, 0])), add(wr, app(Fw, [5.2, -10.8, 0.4])), 1.9, 1.35);
-    cap('thigh' + s, 'legs', hip, kn, 9.4, 6.3, -0.1);
-    cap('shank' + s, 'legs', kn, an, 5.9, 3.7);
+    cap('thigh' + s, 'legs', hip, kn, 9.4, 7.0, -0.1);
+    cap('shank' + s, 'legs', kn, an, 7.0, 4.6);
     ell('ankle' + s, 'skin', add(an, app(Fa, [1, -3.2, 0])), Fa, 11.5, 5.4, 4.2);
     cap('heel' + s, 'skin', add(an, app(Fa, [-D.footB + 1.5, -D.ankleH + 3.8, 0])), add(an, app(Fa, [13, -D.ankleH + 3.3, 0])), 3.8, 3.4);
     cap('toes' + s, 'skin', add(an, app(Fa, [13, -D.ankleH + 3.3, 0])), add(an, app(Fa, [D.footF - 2.4, -D.ankleH + 2.7, 0])), 3.4, 2.7);

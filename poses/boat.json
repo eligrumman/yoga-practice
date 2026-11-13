@@ -85,13 +85,13 @@
         "wristR": [0, 0, 0],
         "hipR": [0, 0, 122],
         "kneeR": [0, 0, 0],
-        "ankleR": [0, 0, -50],
+        "ankleR": [0, 0, -10],
         "shoulderL": [0, 0, 72],
         "elbowL": [0, 0, 0],
         "wristL": [0, 0, 0],
         "hipL": [0, 0, 122],
         "kneeL": [0, 0, 0],
-        "ankleL": [0, 0, -50]
+        "ankleL": [0, 0, -10]
       },
       "props": []
     }

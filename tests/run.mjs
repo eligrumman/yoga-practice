@@ -427,5 +427,21 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   ok(script.every((s) => !s.v2 || (s.lang === 'he')), 'no ru/en v2 segments queued');
 }
 
+// ---- floor contacts (round 3): the parts that should touch the floor are within 2 units of the lowest point
+{
+  const { primBox } = await import('../js/rig.js');
+  const CONTACT = { tabletop: ['palm', 'toes'], cow: ['palm'], 'cat-cow': ['palm'], plank: ['palm'], 'downward-dog': ['palm'], child: ['toes'] };
+  for (const [id, parts] of Object.entries(CONTACT)) {
+    const P = POSES.find((q) => q.id === id);
+    for (let l = 0; l < 3; l++) {
+      const S = solve(poseFrames(P, l).hold);
+      for (const part of parts) {
+        const lo = Math.min(...S.prims.filter((p) => p.id.startsWith(part) || (part === 'palm' && p.id.startsWith('fing'))).map((p) => primBox(p).lo));
+        ok(lo <= 2.0, `${id} L${l} ${part} contact ${lo.toFixed(2)} <= 2`);
+      }
+    }
+  }
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
