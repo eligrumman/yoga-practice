@@ -178,7 +178,7 @@ Sol: `outsourcerer.sh bg run -m sol --provider codex --cloud-ack` (cxnative, gpt
 
 **Top 3 "more human and pleasant":** (1) hide the ball joints and blend the torso into tapered, overlapping limb capsules (row 12); (2) real hand and foot shapes (row 15) plus better frame fill for low poses (row 13); (3) softer motion with anticipation, settle and distal lag (row 14).
 
-**Round 3 fix status (commit HASH_PLACEHOLDER, worktree-yoga-narration-v2):**
+**Round 3 fix status (commit 228999a, worktree-yoga-narration-v2):**
 
 | # | Item | Status | Final numbers / note |
 |---|---|---|---|
