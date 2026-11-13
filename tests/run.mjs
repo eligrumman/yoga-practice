@@ -443,6 +443,23 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   }
 }
 
+// ---- optional ink figure style (preview): off by default, enabled only by ?style=ink
+{
+  const { inkRequested, inkOn, inkJitter } = await import('../js/inkstyle.js');
+  ok(inkRequested('') === false && inkOn('') === false, 'ink: off by default (no query)');
+  ok(inkRequested('?style=ink') === true && inkOn('?style=ink') === true, 'ink: ?style=ink turns it on');
+  ok(inkRequested(new URL('http://x/?style=ink#/pose/tree').search) === true, 'ink: query with hash route still on');
+  ok(inkRequested('?style=other') === false && inkRequested('?ink=1') === false && inkRequested('?style=') === false, 'ink: other values stay off');
+  ok(inkRequested('?a=1&style=ink') === true, 'ink: works beside other params');
+  ok(typeof location === 'undefined' && inkOn() === false, 'ink: no location (node) -> default off');
+  for (const id of ['h_head', 'pelvis', 'armR_u', 'x']) { const j = inkJitter(id); ok(j >= 0.85 && j <= 1.15 && j === inkJitter(id), `ink: jitter ${id} stable in range`); }
+  const src2d = readFileSync(new URL('../js/figure2d.js', import.meta.url), 'utf8'), src3d = readFileSync(new URL('../js/figure3d.js', import.meta.url), 'utf8');
+  ok(/ink = inkOn\(\)/.test(src2d) && /ink = inkOn\(\)/.test(src3d), 'ink: both renderers default to inkOn()');
+  ok(/linGrad\(this\.defs, `\$\{this\.uid\}-\$\{gk\}`, MATS\[it\.p\.mat\], farH, this\.ink\)/.test(src2d) && /if \(cel\) \{ celStops/.test(src2d), '2d: cel gradients only when ink');
+  ok(/this\.ink \? new T\.MeshToonMaterial/.test(src3d) && /: new T\.MeshStandardMaterial/.test(src3d), '3d: toon material only when ink, standard otherwise');
+  ok(/if \(!this\.ink\) return;/.test(src3d), '3d: outline only when ink');
+}
+
 { const pt = await import('./player.test.mjs'); pass += pt.pass; fail += pt.fail; } // player: fix cues, music, transcript
 
 await (await import('./figure.test.mjs')).default(ok);

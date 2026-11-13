@@ -220,3 +220,10 @@ body.in-player{overflow:hidden}
 .fs-ring .count{width:100%;height:100%;left:0;right:0;inset-inline:0;margin:0;font-size:.62rem;white-space:nowrap}
 .player.fs .p-ctrl .fs-next{flex-direction:row;align-items:center;flex:0 1 auto}
 .fs-next-txt{text-align:start}
+/* optional ink style (?style=ink): warm dark contour, round joins, flat cel tones */
+:root{--ink-line:#2b1d15}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink-line:#150e0a}}
+.fig-ink .fp{stroke:var(--ink-line);stroke-linejoin:round;stroke-linecap:round}
+.fig-ink .fig-twin{fill:var(--ink-line);stroke:var(--ink-line);stroke-linejoin:round;stroke-linecap:round}
+.fig-ink .fig-eye,.fig-ink .fig-brow{stroke:var(--ink-line)}
+.fig-ink .prop-block,.fig-ink .prop-cushion{stroke:var(--ink-line);stroke-width:1;stroke-linejoin:round}

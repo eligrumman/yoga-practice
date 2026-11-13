@@ -2,6 +2,7 @@
 // three.js is loaded lazily from a pinned CDN URL; callers fall back to 2D if loadThree() rejects.
 // Render-on-demand: the caller drives animation by calling draw() each frame (draw() renders).
 import { solve, FACE } from './rig.js';
+import { inkOn, inkJitter } from './inkstyle.js';
 
 export const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
@@ -28,7 +29,8 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 const HW = 36, HH = 24; // sphere-hull mesh resolution
 export class Renderer3D {
-  constructor(host, THREE, { floor = true } = {}) {
+  constructor(host, THREE, { floor = true, ink = inkOn() } = {}) {
+    this.ink = !!ink;
     this.T = THREE; this.host = host; this.floorOn = floor;
     const T = THREE;
     this.canvas = document.createElement('canvas');
@@ -53,8 +55,15 @@ export class Renderer3D {
     this.hullDirs = Float32Array.from(this.hullG.attributes.position.array);
     this.geoms.push(this.hullG);
     this.mats = {};
+    if (this.ink) {
+      // toon shading: a 3-step gradient map (hard-edged light / mid / shade), plus an inverted-hull ink outline per mesh
+      this.toonMap = new T.DataTexture(Uint8Array.from([120, 190, 255]), 3, 1, T.RedFormat);
+      this.toonMap.minFilter = this.toonMap.magFilter = T.NearestFilter; this.toonMap.generateMipmaps = false; this.toonMap.needsUpdate = true;
+      this.inkMats = [1.5, 1.9, 2.3].map((px) => this._inkMat(px));
+    }
     for (const [m, v] of Object.entries(MATS)) {
-      this.mats[m] = new T.MeshStandardMaterial({ color: FALLBACK[v], roughness: m === 'hair' ? 0.7 : 0.82, metalness: 0 });
+      this.mats[m] = this.ink ? new T.MeshToonMaterial({ color: FALLBACK[v], gradientMap: this.toonMap })
+        : new T.MeshStandardMaterial({ color: FALLBACK[v], roughness: m === 'hair' ? 0.7 : 0.82, metalness: 0 });
     }
     this.figure = new T.Group();
     this.scene.add(this.figure);
@@ -93,6 +102,25 @@ export class Renderer3D {
   }
 
   // ---------------------------------------------------------------- helpers
+  // ink outline: back faces pushed outwards along the view-space normal by a constant number of screen pixels
+  _inkMat(px) {
+    const m = new this.T.ShaderMaterial({
+      uniforms: { uPx: { value: new this.T.Vector2(px * 2 / 300, px * 2 / 300) }, uCol: { value: new this.T.Color('#2b1d15') } },
+      vertexShader: `uniform vec2 uPx; void main(){ vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        vec2 d = (projectionMatrix * vec4(normalize(normalMatrix * normal), 0.0)).xy; float l = length(d);
+        if (l > 1e-5) p.xy += d / l * uPx * p.w; gl_Position = p; }`,
+      fragmentShader: 'uniform vec3 uCol; void main(){ gl_FragColor = vec4(uCol, 1.0); }',
+      side: this.T.BackSide,
+    });
+    m.userData.px = px; return m;
+  }
+  _inkSize() { if (!this.inkMats) return; for (const m of this.inkMats) m.uniforms.uPx.value.set(m.userData.px * 2 / Math.max(1, this.w), m.userData.px * 2 / Math.max(1, this.h)); }
+  // child mesh sharing the geometry; the jitter picks one of three line weights per part
+  _outline(mesh, id) {
+    if (!this.ink) return;
+    const o = new this.T.Mesh(mesh.geometry, this.inkMats[Math.min(2, Math.floor((inkJitter(id) - 0.85) / 0.1001))]);
+    o.frustumCulled = false; mesh.add(o); mesh.userData.outline = o;
+  }
   _radialTex(stops) {
     const c = document.createElement('canvas'); c.width = c.height = 128;
     const g = c.getContext('2d'); const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
@@ -111,12 +139,14 @@ export class Renderer3D {
       this.propMats.strap.color.set(get('--prop-strap', '#c9794f'));
       this.propMats.wall.color.set(get('--prop-wall', '#d9d6cf'));
       this.faceMats.ink.color.set(get('--fig-ink', '#4a3328'));
+      if (this.inkMats) for (const m of this.inkMats) m.uniforms.uCol.value.set(get('--ink-line', '#2b1d15'));
       const dark = (() => { const bg = get('--bg', '#f6f3ee'); const c = new this.T.Color(bg); return (c.r + c.g + c.b) / 3 < 0.4; })();
       this.floorMat.color.set(get('--floor', '#b9b2a5'));
       this.floorMat.map.needsUpdate = false;
       this.floorMat.opacity = dark ? 0.2 : 0.3;
       this.hemi.intensity = dark ? 1.1 : 1.35;
       this.shadowMat.opacity = dark ? 0.9 : 1;
+      if (this.ink) this.hemi.intensity *= 0.55; // toon steps need contrast: less ambient fill
     } catch (e) { /* keep defaults */ }
   }
 
@@ -224,7 +254,7 @@ export class Renderer3D {
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     this.renderer.setPixelRatio(dpr);
     this.renderer.setSize(w, h, false);
-    this.w = w; this.h = h;
+    this.w = w; this.h = h; this._inkSize();
     this.camera.aspect = w / h; this.camera.updateProjectionMatrix();
     if (this.S) this.renderNow();
   }
@@ -248,7 +278,7 @@ export class Renderer3D {
     if (!it) {
       const mesh = new this.T.Mesh(this.sphereG, this.mats[p.mat] || this.mats.skin);
       mesh.matrixAutoUpdate = false; mesh.frustumCulled = false;
-      this.figure.add(mesh); it = { mesh }; this.items.set(p.id, it);
+      this.figure.add(mesh); this._outline(mesh, p.id); it = { mesh }; this.items.set(p.id, it);
     }
     const [a, b, c] = p.ax, o = p.c;
     it.mesh.matrix.set(a[0], b[0], c[0], o[0], a[1], b[1], c[1], o[1], a[2], b[2], c[2], o[2], 0, 0, 0, 1);
@@ -263,7 +293,7 @@ export class Renderer3D {
       const g = this.hullG.clone();
       const mesh = new this.T.Mesh(g, this.mats[p.mat] || this.mats.skin);
       mesh.matrixAutoUpdate = false; mesh.frustumCulled = false;
-      this.figure.add(mesh); it = { mesh, own: g }; this.items.set(p.id, it);
+      this.figure.add(mesh); this._outline(mesh, p.id); it = { mesh, own: g }; this.items.set(p.id, it);
     }
     const pos = it.own.attributes.position, a = pos.array, D = this.hullDirs, pts = p.pts, n = pts.length;
     for (let i = 0; i < a.length; i += 3) {
@@ -297,7 +327,7 @@ export class Renderer3D {
     let it = this.items.get(p.id);
     if (!it) {
       const mat = this.mats[p.mat] || this.mats.skin;
-      const mk = (g) => { const m = new T.Mesh(g, mat); m.matrixAutoUpdate = false; m.frustumCulled = false; this.figure.add(m); return m; };
+      const mk = (g) => { const m = new T.Mesh(g, mat); m.matrixAutoUpdate = false; m.frustumCulled = false; this.figure.add(m); this._outline(m, p.id + (m.geometry === this.cylG ? 'b' : 's')); return m; };
       it = { body: mk(this.cylG), s0: mk(this.sphereG), s1: mk(this.sphereG) };
       this.items.set(p.id, it);
     }
@@ -322,6 +352,7 @@ export class Renderer3D {
     if (it.own) it.own.dispose();
     const g = new this.T.CylinderGeometry(r1, r0, 1, 24, 1, true);
     it.own = g; it.body.geometry = g; it.r0 = r0; it.r1 = r1;
+    if (it.body.userData.outline) it.body.userData.outline.geometry = g;
   }
 
   _face(S) {
@@ -436,7 +467,8 @@ export class Renderer3D {
     for (const it of this.items.values()) it.own?.dispose();
     for (const o of this.propObjs) o.obj.traverse?.((n) => { if (n.geometry && n.geometry !== this.sphereG) n.geometry.dispose(); });
     for (const g of this.geoms) g.dispose();
-    for (const m of [...Object.values(this.mats), ...Object.values(this.propMats), ...Object.values(this.faceMats), this.shadowMat, this.floorMat]) { m.map?.dispose(); m.dispose(); }
+    for (const m of [...Object.values(this.mats), ...(this.inkMats || []), ...Object.values(this.propMats), ...Object.values(this.faceMats), this.shadowMat, this.floorMat]) { m.map?.dispose(); m.dispose(); }
+    this.toonMap?.dispose();
     this.renderer.dispose();
     try { this.renderer.forceContextLoss(); } catch (e) { /* */ }
     cv.remove();

@@ -2,6 +2,7 @@
 // Sphere-hulls, tapered capsules and ellipsoids are projected orthographically, sorted by depth
 // (painter's algorithm) and filled with soft gradients lit from the upper left.
 import { solve, camera, project, app, FACE } from './rig.js';
+import { inkOn, inkJitter } from './inkstyle.js';
 
 export const VBW = 400, VBH = 300, FLOOR = 262;
 const NS = 'http://www.w3.org/2000/svg';
@@ -36,13 +37,36 @@ function ensureDefs() {
   document.body.appendChild(svg);
 }
 
-function linGrad(defs, id, v, far) {
+// ink style: flat cel tones (hard stop between the lit tone and the shade tone) instead of soft gradients
+function celStops(g, v, far, at) {
+  const stop = (off, name) => {
+    const s = mk('stop', { offset: off }, g);
+    const c = far ? `color-mix(in srgb, var(--${name}) 80%, var(--fig-far, #1d1814))` : `var(--${name})`;
+    s.setAttribute('style', `stop-color:var(--${name});stop-color:${c}`);
+  };
+  stop('0', v); stop(at, v); stop(at, v + '-lo'); stop('1', v + '-lo');
+}
+function ensureInkDefs() {
+  if (document.getElementById('fig-defs-ink')) return;
+  const svg = mk('svg', { id: 'fig-defs-ink', width: 0, height: 0, 'aria-hidden': 'true', style: 'position:absolute;width:0;height:0;overflow:hidden' });
+  const defs = mk('defs', {}, svg);
+  for (const [name, v] of Object.entries(MATS)) {
+    for (const far of [false, true]) {
+      const g = mk('radialGradient', { id: `fg-ink-${name}${far ? '-far' : ''}`, cx: '.5', cy: '.5', r: '.75', fx: '.34', fy: '.28' }, defs);
+      celStops(g, v, far, '.55');
+    }
+  }
+  document.body.appendChild(svg);
+}
+
+function linGrad(defs, id, v, far, cel) {
   const g = mk('linearGradient', { id, gradientUnits: 'userSpaceOnUse' }, defs);
   const stop = (off, name) => {
     const s = mk('stop', { offset: off }, g);
     const c = far ? `color-mix(in srgb, var(--${name}) 80%, var(--fig-far, #1d1814))` : `var(--${name})`;
     s.setAttribute('style', `stop-color:var(--${name});stop-color:${c}`);
   };
+  if (cel) { celStops(g, v, far, '.58'); return g; }
   stop('0', v); stop('.28', v + '-hi'); stop('.62', v); stop('1', v + '-lo');
   return g;
 }
@@ -101,8 +125,10 @@ const hullPath = (cs) => {
 const TORSO = new Set(['pelvis', 'waist', 'chest', 'trap', 'neck']);
 
 export class Renderer2D {
-  constructor(svg, { floor = true } = {}) {
+  constructor(svg, { floor = true, ink = inkOn() } = {}) {
     ensureDefs();
+    this.ink = !!ink;
+    if (this.ink) { ensureInkDefs(); svg.classList.add('fig-ink'); }
     this.svg = svg;
     svg.setAttribute('viewBox', `0 0 ${VBW} ${VBH}`);
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
@@ -113,6 +139,7 @@ export class Renderer2D {
     if (floor) this.floor = mk('line', { x1: 10, x2: VBW - 10, y1: FLOOR, y2: FLOOR, class: 'fig-floor' }, svg);
     this.root = mk('g', {}, svg);
     this.back = mk('g', { class: 'fig-props' }, this.root);
+    this.under = this.ink ? mk('g', { class: 'fig-under' }, this.root) : null; // thick ink silhouette, drawn below the body
     this.body = mk('g', { class: 'fig-body' }, this.root);
     this.faceG = mk('g', { class: 'fig-face', fill: 'none', 'stroke-linecap': 'round' });
     this.front = mk('g', { class: 'fig-props' }, this.root);
@@ -127,7 +154,7 @@ export class Renderer2D {
     const { cam, scale, cx } = view;
     const S = solve(frame, { breath });
     const PX = (p) => { const s = project(cam, p); return [200 + (s[0] - cx) * scale, FLOOR - s[1] * scale, s[2]]; };
-    const mat = (m, far) => `url(#fg-${m}${far ? '-far' : ''})`;
+    const mat = (m, far) => `url(#fg-${this.ink ? 'ink-' : ''}${m}${far ? '-far' : ''})`;
     // body depth reference (so the far limbs read darker)
     let dsum = 0;
     for (const k of ['pelvis', 'spine3']) dsum += PX(S.J[k])[2];
@@ -177,7 +204,7 @@ export class Renderer2D {
         for (const c of cs) { const v = c[0] * nx + c[1] * ny; hi = Math.max(hi, v + c[2]); lo = Math.min(lo, v - c[2]); }
         const gk = id + (farH ? 'f' : 'n');
         let g = this.lgs.get(gk);
-        if (!g) { g = linGrad(this.defs, `${this.uid}-${gk}`, MATS[it.p.mat], farH); this.lgs.set(gk, g); }
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${gk}`, MATS[it.p.mat], farH, this.ink); this.lgs.set(gk, g); }
         g.setAttribute('x1', (nx * hi).toFixed(2)); g.setAttribute('y1', (ny * hi).toFixed(2));
         g.setAttribute('x2', (nx * lo).toFixed(2)); g.setAttribute('y2', (ny * lo).toFixed(2));
         el.setAttribute('fill', `url(#${this.uid}-${gk})`);
@@ -195,7 +222,7 @@ export class Renderer2D {
         const rr = Math.max(it.p.r0, it.p.r1) * scale, mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
         const key = id + (far ? 'f' : 'n');
         let g = this.lgs.get(key);
-        if (!g) { g = linGrad(this.defs, `${this.uid}-${key}`, MATS[m], far); this.lgs.set(key, g); }
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${key}`, MATS[m], far, this.ink); this.lgs.set(key, g); }
         g.setAttribute('x1', (mx + nx * rr).toFixed(2)); g.setAttribute('y1', (my + ny * rr).toFixed(2));
         g.setAttribute('x2', (mx - nx * rr).toFixed(2)); g.setAttribute('y2', (my - ny * rr).toFixed(2));
         el.setAttribute('fill', `url(#${this.uid}-${key})`);
@@ -207,6 +234,7 @@ export class Renderer2D {
       }
       el.setAttribute('fill', fill);
     }
+    if (this.ink) this.inkPass(items, scale);
     if (sig !== this.order) {
       // the face features sit right on top of the face piece
       const ids = items.map((i) => i.p.id);
@@ -230,6 +258,21 @@ export class Renderer2D {
     this.drawProps(props, S, cam, PX, scale, e);
     this.S = S;
     return S;
+  }
+
+  // ink style: per-part stroke width (varies a little, thinner on the face) and a thicker twin underneath for the silhouette
+  inkPass(items, scale) {
+    const lw = 0.55 + 0.5 * scale;
+    if (!this.twins) this.twins = new Map();
+    for (const it of items) {
+      const id = it.p.id, el = this.els.get(id);
+      const w = lw * inkJitter(id) * (id === 'h_head' ? 0.7 : id === 'h_nose' ? 0.25 : id.startsWith('h_ear') ? 0.4 : it.p.mat === 'hair' ? 0.85 : 1);
+      el.style.strokeWidth = w.toFixed(2);
+      let tw = this.twins.get(id);
+      if (!tw) { tw = mk(el.tagName, { class: 'fig-twin' }); this.twins.set(id, tw); this.under.appendChild(tw); }
+      for (const a of ['d', 'cx', 'cy', 'rx', 'ry', 'transform']) { const v = el.getAttribute(a); if (v !== null) tw.setAttribute(a, v); }
+      tw.style.strokeWidth = (w * 2.6).toFixed(2);
+    }
   }
 
   // closed eyes, brows, mouth and a hint of blush: the shared FACE definition (head-local), faded out as it turns away
