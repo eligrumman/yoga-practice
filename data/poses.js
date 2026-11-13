@@ -54,7 +54,7 @@ export const POSES = RAW.map((r) => ({
   cues: r.cue,
   safety: r.safe,
   variations: r.v.map((v, i) => ({
-    level: i, he: v.he, en: v.en, ru: v.ru, props: v.props || [], kf: merge(r.kf, v.kf),
+    level: i, he: v.he, en: v.en, ru: v.ru, props: v.props || [], kf: merge(r.kf, v.kf), ...(r.alt ? { alt: merge(r.alt, v.alt) } : {}),
   })),
 }));
 

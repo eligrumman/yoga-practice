@@ -18,6 +18,23 @@ export default [
     ],
   },
   {
+    id: 'cat-cow', sa: 'Marjaryasana-Bitilasana', en: 'Cat-Cow flow', he: 'זרימת חתול ופרה', cat: 'warm-up', sec: 'warm', flow: 15, d: 1, hold: 30, sides: 'single',
+    ru: 'Кошка и корова, поток', tags: ['relax', 'back', 'flex'], start: 'table',
+    kf: { t: 8, s: 30, h: 45, a: [-90, -90], l: TABLE_LEGS, fix: { a: { x: 0, bend: -1 } } },
+    alt: { t: 45, s: -15, h: -60 },
+    cue: {
+      he: ['על ארבע, ידיים מתחת לכתפיים וברכיים מתחת לירכיים.', 'בשאיפה הורידו את הבטן והרימו את החזה, פרה.', 'בנשיפה עגלו את הגב לתקרה, חתול.', 'המשיכו לנוע לאט, תנועה אחת לכל נשימה.'],
+      en: ['On all fours, hands under shoulders and knees under hips.', 'Inhale: drop the belly and lift the chest, cow.', 'Exhale: round the back toward the ceiling, cat.', 'Keep moving slowly, one movement per breath.'],
+      ru: ['Встаньте на четвереньки, ладони под плечами, колени под бёдрами.', 'На вдохе опустите живот и поднимите грудь, корова.', 'На выдохе округлите спину к потолку, кошка.', 'Двигайтесь медленно, одно движение на одно дыхание.'],
+    },
+    safe: { he: 'כאבי פרקי כף יד, ברכיים או צוואר: הקטינו את התנועה והניחו שמיכה מתחת לברכיים.', en: 'Wrist, knee or neck pain: make the movement smaller and pad the knees with a blanket.', ru: 'При боли в запястьях, коленях или шее делайте движение меньше и подложите одеяло под колени.' },
+    v: [
+      { he: 'תנועה קטנה ונעימה.', en: 'Small, comfortable movement.', ru: 'Небольшое, комфортное движение.', kf: { t: 12, s: 22, h: 30 }, alt: { t: 30, s: 0, h: -35 } },
+      { he: 'זרימה מלאה עם הנשימה.', en: 'Full flow with the breath.', ru: 'Полный поток в ритме дыхания.', kf: {}, alt: {} },
+      { he: 'זרימה עמוקה יותר, מבט מורם בפרה.', en: 'Deeper flow with a lifted gaze in cow.', ru: 'Глубже, взгляд поднят в положении коровы.', kf: { t: 6, s: 36, h: 65 }, alt: { t: 55, s: -25, h: -75 } },
+    ],
+  },
+  {
     id: 'cat', sa: 'Marjaryasana', en: 'Cat', he: 'חתול', cat: 'warm-up', sec: 'warm', flow: 20, d: 1, hold: 30, sides: 'single',
     ru: 'Кошка', tags: ['relax', 'back', 'flex'], start: 'table',
     kf: { t: 45, s: -15, h: -60, a: [-90, -90], l: TABLE_LEGS, fix: { a: { x: 0, bend: -1 } } },

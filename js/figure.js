@@ -154,7 +154,7 @@ export const neutralFrame = (k) => resolve(NEUTRAL[k] || NEUTRAL.stand);
 export function poseFrames(pose, level) {
   const v = pose.variations[level] || pose.variations[1];
   const raw = v.kf;
-  return { frame: resolve(raw), props: v.props || [], note: v };
+  return { frame: resolve(raw), alt: v.alt ? resolve({ ...raw, ...v.alt }) : null, props: v.props || [], note: v };
 }
 
 // ------------------------------------------------------------------ rendering
@@ -259,11 +259,11 @@ export class Animator {
   }
   // mode 'loop' (library) or 'once' (player: transition in, then hold)
   set(pose, level, { from = null, mirror = false, mode = 'loop', intro = 2.8 } = {}) {
-    const { frame, props } = poseFrames(pose, level);
+    const { frame, props, alt } = poseFrames(pose, level);
     const start = from || neutralFrame(pose.start);
     const gs = geometry(start), ge = geometry(frame);
     const [a0, a1] = xExtent(gs), [b0, b1] = xExtent(ge);
-    this.cfg = { start, end: frame, props, mirror, mode, intro, c0: (a0 + a1) / 2, c1: (b0 + b1) / 2 };
+    this.cfg = { start, end: frame, alt, props, mirror, mode, intro, c0: (a0 + a1) / 2, c1: (b0 + b1) / 2 };
     this.time = 0;
     this.frame(0);
   }
@@ -271,6 +271,7 @@ export class Animator {
     const c = this.cfg;
     let e;
     if (c.mode === 'once') e = ease(clamp((time - 0.25) / c.intro));
+    else if (c.alt) e = 1; // flow pose in the library: keep flowing
     else {
       const T = time % 10;
       if (T < 0.6) e = 0;
@@ -280,6 +281,8 @@ export class Animator {
       else e = 0;
     }
     let f = blend(c.start, c.end, e);
+    // flow poses (cat-cow): once in the pose, alternate end <-> alt on a 10 s breath cycle (inhale = end, exhale = alt)
+    if (c.alt && e > 0.999) f = blend(c.end, c.alt, 0.5 - 0.5 * Math.cos(((time - (c.mode === 'once' ? 0.25 + c.intro : 0)) * 2 * Math.PI) / 10));
     // Breathing during the hold: ~5 s cycle; chest widens/rises slightly, head follows.
     let breath = 0;
     const k = clamp((e - 0.92) / 0.08);

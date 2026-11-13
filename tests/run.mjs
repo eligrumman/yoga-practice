@@ -2,7 +2,7 @@
 import { POSES, POSE_BY_ID } from '../data/poses.js';
 import { SEGMENTS, LANGS, segText, cueIds } from '../data/narration.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
-import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID, holdSeconds, clampAmount, dropIndex, reorder } from '../js/plan.js';
+import { mergeHistory, mergeFavorites, SCHEMA_VERSION, planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID, holdSeconds, clampAmount, dropIndex, reorder } from '../js/plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, POSITIONS, POSITION } from '../js/generator.js';
 import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
@@ -80,28 +80,39 @@ const av = generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoi
 ok(!av.items.some((i) => ['downward-dog', 'tree', 'cobra'].includes(i.pose)), 'avoid list respected');
 ok(Math.abs(planSeconds(av.items) / 60 - 20) <= 1, 'avoid plan still ~20 min');
 
-// ---- beginner plans: easy poses only, holds about 15-30 s (cobra shortest), Cat-Cow flow, more poses instead of longer holds
+// ---- beginner plans: easy poses only, few items, 30-45 s holds on the floor, ONE Cat-Cow flow item, two-sided poses count once
 const BEG_OK = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
+const BEG_ITEMS = { 10: [8, 10], 20: [14, 18], 30: [19, 24] }; // total items incl. Savasana
 for (const f of FOCUSES) {
-  const g20 = generatePlan({ minutes: 20, focus: f, level: 'beginner' });
-  ok(g20.items.length >= 12 && g20.items.length <= 34, `beginner 20 min ${f}: ${g20.items.length} items`);
   for (const m of LENGTHS) {
     const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
-    ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1 || BEG_OK.has(i.pose)), `beginner ${m}/${f} only easy poses`);
+    const [lo, hi] = BEG_ITEMS[m];
+    ok(g.items.length >= lo && g.items.length <= hi, `beginner ${m} min ${f}: ${g.items.length} items, expected ${lo}-${hi}`);
+    ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1 || BEG_OK.has(i.pose) || i.pose === 'cat-cow'), `beginner ${m}/${f} only easy poses`);
     ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
     ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
-    const sec = g.items.slice(0, -1).filter((i) => i.unit === 'sec');
-    ok(sec.every((i) => i.amount >= 15 && i.amount <= (m === 30 ? 40 : 30)), `beginner ${m}/${f} holds 15-30 s (40 s only at 30 min)`);
-    ok(sec.filter((i) => i.pose === 'cobra').every((i) => i.amount <= 20), `beginner ${m}/${f} cobra is short (<= 20 s)`);
-    ok(g.items.filter((i) => i.unit === 'breath').every((i) => i.amount <= 3), `beginner ${m}/${f} no long breath holds`);
-    ok(!g.items.some((i) => i.pose === 'tabletop' && i.amount > 3) , `beginner ${m}/${f} no 12-breath tabletop`);
-    ok(g.items.filter((i) => i.pose === 'cat').length === g.items.filter((i) => i.pose === 'cow').length && g.items.filter((i) => i.pose === 'cat').length >= 2, `beginner ${m}/${f} Cat-Cow cycles (cat count = cow count >= 2)`);
-    const names = g.items.map((i) => i.pose), ci = names.indexOf('cat');
-    ok(names[ci + 1] === 'cow', `beginner ${m}/${f} cat is followed by cow`);
+    const nStand = g.items.filter((i) => POSE_BY_ID[i.pose].section === 'stand').length;
+    ok(nStand >= 2 && nStand <= (m === 30 ? 5 : 4), `beginner ${m}/${f} has ${nStand} standing poses (2-4, up to 5 at 30 min)`);
+    ok(new Set(g.items.map((i) => i.pose)).size === g.items.length, `beginner ${m}/${f} no repeated pose item (two sides = one item)`);
+    const body = g.items.slice(0, -1).filter((i) => i.unit === 'sec');
+    for (const i of body) {
+      const p = POSE_BY_ID[i.pose];
+      if (i.pose === 'cobra') ok(i.amount >= 15 && i.amount <= 20, `beginner ${m}/${f} cobra short`);
+      else if (['floor', 'cool'].includes(p.section)) ok(i.amount >= 30 && i.amount <= (m === 30 && f === "back" ? 75 : 45), `beginner ${m}/${f} ${i.pose} floor hold 30-45 s (${i.amount})`);
+      else ok(i.amount >= 15 && i.amount <= (m === 30 && f === "back" ? 75 : 45), `beginner ${m}/${f} ${i.pose} hold (${i.amount})`);
+    }
+    const cc = g.items.filter((i) => i.pose === 'cat-cow');
+    ok(cc.length === 1 && cc[0].unit === 'breath' && cc[0].amount >= 4 && cc[0].amount <= 8, `beginner ${m}/${f} exactly one Cat-Cow flow item`);
+    ok(!g.items.some((i) => ['cat', 'cow', 'tabletop'].includes(i.pose)), `beginner ${m}/${f} no separate cat/cow/tabletop items`);
+    ok(g.items[0].pose === 'cat-cow', `beginner ${m}/${f} starts with the Cat-Cow flow`);
   }
-  const g10 = generatePlan({ minutes: 10, focus: f, level: 'beginner' });
-  ok(g10.items.slice(0, -1).filter((i) => i.unit === 'sec').every((i) => holdSeconds(i) >= 15 && holdSeconds(i) <= 30), `beginner 10 min ${f} holds 15-30 s`);
 }
+// cat-cow flow pose: alternates two frames (cow <-> cat) in the animator and has its own narration
+const CC = POSE_BY_ID['cat-cow'];
+ok(CC && CC.variations.every((v) => v.alt), 'cat-cow has an alternate (cat) frame on every level');
+ok(poseFrames(CC, 1).alt && poseFrames(CC, 1).alt.t > poseFrames(CC, 1).frame.t + 20, 'cat-cow: alt frame is the rounded (cat) spine, base is the arched (cow) spine');
+ok(/Inhale/.test(CC.cues.en[1]) && /cow/i.test(CC.cues.en[1]) && /Exhale/.test(CC.cues.en[2]) && /cat/i.test(CC.cues.en[2]), 'cat-cow narration: inhale cow, exhale cat');
+ok(cueIds('cat-cow').length === 4 && segText('pose.cat-cow.name', 'en') && segText('pose.cat-cow.name', 'he') && segText('pose.cat-cow.name', 'ru'), 'cat-cow narration segments exist');
 ok(generatePlan({ minutes: 20, level: 'gentle' }).items.length > 15, 'gentle level keeps the longer, richer plan');
 
 // ---- sequencing: all fours -> standing -> kneeling -> seated -> prone -> supine -> savasana, never supine -> kneel/stand
@@ -144,6 +155,29 @@ ok(parsePlanJSON('nope').error, 'bad JSON rejected');
 ok(parsePlanJSON(JSON.stringify({ app: 'other', version: 1, plan })).error, 'wrong app rejected');
 ok(parsePlanJSON(JSON.stringify({ app: APP_ID, version: 1, plan: { name: 'x', items: [{ pose: 'zzz', level: 0, unit: 'sec', amount: 5 }] } })).error, 'unknown pose rejected');
 ok(parsePlanJSON(JSON.stringify({ app: APP_ID, version: 1, plan: { name: 'x', items: [{ pose: 'tree', level: 9, unit: 'sec', amount: 5 }] } })).error, 'bad level rejected');
+
+// favorites + history travel in the export (schema v2); import merges them without duplicates
+const favs = ['tree', 'child'];
+const hist = [
+  { date: '2026-11-12', plan: 'Evening', minutes: 10, seconds: 600, planned: 10, counted: true },
+  { date: '2026-11-10', plan: 'Morning', minutes: 20, seconds: 1180, planned: 20, counted: true },
+];
+const full = exportPlanJSON(plan, { favorites: favs, history: hist });
+ok(JSON.parse(full).version === SCHEMA_VERSION && SCHEMA_VERSION === 2, 'export is schema version 2');
+const rt = parsePlanJSON(full);
+ok(!rt.error && JSON.stringify(rt.favorites) === JSON.stringify(favs) && JSON.stringify(rt.history) === JSON.stringify(hist), 'round trip keeps favorites and history');
+ok(JSON.stringify(rt.plan.items) === JSON.stringify(plan.items), 'round trip keeps plan items');
+let devFav = ['child', 'mountain'], devHist = [{ date: '2026-11-12', plan: 'Evening', minutes: 10, seconds: 600, planned: 10, counted: true }];
+for (let n = 0; n < 2; n++) { // importing the same file twice changes nothing the second time
+  devFav = mergeFavorites(devFav, rt.favorites); const m = mergeHistory(devHist, rt.history); devHist = m.history;
+  ok(n === 0 ? m.added === 1 : m.added === 0, `import #${n + 1}: history entries added = ${m.added}`);
+}
+ok(JSON.stringify(devFav) === '["child","mountain","tree"]', 'favorites merged as a union');
+ok(devHist.length === 2 && devHist[0].date === '2026-11-12' && devHist[1].plan === 'Morning', 'history merged without duplicates, newest first');
+ok(!parsePlanJSON(JSON.stringify({ app: APP_ID, version: 1, plan })).error && parsePlanJSON(JSON.stringify({ app: APP_ID, version: 1, plan })).history.length === 0, 'v1 file (plan only) still imports');
+ok(parsePlanJSON(JSON.stringify({ app: APP_ID, version: 3, plan })).error, 'future version rejected');
+const dirty = parsePlanJSON(JSON.stringify({ app: APP_ID, version: 2, plan, favorites: ['nope', 'tree', 5], history: [{ date: 'x', plan: 'y' }, { date: '2026-01-01', plan: 'ok', minutes: 3 }, null] }));
+ok(dirty.favorites.length === 1 && dirty.history.length === 1, 'invalid favorites/history entries are dropped');
 
 // ---- streak
 const d = (n) => { const x = new Date(2026, 10, 13); x.setDate(x.getDate() - n); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };

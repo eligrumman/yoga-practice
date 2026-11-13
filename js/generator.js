@@ -19,7 +19,7 @@ const BREATH_POSES = new Set(['tabletop', 'cat', 'cow']);
 // Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
-  ['allfours', ['tabletop', 'cat', 'cow', 'downward-dog', 'plank']],
+  ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank']],
   ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'half-lift', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel', 'child']],
   ['seated', ['easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'boat']],
@@ -56,7 +56,7 @@ function rank(p, focus, level) {
   const tag = FOCUS_TAG[focus];
   const match = tag && p.tags.includes(tag) ? 0 : 1;
   // beginners: prefer one-sided poses (every second side doubles the time on a pose)
-  return [match, p.difficulty, level === 'beginner' ? (p.sides === 'both' ? 1 : 0) : 0, p.flow];
+  return [match, p.difficulty, level === 'beginner' ? 0 : 0, p.flow];
 }
 const cmp = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; };
 
@@ -67,7 +67,79 @@ function slotNominal(p, f, level) {
   return (p.sides === 'both' ? 2 : 1) * (grid(hold * f) + DEFAULT_TRANSITION);
 }
 
+// ---- beginner plans: few poses, longer holds. Item counts (incl. Savasana): 10 min ~9, 20 min ~16, 30 min ~22.
+// A two-sided pose is ONE item (each side gets the full hold). Cat-Cow is one 'cat-cow' flow item.
+const BEG_BODY = { 10: 8, 20: 16, 30: 23 };
+const BEG_STAND_CAP = { 10: 3, 20: 4, 30: 5 };
+const CATCOW_FLOW_BREATHS = 6; // 3 breath cycles of about 10 s
+function begRange(p) {
+  if (p.id === 'cobra') return [15, 20];
+  if (p.id === 'upward-salute' || p.id === 'half-lift') return [15, 30];
+  if (p.section === 'stand' || p.section === 'bal') return [20, 45];
+  return [30, 45];
+}
+function generateBeginner({ minutes, focus, avoid }) {
+  const T = minutes * 60;
+  const avoidSet = new Set(avoid);
+  const w = WEIGHTS[focus] || WEIGHTS.general;
+  const pool = candidates({ focus, level: 'beginner', avoid: avoidSet }).filter((p) => !BREATH_POSES.has(p.id));
+  const bySec = (sx) => pool.filter((p) => p.section === sx).sort((a, b) => cmp(rank(a, focus, 'beginner'), rank(b, focus, 'beginner')) || (a.sides === 'both' ? 0 : 1) - (b.sides === 'both' ? 0 : 1));
+  // two-sided poses first within equal rank: each side is held in full, so they fill the time with fewer items
+  const lists = { stand: bySec('stand').concat(bySec('bal')), floor: bySec('floor'), cool: bySec('cool') };
+  const N = BEG_BODY[minutes] ?? Math.round(minutes * 0.7);
+  const hasSalute = pool.some((p) => p.id === 'upward-salute');
+  const warmN = 1 + (minutes >= 20 && hasSalute ? 1 : 0); // cat-cow (+ upward salute)
+  const R = N - warmN;
+  const sw = w.stand + w.bal, tot = sw + w.floor + w.cool;
+  const stand = Math.max(2, Math.min(BEG_STAND_CAP[minutes] ?? 4, Math.round((R * sw) / tot)));
+  let floor = Math.max(1, Math.round(((R - stand) * w.floor) / (w.floor + w.cool)));
+  floor = Math.min(floor, lists.floor.length, R - stand - 1);
+  let counts = { stand: Math.min(stand, lists.stand.length), floor, cool: R - stand - floor };
+  if (counts.cool > lists.cool.length) { counts.floor += counts.cool - lists.cool.length; counts.cool = lists.cool.length; counts.floor = Math.min(counts.floor, lists.floor.length); }
+  const picked = [];
+  if (!avoidSet.has('cat-cow')) picked.push(POSE_BY_ID['cat-cow']);
+  if (warmN > 1) picked.push(POSE_BY_ID['upward-salute']);
+  for (const sx of ['stand', 'floor', 'cool']) picked.push(...lists[sx].filter((p) => p.id !== 'upward-salute').slice(0, counts[sx]));
+
+  let items = picked.filter(Boolean).map((p) => (p.id === 'cat-cow'
+    ? { pose: p.id, level: 0, unit: 'breath', amount: CATCOW_FLOW_BREATHS }
+    : { pose: p.id, level: 0, unit: 'sec', amount: begRange(p)[0] }));
+  items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
+  const savasana = { pose: 'savasana', level: 0, unit: 'sec', amount: Math.max(60, grid(T * 0.15)) };
+  items.push(savasana);
+  const body = () => items.slice(0, -1);
+  const range = (it) => begRange(POSE_BY_ID[it.pose]);
+  // grow holds in 5 s steps, round-robin (deterministic), until the plan reaches T minus savasana
+  let i = 0, extra = 0; // extra: only when the pool is exhausted (e.g. back-friendly 30 min), holds may stretch up to +15 s
+  const maxItems = { 10: 10, 20: 18, 30: 24 }[minutes] ?? 24;
+  for (let guard = 0; guard < 4000; guard++) {
+    if (T - planSeconds(items) < 5) break;
+    const cand = body().filter((it) => it.unit === 'sec' && it.amount + 5 <= range(it)[1] + (it.pose === 'cobra' ? 0 : extra));
+    if (!cand.length) {
+      // all holds at their maximum and still more than ~2 min short: add one more easy pose (cool-down first), within the item cap
+      const left = T - planSeconds(items);
+      const nStand = items.filter((it) => POSE_BY_ID[it.pose].section === 'stand').length;
+      const more = [...lists.cool, ...lists.floor, ...(nStand < (BEG_STAND_CAP[minutes] ?? 4) ? lists.stand : [])].find((p) => !items.some((it) => it.pose === p.id));
+      if (left > 150 && more && items.length < maxItems) {
+        items.splice(items.length - 1, 0, { pose: more.id, level: 0, unit: 'sec', amount: begRange(more)[0] });
+        const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items.push(sv);
+        continue;
+      }
+      if (extra < 30 && left - DEFAULT_TRANSITION > 420) { extra += 15; continue; }
+      break;
+    }
+    cand[i++ % cand.length].amount += 5;
+  }
+  // overflow at minimum holds: shrink savasana first
+  savasana.amount = Math.max(30, savasana.amount + Math.min(0, T - planSeconds(items)));
+  // still short: savasana absorbs the rest (up to 5 min for 10-20 min plans, 10 min at 30)
+  const rest = T - planSeconds(body());
+  savasana.amount = Math.max(30, Math.min(minutes >= 30 ? 600 : minutes >= 20 ? 300 : 240, grid(rest - DEFAULT_TRANSITION)));
+  return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
+}
+
 export function generatePlan({ minutes = 20, focus = 'general', level = 'beginner', avoid = [] } = {}) {
+  if (level === 'beginner') return generateBeginner({ minutes, focus, avoid });
   const avoidSet = new Set(avoid);
   const T = minutes * 60;
   const lvl = level === 'beginner' ? 0 : 1;

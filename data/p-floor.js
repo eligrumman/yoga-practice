@@ -68,7 +68,7 @@ export default [
   {
     id: 'camel', sa: 'Ustrasana', en: 'Camel', he: 'גמל', ru: 'Верблюд', cat: 'backbend', sec: 'floor', flow: 50, d: 3, hold: 15, sides: 'single',
     tags: ['flex', 'noback'], start: 'kneel',
-    kf: { t: 118, s: 176, h: 186, a: [-125, -130], l: [-100, 180, 180], fix: { a: { to: 'l', pt: 'ankle', bend: 1 }, b: { to: 'l', pt: 'ankle', bend: 1 } } },
+    kf: { t: 86, s: 108, h: 130, a: [-125, -130], l: [-90, 180, 180], fix: { a: { to: 'l', pt: 'ankle', bend: 1 }, b: { to: 'l', pt: 'ankle', bend: 1 } } },
     cue: {
       he: ['כרעו על הברכיים, ירכיים מעל הברכיים.', 'כפות הידיים על הגב התחתון, אצבעות כלפי מטה.', 'הרימו את החזה והרחיבו אותו לתקרה.', 'הניחו לראש ולצוואר להישאר נוחים.'],
       en: ['Kneel with the hips over the knees.', 'Place the hands on your lower back, fingers down.', 'Lift the chest and open it toward the ceiling.', 'Keep the head and neck comfortable.'],
@@ -76,9 +76,9 @@ export default [
     },
     safe: { he: 'בעיות צוואר, לחץ דם או גב תחתון: שמרו את הסנטר קרוב והישארו ידיים במותניים.', en: 'Neck, blood pressure or lower back issues: tuck the chin and keep hands on the lower back.', ru: 'При проблемах с шеей, давлением или поясницей прижмите подбородок и держите руки на пояснице.' },
     v: [
-      { he: 'ידיים במותניים, קשת קטנה.', en: 'Hands on the lower back, small arch.', ru: 'Руки на пояснице, небольшой прогиб.', kf: { t: 92, s: 105, h: 105, fix: { a: { to: 'hip', dx: -10, bend: -1 }, b: { to: 'hip', dx: -10, bend: -1 } } } },
+      { he: 'ידיים במותניים, קשת קטנה.', en: 'Hands on the lower back, small arch.', ru: 'Руки на пояснице, небольшой прогиб.', kf: { t: 90, s: 108, h: 112, fix: { a: { to: 'hip', dx: -10, bend: -1 }, b: { to: 'hip', dx: -10, bend: -1 } } } },
       { he: 'קשת בינונית וידיים לכיוון העקבים.', en: 'Medium arch, hands toward the heels.', ru: 'Средний прогиб, руки тянутся к пяткам.', kf: {} },
-      { he: 'קשת עמוקה יותר, מבט לאחור.', en: 'Deeper arch, gaze back.', ru: 'Прогиб глубже, взгляд назад.', kf: { t: 126, s: 180, h: 192 } },
+      { he: 'קשת עמוקה יותר, מבט לאחור.', en: 'Deeper arch, gaze back.', ru: 'Прогиб глубже, взгляд назад.', kf: { t: 90, s: 124, h: 150 } },
     ],
   },
   {
@@ -140,9 +140,9 @@ export default [
     },
     safe: { he: 'מתיחה בירך האחורית חזקה מדי? קצרו את המרחק. לא לעגל את הגב בכוח.', en: 'Too strong a hamstring stretch? Shorten the distance. Do not force a rounded back.', ru: 'Если растяжка задней поверхности бедра слишком сильная, слегка согните переднее колено. Не округляйте спину силой.' },
     v: [
-      { he: 'ידיים על בלוקים, גב ארוך.', en: 'Hands on blocks, long back.', ru: 'Руки на блоках, спина длинная.', props: [{ type: 'block', arms: ['a', 'b'] }], kf: { t: 40, s: 30, h: 25, fix: { a: { x: 25, blockH: 22, bend: -1 }, b: { x: 25, blockH: 22, bend: -1 } } } },
-      { he: 'ידיים על הרגל, קיפול קל.', en: 'Hands on the leg, gentle fold.', ru: 'Руки на ноге, лёгкий наклон.', kf: {} },
-      { he: 'קיפול עמוק יותר, אחיזה בכף הרגל.', en: 'Deeper fold, holding the foot.', ru: 'Наклон глубже, рука держит стопу.', kf: { t: 12, s: -5, h: -10, fix: { a: { to: 'l', pt: 'toe', bend: -1 } } } },
+      { he: 'ידיים על הירך, גב זקוף קלות.', en: 'Hands on the thigh, back fairly upright.', ru: 'Руки на бедре, спина почти прямая.', kf: { t: 58, s: 52, h: 48, fix: { a: { to: 'l', pt: 'knee', bend: -1 } } } },
+      { he: 'ידיים על בלוקים, גב ארוך ושטוח.', en: 'Hands on blocks, long flat back.', ru: 'Руки на блоках, спина длинная и ровная.', props: [{ type: 'block', arms: ['a', 'b'] }], kf: { t: 34, s: 32, h: 30, fix: { a: { x: 30, blockH: 22, bend: -1 }, b: { x: 30, blockH: 22, bend: -1 } } } },
+      { he: 'קיפול עמוק יותר, אחיזה בכף הרגל.', en: 'Deeper fold, holding the foot.', ru: 'Наклон глубже, рука держит стопу.', kf: { t: 10, s: -8, h: -16, fix: { a: { to: 'l', pt: 'toe', bend: -1 } } } },
     ],
   },
   {
@@ -164,7 +164,7 @@ export default [
   {
     id: 'cobbler', sa: 'Baddha Konasana', en: 'Cobbler', he: 'סנדלר', ru: 'Бабочка', cat: 'hip opener', sec: 'cool', flow: 30, d: 1, hold: 30, sides: 'single',
     tags: ['flex', 'relax'], start: 'sit',
-    kf: { t: 86, s: 84, h: 84, nz: 0, tw: 1.55, a: [-60, -100], l: [10, 205, 90], m: [170, -25, 90], z: { t: 0.8 }, fix: { a: { to: 'l', pt: 'knee', bend: 1 }, b: { to: 'm', pt: 'knee', bend: -1 } } },
+    kf: { t: 86, s: 84, h: 84, nz: 0, tw: 1.55, a: [-60, -100], l: [10, 205, 90], m: [170, -25, 90], z: { t: 0.92 }, fix: { a: { to: 'l', pt: 'knee', bend: 1 }, b: { to: 'm', pt: 'knee', bend: -1 } } },
     cue: {
       he: ['שבו וחברו את כפות הרגליים זו לזו.', 'הניחו לברכיים לרדת לצדדים.', 'אחזו בקרסוליים והאריכו את עמוד השדרה.', 'קפלו קדימה מעט מהירכיים, בנשימה.'],
       en: ['Sit and bring the soles of the feet together.', 'Let the knees fall out to the sides.', 'Hold the ankles and lengthen the spine.', 'Fold forward slightly from the hips with your breath.'],
@@ -174,7 +174,7 @@ export default [
     v: [
       { he: 'ישיבה על כרית, גב זקוף.', en: 'On a cushion, upright back.', ru: 'На подушке, спина прямая.', props: [{ type: 'cushion', h: 14 }], kf: { t: 90, s: 90, h: 90, z: { t: 1 } } },
       { he: 'קיפול קל קדימה.', en: 'Gentle forward fold.', ru: 'Лёгкий наклон вперёд.', kf: {} },
-      { he: 'קיפול עמוק, מצח לכיוון כפות הרגליים.', en: 'Deeper fold, forehead toward the feet.', ru: 'Глубокий наклон, лоб к стопам.', kf: { t: 90, s: 90, h: 80, z: { t: 0.5 } } },
+      { he: 'קיפול עמוק, מצח לכיוון כפות הרגליים.', en: 'Deeper fold, forehead toward the feet.', ru: 'Глубокий наклон, лоб к стопам.', kf: { t: 90, s: 88, h: 78, z: { t: 0.8 } } },
     ],
   },
   {

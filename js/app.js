@@ -1,7 +1,7 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic } from './figure.js';
-import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
+import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
 import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
 import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
@@ -257,6 +257,8 @@ function importFile(file, done) {
     const res = parsePlanJSON(String(r.result));
     if (res.error) { toast(`${T('importBad')}: ${res.error}`); return; }
     const rec = store.upsertPlan({ id: store.newId(), ...res.plan });
+    store.setFavs(mergeFavorites(store.favorites, res.favorites));
+    const m = mergeHistory(store.history, res.history); if (m.added) store.setHistory(m.history);
     toast(T('importOk')); done(rec);
   };
   r.readAsText(file);
@@ -271,7 +273,7 @@ function viewPlans() {
       el('div', { class: 'row-btns' },
         el('a', { class: 'btn primary', href: `#/player/${p.id}` }, '▶ ' + T('play')),
         el('a', { class: 'btn', href: `#/plan/${p.id}` }, T('open')),
-        el('button', { class: 'btn', onclick: () => downloadText(`${slug(p.name)}.json`, exportPlanJSON(p)) }, T('export')),
+        el('button', { class: 'btn', onclick: () => downloadText(`${slug(p.name)}.json`, exportPlanJSON(p, { favorites: store.favorites, history: store.history })) }, T('export')),
         el('button', { class: 'btn danger', onclick: () => { if (confirm(T('confirmDel'))) { store.deletePlan(p.id); draw(); } } }, T('del'))))) : [el('p', { class: 'empty' }, T('noPlans'))]));
   };
   main.append(el('h1', {}, T('plansTitle')),
@@ -361,7 +363,7 @@ function viewPlan(id) {
     el('div', { class: 'plan-head' }, nameIn, el('div', { class: 'plan-meta' }, totalEl, savedEl)),
     el('div', { class: 'row-btns' },
       el('a', { class: 'btn primary', id: 'play-plan', href: `#/player/${plan.id}` }, '▶ ' + T('playPlan')),
-      el('button', { class: 'btn', id: 'export', onclick: () => downloadText(`${slug(plan.name)}.json`, exportPlanJSON(plan)) }, T('export')),
+      el('button', { class: 'btn', id: 'export', onclick: () => downloadText(`${slug(plan.name)}.json`, exportPlanJSON(plan, { favorites: store.favorites, history: store.history })) }, T('export')),
       el('button', { class: 'btn', onclick: () => $('#import-here').click() }, T('import')),
       el('input', { type: 'file', id: 'import-here', accept: '.json,application/json', hidden: true, onchange: (e) => { const f = e.target.files[0]; if (f) importFile(f, (rec) => go(`/plan/${rec.id}`)); e.target.value = ''; } }),
       el('button', { class: 'btn danger', onclick: () => { if (confirm(T('confirmDel'))) { store.deletePlan(plan.id); go('/plans'); } } }, T('del'))),

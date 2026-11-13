@@ -51,19 +51,61 @@ export function validatePlanObject(plan) {
 
 export const cleanItem = (it) => ({ pose: it.pose, level: it.level, unit: it.unit, amount: Math.round(it.amount) });
 
-export function exportPlanJSON(plan) {
-  return JSON.stringify({ app: APP_ID, version: 1, plan: { name: plan.name, items: plan.items.map(cleanItem) } }, null, 2);
+// ---- export / import. Schema: { app, version: 2, plan, favorites?: [poseId], history?: [{date, plan, minutes, ...}] }.
+// Version 1 files (plan only) are still accepted.
+export const SCHEMA_VERSION = 2;
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+export const cleanHistoryEntry = (h) => {
+  if (!h || typeof h !== 'object' || !DATE_RE.test(h.date) || typeof h.plan !== 'string') return null;
+  const num = (v) => (Number.isFinite(v) && v >= 0 && v < 1e6 ? Math.round(v) : undefined);
+  const o = { date: h.date, plan: h.plan.slice(0, 80), minutes: num(h.minutes) ?? 1 };
+  for (const k of ['seconds', 'planned']) if (num(h[k]) !== undefined) o[k] = num(h[k]);
+  if (typeof h.counted === 'boolean') o.counted = h.counted;
+  return o;
+};
+// Identity of a practice session: same day, plan name and length = the same entry (import never duplicates it).
+export const historyKey = (h) => [h.date, h.plan, h.seconds ?? '', h.minutes, h.planned ?? ''].join('|');
+// Imported entries are added once; existing ones win. Newest first (by date, stable), max 400.
+export function mergeHistory(existing, incoming) {
+  const seen = new Set(existing.map(historyKey));
+  const added = [];
+  for (const raw of incoming || []) {
+    const h = cleanHistoryEntry(raw);
+    if (!h || seen.has(historyKey(h))) continue;
+    seen.add(historyKey(h)); added.push(h);
+  }
+  const all = [...existing, ...added].map((h, i) => [h, i]).sort((x, y) => (x[0].date < y[0].date ? 1 : x[0].date > y[0].date ? -1 : x[1] - y[1]));
+  return { history: all.map((x) => x[0]).slice(0, 400), added: added.length };
+}
+export function mergeFavorites(existing, incoming) {
+  const out = [...existing];
+  for (const id of incoming || []) if (POSE_BY_ID[id] && !out.includes(id)) out.push(id);
+  return out;
 }
 
-// Returns { plan } or { error }.
+export function exportPlanJSON(plan, { favorites = [], history = [] } = {}) {
+  return JSON.stringify({
+    app: APP_ID, version: SCHEMA_VERSION,
+    plan: { name: plan.name, items: plan.items.map(cleanItem) },
+    favorites: favorites.filter((id) => POSE_BY_ID[id]),
+    history: history.map(cleanHistoryEntry).filter(Boolean),
+  }, null, 2);
+}
+
+// Returns { plan, favorites, history } or { error }.
 export function parsePlanJSON(text) {
   let o;
   try { o = JSON.parse(text); } catch { return { error: 'not valid JSON' }; }
   if (!o || o.app !== APP_ID) return { error: 'not a plan file from this app' };
-  if (o.version !== 1) return { error: 'unsupported version' };
+  if (o.version !== 1 && o.version !== 2) return { error: 'unsupported version' };
   const err = validatePlanObject(o.plan);
   if (err) return { error: err };
-  return { plan: { name: o.plan.name.trim().slice(0, 80), items: o.plan.items.map(cleanItem) } };
+  const res = { plan: { name: o.plan.name.trim().slice(0, 80), items: o.plan.items.map(cleanItem) }, favorites: [], history: [] };
+  if (o.version === 2) {
+    if (Array.isArray(o.favorites)) res.favorites = o.favorites.filter((id) => typeof id === 'string' && POSE_BY_ID[id]);
+    if (Array.isArray(o.history)) res.history = o.history.map(cleanHistoryEntry).filter(Boolean);
+  }
+  return res;
 }
 
 // ---- builder helpers (pure) ----

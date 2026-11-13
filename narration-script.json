@@ -240,6 +240,96 @@
   "text": "Breathe slowly into your belly."
  },
  {
+  "id": "pose.cat-cow.name",
+  "lang": "he",
+  "text": "זרימת חתול ופרה"
+ },
+ {
+  "id": "pose.cat-cow.name",
+  "lang": "ru",
+  "text": "Кошка и корова"
+ },
+ {
+  "id": "pose.cat-cow.name",
+  "lang": "en",
+  "text": "Cat and cow flow"
+ },
+ {
+  "id": "pose.cat-cow.intro",
+  "lang": "he",
+  "text": "תנוחת זרימת חתול ופרה."
+ },
+ {
+  "id": "pose.cat-cow.intro",
+  "lang": "ru",
+  "text": "Поза: Кошка и корова."
+ },
+ {
+  "id": "pose.cat-cow.intro",
+  "lang": "en",
+  "text": "Pose: Cat and cow flow."
+ },
+ {
+  "id": "pose.cat-cow.cue.1",
+  "lang": "he",
+  "text": "על ארבע, ידיים מתחת לכתפיים וברכיים מתחת לירכיים."
+ },
+ {
+  "id": "pose.cat-cow.cue.1",
+  "lang": "ru",
+  "text": "Встаньте на четвереньки, ладони под плечами, колени под бёдрами."
+ },
+ {
+  "id": "pose.cat-cow.cue.1",
+  "lang": "en",
+  "text": "On all fours, hands under shoulders and knees under hips."
+ },
+ {
+  "id": "pose.cat-cow.cue.2",
+  "lang": "he",
+  "text": "בשאיפה הורידו את הבטן והרימו את החזה, פרה."
+ },
+ {
+  "id": "pose.cat-cow.cue.2",
+  "lang": "ru",
+  "text": "На вдохе опустите живот и поднимите грудь, корова."
+ },
+ {
+  "id": "pose.cat-cow.cue.2",
+  "lang": "en",
+  "text": "Inhale: drop the belly and lift the chest, cow."
+ },
+ {
+  "id": "pose.cat-cow.cue.3",
+  "lang": "he",
+  "text": "בנשיפה עגלו את הגב לתקרה, חתול."
+ },
+ {
+  "id": "pose.cat-cow.cue.3",
+  "lang": "ru",
+  "text": "На выдохе округлите спину к потолку, кошка."
+ },
+ {
+  "id": "pose.cat-cow.cue.3",
+  "lang": "en",
+  "text": "Exhale: round the back toward the ceiling, cat."
+ },
+ {
+  "id": "pose.cat-cow.cue.4",
+  "lang": "he",
+  "text": "המשיכו לנוע לאט, תנועה אחת לכל נשימה."
+ },
+ {
+  "id": "pose.cat-cow.cue.4",
+  "lang": "ru",
+  "text": "Двигайтесь медленно, одно движение на одно дыхание."
+ },
+ {
+  "id": "pose.cat-cow.cue.4",
+  "lang": "en",
+  "text": "Keep moving slowly, one movement per breath."
+ },
+ {
   "id": "pose.cat.name",
   "lang": "he",
   "text": "חתול"

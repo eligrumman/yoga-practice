@@ -37,6 +37,7 @@ const COMMON = {
 
 // Names that contain numerals are written out for speech.
 const SPOKEN_NAME = {
+  'cat-cow': { he: 'זרימת חתול ופרה', ru: 'Кошка и корова', en: 'Cat and cow flow' },
   'warrior-1': { he: 'לוחם אחד', en: 'Warrior one' },
   'warrior-2': { he: 'לוחם שניים', en: 'Warrior two' },
   'warrior-3': { he: 'לוחם שלוש', en: 'Warrior three' },
