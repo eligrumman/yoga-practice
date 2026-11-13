@@ -3,10 +3,12 @@ import { POSES, POSE_BY_ID } from '../data/poses.js';
 import { SEGMENTS, LANGS, segText, cueIds } from '../data/narration.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID, holdSeconds, clampAmount, dropIndex, reorder } from '../js/plan.js';
-import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from '../js/generator.js';
+import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, POSITIONS, POSITION } from '../js/generator.js';
 import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
-import { nPoses, nCount, tr } from '../js/i18n.js';
+import { nPoses, nCount, tr, poseOf, approxMin, finishStats } from '../js/i18n.js';
+import { hasBreaths } from '../js/plan.js';
+import { readFileSync, readdirSync } from 'node:fs';
 
 let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log('FAIL', m); } };
@@ -78,22 +80,40 @@ const av = generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoi
 ok(!av.items.some((i) => ['downward-dog', 'tree', 'cobra'].includes(i.pose)), 'avoid list respected');
 ok(Math.abs(planSeconds(av.items) / 60 - 20) <= 1, 'avoid plan still ~20 min');
 
-// ---- beginner plans: only difficulty-1 poses, 30-60 s holds, fewer poses
+// ---- beginner plans: easy poses only, holds about 15-30 s (cobra shortest), Cat-Cow flow, more poses instead of longer holds
+const BEG_OK = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
 for (const f of FOCUSES) {
   const g20 = generatePlan({ minutes: 20, focus: f, level: 'beginner' });
-  const body = g20.items.slice(0, -1);
-  ok(g20.items.length >= 10 && g20.items.length <= 15, `beginner 20 min ${f}: ${g20.items.length} items (10-15 incl. savasana)`);
+  ok(g20.items.length >= 12 && g20.items.length <= 34, `beginner 20 min ${f}: ${g20.items.length} items`);
   for (const m of LENGTHS) {
     const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
-    ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1), `beginner ${m}/${f} only difficulty-1 poses`);
+    ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1 || BEG_OK.has(i.pose)), `beginner ${m}/${f} only easy poses`);
     ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
     ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
+    const sec = g.items.slice(0, -1).filter((i) => i.unit === 'sec');
+    ok(sec.every((i) => i.amount >= 15 && i.amount <= (m === 30 ? 40 : 30)), `beginner ${m}/${f} holds 15-30 s (40 s only at 30 min)`);
+    ok(sec.filter((i) => i.pose === 'cobra').every((i) => i.amount <= 20), `beginner ${m}/${f} cobra is short (<= 20 s)`);
+    ok(g.items.filter((i) => i.unit === 'breath').every((i) => i.amount <= 3), `beginner ${m}/${f} no long breath holds`);
+    ok(!g.items.some((i) => i.pose === 'tabletop' && i.amount > 3) , `beginner ${m}/${f} no 12-breath tabletop`);
+    ok(g.items.filter((i) => i.pose === 'cat').length === g.items.filter((i) => i.pose === 'cow').length && g.items.filter((i) => i.pose === 'cat').length >= 2, `beginner ${m}/${f} Cat-Cow cycles (cat count = cow count >= 2)`);
+    const names = g.items.map((i) => i.pose), ci = names.indexOf('cat');
+    ok(names[ci + 1] === 'cow', `beginner ${m}/${f} cat is followed by cow`);
   }
-  if (f === 'general') ok(body.every((i) => { const s = holdSeconds(i); return s >= 30 && s <= 60; }), 'beginner 20 min holds are 30-60 s');
   const g10 = generatePlan({ minutes: 10, focus: f, level: 'beginner' });
-  ok(g10.items.slice(0, -1).every((i) => { const s = holdSeconds(i); return s >= 30 && s <= 60; }), `beginner 10 min ${f} holds 30-60 s`);
+  ok(g10.items.slice(0, -1).filter((i) => i.unit === 'sec').every((i) => holdSeconds(i) >= 15 && holdSeconds(i) <= 30), `beginner 10 min ${f} holds 15-30 s`);
 }
 ok(generatePlan({ minutes: 20, level: 'gentle' }).items.length > 15, 'gentle level keeps the longer, richer plan');
+
+// ---- sequencing: all fours -> standing -> kneeling -> seated -> prone -> supine -> savasana, never supine -> kneel/stand
+const RANK = Object.fromEntries(POSITIONS.map((n, i) => [n, i]));
+for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) for (const avoid of [[], ['tabletop', 'downward-dog', 'cobra']]) {
+  const g = generatePlan({ minutes: m, focus: f, level: l, avoid });
+  const pos = g.items.map((i) => POSITION[i.pose]);
+  ok(pos.every((x) => x), `sequence ${m}/${f}/${l}: every pose has a position`);
+  ok(pos.every((x, i) => i === 0 || RANK[x] >= RANK[pos[i - 1]]), `sequence ${m}/${f}/${l}/${avoid.length}: body positions never go backwards (${pos.join('>')})`);
+  const fs = pos.indexOf('supine');
+  ok(fs < 0 || pos.slice(fs).every((x) => x === 'supine' || x === 'rest'), `sequence ${m}/${f}/${l}: no supine -> kneeling/standing before savasana`);
+}
 
 // ---- builder helpers
 ok(JSON.stringify(reorder(['a', 'b', 'c', 'd'], 2, 0)) === '["c","a","b","d"]', 'reorder: item 3 to position 1');
@@ -147,6 +167,47 @@ for (const l of LANGS) ok(tr('sides', l, 'single') === '' && tr('sides', l, 'bot
 // ---- Russian plurals
 ok(nCount(1, 'minute', 'ru') === '1 минута' && nCount(3, 'minute', 'ru') === '3 минуты' && nCount(5, 'minute', 'ru') === '5 минут' && nCount(11, 'minute', 'ru') === '11 минут' && nCount(21, 'minute', 'ru') === '21 минута', 'ru minute plurals');
 ok(nCount(2, 'day', 'ru') === '2 дня' && nCount(7, 'day', 'ru') === '7 дней' && nCount(22, 'breath', 'ru') === '22 вдоха' && nCount(12, 'second', 'ru') === '12 секунд', 'ru day/breath/second plurals');
+
+// ---- finish screen (regression: nCount was not imported in player.js and the finish page was blank)
+for (const l of LANGS) {
+  for (const [act, plan, cnt] of [[30, 1200, false], [600, 1200, true], [1500, 1500, true]]) {
+    const f = finishStats(l, act, plan, 3, cnt);
+    ok(Object.values(f).every((v) => typeof v === 'string' && v.length > 0 && !/undefined|NaN|\[object/.test(v)), `finish ${l} ${act}s renders text: ${JSON.stringify(f)}`);
+  }
+  ok(finishStats(l, 600, 1200, 3, true).stat.includes('10') && finishStats(l, 600, 1200, 3, true).planned.includes('20'), `finish ${l} shows practiced 10 / planned 20 minutes`);
+  ok(!finishStats(l, 600, 1200, 3, true).planned.includes(tr('notCounted', l)) && finishStats(l, 100, 1200, 3, false).planned.includes(tr('notCounted', l)), `finish ${l} notCounted note`);
+}
+// every identifier a module uses from i18n (or imports from any local module) must be imported and exported
+{
+  const exportsOf = (src) => { const e = new Set(); for (const m of src.matchAll(/export\s+(?:async\s+)?(?:const|let|function\*?|class)\s+([A-Za-z_$][\w$]*)/g)) e.add(m[1]); for (const m of src.matchAll(/export\s*\{([^}]*)\}/g)) for (const x of m[1].split(',')) { const n = x.trim().split(/\s+as\s+/).pop(); if (n) e.add(n); } return e; };
+  const rd = (f) => readFileSync(new URL(f, import.meta.url), 'utf8');
+  const stripC = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:'"`])\/\/.*$/gm, '$1');
+  const i18nExp = exportsOf(rd('../js/i18n.js'));
+  for (const file of readdirSync(new URL('../js/', import.meta.url)).filter((f) => f.endsWith('.js'))) {
+    const src = stripC(rd('../js/' + file)); const imported = new Set();
+    for (const m of src.matchAll(/import\s*\{([^}]*)\}\s*from\s*'(\.[^']+)'/g)) {
+      const target = new URL(m[2], new URL('../js/' + file, import.meta.url)); const exp = exportsOf(readFileSync(target, 'utf8'));
+      for (const x of m[1].split(',')) { const [n, loc] = x.trim().split(/\s+as\s+/); if (!n) continue; ok(exp.has(n), `${file}: imports ${n} from ${m[2]} which exports it`); imported.add(loc || n); }
+    }
+    if (file === 'i18n.js') continue;
+    for (const n of i18nExp) {
+      if (n === 'T') continue;
+      if (new RegExp(`(?<![\\w$.])${n}\\(`).test(src)) ok(imported.has(n) || new RegExp(`(?:const|let|function)\\s+${n}\\b`).test(src), `${file}: uses i18n ${n}() so it must import it`);
+    }
+  }
+}
+
+// ---- plan totals, player counter, bridge cue
+ok(hasBreaths(generatePlan({ minutes: 20 }).items) && !hasBreaths([{ pose: 'tree', level: 0, unit: 'sec', amount: 30 }]), 'hasBreaths');
+ok(approxMin(1230, 'en') === '≈ 21 min' && approxMin(1200, 'en') === '≈ 20 min' && approxMin(1200, 'he') === 'כ-20 דק׳' && approxMin(1200, 'ru') === '≈ 20 мин', 'approx minutes he/ru/en');
+ok(poseOf(2, 3, 'en') === 'Pose 2 of 3' && poseOf(2, 3, 'he') === 'תנוחה 2 מתוך 3' && poseOf(2, 3, 'ru') === 'Поза 2 из 3', 'pose counter he/ru/en');
+ok(slots(generatePlan({ minutes: 20 }).items).every((s) => s.index < generatePlan({ minutes: 20 }).items.length), 'slot.index is the item index (pose counter)');
+for (const [l, re] of [['he', /הראש נשאר על הרצפה/], ['ru', /Голова остаётся на полу/], ['en', /head stays on the floor/i]]) {
+  const b = POSE_BY_ID.bridge;
+  ok(re.test(b.safety[l]) && b.cues[l].some((c) => re.test(c)), `bridge head-stays-on-floor cue (safety + spoken cue) ${l}`);
+}
+ok(!/clasp|שלובות|сцеплен/.test(JSON.stringify(POSE_BY_ID.bridge.variations)), 'bridge L2 text does not promise clasped hands the figure cannot show');
+for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filters label ${l}`);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

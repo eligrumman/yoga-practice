@@ -86,15 +86,15 @@ export default [
     tags: ['back', 'strength', 'relax'], start: 'lie',
     kf: { t: -135, s: -118, h: -172, a: [-5, -5], l: [-22, -118, 0], fix: { a: { x: 72, bend: -1 } } },
     cue: {
-      he: ['שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן.', 'לחצו את כפות הרגליים והרימו את האגן.', 'הרחיקו את הברכיים זו מזו קלות, לא יותר מרוחב האגן.', 'הורידו אחרי כמה נשימות, חוליה אחר חוליה.'],
-      en: ['Lie on your back, knees bent, heels near the hips.', 'Press the feet down and lift the hips.', 'Keep the knees hip-width apart.', 'Lower after a few breaths, one vertebra at a time.'],
-      ru: ['Лягте на спину, колени согнуты, пятки у таза.', 'Надавите стопами на пол и поднимите таз.', 'Колени держите на ширине таза.', 'Через несколько вдохов медленно опуститесь, позвонок за позвонком.'],
+      he: ['שכבו על הגב, ברכיים כפופות, עקבים קרובים לאגן.', 'לחצו את כפות הרגליים והרימו את האגן.', 'הרחיקו את הברכיים זו מזו קלות, לא יותר מרוחב האגן.', 'הורידו אחרי כמה נשימות, חוליה אחר חוליה.', 'הראש נשאר על הרצפה והצוואר רפוי; אל תסובבו את הראש.'],
+      en: ['Lie on your back, knees bent, heels near the hips.', 'Press the feet down and lift the hips.', 'Keep the knees hip-width apart.', 'Lower after a few breaths, one vertebra at a time.', 'The head stays on the floor, neck relaxed; do not turn the head.'],
+      ru: ['Лягте на спину, колени согнуты, пятки у таза.', 'Надавите стопами на пол и поднимите таз.', 'Колени держите на ширине таза.', 'Через несколько вдохов медленно опуститесь, позвонок за позвонком.', 'Голова остаётся на полу, шея расслаблена; не поворачивайте голову.'],
     },
-    safe: { he: 'אל תסובבו את הראש בזמן ההחזקה. צוואר רגיש: הניחו שמיכה מתחת לכתפיים.', en: 'Do not turn the head while holding. Sensitive neck: place a folded blanket under the shoulders.', ru: 'Не поворачивайте голову во время удержания. Если шея чувствительна, подложите сложенное одеяло под плечи.' },
+    safe: { he: 'הראש נשאר על הרצפה והצוואר רפוי; אל תסובבו את הראש בזמן ההחזקה. צוואר רגיש: הניחו שמיכה מתחת לכתפיים.', en: 'The head stays on the floor, neck relaxed; do not turn the head while holding. Sensitive neck: place a folded blanket under the shoulders.', ru: 'Голова остаётся на полу, шея расслаблена; не поворачивайте голову во время удержания. Если шея чувствительна, подложите сложенное одеяло под плечи.' },
     v: [
       { he: 'הרמה נמוכה של האגן.', en: 'Low lift of the hips.', ru: 'Небольшой подъём таза.', kf: { t: -148, s: -134, h: -165, l: [-8, -110, 0] } },
       { he: 'גשר יציב עם ידיים ליד הגוף.', en: 'Steady bridge with arms alongside.', ru: 'Устойчивый мост, руки вдоль тела.', kf: {} },
-      { he: 'גשר גבוה, ידיים שלובות מתחת לגוף.', en: 'High bridge, hands clasped beneath you.', ru: 'Высокий мост, руки сцеплены под спиной.', kf: { t: -125, s: -110, h: -175, l: [-28, -122, 0] } },
+      { he: 'גשר גבוה יותר, ידיים לוחצות אל הרצפה לצד הגוף.', en: 'Higher bridge, arms pressing into the floor alongside.', ru: 'Мост выше, руки прижаты к полу вдоль тела.', kf: { t: -125, s: -110, h: -175, l: [-28, -122, 0] } },
     ],
   },
   {

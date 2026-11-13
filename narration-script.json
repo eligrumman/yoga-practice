@@ -2040,6 +2040,21 @@
   "text": "Lower after a few breaths, one vertebra at a time."
  },
  {
+  "id": "pose.bridge.cue.5",
+  "lang": "he",
+  "text": "הראש נשאר על הרצפה והצוואר רפוי; אל תסובבו את הראש."
+ },
+ {
+  "id": "pose.bridge.cue.5",
+  "lang": "ru",
+  "text": "Голова остаётся на полу, шея расслаблена; не поворачивайте голову."
+ },
+ {
+  "id": "pose.bridge.cue.5",
+  "lang": "en",
+  "text": "The head stays on the floor, neck relaxed; do not turn the head."
+ },
+ {
   "id": "pose.child.name",
   "lang": "he",
   "text": "תנוחת הילד"

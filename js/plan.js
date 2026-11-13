@@ -11,6 +11,7 @@ export const itemSeconds = (it, tr = DEFAULT_TRANSITION, mult = 1) =>
   sideCount(it) * (Math.round(holdSeconds(it) * mult) + tr);
 export const planSeconds = (items, tr = DEFAULT_TRANSITION, mult = 1) =>
   items.reduce((n, it) => n + itemSeconds(it, tr, mult), 0);
+export const hasBreaths = (items) => items.some((it) => it.unit === 'breath');
 export const fmtTime = (sec) => {
   sec = Math.max(0, Math.round(sec));
   return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;

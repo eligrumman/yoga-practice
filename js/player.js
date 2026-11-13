@@ -1,7 +1,7 @@
 // Guided player: timer, looping figure, narration schedule, next preview, finish screen.
 import { Figure, Animator, renderStatic } from './figure.js';
 import { slots, planSeconds, fmtTime } from './plan.js';
-import { tr } from './i18n.js';
+import { tr, poseOf, finishStats } from './i18n.js';
 import { store, streak, countsForStreak } from './store.js';
 import { cueIds } from '../data/narration.js';
 import { LEVEL_LABELS } from '../data/poses.js';
@@ -150,7 +150,7 @@ export class Player {
   renderInfo(s) {
     const L = this.lang, p = s.pose;
     this.elName.textContent = p[L];
-    this.elSub.textContent = `${p.sanskrit} · ${LEVEL_LABELS[s.level][L]}` + (s.sides > 1 ? ` · ${this.T('side')} ${this.T('sideLR', s.side)}` : '');
+    this.elSub.textContent = `${p.sanskrit} · ${LEVEL_LABELS[s.level][L]}` + (s.sides > 1 ? ` · ${this.T('sideLR', s.side)}` : '');
     this.elCues.innerHTML = '';
     for (const c of p.cues[L]) this.elCues.append(el('li', {}, c));
     const easy = p.variations[0];
@@ -164,7 +164,7 @@ export class Player {
     if (!n) { this.elNext.hidden = true; return; }
     this.elNext.hidden = false;
     renderStatic(this.nextSvg, n.pose, n.level, { mirror: n.side === 1, floor: true });
-    this.elNextName.textContent = n.pose[this.lang] + (n.sides > 1 && n.side === 1 ? ` (${this.T('side')} ${this.T('sideLR', 1)})` : '');
+    this.elNextName.textContent = n.pose[this.lang] + (n.sides > 1 && n.side === 1 ? ` (${this.T('sideLR', 1)})` : '');
   }
 
   tick() {
@@ -200,7 +200,7 @@ export class Player {
     this.elCount.classList.toggle('trans', this.phase === 'trans');
     const pct = Math.min(100, (this.elapsedAll / this.totalAll) * 100);
     this.elBar.style.width = pct + '%';
-    this.elBarTxt.textContent = `${this.idx + 1}/${this.list.length} · ${fmtTime(this.elapsedAll)} / ${fmtTime(this.totalAll)}`;
+    this.elBarTxt.textContent = `${poseOf(this.slot().index + 1, this.plan.items.length, this.lang)} · ${fmtTime(this.elapsedAll)} / ${fmtTime(this.totalAll)}`;
     this.root.querySelector('.p-bar')?.setAttribute('aria-valuenow', Math.round(pct));
   }
 
@@ -229,15 +229,15 @@ export class Player {
     store.addHistory(this.plan.name, actual, this.totalAll);
     const counted = countsForStreak(actual, this.totalAll);
     const st = streak(store.history);
-    const shown = actual < 60 ? '<1' : String(Math.round(actual / 60));
+    const fs = finishStats(this.lang, actual, this.totalAll, st, counted);
     this.beep(660, 0.3);
     this.root.innerHTML = '';
     this.root.append(el('div', { class: 'finish' },
       el('div', { class: 'finish-mark', 'aria-hidden': 'true' }, '🪷'),
-      el('h2', {}, this.T('finishTitle')),
-      el('p', {}, this.T('finishText')),
-      el('p', { class: 'stat', id: 'finish-stat' }, `${this.T('practiced')}: ${shown === '<1' ? '<1 ' + this.T('min') : nCount(+shown, 'minute', this.lang)} · ${this.T('streak')}: ${st}`),
-      el('p', { class: 'small', id: 'finish-planned' }, `${this.T('planned')}: ${nCount(Math.round(this.totalAll / 60), 'minute', this.lang)}` + (counted ? '' : ` · ${this.T('notCounted')}`)),
+      el('h2', {}, fs.title),
+      el('p', {}, fs.text),
+      el('p', { class: 'stat', id: 'finish-stat' }, fs.stat),
+      el('p', { class: 'small', id: 'finish-planned' }, fs.planned),
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary', onclick: () => this.again() }, this.T('again')),
         el('button', { class: 'btn', onclick: () => this.exit(true) }, this.T('home')))));

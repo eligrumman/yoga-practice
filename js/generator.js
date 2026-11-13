@@ -1,5 +1,5 @@
 // Deterministic first-time plan generator. Same inputs always give the same plan.
-import { POSES } from '../data/poses.js';
+import { POSES, POSE_BY_ID } from '../data/poses.js';
 import { planSeconds, sideCount, DEFAULT_TRANSITION, BREATH_SEC } from './plan.js';
 
 export const FOCUSES = ['general', 'flexibility', 'strength', 'relax', 'back'];
@@ -16,6 +16,23 @@ const WEIGHTS = {
 };
 const FOCUS_TAG = { general: null, flexibility: 'flex', strength: 'strength', relax: 'relax', back: 'back' };
 const BREATH_POSES = new Set(['tabletop', 'cat', 'cow']);
+// Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
+// SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
+const SEQ = [
+  ['allfours', ['tabletop', 'cat', 'cow', 'downward-dog', 'plank']],
+  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'half-lift', 'uttanasana']],
+  ['kneel', ['low-lunge', 'half-split', 'camel', 'child']],
+  ['seated', ['easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'boat']],
+  ['prone', ['cobra', 'locust']],
+  ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'supine-twist', 'legs-up-wall']],
+  ['rest', ['savasana']],
+];
+export const POSITIONS = SEQ.map(([n]) => n);
+export const POSITION = {}; const SEQ_RANK = {};
+SEQ.forEach(([name, ids]) => ids.forEach((id) => { POSITION[id] = name; SEQ_RANK[id] = Object.keys(SEQ_RANK).length; }));
+// easy two-sided/standing poses a beginner may meet in the first weeks (beyond difficulty 1), to fill time without longer holds
+const BEGINNER_EXTRA = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
+export const CATCOW_CYCLES = 3, CATCOW_BREATHS = 3;
 const NAMES = {
   general: { he: 'תכנית ראשונה', ru: 'Первая практика', en: 'First-time plan' },
   flexibility: { he: 'תכנית גמישות', ru: 'Практика на гибкость', en: 'Flexibility plan' },
@@ -24,12 +41,14 @@ const NAMES = {
   back: { he: 'תכנית ידידותית לגב', ru: 'Практика для спины', en: 'Back-friendly plan' },
 };
 
+// longest beginner hold per pose: cobra is the shortest (20 s)
+const maxSec = (p) => (p.id === 'cobra' ? 20 : 40);
 const grid = (x) => Math.round(x / 5) * 5;
 
 function candidates({ focus, level, avoid }) {
-  // beginner: difficulty-1 poses only (no Tree, Warrior III, Plank, Half-split...)
+  // beginner: difficulty-1 poses plus a short list of easy extras (no Tree, Warrior III, Plank, Half-split...)
   const maxD = focus === 'back' && level !== 'beginner' ? 2 : 3;
-  const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 : p.difficulty <= maxD);
+  const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
   return POSES.filter((p) => p.section !== 'rest' && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !avoid.has(p.id));
 }
 
@@ -41,8 +60,8 @@ function rank(p, focus, level) {
 }
 const cmp = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; };
 
-// beginner holds are longer (30-60 s) so there are fewer, calmer poses
-const baseHold = (p, level) => (level === 'beginner' ? 60 : p.holdSeconds);
+// beginner holds are short (about 20-30 s, cobra shortest); the time is filled with more easy poses, not longer holds
+const baseHold = (p, level) => (level === 'beginner' ? Math.min(30, p.holdSeconds) : p.holdSeconds);
 function slotNominal(p, f, level) {
   const hold = baseHold(p, level);
   return (p.sides === 'both' ? 2 : 1) * (grid(hold * f) + DEFAULT_TRANSITION);
@@ -102,30 +121,43 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
     chosen.push({ s, budget, poses: out });
   }
 
-  // second pass: poses missing for budget -> add from the pool (any section matching order)
+  // build items, then order by body position (see SEQ)
+  const beg = level === 'beginner';
   let items = [];
   for (const sec of chosen) {
     const nominal = sec.poses.reduce((n, p) => n + slotNominal(p, 1, level), 0) || 1;
     const k = Math.max(0.6, Math.min(1.8, sec.budget / nominal));
     for (const p of sec.poses) {
-      const beg = level === 'beginner';
-      const hold = Math.max(beg ? 30 : 10, grid(baseHold(p, level) * k));
-      if (BREATH_POSES.has(p.id)) items.push({ pose: p.id, level: lvl, unit: 'breath', amount: beg ? Math.min(12, Math.max(6, Math.round(hold / BREATH_SEC))) : Math.max(2, Math.round(hold / BREATH_SEC)) });
-      else items.push({ pose: p.id, level: lvl, unit: 'sec', amount: Math.min(beg ? 60 : 90, hold) });
+      const hold = Math.max(beg ? 15 : 10, grid(baseHold(p, level) * k));
+      if (BREATH_POSES.has(p.id)) items.push({ pose: p.id, level: lvl, unit: 'breath', amount: beg ? CATCOW_BREATHS : Math.max(2, Math.round(hold / BREATH_SEC)) });
+      else items.push({ pose: p.id, level: lvl, unit: 'sec', amount: Math.min(beg ? Math.min(30, maxSec(p)) : 90, hold) });
     }
+  }
+  items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
+  // beginner: no 12-breath Tabletop/Cat. A few Cat-Cow cycles instead (fixed, not stretched by the tuner).
+  const fixed = new WeakSet();
+  if (beg && items.some((i) => BREATH_POSES.has(i.pose))) {
+    const out = []; let flowDone = false;
+    const flow = () => { flowDone = true; for (let c = 0; c < CATCOW_CYCLES; c++) for (const id of ['cat', 'cow']) { const x = { pose: id, level: lvl, unit: 'breath', amount: CATCOW_BREATHS }; fixed.add(x); out.push(x); } };
+    for (const it of items) {
+      if (it.pose === 'tabletop') { it.amount = CATCOW_BREATHS; fixed.add(it); out.push(it); if (!flowDone) flow(); }
+      else if (it.pose === 'cat' || it.pose === 'cow') { if (!flowDone) flow(); }
+      else out.push(it);
+    }
+    items = out;
   }
   items.push({ pose: 'savasana', level: lvl, unit: 'sec', amount: savasanaTarget });
 
   // fine tune toward T by nudging holds in 5 s steps (round-robin, deterministic)
   const body = () => items.slice(0, -1);
-  let stretch = false; // beginner: holds stay 30-60 s unless a 30 min plan cannot otherwise fill the time
+  let stretch = false; // beginner: holds stay 15-30 s (up to 40 s only if a 30 min plan cannot otherwise be filled)
   const step = (i, d) => {
     const it = items[i];
-    const unitSec = it.unit === 'breath' ? BREATH_SEC : 5;
-    const amt = it.amount + (d > 0 ? unitSec / (it.unit === 'breath' ? BREATH_SEC : 1) : -unitSec / (it.unit === 'breath' ? BREATH_SEC : 1));
-    const beg = level === 'beginner';
-    const lo = it.unit === 'breath' ? (beg ? 6 : 2) : (beg ? 30 : 10);
-    const hi = it.unit === 'breath' ? (beg ? (stretch ? 18 : 12) : 14) : (beg ? (stretch ? 90 : 60) : 90);
+    if (fixed.has(it)) return false;
+    const sec = it.unit === 'sec';
+    const amt = it.amount + (d > 0 ? 5 : -5) / (sec ? 1 : BREATH_SEC);
+    const lo = sec ? (beg ? 15 : 10) : 2;
+    const hi = sec ? (beg ? Math.min(stretch ? 40 : 30, maxSec(POSE_BY_ID[it.pose])) : 90) : 14;
     if (amt < lo || amt > hi) return false;
     it.amount = amt;
     return true;
@@ -142,12 +174,12 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
     }
   };
   tune();
-  if (level === 'beginner' && T - planSeconds(body()) - DEFAULT_TRANSITION > 480) {
+  if (beg && T - planSeconds(body()) - DEFAULT_TRANSITION > 420) {
     stretch = true; items[items.length - 1].amount = grid(T * 0.2); tune();
   }
-  // let savasana absorb what is left (30-480 s)
+  // let savasana absorb what is left (30-480 s, up to 600 s for a 30 min beginner plan)
   const rest = T - planSeconds(body());
-  items[items.length - 1].amount = Math.max(30, Math.min(480, grid(rest - DEFAULT_TRANSITION)));
+  items[items.length - 1].amount = Math.max(30, Math.min(beg ? 600 : 480, grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level };
 }
 

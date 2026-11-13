@@ -106,7 +106,8 @@ const T = {
   restart: { he: 'התחל תנוחה מחדש', ru: 'Начать позу заново', en: 'Restart pose' },
   replayEntry: { he: 'הצג כניסה שוב', ru: 'Показать вход в позу', en: 'Replay entry' },
   side: { he: 'צד', ru: 'Сторона', en: 'Side' },
-  sideLR: [{ he: 'ראשון', ru: 'первая', en: 'first' }, { he: 'שני', ru: 'вторая', en: 'second' }],
+  sideLR: [{ he: 'צד ימין', ru: 'правая сторона', en: 'right side' }, { he: 'צד שמאל', ru: 'левая сторона', en: 'left side' }],
+  clearFilters: { he: 'נקו את הסינון', ru: 'Сбросить фильтры', en: 'Clear filters' },
   switchSides: { he: 'החליפו צד', ru: 'Смените сторону', en: 'Switch sides' },
   getReady: { he: 'התכוננו', ru: 'Приготовьтесь', en: 'Get ready' },
   finishTitle: { he: 'כל הכבוד!', ru: 'Отлично!', en: 'Well done!' },
@@ -171,6 +172,20 @@ export function nCount(n, kind, lang) {
   if (lang === 'he') { const h = HE[kind]; return n === 1 ? h[0] : n === 2 ? h[1] : `${n} ${h[2]}`; }
   if (lang === 'ru') return `${n} ${ruPlural(n, kind)}`;
   return `${n} ${EN[kind][n === 1 ? 0 : 1]}`;
+}
+// "Pose 2 of 3": counted by pose, not by side.
+export const poseOf = (a, b, lang) => (lang === 'he' ? `תנוחה ${a} מתוך ${b}` : lang === 'ru' ? `Поза ${a} из ${b}` : `Pose ${a} of ${b}`);
+// Approximate total ("≈ 20 min") for plans whose breath-counted items vary with the breathing pace.
+export const approxMin = (sec, lang) => `${lang === 'he' ? 'כ-' : '≈ '}${Math.round(sec / 60)} ${tr('min', lang)}`;
+// Texts of the finish screen, as pure data so they can be tested without a DOM.
+export function finishStats(lang, actualSec, plannedSec, streakDays, counted) {
+  const m = actualSec < 60 ? 0 : Math.round(actualSec / 60);
+  const practiced = m === 0 ? `<1 ${tr('min', lang)}` : nCount(m, 'minute', lang);
+  return {
+    title: tr('finishTitle', lang), text: tr('finishText', lang),
+    stat: `${tr('practiced', lang)}: ${practiced} · ${tr('streak', lang)}: ${streakDays}`,
+    planned: `${tr('planned', lang)}: ${nCount(Math.round(plannedSec / 60), 'minute', lang)}` + (counted ? '' : ` · ${tr('notCounted', lang)}`),
+  };
 }
 export const nPoses = (n, lang) => nCount(n, 'pose', lang);
 export { T };

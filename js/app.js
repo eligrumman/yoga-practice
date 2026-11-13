@@ -1,10 +1,10 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic } from './figure.js';
-import { planSeconds, fmtTime, itemSeconds, exportPlanJSON, parsePlanJSON, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
+import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
 import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
-import { tr, UI_LANGS, DIR, nPoses } from './i18n.js';
+import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
 import { Player } from './player.js';
 
@@ -47,6 +47,8 @@ function applyNarr() {
 }
 applyNarr(); narrator.loadManifest();
 
+// plans with breath-counted items run as long as the breathing: show an approximate total
+const fmtTotal = (items) => (hasBreaths(items) ? approxMin(planSeconds(items), lang) : fmtTime(planSeconds(items)));
 const minutesOf = (items, mult = 1, tr_ = 5) => Math.round(planSeconds(items, tr_, mult) / 60);
 const levelBadge = (n) => el('span', { class: `badge lv${n}` }, LEVEL_LABELS[n][lang]);
 const stars = (n) => '●'.repeat(n) + '○'.repeat(3 - n);
@@ -98,7 +100,7 @@ function presetCard(p) {
   return el('article', { class: 'card preset' },
     el('div', { class: 'preset-top' },
       el('h3', {}, p.name[lang]), // starter names already begin with "Day N:"
-      el('div', { class: 'meta' }, el('span', { class: 'badge' }, `${mins} ${T('min')}`), levelBadge(p.level))),
+      el('div', { class: 'meta' }, el('span', { class: 'badge' }, (hasBreaths(p.items) ? approxMin(mins * 60, lang) : `${mins} ${T('min')}`)), levelBadge(p.level))),
     el('p', {}, p.desc[lang]),
     el('div', { class: 'row-btns' },
       el('button', { class: 'btn primary', onclick: () => go(`/player/preset:${p.id}`) }, '▶ ' + T('play')),
@@ -171,8 +173,16 @@ function viewLibrary() {
         el('div', { class: 'pc-body' }, el('h3', {}, poseName(p)), el('div', { class: 'sans' }, p.sanskrit),
           el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), el('span', { class: 'dots', title: T('difficulty') }, stars(p.difficulty)), favs.includes(p.id) ? el('span', { class: 'fav-on', 'aria-label': T('star') }, '★') : null)));
     }));
-    if (!list.length) grid.append(el('p', { class: 'empty' }, T('none')));
+    if (!list.length) {
+      grid.append(el('p', { class: 'empty' }, T('none')), el('button', { class: 'btn', id: 'clear-filters', onclick: clearAll }, T('clearFilters')));
+    }
     count.textContent = nPoses(list.length, lang);
+  };
+  const clearAll = () => {
+    Object.assign(q, { text: '', cat: '', lvl: '', fav: false });
+    for (const [id, v] of [['q', ''], ['f-cat', ''], ['f-lvl', '']]) { const n = document.getElementById(id); if (n) n.value = v; }
+    const f = document.getElementById('f-fav'); if (f) f.checked = false;
+    draw();
   };
   const sel = (id, label, opts, fn) => { const s = el('select', { id, 'aria-label': label, onchange: (e) => fn(e.target.value) }); for (const [v, t] of opts) s.append(el('option', { value: v }, t)); return s; };
   main.append(el('h1', {}, T('navLibrary')),
@@ -257,7 +267,7 @@ function viewPlans() {
   const draw = () => {
     const plans = store.plans;
     list.replaceChildren(...(plans.length ? plans.map((p) => el('article', { class: 'card plan-card' },
-      el('h3', {}, p.name), el('div', { class: 'meta' }, el('span', { class: 'badge' }, nPoses(p.items.length, lang)), el('span', { class: 'badge' }, `${fmtTime(planSeconds(p.items))}`)),
+      el('h3', {}, p.name), el('div', { class: 'meta' }, el('span', { class: 'badge' }, nPoses(p.items.length, lang)), el('span', { class: 'badge' }, fmtTotal(p.items))),
       el('div', { class: 'row-btns' },
         el('a', { class: 'btn primary', href: `#/player/${p.id}` }, '▶ ' + T('play')),
         el('a', { class: 'btn', href: `#/plan/${p.id}` }, T('open')),
@@ -282,7 +292,7 @@ function viewPlan(id) {
   const totalEl = el('div', { class: 'total', id: 'total' });
   const savedEl = el('span', { class: 'save-state', id: 'save-state', role: 'status', 'aria-live': 'polite' }, T('savedAuto'));
   const flashSaved = () => { savedEl.textContent = T('savedAuto'); savedEl.classList.add('flash'); clearTimeout(flashSaved.t); flashSaved.t = setTimeout(() => savedEl.classList.remove('flash'), 1500); };
-  const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} \u00b7 ${nPoses(plan.items.length, lang)}`; flashSaved(); };
+  const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTotal(plan.items)} \u00b7 ${nPoses(plan.items.length, lang)}`; flashSaved(); };
   const move = (i, d) => { const j = i + d; if (j < 0 || j >= plan.items.length) return; plan.items = reorder(plan.items, i, j); save(); draw(); };
   const row = (it, i) => {
     const p = POSE_BY_ID[it.pose];
@@ -341,7 +351,7 @@ function viewPlan(id) {
   }
   const draw = () => {
     listEl.replaceChildren(...(plan.items.length ? plan.items.map(row) : [el('li', { class: 'empty' }, T('empty'))]));
-    totalEl.textContent = `${T('total')}: ${fmtTime(planSeconds(plan.items))} \u00b7 ${nPoses(plan.items.length, lang)}`;
+    totalEl.textContent = `${T('total')}: ${fmtTotal(plan.items)} \u00b7 ${nPoses(plan.items.length, lang)}`;
   };
   // picker
   const pick = el('select', { id: 'pick', 'aria-label': T('addPose') }, POSES.map((p) => el('option', { value: p.id }, `${poseName(p)} — ${p.sanskrit}`)));
