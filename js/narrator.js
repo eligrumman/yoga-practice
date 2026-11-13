@@ -9,6 +9,7 @@ export class Narrator {
     this.lang = 'he'; this.mute = false; this.volume = 0.9;
     this.manifest = new Set(); this.manifestLoaded = false;
     this.onCaption = () => {}; this.onNotice = () => {};
+    this.onSpeaking = () => {}; this._sp = false; // onSpeaking(bool): true while a clip is playing or queued (music ducking)
     this.queue = []; this.busy = false; this.paused = false; this.current = null; this.gen = 0;
     this.spoken = []; // test hook: [{id, lang, via}]
     this.voices = [];
@@ -63,12 +64,12 @@ export class Narrator {
     return maxMs ? Promise.race([all, new Promise((r) => setTimeout(r, maxMs))]) : all;
   }
   cancel() {
-    this.gen++; this.queue = []; this.busy = false; this.current = null;
+    this.gen++; this.queue = []; this.busy = false; this.current = null; this.setSpeaking(false);
     try { speechSynthesis.cancel(); } catch { /* none */ }
     if (this.audioEl) { try { this.audioEl.pause(); } catch { /* none */ } this.audioEl = null; }
   }
   pause() {
-    this.paused = true;
+    this.paused = true; this.setSpeaking(false);
     try { speechSynthesis.pause(); } catch { /* none */ }
     if (this.audioEl) this.audioEl.pause();
   }
@@ -78,10 +79,11 @@ export class Narrator {
     if (this.audioEl) this.audioEl.play().catch(() => {});
     this.pump();
   }
+  setSpeaking(v) { if (v !== this._sp) { this._sp = v; try { this.onSpeaking(v); } catch { /* listener error */ } } }
   async pump() {
     if (this.busy || this.paused) return;
     let id = this.queue.shift();
-    if (!id) return;
+    if (!id) return this.setSpeaking(false);
     if (typeof id === 'function') { try { id(); } catch { /* callback error */ } return this.pump(); }
     let pause = 0;
     if (typeof id === 'object') { pause = id.pause || 0; id = id.id; }
@@ -89,6 +91,7 @@ export class Narrator {
     const text = segText(id, this.lang);
     if (!text) { this.busy = false; return this.pump(); }
     this.onCaption(text, id);
+    if (!this.mute) this.setSpeaking(true);
     if (this.mute) { await new Promise((r) => setTimeout(r, Math.min(4000, 400 + text.length * 45))); }
     else await this.speak(id, text, g);
     if (g !== this.gen) return;

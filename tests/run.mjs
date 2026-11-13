@@ -296,7 +296,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 375, `375 v2 segments (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 449, `449 v2 segments = 375 + 74 fix (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -331,10 +331,10 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // level -> segments mapping (tree: two-sided; hold long enough that nothing is dropped)
   const base = { lang: 'he', poseId: 'tree', side: 0, sides: 2, hold: 60, lvl: 0, dur, announced: false, lastSavasana: false, minutes: 20 };
   const P = (o) => NP.slotPlan({ ...base, ...o });
-  const full = P({ level: 'full', hold: 90 });
+  const full = P({ level: 'full', hold: 130 });
   ok(full.ids[0] === 'pose.tree.intro' && full.ids.includes('pose.tree.entry.1') && full.ids.includes('pose.tree.mod.L0') && full.ids.includes('pose.tree.align.1') && full.ids.includes('pose.tree.breath') && full.ids.includes('pose.tree.exit'), 'full: intro, entry, mod, align, breath, exit');
   ok(full.ids.indexOf('pose.tree.mod.L0') > full.ids.indexOf('pose.tree.entry.1') && full.ids.indexOf('pose.tree.mod.L0') < full.ids.indexOf('pose.tree.align.1'), 'full: mod comes after entry and before align');
-  ok(P({ level: 'full', hold: 90, lvl: 2 }).ids.includes('pose.tree.mod.L2') && !P({ level: 'full', hold: 90, lvl: 2 }).ids.includes('pose.tree.mod.L0'), 'full: mod follows the item level');
+  ok(P({ level: 'full', hold: 130, lvl: 2 }).ids.includes('pose.tree.mod.L2') && !P({ level: 'full', hold: 130, lvl: 2 }).ids.includes('pose.tree.mod.L0'), 'full: mod follows the item level');
   const shortL0 = P({ level: 'short', lvl: 0, hold: 60 }), shortL1 = P({ level: 'short', lvl: 1, hold: 30 });
   ok(shortL0.ids.join() === 'pose.tree.intro,pose.tree.entry.1,pose.tree.mod.L0,pose.tree.breath', 'short L0: intro, entry.1, mod.L0, breath (hold>=25, budget allows)');
   ok(shortL1.ids.join() === 'pose.tree.intro,pose.tree.entry.1,pose.tree.breath' && !P({ level: 'short', lvl: 0, hold: 20 }).ids.includes('pose.tree.breath'), 'short L1: no mod; no breath when hold < 25');
@@ -419,7 +419,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 375 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 375 Hebrew v2 entries');
+  ok(v2s.length === 449 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 449 Hebrew v2 entries');
   ok(script.filter((s) => !s.v2).length === 233 * 3, 'narration-script.json legacy entries unchanged (233 x 3)');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
@@ -442,6 +442,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     }
   }
 }
+
+{ const pt = await import('./player.test.mjs'); pass += pt.pass; fail += pt.fail; } // player: fix cues, music, transcript
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

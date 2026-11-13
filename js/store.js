@@ -10,7 +10,7 @@ function set(key, val) {
   try { localStorage.setItem(K + key, JSON.stringify(val)); } catch { /* private mode: memory only */ }
 }
 
-export const DEFAULT_SETTINGS = { holdMult: 1, transition: 5, beep: true, mute: false, volume: 0.9, narrLang: '', wake: true };
+export const DEFAULT_SETTINGS = { holdMult: 1, transition: 5, beep: true, mute: false, volume: 0.9, narrLang: '', wake: true, music: 'soft', musicVol: 0.5, barPin: false };
 
 export const store = {
   get lang() { return get('lang', 'he'); },

@@ -19,7 +19,7 @@ PNAME=$($AB eval "document.querySelector('.p-name')?.textContent || ''" | tr -d 
 # Hebrew starts with an intro phase (the first skip only skips the intro), so skip until the finish screen shows (max 6 clicks)
 for i in 1 2 3 4 5 6; do
   [ "$($AB eval "!!document.querySelector('.finish')")" = true ] && break
-  $AB eval "(document.querySelector('#p-ctrl button:last-child')).click()" >/dev/null || fail "skip click failed"
+  $AB eval "(document.querySelector('[data-act=skip]') || document.querySelector('#p-ctrl button:last-child')).click()" >/dev/null || fail "skip click failed"
   sleep 1
 done
 FIN=$($AB eval "document.querySelector('.finish')?.innerText || ''")

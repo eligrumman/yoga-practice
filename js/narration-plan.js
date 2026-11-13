@@ -13,7 +13,7 @@ export const resolveNarration = (raw) => (NARR_LEVELS.includes(raw?.narration) ?
 export const BUDGET = 0.65;          // speech <= 65% of the hold (Owner default, option A)
 export const BREATH_EVERY = 30;      // mid-hold reminder cadence in long holds (s)
 export const LONG_HOLD = 45;
-export const PAUSE = { afterIntroName: 0.8, afterEntry: 1.5, afterMod: 2, afterAlign: 2 };
+export const PAUSE = { afterIntroName: 0.8, afterEntry: 1.5, afterMod: 2, afterFix: 2, afterAlign: 2 };
 
 export const countWords = (t) => (t || '').trim().split(/\s+/).filter(Boolean).length;
 // Measured on the existing Hebrew clips: 2.3 s + 0.65 s per word.
@@ -28,7 +28,7 @@ const pauseOfSession = (id) => SESSION_BY_ID[id]?.pauseAfter ?? 1;
 export function poseV2Ids(poseId) {
   const P = POSE_V2[poseId]; if (!P) return [];
   const k = (s) => `pose.${poseId}.${s}`;
-  return [...P.entry.map((_, i) => k(`entry.${i + 1}`)), ...P.align.map((_, i) => k(`align.${i + 1}`)), k('breath'), k('mod.L0'), k('mod.L1'), k('mod.L2'), k('exit'), ...(P.side ? [k('side')] : [])];
+  return [...P.entry.map((_, i) => k(`entry.${i + 1}`)), ...P.align.map((_, i) => k(`align.${i + 1}`)), k('breath'), k('mod.L0'), k('mod.L1'), k('mod.L2'), ...(P.fix || []).map((_, i) => k(`fix.${i + 1}`)), k('exit'), ...(P.side ? [k('side')] : [])];
 }
 export const sessionIds = () => Object.keys(SESSION_BY_ID);
 
@@ -108,13 +108,15 @@ function hePlan(o) {
 
   const entries = P.entry.map((_, i) => k(`entry.${i + 1}`));
   const aligns = P.align.map((_, i) => k(`align.${i + 1}`));
+  const fixes = (P.fix || []).map((_, i) => k(`fix.${i + 1}`));
   const mod = k(`mod.L${lvl}`);
   const breath = k('breath'), exit = k('exit');
   let list, dropOrder;
   if (level === 'full') {
-    list = [intro, ...entries, mod, ...aligns, ...(hold >= 20 ? [breath] : []), exit];
-    // Owner rule: later align lines go first, then the breath line, then exit and the extra entry steps. Never intro, entry.1, mod.
-    dropOrder = [...aligns.slice().reverse(), breath, exit, ...entries.slice(1).reverse()];
+    list = [intro, ...entries, mod, ...fixes, ...aligns, ...(hold >= 20 ? [breath] : []), exit];
+    // Owner rule: later align lines go first, then the breath line, then exit, then the common-mistake (fix) lines, then the extra entry steps. Never intro, entry.1, mod.
+    // Fix lines sit right after entry and mod in play order, so they outrank the extra align lines.
+    dropOrder = [...aligns.slice().reverse(), breath, exit, ...fixes.slice().reverse(), ...entries.slice(1).reverse()];
   } else { // short
     list = [intro, entries[0], ...(lvl === 0 ? [mod] : []), ...(hold >= 25 ? [breath] : [])];
     dropOrder = [breath];
@@ -124,7 +126,7 @@ function hePlan(o) {
   const items = main.map((id, n) => {
     const nxt = main[n + 1];
     let pause = 0;
-    if (id === intro) pause = PAUSE.afterIntroName; else if (id.includes('.entry.')) pause = PAUSE.afterEntry; else if (id === mod) pause = PAUSE.afterMod; else if (id.includes('.align.')) pause = PAUSE.afterAlign;
+    if (id === intro) pause = PAUSE.afterIntroName; else if (id.includes('.entry.')) pause = PAUSE.afterEntry; else if (id === mod) pause = PAUSE.afterMod; else if (id.includes('.fix.')) pause = PAUSE.afterFix; else if (id.includes('.align.')) pause = PAUSE.afterAlign;
     return it(id, nxt ? pause : 0);
   });
   const ev = [{ t: 0, items }];
