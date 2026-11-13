@@ -16,7 +16,7 @@ const T = {
   play: { he: 'התחילו', ru: 'Начать', en: 'Start' },
   copy: { he: 'העתק לתכניות שלי', ru: 'Скопировать в мои планы', en: 'Copy to my plans' },
   copied: { he: 'הועתק לתכניות שלי', ru: 'Скопировано в мои планы', en: 'Copied to my plans' },
-  firstPlan: { he: 'צרו תכנית לפעם הראשונה', ru: 'Создать первую программу', en: 'Create my first-time plan' },
+  firstPlan: { he: 'צור לי תכנית לפעם ראשונה', ru: 'Создать первую программу', en: 'Create my first-time plan' },
   genTitle: { he: 'תכנית לפעם ראשונה', ru: 'Первая программа', en: 'First-time plan' },
   genLength: { he: 'אורך', ru: 'Длительность', en: 'Length' },
   genFocus: { he: 'מיקוד', ru: 'Фокус', en: 'Focus' },
