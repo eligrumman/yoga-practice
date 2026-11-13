@@ -4,7 +4,9 @@ import { SEGMENTS, LANGS, segText, cueIds } from '../data/narration.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { mergeHistory, mergeFavorites, SCHEMA_VERSION, planSeconds, validatePlanObject, exportPlanJSON, parsePlanJSON, slots, APP_ID, holdSeconds, clampAmount, dropIndex, reorder } from '../js/plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, POSITIONS, POSITION } from '../js/generator.js';
-import { poseFrames, geometry, bottom, FLOOR } from '../js/figure.js';
+import { poseFrames, Animator } from '../js/figure.js';
+import { attachSpecs } from '../js/specs.js';
+import { solve, validateFrame, camera, project, swapLR } from '../js/rig.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
 import { nPoses, nCount, tr, poseOf, approxMin, finishStats } from '../js/i18n.js';
 import { hasBreaths } from '../js/plan.js';
@@ -14,6 +16,8 @@ let pass = 0, fail = 0;
 const ok = (c, m) => { if (c) pass++; else { fail++; console.log('FAIL', m); } };
 const hasLatin = (s) => /[A-Za-z]/.test(s), hasDigit = (s) => /[0-9]/.test(s);
 const hebrew = (s) => /[֐-׿]/.test(s), cyr = (s) => /[Ѐ-ӿ]/.test(s);
+
+await attachSpecs(POSES);
 
 // ---- poses
 ok(POSES.length >= 30, `30+ poses (have ${POSES.length})`);
@@ -33,13 +37,40 @@ for (const p of POSES) {
   p.variations.forEach((v, n) => {
     ok(v.level === n && v.he && v.ru && v.en, `${p.id} L${n} texts (easier option present on L0)`);
     ok(Array.isArray(v.props), `${p.id} L${n} props`);
-    const { frame } = poseFrames(p, n);
-    const g = geometry(frame); const b = bottom(g);
-    ok(Number.isFinite(b) && JSON.stringify(g).indexOf('null') < 0 && JSON.stringify(g).indexOf('NaN') < 0, `${p.id} L${n} geometry is finite`);
+    const { hold, start, alt, camera: cam } = poseFrames(p, n);
+    for (const [nm, f] of [['start', start], ['hold', hold], ...(alt ? [['alt', alt]] : [])]) {
+      const errs = validateFrame(f, `${p.id} L${n} ${nm}`);
+      ok(!errs.length, errs.join('; ') || `${p.id} L${n} ${nm} valid`);
+    }
+    // 2D and 3D renderers consume the same solve() output: finite primitives
+    const S = solve(hold);
+    ok(S.prims.length > 20 && !/null|NaN|Infinity/.test(JSON.stringify(S.prims)), `${p.id} L${n} solve() is finite`);
+    ok(project(camera(cam.az, cam.el), S.J.head).every(Number.isFinite), `${p.id} L${n} camera projects`);
+    ok(solve(swapLR(hold)).prims.length === S.prims.length, `${p.id} L${n} mirror solves`);
   });
   // levels must actually differ in motion data (animated variations)
-  const sig = p.variations.map((v) => JSON.stringify(v.kf));
+  const sig = [0, 1, 2].map((n) => JSON.stringify(poseFrames(p, n).hold));
   ok(new Set(sig).size >= 2, `${p.id} variations differ`);
+  ok(p.spec && p.spec.id === p.id && p.spec.format === 1 && p.spec.levels.length === 3, `${p.id} spec shape`);
+}
+// the animator never produces an invalid frame, in loop and once modes
+for (const p of POSES) for (const mode of ['loop', 'once']) {
+  const A = new Animator({ draw() {}, dispose() {} });
+  A.set(p, 1, { mode, mirror: p.sides === 'both' });
+  let bad = 0;
+  for (let t = 0; t <= 22; t += 0.5) { const { f } = A.frameAt(t); if (validateFrame(f, 'f', { strict: false }).length || /NaN/.test(JSON.stringify(f))) bad++; }
+  ok(!bad, `${p.id} animator ${mode} frames valid`);
+}
+// both renderers are driven by the same rig and the same spec
+const src2d = readFileSync(new URL('../js/figure2d.js', import.meta.url), 'utf8');
+const src3d = readFileSync(new URL('../js/figure3d.js', import.meta.url), 'utf8');
+ok(/from '\.\/rig\.js'/.test(src2d) && /solve\(/.test(src2d), '2D renderer uses rig.solve');
+ok(/from '\.\/rig\.js'/.test(src3d) && /solve\(/.test(src3d), '3D renderer uses rig.solve');
+ok(/THREE_URL = 'https:\/\/cdn\.jsdelivr\.net\/npm\/three@\d+\.\d+\.\d+\//.test(src3d), 'three.js pinned to an exact version');
+const IDX = JSON.parse(readFileSync(new URL('../poses/index.json', import.meta.url), 'utf8'));
+ok(IDX.length === POSES.length && POSES.every((p) => IDX.includes(p.id)), 'poses/index.json lists every pose');
+for (const f of readdirSync(new URL('../data/', import.meta.url)).filter((n) => /^p-.*\.js$/.test(n))) {
+  ok(!/\bkf:|\balt:|\bstart:/.test(readFileSync(new URL('../data/' + f, import.meta.url), 'utf8')), `${f} has no motion data`);
 }
 
 // ---- narration
@@ -109,8 +140,8 @@ for (const f of FOCUSES) {
 }
 // cat-cow flow pose: alternates two frames (cow <-> cat) in the animator and has its own narration
 const CC = POSE_BY_ID['cat-cow'];
-ok(CC && CC.variations.every((v) => v.alt), 'cat-cow has an alternate (cat) frame on every level');
-ok(poseFrames(CC, 1).alt && poseFrames(CC, 1).alt.t > poseFrames(CC, 1).frame.t + 20, 'cat-cow: alt frame is the rounded (cat) spine, base is the arched (cow) spine');
+ok(CC && [0, 1, 2].every((n) => poseFrames(CC, n).alt), 'cat-cow has an alternate (cat) frame on every level');
+ok(poseFrames(CC, 1).alt.spine2[2] > poseFrames(CC, 1).hold.spine2[2] + 8, 'cat-cow: alt frame is the rounded (cat) spine, base is the arched (cow) spine');
 ok(/Inhale/.test(CC.cues.en[1]) && /cow/i.test(CC.cues.en[1]) && /Exhale/.test(CC.cues.en[2]) && /cat/i.test(CC.cues.en[2]), 'cat-cow narration: inhale cow, exhale cat');
 ok(cueIds('cat-cow').length === 4 && segText('pose.cat-cow.name', 'en') && segText('pose.cat-cow.name', 'he') && segText('pose.cat-cow.name', 'ru'), 'cat-cow narration segments exist');
 ok(generatePlan({ minutes: 20, level: 'gentle' }).items.length > 15, 'gentle level keeps the longer, richer plan');
@@ -196,7 +227,7 @@ ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 2
 const BOTH = ['warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'hand-to-toe'];
 const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
 ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 13 two-sided poses (got ${gotBoth.join(',')})`);
-ok(POSE_BY_ID.mountain.start === 'stand', 'mountain.start === stand');
+ok(Math.abs(POSE_BY_ID.mountain.spec.start.pelvis.rot[2]) < 1 && POSE_BY_ID.mountain.spec.start.hipR[2] === 0, 'mountain starts from a neutral stand');
 for (const l of LANGS) ok(tr('sides', l, 'single') === '' && tr('sides', l, 'both').length > 0, `sides label ${l}: none for single, text for both`);
 // ---- Russian plurals
 ok(nCount(1, 'minute', 'ru') === '1 минута' && nCount(3, 'minute', 'ru') === '3 минуты' && nCount(5, 'minute', 'ru') === '5 минут' && nCount(11, 'minute', 'ru') === '11 минут' && nCount(21, 'minute', 'ru') === '21 минута', 'ru minute plurals');

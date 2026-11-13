@@ -1,302 +1,209 @@
-// Original jointed SVG mannequin: forward kinematics + small IK helpers.
-// Convention: figure faces +x (right). Angles are absolute world angles in degrees,
-// 0 = forward (+x), 90 = up, 180 = back, -90 = down.
-// Frame: { t: lower torso, s: upper torso (default t), h: head, a:[upper,fore] near arm,
-//          b: far arm (default a), l:[thigh,shin,foot] near leg, m: far leg (default l),
-//          fix: optional constraints (hand/foot planting) }
+// Figure facade: one API (Figure / Animator / renderStatic / poseFrames) over the shared rig (rig.js),
+// the SVG renderer (figure2d.js) and the optional three.js renderer (figure3d.js).
+// Motion data comes from pose.spec (poses/<id>.json, attached by specs.js). The same frames drive 2D and 3D.
+import { blendFrames, swapLR, solve, fullFrame } from './rig.js';
+import { Renderer2D, fitView } from './figure2d.js';
 
-export const D = { th: 50, sh: 48, ft: 14, tl: 30, neck: 8, head: 12, ua: 36, fa: 40 };
-const rad = (d) => (d * Math.PI) / 180;
-export const dir = (d) => [Math.cos(rad(d)), -Math.sin(rad(d))];
-const add = (p, d, l) => [p[0] + d[0] * l, p[1] + d[1] * l];
-const ang = (a, b) => (Math.atan2(-(b[1] - a[1]), b[0] - a[0]) * 180) / Math.PI;
+export { FLOOR, VBW, VBH } from './figure2d.js';
+export { solve };
 
-export const VBW = 400, VBH = 300, FLOOR = 262;
-
-function ik(p0, target, L1, L2, bend) {
-  const dx = target[0] - p0[0], dy = target[1] - p0[1];
-  const d = Math.hypot(dx, dy);
-  const max = L1 + L2 - 0.01, min = Math.abs(L1 - L2) + 0.01;
-  const dd = Math.min(max, Math.max(min, d));
-  const base = ang(p0, target);
-  const c = (L1 * L1 + dd * dd - L2 * L2) / (2 * L1 * dd);
-  const A = (Math.acos(Math.max(-1, Math.min(1, c))) * 180) / Math.PI;
-  const a1 = base + bend * A;
-  const e = add(p0, dir(a1), L1);
-  const tgt = d > max || d < min ? add(p0, dir(base), dd) : target;
-  return [a1, ang(e, tgt)];
-}
-
-// Optional depth cue: frame.z = { l, m, a, b } foreshortening of a limb (number, or per-segment array).
-// Used for twists, where a limb points toward/away from the viewer and so appears shorter.
-const tzOf = (z) => { const v = z && z.t; return v == null ? 1 : Array.isArray(v) ? v[0] : v; };
-const zv = (z, n) => (z == null ? [1, 1, 1] : Array.isArray(z) ? [z[0] ?? 1, z[1] ?? z[0] ?? 1, z[2] ?? z[1] ?? z[0] ?? 1] : [z, z, z]);
-function legPts(P, l, z) {
-  const q = zv(z);
-  const k = add(P, dir(l[0]), D.th * q[0]), a = add(k, dir(l[1]), D.sh * q[1]), t = add(a, dir(l[2]), D.ft * q[2]);
-  return [P, k, a, t];
-}
-
-// Resolve constraints into plain angles.
-export function resolve(f) {
-  const o = {
-    t: f.t, s: f.s ?? f.t, h: f.h ?? f.s ?? f.t,
-    a: [...f.a], b: [...(f.b || f.a)], l: [...f.l], m: [...(f.m || f.l)],
-  };
-  if (f.z) o.z = f.z;
-  if (f.tw != null) o.tw = f.tw;
-  if (f.nz != null) o.nz = f.nz;
-  const fx = f.fix;
-  if (!fx) return o;
-  const P = [0, 0];
-  if (fx.m && fx.m.to) {
-    // far leg's ankle/knee/toe placed on a point of the near leg (e.g. figure-four), honouring foreshortening
-    const L1 = legPts(P, o.l, f.z?.l);
-    const tgt = L1[{ knee: 1, ankle: 2, toe: 3 }[fx.m.pt || 'knee']];
-    const q = zv(f.z?.m);
-    const [a1, a2] = ik(P, tgt, D.th * q[0], D.sh * q[1], fx.m.bend ?? 1);
-    o.m[0] = a1; o.m[1] = a2;
-  } else if (fx.m) {
-    const L1 = legPts(P, o.l);
-    const g1 = Math.max(L1[2][1], L1[3][1]);
-    const toeOff = -Math.sin(rad(o.m[2])) * D.ft;
-    const ay = g1 - Math.max(0, toeOff);
-    let dx = fx.m.x;
-    const reach = D.th + D.sh - 0.5;
-    if (Math.hypot(dx, ay) > reach) dx = Math.sign(dx) * Math.sqrt(Math.max(0, reach * reach - ay * ay));
-    const [a1, a2] = ik(P, [dx, ay], D.th, D.sh, fx.m.bend ?? 1);
-    o.m[0] = a1; o.m[1] = a2;
-  }
-  const TL = D.tl * tzOf(f.z);
-  const M = add(P, dir(o.t), TL), S = add(M, dir(o.s), TL);
-  const legs = { l: legPts(P, o.l, f.z?.l), m: legPts(P, o.m, f.z?.m) };
-  const hc = add(S, dir(o.h), D.neck + D.head);
-  let G = Math.max(P[1] + 13, M[1] + 13, S[1] + 13, hc[1] + 12);
-  for (const q of Object.values(legs)) G = Math.max(G, q[1][1] + 8, q[2][1] + 7, q[3][1] + 4);
-  for (const k of ['a', 'b']) {
-    const c = fx[k];
-    if (!c) continue;
-    if (c.to) {
-      let tgt;
-      if (c.to === 'hip') tgt = [P[0] + (c.dx ?? 8), P[1] - 8];
-      else tgt = legs[c.to][{ knee: 1, ankle: 2, toe: 3 }[c.pt || 'ankle']];
-      o[k] = ik(S, tgt, D.ua, D.fa, c.bend ?? -1);
-    } else if (c.fore) {
-      const ey = G - 5.5, dy = ey - S[1];
-      if (dy >= D.ua) o[k] = [-90, c.fa ?? 0];
-      else {
-        const dx = Math.sqrt(D.ua * D.ua - dy * dy) * (c.back ? -1 : 1) + (c.x || 0);
-        o[k] = [ang(S, [S[0] + dx, ey]), c.fa ?? 0];
-      }
-    } else {
-      o[k] = ik(S, [S[0] + (c.x || 0), G - (c.blockH || 0) - 4.5], D.ua, D.fa, c.bend ?? -1);
-    }
-  }
-  if (!f.b && !fx.b && fx.a) o.b = [...o.a];
+// ------------------------------------------------------------------ spec access
+const mirrorSide = (v) => (v === 'R' ? 'L' : v === 'L' ? 'R' : Array.isArray(v) ? v.map(mirrorSide) : v);
+export const mirrorProps = (props) => props.map((p) => {
+  const o = { ...p };
+  for (const k of ['arm', 'leg', 'arms', 'legs', 'side']) if (k in o) o[k] = mirrorSide(o[k]);
   return o;
-}
+});
 
-export function geometry(f) {
-  const P = [0, 0];
-  const z = f.z || {};
-  const TL = D.tl * tzOf(z);
-  const M = add(P, dir(f.t), TL), S = add(M, dir(f.s), TL);
-  const head = add(S, dir(f.h), D.neck + D.head);
-  const arm = (a, zz) => { const q = zv(zz); const e = add(S, dir(a[0]), D.ua * q[0]); return [S, e, add(e, dir(a[1]), D.fa * q[1])]; };
-  return { P, M, S, head, a: arm(f.a, z.a), b: arm(f.b, z.b), l: legPts(P, f.l, z.l), m: legPts(P, f.m, z.m) };
-}
-
-export function bottom(g) {
-  let y = Math.max(g.P[1], g.M[1], g.S[1]) + 13;
-  y = Math.max(y, g.head[1] + 12);
-  for (const k of ['l', 'm']) y = Math.max(y, g[k][1][1] + 8, g[k][2][1] + 7, g[k][3][1] + 4);
-  for (const k of ['a', 'b']) y = Math.max(y, g[k][1][1] + 5.5, g[k][2][1] + 5);
-  return y;
-}
-export function xExtent(g) {
-  let lo = 1e9, hi = -1e9;
-  const pts = [g.P, g.M, g.S, g.head, ...g.a, ...g.b, ...g.l, ...g.m];
-  for (const p of pts) { lo = Math.min(lo, p[0] - 8); hi = Math.max(hi, p[0] + 8); }
-  return [lo, hi];
-}
-
-const lerpA = (a, b, t) => a + (((b - a + 540) % 360) - 180) * t;
-const lerpArr = (x, y, t) => x.map((v, i) => lerpA(v, y[i], t));
-const zl = (a, b, t) => {
-  const x = zv(a), y = zv(b);
-  return x.map((v, i) => v + (y[i] - v) * t);
-};
-export function blend(f0, f1, t) {
-  const z0 = f0.z || {}, z1 = f1.z || {};
-  const zk = {};
-  for (const k of ['l', 'm', 'a', 'b', 't']) if (z0[k] != null || z1[k] != null) zk[k] = zl(z0[k], z1[k], t);
-  const tw0 = f0.tw ?? 1, tw1 = f1.tw ?? 1, nz0 = f0.nz ?? 1, nz1 = f1.nz ?? 1;
+// { start, hold, alt (full frame or null), props, camera } for one level of a pose (hold position, unmirrored).
+export function poseFrames(pose, level = 1) {
+  const spec = pose.spec;
+  if (!spec) throw new Error(`pose ${pose.id}: spec not loaded (call attachSpecs first)`);
+  const L = spec.levels[level] || spec.levels[1];
   return {
-    ...(nz0 !== 1 || nz1 !== 1 ? { nz: nz0 + (nz1 - nz0) * t } : {}),
-    ...(Object.keys(zk).length ? { z: zk } : {}), ...(tw0 !== 1 || tw1 !== 1 ? { tw: tw0 + (tw1 - tw0) * t } : {}),
-    t: lerpA(f0.t, f1.t, t), s: lerpA(f0.s, f1.s, t), h: lerpA(f0.h, f1.h, t),
-    a: lerpArr(f0.a, f1.a, t), b: lerpArr(f0.b, f1.b, t),
-    l: lerpArr(f0.l, f1.l, t), m: lerpArr(f0.m, f1.m, t),
+    start: spec.start, hold: L.hold, frame: L.hold, alt: L.altFull || null,
+    props: L.props, camera: L.camera || spec.camera,
   };
 }
 
-export const NEUTRAL = {
-  stand: { t: 90, h: 90, a: [-92, -90], l: [-90, -90, 0] },
-  sit: { t: 90, h: 90, a: [-67, -67], l: [-4, -2, 90], fix: { a: { x: 26, bend: -1 } } },
-  kneel: { t: 90, h: 90, a: [-90, -90], l: [-90, 180, 180] },
-  lie: { t: 180, h: 180, a: [-8, -5], l: [53, -76, 0] },
-  prone: { t: 0, h: 0, a: [185, 185], l: [182, 182, 180] },
-  table: { t: 15, h: 20, a: [-90, -90], l: [-90, 180, 180], fix: { a: { x: 0, bend: -1 } } },
+const viewCache = new Map();
+// Per-pose framing for the 2D view: fitted once from the hold (and alt) frames so the figure never jumps while it moves.
+function viewFor(pose, level, mirror) {
+  const key = `${pose.id}|${level}|${mirror ? 1 : 0}`;
+  if (!viewCache.has(key)) {
+    const P = poseFrames(pose, level);
+    const fs = [P.hold, P.alt].filter(Boolean).map((f) => (mirror ? swapLR(f) : f));
+    viewCache.set(key, fitView(fs, P.camera));
+  }
+  return viewCache.get(key);
+}
+
+// ------------------------------------------------------------------ 2D / 3D mode
+const LS = 'yoga.view';
+const lsGet = () => { try { return localStorage.getItem(LS); } catch { return null; } };
+const lsSet = (v) => { try { localStorage.setItem(LS, v); } catch { /* ignore */ } };
+const subs = new Set();
+let g3 = null; // lazily imported figure3d module
+let failed3d = false;
+
+export const view3d = {
+  // can this device show 3D at all (WebGL)?
+  get available() {
+    if (typeof document === 'undefined' || failed3d) return false;
+    if (g3) return g3.webglAvailable();
+    try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
+  },
+  // default when the user has not chosen: 3D only on capable devices without reduced-motion
+  get auto() {
+    const cores = typeof navigator !== 'undefined' ? navigator.hardwareConcurrency || 4 : 4;
+    const rm = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return this.available && cores > 4 && !rm ? '3d' : '2d';
+  },
+  get mode() {
+    const s = lsGet();
+    if (s === '2d') return '2d';
+    if (s === '3d') return this.available ? '3d' : '2d';
+    return this.auto;
+  },
+  set(m) { lsSet(m); subs.forEach((f) => f()); },
+  on(fn) { subs.add(fn); return () => subs.delete(fn); },
+  fail() { failed3d = true; subs.forEach((f) => f()); },
 };
-export const neutralFrame = (k) => resolve(NEUTRAL[k] || NEUTRAL.stand);
 
-// pose.kf is the intermediate/base frame; pose.vars[i].kf are overrides merged onto it.
-export function poseFrames(pose, level) {
-  const v = pose.variations[level] || pose.variations[1];
-  const raw = v.kf;
-  return { frame: resolve(raw), alt: v.alt ? resolve({ ...raw, ...v.alt }) : null, props: v.props || [], note: v };
+async function load3d() {
+  if (!g3) g3 = await import('./figure3d.js');
+  return g3;
 }
 
-// ------------------------------------------------------------------ rendering
-const NS = 'http://www.w3.org/2000/svg';
-function mk(tag, attrs, parent) {
-  const e = document.createElementNS(NS, tag);
-  for (const k in attrs) e.setAttribute(k, attrs[k]);
-  if (parent) parent.appendChild(e);
-  return e;
+// A small "2D | 3D" toggle button. Hidden when WebGL is unavailable.
+export function viewToggle() {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'btn view-toggle'; b.setAttribute('aria-live', 'polite');
+  const sync = () => {
+    b.hidden = !view3d.available;
+    const m = view3d.mode;
+    b.textContent = m === '3d' ? '3D' : '2D';
+    b.title = m === '3d' ? '3D → 2D' : '2D → 3D';
+    b.setAttribute('aria-label', b.title);
+  };
+  b.addEventListener('click', () => view3d.set(view3d.mode === '3d' ? '2d' : '3d'));
+  const off = view3d.on(() => { if (!b.isConnected) off(); else sync(); });
+  sync();
+  return b;
 }
-const W = { torso: 26, th: 20, sh: 15, ft: 9, ua: 12, fa: 10, neck: 9 };
 
+// ------------------------------------------------------------------ Figure
 export class Figure {
   constructor(svg, { floor = true } = {}) {
-    this.svg = svg;
-    svg.setAttribute('viewBox', `0 0 ${VBW} ${VBH}`);
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    svg.innerHTML = '';
-    if (floor) this.floor = mk('line', { x1: 10, x2: VBW - 10, y1: FLOOR, y2: FLOOR, class: 'fig-floor' }, svg);
-    this.root = mk('g', {}, svg);
-    this.back = mk('g', { class: 'fig-props' }, this.root);
-    const seg = (cls, w) => mk('line', { class: 'seg ' + cls, 'stroke-width': w, 'stroke-linecap': 'round' }, this.root);
-    this.s = {
-      bua: seg('far', W.ua), bfa: seg('far', W.fa),
-      mth: seg('far', W.th), msh: seg('far', W.sh), mft: seg('far', W.ft),
-      t1: seg('torso', W.torso), t2: seg('torso', W.torso),
-      lth: seg('near', W.th), lsh: seg('near', W.sh), lft: seg('near', W.ft),
-      neck: seg('torso', W.neck),
-      aua: seg('near', W.ua), afa: seg('near', W.fa),
-    };
-    this.headEl = mk('circle', { r: D.head, class: 'fig-head' }, this.root);
-    this.nose = mk('circle', { r: 2.6, class: 'fig-nose' }, this.root);
-    this.front = mk('g', { class: 'fig-props' }, this.root);
+    this.svg = svg; this.floor = floor;
+    this.r2 = new Renderer2D(svg, { floor });
+    this.r3 = null; this.host = null; this.loading = false; this.dead = false; this.last = null;
+    this.off = view3d.on(() => this.apply());
+    this.apply();
   }
 
-  // props: [{type, ...}], e: 0..1 prop visibility, cx: horizontal centre (model x mapped to 200)
-  draw(frame, { mirror = false, props = [], e = 1, cx = null, breath = 0 } = {}) {
-    const g = geometry(frame);
-    let lift = 0;
-    for (const p of props) if (p.type === 'cushion') lift = (p.h || 12) * e;
-    const [x0, x1] = xExtent(g);
-    const c = cx ?? (x0 + x1) / 2;
-    const ox = 200 - c, oy = FLOOR - lift - bottom(g);
-    const T = (p) => [p[0] + ox, p[1] + oy];
-    const ln = (el, p, q) => {
-      const a = T(p), b = T(q);
-      el.setAttribute('x1', a[0]); el.setAttribute('y1', a[1]); el.setAttribute('x2', b[0]); el.setAttribute('y2', b[1]);
-    };
-    const s = this.s;
-    const tw = (frame.tw ?? 1) * (1 + (breath || 0));
-    // twist widens the chest more than the pelvis
-    s.t1.setAttribute('stroke-width', W.torso * (1 + (tw - 1) * 0.3)); s.t2.setAttribute('stroke-width', W.torso * tw);
-    ln(s.bua, g.b[0], g.b[1]); ln(s.bfa, g.b[1], g.b[2]);
-    ln(s.mth, g.m[0], g.m[1]); ln(s.msh, g.m[1], g.m[2]); ln(s.mft, g.m[2], g.m[3]);
-    ln(s.t1, g.P, g.M); ln(s.t2, g.M, g.S);
-    ln(s.lth, g.l[0], g.l[1]); ln(s.lsh, g.l[1], g.l[2]); ln(s.lft, g.l[2], g.l[3]);
-    ln(s.neck, g.S, g.head);
-    ln(s.aua, g.a[0], g.a[1]); ln(s.afa, g.a[1], g.a[2]);
-    const h = T(g.head);
-    this.headEl.setAttribute('cx', h[0]); this.headEl.setAttribute('cy', h[1]);
-    const nd = dir(frame.h - 90);
-    // frame.nz: 1 = face in profile; 0 = face turned toward the viewer (twists)
-    const nzf = frame.nz ?? 1;
-    this.nose.setAttribute('cx', h[0] + nd[0] * 8.5 * nzf); this.nose.setAttribute('cy', h[1] + nd[1] * 8.5 * nzf - 1);
-    this.root.setAttribute('transform', mirror ? `translate(${VBW},0) scale(-1,1)` : '');
-    this.drawProps(props, g, T, e, lift);
+  // frame: full (already mirrored) frame; opts: { props, e, breath, view (2D framing), cam (3D default camera) }
+  draw(frame, opts = {}) {
+    this.last = [frame, opts];
+    if (!this.r3 && !this.loading && !this.dead && view3d.mode === '3d') this.enable3d();
+    if (this.r3 && this.is3d()) this.r3.draw(frame, { props: opts.props || [], e: opts.e ?? 1, breath: opts.breath || 0, cam: opts.cam });
+    else if (opts.view) this.r2.draw(frame, { props: opts.props || [], e: opts.e ?? 1, breath: opts.breath || 0, view: opts.view });
+  }
+  redraw() { if (this.last) this.draw(this.last[0], this.last[1]); }
+  is3d() { return view3d.mode === '3d' && !!this.r3 && !!this.host; }
+
+  apply() {
+    if (this.dead) return;
+    if (view3d.mode === '3d' && !this.r3) { this.enable3d(); }
+    const on = this.is3d();
+    this.svg.style.display = on ? 'none' : '';
+    if (this.host) this.host.style.display = on ? '' : 'none';
+    if (on) this.r3.resize();
+    this.redraw();
   }
 
-  drawProps(props, g, T, e, lift) {
-    this.back.innerHTML = ''; this.front.innerHTML = '';
-    for (const p of props) {
-      const op = String(Math.max(0, Math.min(1, e * 1.4 - 0.2)));
-      if (p.type === 'block') {
-        for (const k of p.arms || ['a']) {
-          const w = T(g[k][2]);
-          const top = w[1] + 5, h = FLOOR - lift - top;
-          if (h > 3) mk('rect', { x: w[0] - 15, y: top, width: 30, height: h, rx: 3, class: 'prop-block', opacity: op }, this.back);
-        }
-      } else if (p.type === 'strap') {
-        const w = T(g[p.arm || 'a'][2]);
-        const A = T(g[p.leg || 'l'][2]), Tt = T(g[p.leg || 'l'][3]);
-        const f = [A[0] + (Tt[0] - A[0]) * 0.55, A[1] + (Tt[1] - A[1]) * 0.55];
-        mk('line', { x1: w[0], y1: w[1], x2: f[0], y2: f[1], class: 'prop-strap', opacity: op }, this.front);
-        mk('circle', { cx: f[0], cy: f[1], r: 6, class: 'prop-strap-loop', opacity: op }, this.front);
-      } else if (p.type === 'cushion') {
-        const c = T(g.P), h = (p.h || 12) * e, wd = p.w || 64;
-        mk('rect', { x: c[0] - wd / 2, y: FLOOR - h, width: wd, height: Math.max(0, h), rx: 6, class: 'prop-cushion' }, this.back);
-      } else if (p.type === 'wall') {
-        let mx = -1e9;
-        for (const k of ['l', 'm']) for (const q of g[k]) mx = Math.max(mx, T(q)[0]);
-        mk('rect', { x: mx + 12, y: 30, width: 14, height: FLOOR - 30, class: 'prop-wall', opacity: op }, this.back);
-      }
+  async enable3d() {
+    if (this.loading || this.r3) return;
+    this.loading = true;
+    try {
+      const G = await load3d();
+      const THREE = await G.loadThree();
+      if (this.dead) return;
+      const parent = this.svg.parentNode;
+      if (!parent) { this.loading = false; return; } // not mounted yet: a later apply() retries
+      const host = document.createElement('div');
+      host.className = (this.svg.getAttribute('class') || '') + ' fig3d-host';
+      host.setAttribute('aria-hidden', 'true');
+      parent.insertBefore(host, this.svg.nextSibling);
+      this.host = host;
+      this.r3 = new G.Renderer3D(host, THREE, { floor: this.floor });
+    } catch (e) {
+      console.warn('3D unavailable, using 2D', e);
+      view3d.fail();
     }
+    this.loading = false;
+    this.apply();
+  }
+
+  resetCamera() { this.r3?.reset(); }
+
+  dispose() {
+    this.dead = true; this.off?.();
+    try { this.r3?.dispose(); } catch { /* ignore */ }
+    this.host?.remove(); this.r3 = null; this.host = null;
+    this.svg.style.display = '';
   }
 }
 
-// Time-driven animation of one pose
+// ------------------------------------------------------------------ Animator
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const smooth = (x) => { x = clamp(x); return x * x * x * (x * (6 * x - 15) + 10); };
+
+// Time-driven animation of one pose: 'loop' (library: enter, hold, leave, repeat) or 'once' (player: enter, then hold).
 export class Animator {
   constructor(fig) {
-    this.fig = fig; this.speed = 1; this.playing = true; this.time = 0; this.raf = 0; this.last = 0;
-    this.cfg = null;
+    this.fig = fig; this.speed = 1; this.playing = true; this.time = 0; this.raf = 0; this.last = 0; this.cfg = null;
   }
-  // mode 'loop' (library) or 'once' (player: transition in, then hold)
   set(pose, level, { from = null, mirror = false, mode = 'loop', intro = 2.8 } = {}) {
-    const { frame, props, alt } = poseFrames(pose, level);
-    const start = from || neutralFrame(pose.start);
-    const gs = geometry(start), ge = geometry(frame);
-    const [a0, a1] = xExtent(gs), [b0, b1] = xExtent(ge);
-    this.cfg = { start, end: frame, alt, props, mirror, mode, intro, c0: (a0 + a1) / 2, c1: (b0 + b1) / 2 };
+    const P = poseFrames(pose, level);
+    let hold = P.hold, alt = P.alt, start = from || P.start, props = P.props;
+    if (mirror) {
+      hold = swapLR(hold); alt = alt && swapLR(alt); props = mirrorProps(props);
+      if (!from) start = swapLR(start);
+    }
+    this.cfg = { start: fullFrame(start), hold, alt, props, mode, intro, view: viewFor(pose, level, mirror), cam: P.camera };
     this.time = 0;
     this.frame(0);
   }
+  // progress u (0 = start frame, 1 = full pose) at a time
+  progress(time) {
+    const c = this.cfg;
+    if (c.mode === 'once') return clamp((time - 0.25) / c.intro);
+    if (c.alt) return 1; // flow pose in the library: keep flowing
+    const T = time % 10;
+    if (T < 0.6) return 0;
+    if (T < 3.4) return (T - 0.6) / 2.8;
+    if (T < 7.2) return 1;
+    return 1 - (T - 7.2) / 2.8;
+  }
   frameAt(time) {
     const c = this.cfg;
-    let e;
-    if (c.mode === 'once') e = ease(clamp((time - 0.25) / c.intro));
-    else if (c.alt) e = 1; // flow pose in the library: keep flowing
-    else {
-      const T = time % 10;
-      if (T < 0.6) e = 0;
-      else if (T < 3.4) e = ease((T - 0.6) / 2.8);
-      else if (T < 7.2) e = 1;
-      else if (T < 10) e = 1 - ease((T - 7.2) / 2.8);
-      else e = 0;
+    const u = this.progress(time);
+    let f = blendFrames(c.start, c.hold, u);
+    // flow pose (cat-cow): once in the pose, alternate hold <-> alt, one half-cycle every 5 s
+    if (c.alt && u >= 1) {
+      const t0 = c.mode === 'once' ? 0.25 + c.intro : 0;
+      f = blendFrames(c.hold, c.alt, 0.5 - 0.5 * Math.cos(((time - t0) * 2 * Math.PI) / 10));
     }
-    let f = blend(c.start, c.end, e);
-    // flow poses (cat-cow): once in the pose, alternate end <-> alt on a 10 s breath cycle (inhale = end, exhale = alt)
-    if (c.alt && e > 0.999) f = blend(c.end, c.alt, 0.5 - 0.5 * Math.cos(((time - (c.mode === 'once' ? 0.25 + c.intro : 0)) * 2 * Math.PI) / 10));
-    // Breathing during the hold: ~5 s cycle; chest widens/rises slightly, head follows.
-    let breath = 0;
-    const k = clamp((e - 0.92) / 0.08);
-    if (k > 0) {
-      const b = Math.sin((time * 2 * Math.PI) / 5);
-      breath = b * 0.045 * k;
-      f = { ...f, s: f.s + b * 1.8 * k, h: f.h + b * 1.0 * k };
-    }
-    return { f, e, breath };
+    // breathing in the hold: ~5 s cycle
+    const k = clamp((u - 0.92) / 0.08);
+    const breath = Math.sin((time * 2 * Math.PI) / 5) * 0.03 * k;
+    return { f, e: smooth(u), breath, u };
   }
   frame(time) {
     const { f, e, breath } = this.frameAt(time);
     const c = this.cfg;
-    this.fig.draw(f, { mirror: c.mirror, props: c.props, e, breath, cx: c.c0 + (c.c1 - c.c0) * e });
+    this.fig.draw(f, { props: c.props, e, breath, view: c.view, cam: c.cam });
   }
   loop = (now) => {
     if (!this.raf) return;
@@ -307,18 +214,17 @@ export class Animator {
   };
   start() { if (this.raf) return; this.last = performance.now(); this.raf = requestAnimationFrame(this.loop); }
   stop() { cancelAnimationFrame(this.raf); this.raf = 0; }
-  setPlaying(p) { this.playing = p; }
+  destroy() { this.stop(); this.fig.dispose(); }
+  setPlaying(p) { this.playing = p; if (p) this.last = performance.now(); }
   replay() { this.time = 0; }
   setSpeed(s) { this.speed = s; }
   currentFrame() { return this.frameAt(this.time).f; }
 }
-const clamp = (x) => Math.max(0, Math.min(1, x));
-const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
-// Static render of the hold position (used for cards and previews)
+// Static render of the hold position in 2D (cards, thumbnails, previews)
 export function renderStatic(svg, pose, level = 1, { mirror = false, floor = true } = {}) {
-  const fig = new Figure(svg, { floor });
-  const { frame, props } = poseFrames(pose, level);
-  fig.draw(frame, { mirror, props, e: 1 });
-  return fig;
+  const r = new Renderer2D(svg, { floor });
+  const P = poseFrames(pose, level);
+  r.draw(mirror ? swapLR(P.hold) : P.hold, { props: mirror ? mirrorProps(P.props) : P.props, e: 1, view: viewFor(pose, level, mirror) });
+  return r;
 }

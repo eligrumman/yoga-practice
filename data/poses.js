@@ -1,4 +1,4 @@
-// Pose library. All text and joint-angle data are original work for this project.
+// Pose library: names, cues and safety text. Motion lives in poses/<id>.json (see poses/README.md).
 import warm from './p-warm.js';
 import standing from './p-standing.js';
 import floor from './p-floor.js';
@@ -27,14 +27,6 @@ export const LEVEL_LABELS = [
   { he: 'מתקדם', en: 'Advanced', ru: 'Продвинутый' },
 ];
 
-function merge(base, over = {}) {
-  const o = { ...base, ...over };
-  const fix = { ...(base.fix || {}), ...(over.fix || {}) };
-  for (const k of Object.keys(fix)) if (fix[k] === null) delete fix[k];
-  if (Object.keys(fix).length) o.fix = fix; else delete o.fix;
-  return o;
-}
-
 const RAW = [...warm, ...standing, ...floor, ...rest];
 
 export const POSES = RAW.map((r) => ({
@@ -50,11 +42,10 @@ export const POSES = RAW.map((r) => ({
   holdSeconds: r.hold,
   sides: r.sides,
   tags: r.tags || [],
-  start: r.start,
   cues: r.cue,
   safety: r.safe,
   variations: r.v.map((v, i) => ({
-    level: i, he: v.he, en: v.en, ru: v.ru, props: v.props || [], kf: merge(r.kf, v.kf), ...(r.alt ? { alt: merge(r.alt, v.alt) } : {}),
+    level: i, he: v.he, en: v.en, ru: v.ru, props: v.props || [],
   })),
 }));
 

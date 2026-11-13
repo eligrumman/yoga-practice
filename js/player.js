@@ -1,5 +1,5 @@
 // Guided player: timer, looping figure, narration schedule, next preview, finish screen.
-import { Figure, Animator, renderStatic } from './figure.js';
+import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { slots, planSeconds, fmtTime } from './plan.js';
 import { tr, poseOf, finishStats } from './i18n.js';
 import { store, streak, countsForStreak } from './store.js';
@@ -33,6 +33,7 @@ export class Player {
 
   build() {
     const T = (k, s) => this.T(k, s);
+    this.anim?.destroy();
     this.root.innerHTML = '';
     this.svg = document.createElementNS(SVGNS, 'svg');
     this.svg.setAttribute('class', 'fig big'); this.svg.setAttribute('role', 'img');
@@ -64,7 +65,7 @@ export class Player {
         el('div', { class: 'p-bar', role: 'progressbar', 'aria-valuemin': 0, 'aria-valuemax': 100 }, this.elBar),
         this.elBarTxt,
         el('div', { class: 'p-stage' },
-          el('div', { class: 'p-fig' }, this.svg, this.elCount),
+          el('div', { class: 'p-fig' }, this.svg, viewToggle(), this.elCount),
           el('div', { class: 'p-info' }, this.elName, this.elSub, this.elCues, this.elDetails)),
         this.elCap, this.elNotice,
         this.elNext,
@@ -223,7 +224,7 @@ export class Player {
 
   finish() {
     if (this.done) return; this.done = true;
-    clearInterval(this.timer); this.anim.stop();
+    clearInterval(this.timer); this.anim.destroy();
     this.nar.say(['common.finish'], { flush: true });
     const actual = this.actualSec;
     store.addHistory(this.plan.name, actual, this.totalAll);
@@ -246,6 +247,6 @@ export class Player {
   }
   again() { this.destroy(); const p = new Player(this.root, { plan: this.plan, narrator: this.nar, lang: this.lang, onExit: this.onExit, onFinish: this.onFinish }); p.start(); this.successor = p; }
   releaseWake() { try { this.wake?.release(); } catch { /* none */ } this.wake = null; }
-  destroy() { this._ro?.disconnect(); clearInterval(this.timer); this.anim.stop(); this.nar.cancel(); this.releaseWake(); this.nar.onCaption = () => {}; }
+  destroy() { this._ro?.disconnect(); clearInterval(this.timer); this.anim.destroy(); this.nar.cancel(); this.releaseWake(); this.nar.onCaption = () => {}; }
   exit(home) { this.destroy(); this.onExit?.(home); }
 }

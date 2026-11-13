@@ -1,6 +1,7 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
-import { Figure, Animator, renderStatic } from './figure.js';
+import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
+import { attachSpecs } from './specs.js';
 import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
 import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
@@ -228,7 +229,7 @@ function viewPose(id) {
   main.append(
     el('a', { class: 'back', href: '#/library' }, (DIR[lang] === 'rtl' ? '→ ' : '← ') + T('back')),
     el('div', { class: 'pose-page' },
-      el('div', { class: 'pose-stage' }, svg,
+      el('div', { class: 'pose-stage' }, svg, viewToggle(),
         tabs, el('div', { class: 'row-btns' }, playBtn,
           el('label', { class: 'row inline' }, el('span', {}, T('speed')), el('select', { id: 'spd', onchange: (e) => { speed = +e.target.value; anim.setSpeed(speed); } }, [0.5, 0.75, 1, 1.5].map((s) => el('option', { value: s, selected: s === 1 }, s + '×'))))),
         varText, propsLine),
@@ -242,7 +243,7 @@ function viewPose(id) {
         el('div', { class: 'note easier' }, el('strong', {}, '✓ ' + T('easier') + ': '), p.variations[0][lang]),
         el('div', { class: 'row-btns' }, addSel))));
   setLevel(1); anim.start();
-  return () => anim.stop();
+  return () => anim.destroy();
 }
 
 // ---------------- plans list ----------------
@@ -388,5 +389,5 @@ function viewPlayer(id) {
 }
 
 applyLang();
-route();
+attachSpecs(POSES).then(route, (e) => { console.error(e); main.replaceChildren(el('p', { class: 'empty' }, String(e.message || e))); });
 if ('serviceWorker' in navigator && false) navigator.serviceWorker.register('sw.js');

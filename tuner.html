@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pose tuner</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3f6f64">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body{padding:0 0 40px}
+.tn{max-width:1100px;margin:0 auto;padding:10px 16px;display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:860px){.tn{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}.tn-prev{position:sticky;top:8px}}
+.tn h1{font-size:1.2rem;margin:.2rem 0}
+.tn-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.tn select,.tn input[type=number]{font:inherit;min-height:44px;padding:0 8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}
+.tn-stage{position:relative}
+.tn-j{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin:6px 0}
+.tn-j summary{cursor:pointer;padding:10px 12px;min-height:44px;font-weight:600;display:flex;justify-content:space-between}
+.tn-ax{display:grid;grid-template-columns:2ch minmax(0,1fr) 7ch;gap:8px;align-items:center;padding:2px 12px 8px}
+.tn-ax input[type=range]{width:100%;min-height:32px}
+.tn-ax output{font-variant-numeric:tabular-nums;text-align:end}
+.tn-ax.bad output{color:var(--danger);font-weight:700}
+.tn-warn{color:var(--danger);font-size:.85rem;white-space:pre-wrap}
+.tn-out{width:100%;min-height:8rem;font:12px/1.4 ui-monospace,Menlo,monospace}
+.tn-ph{display:flex;gap:6px;flex-wrap:wrap}
+.tn-ph label{display:inline-flex;gap:4px;align-items:center;min-height:44px}
+</style>
+</head>
+<body>
+<div class="tn">
+  <section class="tn-prev">
+    <h1>Pose tuner <a class="small" href="poses/README.md">how it works</a> · <a class="small" href="index.html">app</a></h1>
+    <div class="tn-row">
+      <select id="pose" aria-label="Pose"></select>
+      <select id="level" aria-label="Level"><option value="0">L0 easy</option><option value="1">L1 medium</option><option value="2">L2 deep</option></select>
+      <select id="frame" aria-label="Frame being edited"><option value="hold">edit: hold</option><option value="start">edit: start</option><option value="alt">edit: alt</option></select>
+    </div>
+    <div class="tn-stage pose-stage"><svg id="svg" class="fig big" viewBox="0 0 400 300" role="img" aria-label="Pose preview"></svg></div>
+    <div class="tn-row">
+      <label>entry &rarr; hold <input id="scrub" type="range" min="0" max="1" step="0.01" value="1" style="width:40vw;max-width:260px"></label>
+      <span id="scrubv" class="small">hold</span>
+    </div>
+    <div class="tn-row" id="cam"></div>
+    <div class="tn-row"><span class="small">Drag the 3D figure to orbit. Sliders move one axis of one joint.</span></div>
+  </section>
+  <section>
+    <div class="tn-row">
+      <button class="btn primary" id="copy">Copy JSON</button>
+      <button class="btn" id="dl">Download JSON</button>
+      <button class="btn" id="reset">Revert pose</button>
+    </div>
+    <div id="warn" class="tn-warn" role="status"></div>
+    <div id="joints"></div>
+    <details class="tn-j"><summary>Exported JSON</summary><textarea id="out" class="tn-out" readonly></textarea></details>
+  </section>
+</div>
+<script type="module" src="js/tuner.js"></script>
+</body>
+</html>
