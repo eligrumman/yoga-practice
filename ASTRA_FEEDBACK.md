@@ -197,3 +197,80 @@ Sol: `outsourcerer.sh bg run -m sol --provider codex --cloud-ack` (cxnative, gpt
 | 11c | Motion easing | FIXED | cubic-bezier(0.4,0,0.2,1) + 3% anticipation + 2.5% settle; joint lag head 110 ms, wrist 90 ms, elbow 70 ms, knee 25 ms (default 2.8 s entry). Clip: screenshots/round3-fix-easing-warrior-2.gif, screenshots/round3-fix-easing-child.gif |
 | 11d | Shaped hands and feet | NOT DONE | out of time; hands/feet remain ellipsoid wedges |
 | 18 | Floating contacts | FIXED + TESTED | tests/run.mjs asserts contact <= 2 units for tabletop (hands, toes), cow, cat-cow, plank, downward-dog (hands), child (toes) at all levels. Tabletop/child toes were 8.1/5.0 above the floor, now 0. Plank L0 2.23 -> 0.04. Cobra L1/L2 hands stay 3.7-3.8 above (hand flatness would break); low-lunge L0 hands rest on a 22-unit block by design. |
+
+## Round 4 — yoga master (Sol + Claude-master pass)
+
+Date 2026-11-14. Scope: Hebrew cues, SAFE lines, "שימו לב" (FIX) lines, level texts and figure joints for all 37 poses, plus the generated and preset plans. No fixes were implemented.
+
+**Lane.** Reviewer persona is the new skill `~/.claude/skills/yoga-master` (SKILL.md plus references; Step 0 coverage check, pose families, generic N-level progression, sources). Command used for Sol (4 calls, one read-only bg job each):
+
+`outsourcerer.sh bg run -m sol --provider codex --with skills=yoga-master --cloud-ack "public yoga site text, no personal data" "<inline evidence>"`
+
+Calls: (1) poses tabletop..downward-dog, BLOCKED (Sol's host could not read SKILL.md; no findings); (1b) same chunk re-run with a plain output format, OK, 15 findings, 17/17 poses; (2) plank..savasana, 22 findings, 20/20 poses; (3) plans plus joints, 17 findings. Total 54 raw Sol findings, merged and de-duplicated with the Claude-master list into 42 rows.
+
+**Evidence gate.** Sol cannot browse and cannot attach images, so it received only text captured from the live site. Evidence (local, git-ignored): review/round4/poses-he.txt, plans.txt, joints.txt. Screenshots at 375 and 1280 widths are committed as screenshots/round4-*.png. Sources: Sol's URLs were not live-checked by Sol (it states so). From my side, NCCIH (yoga safety) and Inside Yoga / Kripalu / Yoga Journal (Warrior I, anon variant) were opened; Mayo (403), NHS (404) and the PubMed abstract page (cookie wall) were not. Any row whose source column says "unverified" is a judgment, not a citation. Sol's two P0 ratings were re-graded to P1 because the text already says to skip or avoid; the issue is wording, not a missing warning.
+
+### Triage table
+
+| # | Pose / area | Sev | Issue | Source | Fix (not implemented) | Decision | Reason |
+|---|---|---|---|---|---|---|---|
+| 1 | downward-dog SAFE | P1 | "הרמת הראש מעל הלב היא הפוכה עדינה" is reversed: in dog the head is below the heart | Claude-master; NCCIH https://www.nccih.nih.gov/health/yoga-effectiveness-and-safety (verified, glaucoma/BP modifications) | "ראש מתחת ללב" | ADOPT | Factual error in a safety line |
+| 2 | downward-dog, uttanasana SAFE | P1 | "shorten or skip" / "bend knees or avoid" for glaucoma and high BP: bent knees do not remove head-below-heart | Sol (P0) + Claude-master; AAO https://www.aao.org/eye-health/news/yoga-poses-may-impact-eye-pressure-glaucoma (unverified) | Separate back/disc from eye/BP; for glaucoma/uncontrolled BP: skip or use half-lift/tabletop, ask a clinician | ADOPT | Safety wording; severity lowered to P1 |
+| 3 | cobra, locust, camel, boat, seated-twist, knees-to-chest, supine-twist, happy-baby, child | P1 | Pregnancy lines offer "stay low" / partial lift / wider knees for prone, closed-twist or supine poses; grip or range change does not address belly pressure or supine lying | Sol + Claude-master; ACOG https://www.acog.org/womens-health/faqs/exercise-during-pregnancy (unverified), NCCIH (verified: avoid long flat on back) | Replace with "skip once lying on the belly/back is uncomfortable, choose side-lying or an open twist", plus "ask your clinician" | ADOPT | Safety, 9 poses share one pattern |
+| 4 | plank L1 | P1 | "על קצות האצבעות" means fingertips, not toes | Claude-master | "על קצות הבהונות" | ADOPT | Wrong word, risky for wrists |
+| 5 | plank BREATH | P2 | "נשמו קצר וקבוע" teaches breath restriction | Sol + Claude-master | "נשמו חלק ורציף; אם אי אפשר, הורידו עומס" | ADOPT | Clarity/safety |
+| 6 | cobra L2 | P2 | Progression = higher chest and straighter arms: lumbar compression | Sol + Claude-master | Progress by chest length and control, soft elbows | ADOPT | Level logic |
+| 7 | locust FIX | P3 | "הדקו את הישבן" with "הרימו גבוה" prompts lumbar crunch | Sol | Moderate engagement, length through legs | ADOPT | Small cue change |
+| 8 | camel L2 | P2 | "קשת עמוקה יותר, מבט לאחור" treats neck/lumbar range as advancement and conflicts with the neck warning | Sol | Progress by stable pelvis and chest lift; head neutral | ADOPT | Level logic |
+| 9 | warrior-1 | P2 | Cue "צעדו רחב" vs L0 "צעד קצר"; forced square pelvis with grounded back foot; L2 back-bend in the lunge | Claude-master + Sol; Inside Yoga https://insideyoga.org/asana-library/virabhadrasana-i-traditional/ (verified, square hips) vs Yoga Journal ?scope=anon (tucked tailbone not forced); sources disagree | "Pelvis generally forward, without forcing"; offer shorter stance or lifted heel (high-lunge) | ADOPT | Safer default for beginners |
+| 10 | warrior-2 | P2 | No back-foot cue; "push the knee out" is imprecise | Claude-master + Sol | Back foot parallel to the mat edge; knee tracks toward 2nd/3rd toe | ADOPT | Clarity |
+| 11 | chair, high-lunge, warrior-2 | P3 | Sol (P1): "knee above ankle / not past toes" is not universal | Sol; JSCR doi 10.1519/1533-4287(2003)017<0629 (unverified) | n/a | REJECT | Knee over ankle is the conservative beginner default in Yoga Journal and Iyengar sources; only a wording tweak "knee follows the toes" is worth adding |
+| 12 | uttanasana EXIT | P2 | "חוליה אחר חוליה, וראש אחרון" contradicts "hinge from hips" and loads flexed lumbar spine (disc warning already in SAFE) | Claude-master + Sol; Yoga Journal Standing Forward Bend (unverified) | Bent knees, hands to thighs, hinge up with a long spine | ADOPT | Contradiction inside the pose |
+| 13 | revolved-chair | P2 | Cue says hand to floor; entry and L0/L1 use prayer hands; awkward "מכסא כופפים" | Claude-master + Sol | Prayer hands as the base; floor hand only as an advanced option with a block | ADOPT | Contradictory variants |
+| 14 | dancer | P2 | "הקרסול הנגדי" ambiguous; L2 "lean deeper, lift higher" is range as progress | Claude-master + Sol | Name the lifted foot; progress while ribs stay controlled | ADOPT | Clarity/safety |
+| 15 | warrior-3 L2 | P2 | "הרימו את הרגל גבוה יותר" past the torso line opens the pelvis / arches the back | Sol | Heel no higher than the pelvis; progress by arm position | ADOPT | Level logic |
+| 16 | high-lunge L0/L2 | P2 | L0 lean forward, L2 arch back | Claude-master | Upright torso at L0; keep ribs in at L2 | ADOPT | Alignment |
+| 17 | cat CUE/ALIGN | P2 | "והשעינו את האגן" (lean the pelvis) does not describe a posterior tilt | Sol (P1) | "הטו את האגן אחורה, עצם הזנב פנימה" | ADOPT | Clarity; P2 since text still reads naturally |
+| 18 | tabletop L2 | P3 | Opposite arm/leg lacks keep-hips-level and return cue | Sol | Add both cues | ADOPT | Small |
+| 19 | mountain L2 | P3 | Heel raise as a level with no wall/chair option, while SAFE mentions dizziness | Sol | Wall/chair beside the heel raise | ADOPT | Fall risk |
+| 20 | half-lift L2 | P3 | Fingertips to floor as the top level | Sol | Hands anywhere that keeps the spine long | REJECT | L0/L1 already allow thighs/shins; "range" is one accepted dial in level-progression.md |
+| 21 | bridge | P2 | Blanket "מתחת לכתפיים" without head-on-floor note; knee-width cue self-conflicting | Sol | Head on floor, neck free; one clear hip-width cue | ADOPT | Cervical safety |
+| 22 | child | P2 | Knee pain and pregnancy: cushion at the heels still gives deep knee flexion / belly pressure | Sol | Knees wide, hips raised on support, or use another rest pose | ADOPT | Safety |
+| 23 | low-lunge | P3 | "הניחו לאגן לשקוע" invites passive lumbar extension | Sol | Small controlled weight shift, tailbone long | ADOPT | Cue |
+| 24 | figure-four | P2 | "לחצו את הברך" presses the joint | Sol | Flex the foot, adjust the other leg; no knee pressing | ADOPT | Joint safety |
+| 25 | half-split | P3 | Toes toward the shin can raise neural tension | Sol | Optional ankle, stop on tingling | REJECT | Not in the supplied text; no evidence the cue is mandatory |
+| 26 | easy-seat L2, legs-up-wall L2 | P3 | Prayer hands / arms overhead called "advanced" | Sol | Treat as comfort options | REJECT | Hand position is a legitimate low-stakes variant |
+| 27 | legs-up-wall SAFE | P2 | "לחץ דם גבוה מאוד" vague; supine tolerance in late pregnancy | Sol; AAO https://www.aao.org/eye-health/tips-prevention/does-yoga-increase-glaucoma-risk (unverified) | "Glaucoma or uncontrolled BP: ask a clinician"; side-lying rest alternative | ADOPT | Safety |
+| 28 | savasana EXIT | P3 | "אין צורך לזוז עד שאזמין אתכם" assumes narration continues | Sol | Add "you may get up any time" and a full self-led return | ADOPT | Audio can stop |
+| 29 | pose page | P2 | Default level tab is "בינוני" not "מתחילים" (seen at 375px: screenshots/round4-pose-tree-375.png) | Claude-master | Default to the beginner level | ADOPT | First-time user lands on the harder variant |
+| 30 | generator 10 min | P2 | No warm-up in the 10-minute beginner plan | Claude-master (review/round4/plans.txt) | Start with tabletop/cat-cow | ADOPT | Sequencing |
+| 31 | generator order | P2 | Transitions: cobbler to cobra, uttanasana to child, cobra to bridge, legs-up-wall to savasana by category order | Sol + Claude-master | Order by body position, add a neutral between backbends | ADOPT | Sequencing |
+| 32 | full-flow | P2 | Low-lunge, camel, bridge, locust back to back with no neutral; camel at L1 | Sol + Claude-master | Child or tabletop between; camel to L2 or out | ADOPT | Counterposes |
+| 33 | relax / strength / 30 min | P3 | "relax" has lunge, cobra, bridge; "strength" is short with 4:10 savasana; 30-min savasana 565 s (31%) | Sol | Cap savasana, align focus pose pool | ADOPT | Theme fit |
+| 34 | back-relief | P2 | Dog to half-lift to cobra with no fold or prone set-up; cobra in a back preset | Sol + Claude-master | Insert fold/child; drop or soften cobra | ADOPT | Safety/sequence |
+| 35 | starter days 3, 5, 7 | P2 | Day 3 adds chair, two warriors and tree at once; plank in days 5 and 7 | Sol + Claude-master | Introduce one new family per day | ADOPT | Beginner progression |
+| 36 | beginner-foundations | P3 | First dog 50 s, tree 40 s per side, cobra 40 s | Sol | First dog 30 s, shorter cobra | ADOPT | Holds |
+| 37 | core-balance | P2 | Plank, warrior-3, tree, dancer, boat in one L1 session, tree directly before dancer, no wall/chair option | Sol | Space the balance poses, add support line | ADOPT | Fall risk |
+| 38 | desk-break | P2 | Ends with revolved-chair L0 (squat plus twist plus balance) | Sol + Claude-master | End with seated twist or chair | ADOPT | Wrong close |
+| 39 | all plans | P2 | No pregnancy screening line on plans that contain prone/supine/twist/balance poses | Sol; ACOG (unverified) | One line on the plan screen | ADOPT | Cheap, safe |
+| 40 | plan metadata | P3 | Level-0 plans contain easy-seat L1 | Sol | n/a | REJECT | Benign: level changes the figure, not a safety property |
+| 41 | hips-hamstrings | P3 | easy-seat between cobbler and hand-to-toe | Sol | n/a | REJECT | Easy-seat is a reasonable rest |
+| 42 | starter-day-5 plank L0 | P3 | Label says only "plank L0" | Sol | n/a | REJECT | Not evidenced; the level text states knees |
+
+**Figures.** Contact sheets at L0 and L2 (screenshots/round4-sheet-L0.png) show no new defects beyond round 3; I did not raise figure rows because Sol had no image access and joint numbers alone would be speculation.
+
+**Counts:** 42 rows. By severity (after my re-grading): P0 0, P1 4, P2 24, P3 14. Decisions: 35 ADOPT, 7 REJECT. By source: Sol only 24, Claude-master only 5, both 13. Raw Sol findings 54 before merge.
+
+**Top ADOPT list (ranked):**
+1. Row 1 dog SAFE reversed.
+2. Row 3 pregnancy wording in nine poses.
+3. Row 2 glaucoma/BP wording.
+4. Row 4 plank "fingertips".
+5. Row 12 uttanasana exit contradiction.
+6. Row 13 revolved-chair variant conflict.
+7. Row 34 back-relief plan order.
+8. Row 32 full-flow backbend cluster.
+9. Row 29 default pose-page level.
+10. Row 6, 8, 14, 15 level progression by range.
+
+**Skill note.** Sol could not read the skill files in one of four calls (call 1), so Step 0 coverage was done by me from the discovered pose list and by Sol only as an "n/n poses reviewed" line. Coverage by chunk: 17/17, 20/20, plans 6 generated plus 15 presets.
