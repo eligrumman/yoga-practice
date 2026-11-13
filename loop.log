@@ -1,2 +1,3 @@
 2026-11-13 v1 build
 2026-11-13 | cycle 1 | beginner plans leaner (10/20/30 min = 10/18/22 items, cat-cow flow item), Warrior I/High Lunge/Camel/Half-split/Cobbler animations, export v2 with favorites+history | e2c4c00 | 3702 tests pass | TTS 88 generated / 590 pending (quota 429; +18 new cat-cow segments)
+2026-11-13 | human figure | poses/<id>.json single source (37 poses x 3 levels, joint rotations), human 2D SVG figure, three.js 0.160.0 3D view (2D fallback), tuner.html | 24f8562 | 4301 tests pass | live smoke he/ru/en x 375/1280 OK
