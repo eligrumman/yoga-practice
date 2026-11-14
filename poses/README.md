@@ -24,6 +24,7 @@
 * `start`: the full frame the pose is entered from (shared by all levels).
 * `levels[i].hold`: the full frame held at level i (0 easy, 1 medium, 2 deep).
 * `levels[i].alt` (optional): a partial frame. Only the joints listed replace the hold frame. Used for the second half of a flow (cat-cow). The animation goes start, hold, alt, hold.
+* `levels[i].seq` (optional): an ordered multi-step flow, `[{name, frame, dur, breath}, ...]`. Frames use the full hold-frame schema; `dur` is seconds at 1× and the sum is the round length. The sequence interpolates smoothly and loops. A plan's default hold unit represents one complete round. Reduced-motion displays the first frame.
 * `levels[i].props` (optional): `{"type":"strap","arm":"R","leg":"R"}`, `{"type":"block","arms":["R","L"],"h":22}`, `{"type":"cushion","h":10}`, `{"type":"wall"}`. Sides are `R`/`L`.
 * `camera` (top level, and optionally per level): `az` is the horizontal angle (90 = looking at the front, about 28 = a 3/4 view, 0 = from the side), `el` is the elevation in degrees. The 2D view is an orthographic projection with this camera; the 3D view starts at this camera and can then be orbited.
 

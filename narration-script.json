@@ -330,6 +330,96 @@
   "text": "Keep moving slowly, one movement per breath."
  },
  {
+  "id": "pose.sun-salutation-a.name",
+  "lang": "he",
+  "text": "ברכת השמש א׳ (גרסה ביתית)"
+ },
+ {
+  "id": "pose.sun-salutation-a.name",
+  "lang": "ru",
+  "text": "Приветствие солнцу А (домашняя версия)"
+ },
+ {
+  "id": "pose.sun-salutation-a.name",
+  "lang": "en",
+  "text": "Sun Salutation A (home version)"
+ },
+ {
+  "id": "pose.sun-salutation-a.intro",
+  "lang": "he",
+  "text": "תנוחת ברכת השמש א׳ (גרסה ביתית)."
+ },
+ {
+  "id": "pose.sun-salutation-a.intro",
+  "lang": "ru",
+  "text": "Поза: Приветствие солнцу А (домашняя версия)."
+ },
+ {
+  "id": "pose.sun-salutation-a.intro",
+  "lang": "en",
+  "text": "Pose: Sun Salutation A (home version)."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.1",
+  "lang": "he",
+  "text": "עמדו בהר; שאפו והרימו ידיים, נשפו לקיפול עם ברכיים רכות."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.1",
+  "lang": "ru",
+  "text": "Из Горы вдохните, поднимите руки и с выдохом наклонитесь, смягчая колени."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.1",
+  "lang": "en",
+  "text": "From Mountain, inhale arms up and exhale to a soft-knee fold."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.2",
+  "lang": "he",
+  "text": "שאפו לחצי הרמה; נשפו והחזירו רגליים לאחור לפי הרמה, בלי צ׳טורנגה."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.2",
+  "lang": "ru",
+  "text": "Вдох — полунаклон; выдох — шаг назад по своему уровню, без чатуранги."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.2",
+  "lang": "en",
+  "text": "Inhale to half lift; exhale and step back to your level, with no chaturanga."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.3",
+  "lang": "he",
+  "text": "שאפו לקוברה נמוכה; נשפו דרך שולחן או תנוחת הילד אל כלב מביט מטה."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.3",
+  "lang": "ru",
+  "text": "Вдох — низкая кобра; выдох — через стол или позу ребёнка в собаку мордой вниз."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.3",
+  "lang": "en",
+  "text": "Inhale to low cobra; exhale through tabletop or Child’s Pose to Downward Dog."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.4",
+  "lang": "he",
+  "text": "צעדו קדימה: שאפו לחצי הרמה, נשפו לקיפול, שאפו ועלו; נשפו ידיים אל הלב."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.4",
+  "lang": "ru",
+  "text": "Шаг вперёд, полунаклон, наклон, подъём с руками вверх и выдох — ладони к сердцу."
+ },
+ {
+  "id": "pose.sun-salutation-a.cue.4",
+  "lang": "en",
+  "text": "Step forward, half lift, fold, rise with arms up, then exhale hands to heart."
+ },
+ {
   "id": "pose.cat.name",
   "lang": "he",
   "text": "חתול"
@@ -4209,6 +4299,90 @@
   "text": "עצרו באמצע, גב ארוך, ונשמו.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.sun-salutation-a.entry.1",
+  "lang": "he",
+  "text": "עמדו בתנוחת ההר, כפות רגליים יציבות וברכיים רכות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.entry.2",
+  "lang": "he",
+  "text": "נתחיל סיבוב אחד של ברכת השמש הביתית.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.align.1",
+  "lang": "he",
+  "text": "שאפו והרימו ידיים. נשפו והתקפלו, עם ברכיים רכות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.align.2",
+  "lang": "he",
+  "text": "שאפו לחצי הרמה. נשפו והחזירו רגליים לאחור לפי הרמה שלכם. שאפו לקוברה נמוכה, ונשפו דרך שולחן או ילד אל כלב מביט מטה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.align.3",
+  "lang": "he",
+  "text": "צעדו קדימה, שאפו לחצי הרמה ונשפו לקיפול. שאפו ועלו, ונשפו ידיים אל הלב.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.breath",
+  "lang": "he",
+  "text": "תנו לנשימה לקבוע את הקצב; אין צורך למהר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.mod.L0",
+  "lang": "he",
+  "text": "השאירו ברכיים למטה, הורידו ברכיים־חזה־סנטר ועלו לקוברה נמוכה על האמות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.mod.L1",
+  "lang": "he",
+  "text": "עברו לקרש על הברכיים, רדו אל הבטן ועלו לקוברה נמוכה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.mod.L2",
+  "lang": "he",
+  "text": "עברו לקרש מלא ורדו אל הבטן בשליטה; אין צ׳טורנגה ואין כלב מביט מעלה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.sun-salutation-a.fix.1",
+  "lang": "he",
+  "text": "שימו לב לא לקרוס אל הידיים במעבר לאחור. פרשו אצבעות, דחפו את הרצפה והורידו ברכיים לפי הצורך.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.sun-salutation-a.fix.2",
+  "lang": "he",
+  "text": "שימו לב לא להרים את הקוברה בכוח הידיים. השאירו אותה נמוכה, צוואר ארוך וגב תחתון נינוח.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.sun-salutation-a.exit",
+  "lang": "he",
+  "text": "סיימו בהר, ידיים מול הלב, וקחו נשימה רגועה.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.cat.entry.1",

@@ -44,7 +44,7 @@ function separateBackbends(items, level) {
 // Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
-  ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
+  ['allfours', ['tabletop', 'cat-cow', 'sun-salutation-a', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
   ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
@@ -80,6 +80,7 @@ function candidates({ focus, level, avoid }) {
   const out = (p) => focus === 'relax' && RELAX_OUT.has(p.id);
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
   return POSES.filter((p) => p.section !== 'rest'
+    && p.id !== 'sun-salutation-a' // inserted explicitly below only for eligible 20+ minute non-beginner plans
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
     && (p.id !== 'extended-side-angle' || (level !== 'beginner' && focus === 'general'))
     && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
@@ -248,6 +249,14 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
       else items.push({ pose: p.id, level: lvl, unit: 'sec', amount: Math.min(beg ? Math.min(30, maxSec(p)) : 90, hold) });
     }
   }
+  // Sun Salutation A is one 72-second round (one default hold unit). Keep it out of beginner,
+  // short, pregnancy-avoid, blood-pressure-avoid and wrist-avoid plans.
+  const flowBlocked = ['sun-salutation-a', 'pregnancy-avoid', 'blood-pressure-avoid', 'wrist-avoid'].some((x) => avoidSet.has(x));
+  if (minutes >= 20 && !flowBlocked) {
+    const warm = items.findIndex((it) => it.pose === 'upward-salute');
+    if (warm >= 0) items[warm] = { pose: 'sun-salutation-a', level: lvl, unit: 'sec', amount: 72 };
+    else items.push({ pose: 'sun-salutation-a', level: lvl, unit: 'sec', amount: 72 });
+  }
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
   items = separateBackbends(items, lvl);
   // beginner: no 12-breath Tabletop/Cat. A few Cat-Cow cycles instead (fixed, not stretched by the tuner).
@@ -269,7 +278,7 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
   let stretch = false; // beginner: holds stay 15-30 s (up to 40 s only if a 30 min plan cannot otherwise be filled)
   const step = (i, d) => {
     const it = items[i];
-    if (fixed.has(it)) return false;
+    if (fixed.has(it) || it.pose === 'sun-salutation-a') return false; // one declared round stays 72 s
     const sec = it.unit === 'sec';
     const amt = it.amount + (d > 0 ? 5 : -5) / (sec ? 1 : BREATH_SEC);
     const lo = sec ? (beg ? 15 : 10) : 2;

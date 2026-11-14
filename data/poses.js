@@ -28,6 +28,7 @@ export const LEVEL_LABELS = [
   { he: 'בינוני', en: 'Intermediate', ru: 'Средний' },
   { he: 'מתקדם', en: 'Advanced', ru: 'Продвинутый' },
 ];
+export const FLOW_LABEL = { he: 'זרימה', en: 'Flow', ru: 'Поток' };
 
 const RAW = [...warm, ...standing, ...floor, ...rest];
 
@@ -40,6 +41,7 @@ export const POSES = RAW.map((r) => ({
   category: r.cat,
   section: r.sec,
   flow: r.flow,
+  isFlow: !!r.isFlow,
   difficulty: r.d,
   holdSeconds: r.hold,
   sides: r.sides,

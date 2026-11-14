@@ -21,7 +21,7 @@ export function poseFrames(pose, level = 1) {
   if (!spec) throw new Error(`pose ${pose.id}: spec not loaded (call attachSpecs first)`);
   const L = spec.levels[level] || spec.levels[1];
   return {
-    start: spec.start, hold: L.hold, frame: L.hold, alt: L.altFull || null,
+    start: spec.start, hold: L.hold, frame: L.hold, alt: L.altFull || null, seq: L.seqFull || null,
     props: L.props, camera: L.camera || spec.camera,
   };
 }
@@ -32,7 +32,7 @@ function viewFor(pose, level, mirror) {
   const key = `${pose.id}|${level}|${mirror ? 1 : 0}`;
   if (!viewCache.has(key)) {
     const P = poseFrames(pose, level);
-    const fs = [P.hold, P.alt].filter(Boolean).map((f) => (mirror ? swapLR(f) : f));
+    const fs = [P.hold, P.alt, ...(P.seq || []).map((s) => s.frame)].filter(Boolean).map((f) => (mirror ? swapLR(f) : f));
     viewCache.set(key, fitView(fs, P.camera));
   }
   return viewCache.get(key);
@@ -166,15 +166,15 @@ export class Animator {
   }
   set(pose, level, { from = null, mirror = false, mode = 'loop', intro = 2.8 } = {}) {
     const P = poseFrames(pose, level);
-    let hold = P.hold, alt = P.alt, start = from || P.start, props = P.props;
+    let hold = P.hold, alt = P.alt, seq = P.seq, start = from || P.start, props = P.props;
     if (mirror) {
-      hold = swapLR(hold); alt = alt && swapLR(alt); props = mirrorProps(props);
+      hold = swapLR(hold); alt = alt && swapLR(alt); seq = seq?.map((s) => ({ ...s, frame: swapLR(s.frame) })); props = mirrorProps(props);
       if (!from) start = swapLR(start);
     }
     const view = viewFor(pose, level, mirror);
     // the hold view can be zoomed in far more than the standing start frame fits: ease the framing from the start view to the hold view
     const sv = fitView([fullFrame(start)], P.camera, { maxScale: 1.45 });
-    this.cfg = { start: fullFrame(start), hold, alt, props, mode, intro, view, startView: sv.scale < view.scale ? sv : null, cam: P.camera };
+    this.cfg = { start: fullFrame(start), hold, alt, seq, props, mode, intro, view, startView: sv.scale < view.scale ? sv : null, cam: P.camera };
     this.time = 0;
     this.frame(0);
   }
@@ -182,7 +182,7 @@ export class Animator {
   progress(time) {
     const c = this.cfg;
     if (c.mode === 'once') return clamp((time - 0.25) / c.intro);
-    if (c.alt) return 1; // flow pose in the library: keep flowing
+    if (c.alt || c.seq) return 1; // flow pose in the library: keep flowing
     const T = time % 10;
     if (T < 0.6) return 0;
     if (T < 3.4) return (T - 0.6) / 2.8;
@@ -193,8 +193,21 @@ export class Animator {
     const c = this.cfg;
     const u = this.progress(time);
     let f = blendFrames(c.start, c.hold, u);
+    // A duration includes the smooth transition into the next step. One plan hold unit is one round.
+    if (c.seq && u >= 1) {
+      const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) f = c.seq[0].frame;
+      else {
+        const total = c.seq.reduce((n, s) => n + s.dur, 0);
+        const t0 = c.mode === 'once' ? 0.25 + c.intro : 0;
+        let t = ((time - t0) % total + total) % total, i = 0;
+        while (i < c.seq.length - 1 && t >= c.seq[i].dur) t -= c.seq[i++].dur;
+        const a = c.seq[i], b = c.seq[(i + 1) % c.seq.length];
+        f = blendFrames(a.frame, b.frame, smooth(t / a.dur));
+      }
+    }
     // flow pose (cat-cow): once in the pose, alternate hold <-> alt, one half-cycle every 5 s
-    if (c.alt && u >= 1) {
+    if (c.alt && !c.seq && u >= 1) {
       const t0 = c.mode === 'once' ? 0.25 + c.intro : 0;
       f = blendFrames(c.hold, c.alt, 0.5 - 0.5 * Math.cos(((time - t0) * 2 * Math.PI) / 10));
     }

@@ -16,12 +16,13 @@ async function readJSON(rel) {
   return r.json();
 }
 
-// Normalise a raw spec: every start/hold is a full frame; alt stays a partial overlay plus a resolved full frame (altFull).
+// Normalise a raw spec: every start/hold/sequence frame is full; alt stays a partial overlay plus a resolved full frame.
 export function prepareSpec(raw) {
   const spec = { ...raw, start: fullFrame(raw.start) };
   spec.levels = raw.levels.map((l) => {
     const hold = fullFrame(l.hold);
-    return { ...l, hold, altFull: l.alt ? overlay(hold, l.alt) : null, props: l.props || [] };
+    const seqFull = l.seq?.map((s) => ({ ...s, frame: fullFrame(s.frame) })) || null;
+    return { ...l, hold, seqFull, altFull: l.alt ? overlay(hold, l.alt) : null, props: l.props || [] };
   });
   return spec;
 }

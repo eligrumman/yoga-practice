@@ -16,7 +16,7 @@ export default [
     ],
   },
   {
-    id: 'cat-cow', sa: 'Marjaryasana-Bitilasana', en: 'Cat-Cow flow', he: 'זרימת חתול ופרה', cat: 'warm-up', sec: 'warm', flow: 15, d: 1, hold: 30, sides: 'single',
+    id: 'cat-cow', sa: 'Marjaryasana-Bitilasana', en: 'Cat-Cow flow', he: 'זרימת חתול ופרה', cat: 'warm-up', sec: 'warm', flow: 15, d: 1, hold: 30, sides: 'single', isFlow: true,
     ru: 'Кошка и корова, поток', tags: ['relax', 'back', 'flex'],
     cue: {
       he: ['על ארבע, ידיים מתחת לכתפיים וברכיים מתחת לירכיים.', 'בשאיפה הורידו את הבטן והרימו את החזה, פרה.', 'בנשיפה עגלו את הגב לתקרה, חתול.', 'המשיכו לנוע לאט, תנועה אחת לכל נשימה.'],
@@ -28,6 +28,25 @@ export default [
       { he: 'תנועה קטנה ונעימה.', en: 'Small, comfortable movement.', ru: 'Небольшое, комфортное движение.' },
       { he: 'זרימה מלאה עם הנשימה.', en: 'Full flow with the breath.', ru: 'Полный поток в ритме дыхания.' },
       { he: 'זרימה עמוקה יותר, מבט מורם בפרה.', en: 'Deeper flow with a lifted gaze in cow.', ru: 'Глубже, взгляд поднят в положении коровы.' },
+    ],
+  },
+  {
+    id: 'sun-salutation-a', sa: 'Surya Namaskar A', en: 'Sun Salutation A (home version)', he: 'ברכת השמש א׳ (גרסה ביתית)', ru: 'Приветствие солнцу А (домашняя версия)', cat: 'warm-up', sec: 'warm', flow: 18, d: 2, hold: 72, sides: 'single', isFlow: true,
+    tags: ['flex', 'strength'],
+    cue: {
+      he: ['עמדו בהר; שאפו והרימו ידיים, נשפו לקיפול עם ברכיים רכות.', 'שאפו לחצי הרמה; נשפו והחזירו רגליים לאחור לפי הרמה, בלי צ׳טורנגה.', 'שאפו לקוברה נמוכה; נשפו דרך שולחן או תנוחת הילד אל כלב מביט מטה.', 'צעדו קדימה: שאפו לחצי הרמה, נשפו לקיפול, שאפו ועלו; נשפו ידיים אל הלב.'],
+      en: ['From Mountain, inhale arms up and exhale to a soft-knee fold.', 'Inhale to half lift; exhale and step back to your level, with no chaturanga.', 'Inhale to low cobra; exhale through tabletop or Child’s Pose to Downward Dog.', 'Step forward, half lift, fold, rise with arms up, then exhale hands to heart.'],
+      ru: ['Из Горы вдохните, поднимите руки и с выдохом наклонитесь, смягчая колени.', 'Вдох — полунаклон; выдох — шаг назад по своему уровню, без чатуранги.', 'Вдох — низкая кобра; выдох — через стол или позу ребёнка в собаку мордой вниз.', 'Шаг вперёд, полунаклон, наклон, подъём с руками вверх и выдох — ладони к сердцу.'],
+    },
+    safe: {
+      he: 'זה אינו ייעוץ רפואי. לחץ דם או סחרחורת: דלגו על מצבים שבהם הראש נמוך מהלב, או השאירו ראש גבוה וברכיים רכות. בהריון: אין לשכב על הבטן; החליפו את ההורדה בשולחן ובחתול־פרה. רגישות בפרקי כף היד: הישענו על אגרופים או אמות ועצרו אם כואב. גב תחתון: קוברה נמוכה בלבד; צוואר ארוך ומבט קדימה־מטה.',
+      en: 'Not medical advice. For blood-pressure concerns or dizziness, skip head-below-heart steps or keep the head high with soft knees. During pregnancy, do not lie on the belly; replace the lowering with tabletop and Cat-Cow. For wrist issues use fists or forearms; keep cobra low and the neck long.',
+      ru: 'Это не медицинская рекомендация. При проблемах с давлением или головокружении пропустите положения ниже уровня сердца либо держите голову выше, смягчая колени. При беременности не ложитесь на живот: замените опускание столом и кошкой-коровой. При боли в запястьях используйте кулаки или предплечья; кобра низкая, шея длинная.',
+    },
+    v: [
+      { he: 'ברכיים נשארות למטה: ברכיים־חזה־סנטר, קוברה נמוכה על האמות וברכיים רכות בקיפולים.', en: 'Knees stay down: knees-chest-chin, low forearm cobra, and soft knees in folds.', ru: 'Колени остаются на полу: колени-грудь-подбородок, низкая кобра на предплечьях, мягкие колени в наклонах.' },
+      { he: 'קרש על הברכיים, ירידה לבטן, קוברה נמוכה וכלב מביט מטה.', en: 'Knees plank, lower to the belly, low cobra, and Downward Dog.', ru: 'Планка с колен, опускание на живот, низкая кобра и собака мордой вниз.' },
+      { he: 'קרש מלא, ירידה אל הבטן, קוברה, כלב מביט מטה וצעד קדימה — ללא צ׳טורנגה וללא כלב מביט מעלה.', en: 'Full plank, lower to the belly, cobra, Downward Dog, and step through—no chaturanga or Upward Dog.', ru: 'Полная планка, опускание на живот, кобра, собака мордой вниз и шаг вперёд — без чатуранги и собаки мордой вверх.' },
     ],
   },
   {

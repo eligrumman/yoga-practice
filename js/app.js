@@ -1,4 +1,4 @@
-import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
+import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS, FLOW_LABEL } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { attachSpecs } from './specs.js';
@@ -174,7 +174,7 @@ function viewLibrary() {
       const svg = svgEl('fig card-fig'); renderStatic(svg, p, 1);
       return el('a', { class: 'card pose-card', href: `#/pose/${p.id}` }, svg,
         el('div', { class: 'pc-body' }, el('h3', {}, poseName(p)), el('div', { class: 'sans' }, p.sanskrit),
-          el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), el('span', { class: 'dots', title: T('difficulty') }, stars(p.difficulty)), favs.includes(p.id) ? el('span', { class: 'fav-on', 'aria-label': T('star') }, '★') : null)));
+          el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), p.isFlow ? el('span', { class: 'badge flow-badge' }, FLOW_LABEL[lang]) : null, el('span', { class: 'dots', title: T('difficulty') }, stars(p.difficulty)), favs.includes(p.id) ? el('span', { class: 'fav-on', 'aria-label': T('star') }, '★') : null)));
     }));
     if (!list.length) {
       grid.append(el('p', { class: 'empty' }, T('none')), el('button', { class: 'btn', id: 'clear-filters', onclick: clearAll }, T('clearFilters')));
@@ -238,7 +238,7 @@ function viewPose(id) {
       el('div', { class: 'pose-info' },
         el('div', { class: 'title-row' }, el('h1', {}, poseName(p)), fav),
         el('div', { class: 'sans' }, `${p.sanskrit} · ${p.en}`),
-        el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), el('span', { class: 'dots' }, stars(p.difficulty)),
+        el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), p.isFlow ? el('span', { class: 'badge flow-badge' }, FLOW_LABEL[lang]) : null, el('span', { class: 'dots' }, stars(p.difficulty)),
           el('span', { class: 'badge' }, `${T('hold')}: ${p.holdSeconds} ${T('sec')}` + (p.sides === 'both' ? ` · ${T('sides', 'both')}` : ''))),
         el('h3', {}, T('cues')), el('ol', { class: 'cues' }, p.cues[lang].map((c) => el('li', {}, c))),
         el('div', { class: 'note safety' }, el('strong', {}, '⚠ ' + T('safety') + ': '), p.safety[lang]),

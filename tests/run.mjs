@@ -6,7 +6,7 @@ import { mergeHistory, mergeFavorites, SCHEMA_VERSION, planSeconds, validatePlan
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, POSITIONS, POSITION } from '../js/generator.js';
 import { poseFrames, Animator } from '../js/figure.js';
 import { attachSpecs } from '../js/specs.js';
-import { solve, validateFrame, camera, project, swapLR } from '../js/rig.js';
+import { solve, validateFrame, camera, project, swapLR, primBox } from '../js/rig.js';
 import { streak, countsForStreak, histMinutes } from '../js/store.js';
 import { nPoses, nCount, tr, poseOf, approxMin, finishStats } from '../js/i18n.js';
 import { hasBreaths } from '../js/plan.js';
@@ -118,6 +118,34 @@ for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   if (l === 'beginner' || !['general', 'flexibility'].includes(f)) ok(!ids.includes('wide-legged-fold'), `wide-legged fold gate: gentle general/flexibility only ${m}/${f}/${l}`);
 }
 ok(!ALL_PRESETS.some((p) => p.items.some((i) => i.pose === 'crow')), 'crow safety gate: excluded from presets and 7-day starter path');
+
+// Sun Salutation A: generic multi-step flow, one 72-second home-version round.
+{
+  const sun = POSE_BY_ID['sun-salutation-a'];
+  ok(sun?.isFlow && ['he', 'ru', 'en'].every((l) => sun[l] && sun.cues[l].length === 4 && sun.safety[l]), 'sun flow i18n and library marker complete');
+  const orders = [
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'knees-down', 'knees-chest-chin', 'low-cobra', 'child-reset', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'knees-plank', 'lower-to-belly', 'low-cobra', 'downward-dog', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'full-plank', 'lower-to-belly', 'cobra', 'downward-dog', 'step-through-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+  ];
+  for (let l = 0; l < 3; l++) {
+    const seq = poseFrames(sun, l).seq;
+    ok(seq.map((s) => s.name).join() === orders[l].join(), `sun L${l} sequence order`);
+    ok(seq.reduce((n, s) => n + s.dur, 0) === 72, `sun L${l} round is 72 seconds at 1x`);
+    for (const s of seq) {
+      const S = solve(s.frame), lo = Math.min(...S.prims.map((p) => primBox(p).lo));
+      ok(validateFrame(s.frame).length === 0 && lo > -0.01 && lo <= 2, `sun L${l} ${s.name} valid and grounded`);
+      if (/plank|knees-chest-chin|cobra|downward-dog/.test(s.name)) ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `sun L${l} ${s.name} weight-bearing palms flat`);
+    }
+  }
+  ok(!poseFrames(POSE_BY_ID['cat-cow'], 1).seq && poseFrames(POSE_BY_ID['cat-cow'], 1).alt, 'cat-cow remains the unchanged alt-frame flow');
+  ok(generatePlan({ minutes: 20, focus: 'general', level: 'intermediate' }).items.some((i) => i.pose === sun.id && i.amount === 72), 'sun flow may warm a non-beginner 20+ minute plan as one round');
+  for (const avoid of [['sun-salutation-a'], ['pregnancy-avoid'], ['blood-pressure-avoid'], ['wrist-avoid']])
+    ok(!generatePlan({ minutes: 20, focus: 'general', level: 'intermediate', avoid }).items.some((i) => i.pose === sun.id), `sun flow gated by ${avoid[0]}`);
+  ok(!generatePlan({ minutes: 30, focus: 'general', level: 'beginner' }).items.some((i) => i.pose === sun.id), 'sun flow never generated for beginners');
+  const appSrc = readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
+  ok(/FLOW_LABEL/.test(appSrc) && /p\.isFlow/.test(appSrc), 'library card and pose page render the flow badge');
+}
 ok(!STARTER_PATH.some((p) => p.items.some((i) => i.pose === 'pigeon')), 'pigeon excluded from 7-day starter path');
 for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   const ids = generatePlan({ minutes: m, focus: f, level: l }).items.map((i) => i.pose);
@@ -377,7 +405,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 507, `507 v2 segments including extended-side-angle (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 519, `519 v2 segments including sun-salutation-a (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -386,9 +414,9 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle|sun-salutation-a)\./.test(s.id);
   ok(JSON.stringify(SEGS_NOW.filter((s) => !newPoseSegment(s))) === JSON.stringify(legacy), 'pre-existing ru/en/he legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 30, 'legacy narration adds only the 30 required new-pose segments');
+  ok(SEGS_NOW.length === legacy.length + 36, 'legacy narration adds only the 36 required new-pose segments');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
@@ -501,8 +529,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 507 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 507 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 263 * 3, 'narration-script.json has 263 legacy entries in each language');
+  ok(v2s.length === 519 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 519 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 269 * 3, 'narration-script.json has 269 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');
