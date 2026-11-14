@@ -45,7 +45,7 @@ function separateBackbends(items, level) {
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
   ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
-  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'triangle', 'half-lift', 'wide-legged-fold', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
+  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
   ['prone', ['cobra', 'locust', 'child']],
@@ -81,6 +81,7 @@ function candidates({ focus, level, avoid }) {
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
   return POSES.filter((p) => p.section !== 'rest'
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
+    && (p.id !== 'extended-side-angle' || (level !== 'beginner' && focus === 'general'))
     && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
     && (p.id !== 'wide-legged-fold' || (level !== 'beginner' && (focus === 'general' || focus === 'flexibility')))
     && (p.id !== 'triangle' || focus === 'general') // introduce Triangle only in a balanced general sequence

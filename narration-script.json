@@ -1050,6 +1050,96 @@
   "text": "Keep breathing and do not force the depth."
  },
  {
+  "id": "pose.extended-side-angle.name",
+  "lang": "he",
+  "text": "זווית צידית מוארכת"
+ },
+ {
+  "id": "pose.extended-side-angle.name",
+  "lang": "ru",
+  "text": "Уттхита Паршваконасана"
+ },
+ {
+  "id": "pose.extended-side-angle.name",
+  "lang": "en",
+  "text": "Extended side angle"
+ },
+ {
+  "id": "pose.extended-side-angle.intro",
+  "lang": "he",
+  "text": "תנוחת זווית צידית מוארכת."
+ },
+ {
+  "id": "pose.extended-side-angle.intro",
+  "lang": "ru",
+  "text": "Поза: Уттхита Паршваконасана."
+ },
+ {
+  "id": "pose.extended-side-angle.intro",
+  "lang": "en",
+  "text": "Pose: Extended side angle."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.1",
+  "lang": "he",
+  "text": "מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו את האמה בעדינות על הירך."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.1",
+  "lang": "ru",
+  "text": "Из Воина два держите переднее колено над лодыжкой и легко опустите предплечье на бедро."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.1",
+  "lang": "en",
+  "text": "From Warrior II, keep the front knee over the ankle and rest the forearm lightly on the thigh."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.2",
+  "lang": "he",
+  "text": "האריכו את הצד העליון של הגוף; היד העליונה יכולה להישאר במותן או להתארך מעבר לאוזן."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.2",
+  "lang": "ru",
+  "text": "Удлините верхний бок корпуса; верхняя рука на тазу или вытянута за ухо."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.2",
+  "lang": "en",
+  "text": "Lengthen the upper side of the body, with the top hand on the hip or reaching past the ear."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.3",
+  "lang": "he",
+  "text": "דחפו דרך כף הרגל האחורית וסובבו את החזה מעט כלפי מעלה, בלי ללחוץ על הבטן."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.3",
+  "lang": "ru",
+  "text": "Давите задней стопой в пол и мягко раскрывайте грудную клетку, не сдавливая живот."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.3",
+  "lang": "en",
+  "text": "Press through the back foot and turn the chest open without compressing the belly."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.4",
+  "lang": "he",
+  "text": "השאירו את הצוואר בהמשך לעמוד השדרה והביטו קדימה אם מבט למעלה מכביד."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.4",
+  "lang": "ru",
+  "text": "Держите шею нейтрально и смотрите вперёд, если взгляд вверх создаёт напряжение."
+ },
+ {
+  "id": "pose.extended-side-angle.cue.4",
+  "lang": "en",
+  "text": "Keep the neck neutral and look forward if looking up strains it."
+ },
+ {
   "id": "pose.wide-legged-fold.name",
   "lang": "he",
   "text": "כפיפה קדימה בפיסוק רחב"
@@ -4784,6 +4874,90 @@
   "text": "צד שני. הפנו את כפות הרגליים והאריכו את הגוף מעל הרגל השנייה.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.extended-side-angle.entry.1",
+  "lang": "he",
+  "text": "מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.entry.2",
+  "lang": "he",
+  "text": "הישענו הצידה והניחו אמה על הירך או יד על תמיכה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.align.1",
+  "lang": "he",
+  "text": "כוונו את הברך בכיוון אצבעות כף הרגל ודחפו דרך הרגל האחורית.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.align.2",
+  "lang": "he",
+  "text": "האריכו את הצד העליון ופתחו את החזה בלי ללחוץ על הבטן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.breath",
+  "lang": "he",
+  "text": "נשמו ברצף והשאירו את הצוואר ארוך ונינוח.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.mod.L0",
+  "lang": "he",
+  "text": "קצרו את הפסיעה, הניחו אמה על הירך והשאירו את היד העליונה במותן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.mod.L1",
+  "lang": "he",
+  "text": "הניחו את היד התחתונה על בלוק והאריכו את היד העליונה מעבר לאוזן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.mod.L2",
+  "lang": "he",
+  "text": "אם הגוף נשאר ארוך, הורידו קצות אצבעות או כף יד לרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.fix.1",
+  "lang": "he",
+  "text": "הברך הקדמית נוטה לקרוס פנימה. כוונו אותה בכיוון האצבעות והשאירו אותה מעל הקרסול.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.extended-side-angle.fix.2",
+  "lang": "he",
+  "text": "הגוף נוטה לקרוס על הירך. דחפו את האמה בעדינות, האריכו את הצד התחתון ושמרו מרווח בבטן.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.extended-side-angle.exit",
+  "lang": "he",
+  "text": "דחפו דרך הרגל האחורית, הרימו את הגוף וחברו את כפות הרגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.extended-side-angle.side",
+  "lang": "he",
+  "text": "צד שני. פנו את כפות הרגליים לצד השני וכופפו את הברך הקדמית.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.wide-legged-fold.entry.1",

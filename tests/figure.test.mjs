@@ -16,6 +16,7 @@ const CONTACT = [
   ['crow', [0], ['handR', 'handL', 'footR', 'footL']], ['crow', [1], ['handR', 'handL', 'footR']], ['crow', [2], ['handR', 'handL']],
   ['pigeon', [1, 2], ['handR', 'handL', 'footR', 'footL']],
   ['triangle', ALL, ['footR', 'footL']],
+  ['extended-side-angle', ALL, ['footR', 'footL']], ['extended-side-angle', [2], ['handR']],
   ['wide-legged-fold', ALL, ['footR', 'footL']],
   ['downward-dog', ALL, ['handR', 'handL', 'footR', 'footL']], ['cobra', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['child', ALL, ['handR', 'handL', 'footR', 'footL']], ['bridge', ALL, ['handR', 'handL', 'footR', 'footL']],
@@ -51,6 +52,11 @@ export default async function figureTests(ok) {
     const f = poseFrames(tri, l).hold; const m = swapLR(f); const X = solve(f), Y = solve(m);
     ok(Math.abs(lowest(X, 'footR') - lowest(Y, 'footL')) < 0.2 && Math.abs(lowest(X, 'footL') - lowest(Y, 'footR')) < 0.2, `triangle L${l} mirrors floor contacts`);
   }
+  const esa = POSES.find((q) => q.id === 'extended-side-angle');
+  for (const l of ALL) {
+    const f = poseFrames(esa, l).hold; const X = solve(f), Y = solve(swapLR(f));
+    ok(Math.abs(lowest(X, 'footR') - lowest(Y, 'footL')) < 0.2 && Math.abs(lowest(X, 'footL') - lowest(Y, 'footR')) < 0.2, `extended-side-angle L${l} mirrors floor contacts`);
+  }
   // ---- every pose / level: frames valid, primitives finite, nothing under the floor
   for (const P of POSES) for (const l of ALL) {
     const fr = poseFrames(P, l); const S = solve(fr.hold);
@@ -74,7 +80,7 @@ export default async function figureTests(ok) {
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
   }
   // ---- lunges / warriors: front knee over the ankle, front sole flat
-  for (const id of ['warrior-1', 'warrior-2', 'high-lunge', 'low-lunge']) {
+  for (const id of ['warrior-1', 'warrior-2', 'extended-side-angle', 'high-lunge', 'low-lunge']) {
     const P = POSES.find((q) => q.id === id);
     for (const l of ALL) { const S = solve(poseFrames(P, l).hold); const d = Math.hypot(S.J.kneeR[0] - S.J.ankleR[0], S.J.kneeR[2] - S.J.ankleR[2]); ok(d <= 8, `${id} L${l} front knee over ankle (${d.toFixed(1)})`); ok(S.feet.R.n[1] < -0.97, `${id} L${l} front sole flat`); }
   }

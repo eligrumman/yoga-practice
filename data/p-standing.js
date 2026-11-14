@@ -76,6 +76,21 @@ export default [
     ],
   },
   {
+    id: 'extended-side-angle', sa: 'Utthita Parsvakonasana', en: 'Extended side angle', he: 'זווית צידית מוארכת', ru: 'Уттхита Паршваконасана', cat: 'standing', sec: 'stand', flow: 43, d: 2, hold: 25, sides: 'both',
+    tags: ['strength', 'flex'],
+    cue: {
+      he: ['מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו את האמה בעדינות על הירך.', 'האריכו את הצד העליון של הגוף; היד העליונה יכולה להישאר במותן או להתארך מעבר לאוזן.', 'דחפו דרך כף הרגל האחורית וסובבו את החזה מעט כלפי מעלה, בלי ללחוץ על הבטן.', 'השאירו את הצוואר בהמשך לעמוד השדרה והביטו קדימה אם מבט למעלה מכביד.'],
+      en: ['From Warrior II, keep the front knee over the ankle and rest the forearm lightly on the thigh.', 'Lengthen the upper side of the body, with the top hand on the hip or reaching past the ear.', 'Press through the back foot and turn the chest open without compressing the belly.', 'Keep the neck neutral and look forward if looking up strains it.'],
+      ru: ['Из Воина два держите переднее колено над лодыжкой и легко опустите предплечье на бедро.', 'Удлините верхний бок корпуса; верхняя рука на тазу или вытянута за ухо.', 'Давите задней стопой в пол и мягко раскрывайте грудную клетку, не сдавливая живот.', 'Держите шею нейтрально и смотрите вперёд, если взгляд вверх создаёт напряжение.'],
+    },
+    safe: { he: 'ודאו שהברך הקדמית עוקבת בכיוון אצבעות כף הרגל ואינה קורסת פנימה. ברגישות בברך או בירך קצרו את הפסיעה והניחו אמה על הירך. בהריון או בלחץ דם לא מאוזן בחרו פסיעה קצרה, תמיכה גבוהה, ללא סיבוב עמוק וללא לחץ על הבטן; עלו לאט. צאו בדחיפת הרגל האחורית. אין כאן ייעוץ רפואי.', en: 'Keep the front knee tracking with the toes, not collapsing inward. For knee or hip concerns, shorten the stance and use the forearm-on-thigh version. During pregnancy or with uncontrolled blood pressure, use a shorter stance and high support, avoid deep rotation and belly compression, and rise slowly. Come up by pressing through the back leg. This is not medical advice.', ru: 'Следите, чтобы переднее колено шло по направлению пальцев и не заваливалось внутрь. При проблемах с коленом или тазобедренным суставом сократите стойку и опирайтесь предплечьем на бедро. При беременности или неконтролируемом давлении используйте короткую стойку и высокую опору, избегайте глубокого поворота и сдавливания живота, поднимайтесь медленно. Выходите, отталкиваясь задней ногой. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'פסיעה קצרה וכיפוף מתון; האמה על הירך הקדמית, היד העליונה במותן וקיר מאחור לפי הצורך.', en: 'Short stance and shallow bend; forearm on the front thigh, top hand on the hip.', ru: 'Короткая стойка и неглубокий сгиб; предплечье на переднем бедре, верхняя рука на тазу.', props: [{ type: 'wall' }] },
+      { he: 'היד התחתונה על בלוק מחוץ לכף הרגל הקדמית, והיד העליונה מתארכת מעבר לאוזן כשהחזה נפתח.', en: 'Lower hand on a block outside the front foot; top arm reaches past the ear.', ru: 'Нижняя рука на блоке снаружи передней стопы; верхняя рука вытянута за ухо.', props: [{ type: 'block', arms: ['R'], h: 22 }] },
+      { he: 'קצות האצבעות או כף היד לרצפה מחוץ לכף הרגל, והיד העליונה ממשיכה קו ארוך עם הרגל האחורית.', en: 'Fingertips or palm to the floor outside the foot, with one long line through the top arm and back leg.', ru: 'Пальцы или ладонь на полу снаружи стопы; верхняя рука и задняя нога образуют длинную линию.' },
+    ],
+  },
+  {
     id: 'wide-legged-fold', sa: 'Prasarita Padottanasana', en: 'Wide-legged forward fold', he: 'כפיפה קדימה בפיסוק רחב', ru: 'Наклон вперёд с широко расставленными ногами', cat: 'forward fold', sec: 'stand', flow: 44, d: 2, hold: 30, sides: 'single', tags: ['flex', 'relax', 'noback'],
     cue: {
       he: ['פתחו את כפות הרגליים בערך לאורך רגל, מקבילות זו לזו.', 'רככו את הברכיים והטו את האגן קדימה, כשהחזה מתארך הרחק ממנו.', 'הניחו ידיים על הירכיים, השוקיים, בלוקים או הרצפה — לפי גובה שמאפשר גב ארוך.', 'חלקו משקל על כל כף הרגל, נשמו ברצף ואל תרדפו אחרי הרצפה.'],

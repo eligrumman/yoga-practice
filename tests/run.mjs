@@ -114,6 +114,7 @@ for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   const ids = generatePlan({ minutes: m, focus: f, level: l }).items.map((i) => i.pose);
   ok(!ids.includes('crow'), `crow safety gate: excluded from generated ${m}/${f}/${l}`);
   if (l === 'beginner' || f !== 'flexibility') ok(!ids.includes('pigeon'), `pigeon gate: only gentle-intermediate flexibility plans ${m}/${f}/${l}`);
+  if (l === 'beginner' || f !== 'general') ok(!ids.includes('extended-side-angle'), `extended-side-angle gate: only gentle-intermediate general plans ${m}/${f}/${l}`);
   if (l === 'beginner' || !['general', 'flexibility'].includes(f)) ok(!ids.includes('wide-legged-fold'), `wide-legged fold gate: gentle general/flexibility only ${m}/${f}/${l}`);
 }
 ok(!ALL_PRESETS.some((p) => p.items.some((i) => i.pose === 'crow')), 'crow safety gate: excluded from presets and 7-day starter path');
@@ -124,7 +125,11 @@ for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   if (ids.includes('triangle')) {
     const tri = ids.indexOf('triangle');
     ok(ids.slice(0, tri).includes('warrior-2'), `triangle follows warrior-2 in ${m}/${l}`);
-    ok(ids[tri + 1] === 'half-lift', `triangle has immediate half-lift counterpose in ${m}/${l}`);
+    ok(ids[tri + 1] === 'half-lift' || (ids[tri + 1] === 'extended-side-angle' && ids[tri + 2] === 'half-lift'), `triangle flows to half-lift, optionally through extended-side-angle, in ${m}/${l}`);
+  }
+  if (ids.includes('extended-side-angle')) {
+    const ext = ids.indexOf('extended-side-angle');
+    ok(ids.indexOf('warrior-2') >= 0 && ids.indexOf('triangle') > ids.indexOf('warrior-2') && ext > ids.indexOf('triangle'), `extended-side-angle follows warrior-2 and triangle in ${m}/${l}`);
   }
 }
 ok(generatePlan({ minutes: 30, focus: 'general', level: 'beginner' }).items.some((i) => i.pose === 'triangle'), 'triangle may enter beginner general plans');
@@ -140,7 +145,7 @@ for (const f of FOCUSES) {
     const [lo, hi] = BEG_ITEMS[m];
     ok(g.items.length >= lo && g.items.length <= hi, `beginner ${m} min ${f}: ${g.items.length} items, expected ${lo}-${hi}`);
     ok(g.items.every((i) => POSE_BY_ID[i.pose].difficulty === 1 || BEG_OK.has(i.pose) || i.pose === 'cat-cow'), `beginner ${m}/${f} only easy poses`);
-    ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat', 'crow', 'pigeon'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
+    ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat', 'crow', 'pigeon', 'extended-side-angle'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
     ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
     const nStand = g.items.filter((i) => POSE_BY_ID[i.pose].section === 'stand').length;
     ok(nStand >= 2 && nStand <= (m === 30 ? 5 : 4) + (f === 'strength' ? 1 : 0), `beginner ${m}/${f} has ${nStand} standing poses (2-4, up to 5 at 30 min)`);
@@ -245,14 +250,16 @@ ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only
 ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
 
 // ---- two-sided poses and sides label
-const BOTH = ['warrior-1', 'warrior-2', 'triangle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe'];
+const BOTH = ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe'];
 const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
-ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 15 two-sided poses (got ${gotBoth.join(',')})`);
+ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 16 two-sided poses (got ${gotBoth.join(',')})`);
 for (const l of LANGS) {
   const p = POSE_BY_ID.triangle;
   ok(p[l] && p.cues[l].length === 4 && p.safety[l] && p.variations.every((v) => v[l]), `triangle i18n ${l}`);
   const w = POSE_BY_ID['wide-legged-fold'];
   ok(w[l] && w.cues[l].length === 4 && w.safety[l] && w.variations.every((v) => v[l]), `wide-legged-fold i18n ${l}`);
+  const e = POSE_BY_ID['extended-side-angle'];
+  ok(e[l] && e.cues[l].length === 4 && e.safety[l] && e.variations.every((v) => v[l]), `extended-side-angle i18n ${l}`);
 }
 ok(Math.abs(POSE_BY_ID.mountain.spec.start.pelvis.rot[2]) < 1 && POSE_BY_ID.mountain.spec.start.hipR[2] === 0, 'mountain starts from a neutral stand');
 for (const l of LANGS) ok(tr('sides', l, 'single') === '' && tr('sides', l, 'both').length > 0, `sides label ${l}: none for single, text for both`);
@@ -370,7 +377,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 495, `495 v2 segments including wide-legged-fold (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 507, `507 v2 segments including extended-side-angle (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -379,9 +386,9 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle)\./.test(s.id);
   ok(JSON.stringify(SEGS_NOW.filter((s) => !newPoseSegment(s))) === JSON.stringify(legacy), 'pre-existing ru/en/he legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 24, 'legacy narration adds only the 24 required crow/pigeon/triangle/wide-legged-fold segments');
+  ok(SEGS_NOW.length === legacy.length + 30, 'legacy narration adds only the 30 required new-pose segments');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
@@ -494,8 +501,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 495 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 495 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 257 * 3, 'narration-script.json has 257 legacy entries in each language');
+  ok(v2s.length === 507 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 507 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 263 * 3, 'narration-script.json has 263 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');
