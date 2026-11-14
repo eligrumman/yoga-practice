@@ -318,7 +318,9 @@ export class Renderer2D {
       if (p.type === 'block') {
         for (const b of blockBoxes([p], S, e)) box(this.back, b.c, b.size, 'prop-block');
       } else if (p.type === 'cushion') {
-        const pl = p.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = (p.h || 12) * Math.min(1, e * 1.4);
+        const pl = p.at === 'front' ? [S.bounds.maxX + 20, 0, 0]
+          : p.at === 'knees' ? S.J.kneeR.map((v, i) => (v + S.J.kneeL[i]) / 2)
+            : S.J.pelvis, h = (p.h || 12) * Math.min(1, e * 1.4);
         box(this.back, [pl[0] - 2, h / 2, pl[2]], [(p.w || 56), h, 36], 'prop-cushion');
       } else if (p.type === 'wall') {
         const b = S.bounds;

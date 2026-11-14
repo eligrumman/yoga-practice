@@ -45,7 +45,7 @@
         "kneeL": [0, 0, 105],
         "ankleL": [0, 0, 0]
       },
-      "props": []
+      "props": [{"type":"cushion","at":"knees","h":14,"w":54}]
     },
     {
       "level": 1,

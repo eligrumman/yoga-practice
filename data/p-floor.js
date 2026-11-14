@@ -34,7 +34,7 @@ export default [
     id: 'cobra', sa: 'Bhujangasana', en: 'Cobra', he: 'קוברה', ru: 'Кобра', cat: 'backbend', sec: 'floor', flow: 30, d: 1, hold: 20, sides: 'single',
     tags: ['back', 'flex', 'strength'],
     cue: {
-      he: ['שכבו על הבטן, כפות ידיים מתחת לכתפיים.', 'בשאיפה הרימו את החזה בעדינות.', 'המרפקים קרובים לגוף, הכתפיים רחוקות מהאוזניים.', 'הרגליים נשארות על הרצפה.'],
+      he: ['שכבו על הבטן והניחו אמות או כפות ידיים מתחת לכתפיים, לפי הרמה.', 'בשאיפה הרימו את החזה בעדינות.', 'המרפקים קרובים לגוף, הכתפיים רחוקות מהאוזניים.', 'הרגליים נשארות על הרצפה.'],
       en: ['Lie on your belly with palms under the shoulders.', 'Inhale and lift the chest gently.', 'Keep the elbows close and shoulders away from the ears.', 'Legs stay on the floor.'],
       ru: ['Лягте на живот, ладони под плечами.', 'На вдохе мягко приподнимите грудь.', 'Локти прижаты к бокам, плечи подальше от ушей.', 'Ноги остаются на полу.'],
     },
@@ -49,7 +49,7 @@ export default [
     id: 'locust', sa: 'Salabhasana', en: 'Locust', he: 'ארבה', ru: 'Саранча', cat: 'backbend', sec: 'floor', flow: 40, d: 2, hold: 15, sides: 'single',
     tags: ['back', 'strength'],
     cue: {
-      he: ['שכבו על הבטן וידיים לצדי הגוף.', 'הרימו חזה ורגליים יחד, מבלי להרים את הצוואר.', 'הארכו את הגוף מהראש ועד העקבים.', 'נשמו רגוע, ואז הורידו לאט.'],
+      he: ['שכבו על הבטן וידיים לצדי הגוף.', 'הרימו את החזה, ואת הרגליים לפי הרמה; שמרו את הצוואר ארוך.', 'הארכו את הגוף מהראש ועד העקבים.', 'נשמו רגוע, ואז הורידו לאט.'],
       en: ['Lie on your belly with arms by your sides.', 'Lift chest and legs together without cranking the neck.', 'Lengthen from the head to the heels.', 'Breathe calmly, then lower slowly.'],
       ru: ['Лягте на живот, руки вдоль тела.', 'Поднимите грудь и ноги вместе, не запрокидывая шею.', 'Вытягивайтесь от макушки до пяток.', 'Дышите спокойно, затем медленно опуститесь.'],
     },
@@ -64,7 +64,7 @@ export default [
     id: 'camel', sa: 'Ustrasana', en: 'Camel', he: 'גמל', ru: 'Верблюд', cat: 'backbend', sec: 'floor', flow: 50, d: 3, hold: 15, sides: 'single',
     tags: ['flex', 'noback'],
     cue: {
-      he: ['כרעו על הברכיים, ירכיים מעל הברכיים.', 'כפות הידיים על הגב התחתון, אצבעות כלפי מטה.', 'הרימו את החזה והרחיבו אותו לתקרה.', 'הניחו לראש ולצוואר להישאר נוחים.'],
+      he: ['כרעו על הברכיים, ירכיים מעל הברכיים.', 'הניחו ידיים על הגב התחתון או על העקבים, לפי הרמה.', 'הרימו את החזה והרחיבו אותו לתקרה.', 'שמרו את הראש ניטרלי ואת העורף ארוך.'],
       en: ['Kneel with the hips over the knees.', 'Place the hands on your lower back, fingers down.', 'Lift the chest and open it toward the ceiling.', 'Keep the head and neck comfortable.'],
       ru: ['Встаньте на колени, бёдра над коленями.', 'Положите руки на поясницу, пальцы вниз.', 'Поднимите грудь и раскройте её к потолку.', 'Голова и шея остаются в удобном положении.'],
     },
@@ -94,13 +94,13 @@ export default [
     id: 'child', sa: 'Balasana', en: "Child's pose", he: 'תנוחת הילד', ru: 'Поза ребёнка', cat: 'floor/seated', sec: 'cool', flow: 10, d: 1, hold: 40, sides: 'single',
     tags: ['relax', 'back', 'flex'],
     cue: {
-      he: ['שבו על העקבים והניחו את החזה על הירכיים.', 'הושיטו ידיים קדימה והניחו אותן על הרצפה.', 'הרפו את הכתפיים והמצח לרצפה.', 'נשמו אל הגב התחתון.'],
+      he: ['שבו על העקבים והניחו את החזה על הירכיים.', 'הניחו את הידיים לצד הגוף או הושיטו אותן קדימה, לפי הרמה.', 'הרפו את הכתפיים והמצח לרצפה.', 'נשמו אל הגב התחתון.'],
       en: ['Sit back on your heels and rest the chest on the thighs.', 'Reach the arms forward and rest them on the floor.', 'Let the shoulders and forehead soften.', 'Breathe into your lower back.'],
       ru: ['Сядьте на пятки и положите грудь на бёдра.', 'Вытяните руки вперёд и положите их на пол.', 'Расслабьте плечи и лоб.', 'Дышите в поясницу.'],
     },
     safe: { he: 'כאבי ברכיים: פתחו את הברכיים, הניחו כרית או שמיכה מתחת לאגן, או בחרו תנוחת מנוחה אחרת. בהריון: פתחו את הברכיים רחב כך שהבטן לא נלחצת, או דלגו ונוחו על הצד; התייעצו עם איש מקצוע רפואי.', en: 'Knee pain: open the knees, raise the hips on a cushion or blanket, or choose another rest pose. Pregnancy: open the knees wide so the belly is not pressed, or skip it and rest on your side, and ask your clinician.', ru: 'При боли в коленях раздвиньте колени, подложите подушку или одеяло под таз либо выберите другую позу отдыха. При беременности раздвиньте колени широко, чтобы не давить на живот, или пропустите позу и отдохните на боку, и спросите врача.' },
     v: [
-      { he: 'אגן גבוה יותר, ידיים לצד הגוף.', en: 'Hips higher, hands by your sides.', ru: 'Таз выше, руки вдоль тела.' },
+      { he: 'אגן גבוה יותר, ידיים לצד הגוף; כרית או שמיכה מתחת לאגן לפי הצורך.', en: 'Hips higher, hands by your sides.', ru: 'Таз выше, руки вдоль тела.', props: [{ type: 'cushion', h: 10 }] },
       { he: 'ידיים קדימה והמצח למטה.', en: 'Arms forward, forehead down.', ru: 'Руки вперёд, лоб вниз.' },
       { he: 'אגן נמוך על העקבים, ידיים רחוקות קדימה.', en: 'Hips low on the heels, arms far forward.', ru: 'Таз низко на пятках, руки далеко вперёд.' },
     ],
@@ -109,7 +109,7 @@ export default [
     id: 'low-lunge', sa: 'Anjaneyasana', en: 'Low lunge', he: 'מצעד נמוך', ru: 'Низкий выпад', cat: 'hip opener', sec: 'floor', flow: 70, d: 1, hold: 25, sides: 'both',
     tags: ['flex', 'strength'],
     cue: {
-      he: ['מעמד שולחן, צעדו עם רגל אחת קדימה בין הידיים.', 'הברך האחורית על הרצפה, הברך הקדמית מעל הקרסול.', 'הרימו את הגוף ואת הידיים כלפי מעלה.', 'העבירו מעט משקל קדימה, האריכו את עצם הזנב ונשמו.'],
+      he: ['מעמד שולחן, צעדו עם רגל אחת קדימה בין הידיים.', 'הברך האחורית על הרצפה, הברך הקדמית מעל הקרסול.', 'הניחו ידיים על תמיכה או הרימו אותן, לפי הרמה.', 'העבירו מעט משקל קדימה, האריכו את עצם הזנב ונשמו.'],
       en: ['From tabletop, step one foot forward between the hands.', 'Back knee on the floor, front knee over the ankle.', 'Lift the torso and raise the arms.', 'Shift a little weight forward, lengthen the tailbone down, and breathe.'],
       ru: ['Из позы стола поставьте одну стопу вперёд между руками.', 'Заднее колено на полу, переднее над лодыжкой.', 'Поднимите корпус и руки вверх.', 'Слегка перенесите вес вперёд, направьте копчик вниз и дышите.'],
     },
@@ -188,7 +188,7 @@ export default [
       en: ['Sit with one leg straight and one bent, foot on the floor.', 'Inhale to lengthen the spine.', 'Exhale and turn the chest toward the raised knee.', 'The turn comes from the chest. Gaze softly over the shoulder.'],
       ru: ['Сядьте: одна нога прямая, другая согнута, стопа на полу.', 'На вдохе вытяните позвоночник.', 'На выдохе поверните грудь к поднятому колену.', 'Поворот идёт от груди. Мягко смотрите через плечо.'],
     },
-    safe: { he: 'פיצול דיסק או בעיות בגב: סובבו מעט בלבד ואל תכפו. בהריון: בחרו סיבוב פתוח, בלי ללחוץ על הבטן; התייעצו עם איש מקצוע רפואי.', en: 'Disc issues or back problems: twist only a little. Never force it. Pregnancy: choose an open twist with no pressure on the belly, and ask your clinician.', ru: 'При проблемах с дисками или спиной скручивайтесь совсем немного. Не форсируйте. При беременности выберите открытое скручивание без давления на живот и спросите врача.' },
+    safe: { he: 'בעיות בדיסק או כאב גב: סובבו בטווח קטן וללא מאמץ. בהריון: בחרו סיבוב פתוח, בלי ללחוץ על הבטן; התייעצו עם איש מקצוע רפואי.', en: 'Disc issues or back problems: twist only a little. Never force it. Pregnancy: choose an open twist with no pressure on the belly, and ask your clinician.', ru: 'При проблемах с дисками или спиной скручивайтесь совсем немного. Не форсируйте. При беременности выберите открытое скручивание без давления на живот и спросите врача.' },
     v: [
       { he: 'שתי רגליים ישרות, סיבוב קל.', en: 'Both legs straight, gentle twist.', ru: 'Обе ноги прямые, лёгкое скручивание.' },
       { he: 'ברך מורמת, יד סביב הברך.', en: 'Knee raised, arm around the knee.', ru: 'Колено поднято, рука обхватывает колено.' },

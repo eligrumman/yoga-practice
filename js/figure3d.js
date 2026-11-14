@@ -418,7 +418,9 @@ export class Renderer3D {
         const b = blockBox(S.J[(o.joint || 'wrist') + o.k], Math.max(0.01, o.h * ke));
         o.obj.position.set(...b.c); o.obj.scale.set(...b.size);
       } else if (o.type === 'cushion') {
-        const pl = o.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = Math.max(0.01, o.h * ke);
+        const pl = o.at === 'front' ? [S.bounds.maxX + 20, 0, 0]
+          : o.at === 'knees' ? S.J.kneeR.map((v, i) => (v + S.J.kneeL[i]) / 2)
+            : S.J.pelvis, h = Math.max(0.01, o.h * ke);
         o.obj.position.set(pl[0] - 2, h / 2, pl[2]); o.obj.scale.set(o.w, h, 36);
       } else if (o.type === 'wall') {
         o.obj.position.set(S.bounds.maxX + 8, 107.5, 0);

@@ -462,7 +462,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
   const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
-  ok(JSON.stringify(SEGS_NOW.filter((s) => !newPoseSegment(s))) === JSON.stringify(legacy), 'pre-existing ru/en/he legacy SEGMENTS identical to the snapshot');
+  const legacyRuEn = (xs) => xs.filter((s) => !newPoseSegment(s)).map(({ id, ru, en }) => ({ id, ru, en }));
+  ok(JSON.stringify(legacyRuEn(SEGS_NOW)) === JSON.stringify(legacyRuEn(legacy)), 'pre-existing ru/en legacy SEGMENTS identical to the snapshot');
   ok(SEGS_NOW.length === legacy.length + 48, 'legacy narration adds only the 48 required new-pose segments');
 
   // setting migration + defaults

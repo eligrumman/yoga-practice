@@ -157,7 +157,7 @@ export class Player {
     const { lines, notes } = transcriptFor({ lang: this.nlang, pose: s.pose, lvl: s.level, side: s.side, sides: s.sides });
     this.elLines.innerHTML = ''; this.lineEls = new Map(); this.onEl = null;
     for (const l of lines) {
-      const li = el('li', { class: 'tx tx-' + l.kind, 'data-id': l.id }, l.kind === 'fix' ? el('span', { class: 'tx-tag' }, tr('mistake', this.nlang)) : null, l.text);
+      const li = el('li', { class: 'tx tx-' + l.kind, 'data-id': l.id }, l.kind === 'fix' ? el('span', { class: 'tx-tag' }, tr('mistake', this.nlang)) : null, l.kind === 'fix' ? ' ' : null, l.text);
       this.lineEls.set(l.id, li); this.elLines.append(li);
     }
     for (const n of notes) this.elLines.append(el('li', { class: 'tx-note tx-' + n.kind }, el('strong', {}, tr(n.kind, this.nlang) + ': '), n.text));

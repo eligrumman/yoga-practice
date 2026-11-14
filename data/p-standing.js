@@ -34,7 +34,7 @@ export default [
     id: 'warrior-1', sa: 'Virabhadrasana I', en: 'Warrior I', he: 'לוחם 1', ru: 'Воин один', cat: 'standing', sec: 'stand', flow: 30, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {
-      he: ['צעדו צעד נוח, הברך הקדמית מעל הקרסול.', 'הרגל האחורית ישרה ועקב לחוץ לרצפה.', 'הרימו את הידיים והארכו את הגוף.', 'האגן פונה בערך קדימה, בלי לכפות. נשימה רגועה.'],
+      he: ['צעדו צעד נוח, הברך הקדמית מעל הקרסול.', 'הרגל האחורית ישרה; מקמו את העקב לפי הרמה.', 'הרימו את הידיים והארכו את הגוף.', 'האגן פונה בערך קדימה, בלי לכפות. נשימה רגועה.'],
       en: ['Step wide with the front knee over the ankle.', 'Keep the back leg straight and the heel pressing down.', 'Raise the arms and lengthen the body.', 'Square the hips forward and breathe calmly.'],
       ru: ['Сделайте широкий шаг, передняя нога согнута, колено над лодыжкой.', 'Задняя нога прямая, пятка прижата к полу.', 'Поднимите руки и вытяните корпус.', 'Таз направьте вперёд и дышите ровно.'],
     },
@@ -98,7 +98,7 @@ export default [
     id: 'extended-side-angle', sa: 'Utthita Parsvakonasana', en: 'Extended side angle', he: 'זווית צידית מוארכת', ru: 'Уттхита Паршваконасана', cat: 'standing', sec: 'stand', flow: 43, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {
-      he: ['מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו את האמה בעדינות על הירך.', 'האריכו את הצד העליון של הגוף; היד העליונה יכולה להישאר במותן או להתארך מעבר לאוזן.', 'דחפו דרך כף הרגל האחורית וסובבו את החזה מעט כלפי מעלה, בלי ללחוץ על הבטן.', 'השאירו את הצוואר בהמשך לעמוד השדרה והביטו קדימה אם מבט למעלה מכביד.'],
+      he: ['מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו אמה על הירך או יד על התמיכה, לפי הרמה.', 'האריכו את הצד העליון של הגוף; היד העליונה יכולה להישאר במותן או להתארך מעבר לאוזן.', 'דחפו דרך כף הרגל האחורית וסובבו את החזה מעט כלפי מעלה, בלי ללחוץ על הבטן.', 'השאירו את הצוואר בהמשך לעמוד השדרה והביטו קדימה אם מבט למעלה מכביד.'],
       en: ['From Warrior II, keep the front knee over the ankle and rest the forearm lightly on the thigh.', 'Lengthen the upper side of the body, with the top hand on the hip or reaching past the ear.', 'Press through the back foot and turn the chest open without compressing the belly.', 'Keep the neck neutral and look forward if looking up strains it.'],
       ru: ['Из Воина два держите переднее колено над лодыжкой и легко опустите предплечье на бедро.', 'Удлините верхний бок корпуса; верхняя рука на тазу или вытянута за ухо.', 'Давите задней стопой в пол и мягко раскрывайте грудную клетку, не сдавливая живот.', 'Держите шею нейтрально и смотрите вперёд, если взгляд вверх создаёт напряжение.'],
     },

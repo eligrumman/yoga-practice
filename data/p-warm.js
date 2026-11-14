@@ -4,13 +4,13 @@ export default [
     id: 'tabletop', sa: 'Bharmanasana', en: 'Tabletop', he: 'שולחן', cat: 'warm-up', sec: 'warm', flow: 10, d: 1, hold: 30, sides: 'single',
     ru: 'Стол', tags: ['relax', 'back', 'flex'],
     cue: {
-      he: ['ידיים מתחת לכתפיים, ברכיים מתחת לירכיים.', 'גב ארוך ונייטרלי, מבט אל הרצפה.', 'לחצו בעדינות את כף היד אל הרצפה.', 'נשמו לאט אל הבטן.'],
+      he: ['ידיים או אמות מתחת לכתפיים, לפי הרמה; ברכיים מתחת לאגן.', 'גב ארוך ונייטרלי, מבט אל הרצפה.', 'לחצו בעדינות דרך בסיס התמיכה.', 'נשמו לאט אל הבטן.'],
       en: ['Hands under shoulders, knees under hips.', 'Keep a long, neutral spine and look at the floor.', 'Press your palms gently into the floor.', 'Breathe slowly into your belly.'],
       ru: ['Ладони под плечами, колени под бёдрами.', 'Держите спину длинной и ровной, смотрите в пол.', 'Мягко надавите ладонями на пол.', 'Дышите медленно, животом.'],
     },
     safe: { he: 'כאבי פרקי כף יד או ברך: הניחו שמיכה מתחת לברכיים או רדו לאמות.', en: 'Wrist or knee pain: pad your knees with a blanket or lower onto forearms.', ru: 'Если болят запястья или колени, подложите одеяло под колени или опуститесь на предплечья.' },
     v: [
-      { he: 'על האמות: מקלה על פרקי כף היד.', en: 'On forearms: easier on the wrists.', ru: 'На предплечьях: так легче запястьям.' },
+      { he: 'על האמות: מקלה על פרקי כף היד; שמיכה מתחת לברכיים לפי הצורך.', en: 'On forearms: easier on the wrists.', ru: 'На предплечьях: так легче запястьям.', props: [{ type: 'cushion', at: 'knees', h: 6, w: 72 }] },
       { he: 'שולחן יציב על כפות הידיים.', en: 'Steady tabletop on your palms.', ru: 'Устойчивый стол на ладонях.' },
       { he: 'הושיטו יד אחת קדימה ורגל נגדית אחורה, האגן ישר, וחזרו לשולחן בשליטה.', en: 'Reach one arm forward and the opposite leg back, keep the pelvis level, then return to tabletop with control.', ru: 'Вытяните одну руку вперёд, а противоположную ногу назад, удерживайте таз ровно и плавно вернитесь в положение стола.' },
     ],

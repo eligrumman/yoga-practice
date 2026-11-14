@@ -4,7 +4,7 @@ export default [
     id: 'knees-to-chest', sa: 'Apanasana', en: 'Knees to chest', he: 'ברכיים לחזה', ru: 'Колени к груди', cat: 'supine', sec: 'cool', flow: 60, d: 1, hold: 30, sides: 'single',
     tags: ['back', 'relax', 'flex'],
     cue: {
-      he: ['שכבו על הגב וקרבו את שתי הברכיים לחזה.', 'חבקו את הברכיים או את השוקיים.', 'הרפו את הכתפיים והראש לרצפה.', 'נשמו עמוק, ואפשר להתנדנד קלות.'],
+      he: ['שכבו על הגב וקרבו ברך אחת או שתיים לחזה, לפי הרמה.', 'חבקו את הברכיים או את השוקיים.', 'השאירו ראש וכתפיים על הרצפה, אלא אם הרמה מזמינה הרמה עדינה.', 'נשמו עמוק, ואפשר להתנדנד קלות.'],
       en: ['Lie on your back and draw both knees toward the chest.', 'Hug the knees or the shins.', 'Let the shoulders and head rest on the floor.', 'Breathe deeply; a gentle rock is fine.'],
       ru: ['Лягте на спину и подтяните оба колена к груди.', 'Обхватите колени или голени руками.', 'Пусть плечи и голова лежат на полу.', 'Дышите глубоко, можно слегка покачаться.'],
     },
@@ -19,13 +19,13 @@ export default [
     id: 'supine-twist', sa: 'Supta Matsyendrasana', en: 'Reclined twist', he: 'סיבוב בשכיבה', ru: 'Скручивание лёжа', cat: 'twist', sec: 'cool', flow: 70, d: 1, hold: 35, sides: 'both',
     tags: ['back', 'relax', 'flex'],
     cue: {
-      he: ['שכבו על הגב, ברכיים כפופות.', 'הורידו את שתי הברכיים לצד אחד.', 'פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה.', 'הפנו את המבט לצד ההפוך ונשמו.'],
+      he: ['שכבו על הגב; כופפו ברך אחת או שתיים, לפי הרמה.', 'העבירו את הברך או הברכיים לצד אחד.', 'פתחו יד אחת או שתיים לצדדים, לפי הרמה, והשאירו את הכתפיים כבדות.', 'הפנו את המבט לצד ההפוך ונשמו.'],
       en: ['Lie on your back with the knees bent.', 'Lower both knees to one side.', 'Open the arms wide and keep the shoulders on the floor.', 'Turn your gaze the other way and breathe.'],
       ru: ['Лягте на спину, колени согнуты.', 'Опустите оба колена в одну сторону.', 'Раскройте руки в стороны, плечи остаются на полу.', 'Поверните голову в другую сторону и дышите.'],
     },
     safe: { he: 'כאבי גב תחתון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות. בהריון: דלגו ברגע שהשכיבה על הגב לא נוחה, ובחרו סיבוב פתוח בישיבה או שכיבה על הצד; התייעצו עם איש מקצוע רפואי.', en: 'Lower back pain: place a cushion under the knees and go only as far as comfortable. Pregnancy: skip it as soon as lying on the back is uncomfortable, choose an open seated twist or lie on your side, and ask your clinician.', ru: 'При боли в пояснице подложите подушку под колени и опускайте их лишь до комфортного уровня. При беременности пропустите позу, как только лежать на спине становится неудобно, выберите открытое скручивание сидя или лягте на бок и спросите врача.' },
     v: [
-      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.' },
+      { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.', props: [{ type: 'cushion', at: 'knees', h: 14, w: 54 }] },
       { he: 'שתי ברכיים לצד.', en: 'Both knees to the side.', ru: 'Оба колена в сторону.' },
       { he: 'רגל אחת ישרה, יד אוחזת בברך.', en: 'One leg straight, hand on the bent knee.', ru: 'Одна нога прямая, рука на согнутом колене.' },
     ],
@@ -34,7 +34,7 @@ export default [
     id: 'happy-baby', sa: 'Ananda Balasana', en: 'Happy baby', he: 'תינוק שמח', ru: 'Счастливый малыш', cat: 'hip opener', sec: 'cool', flow: 80, d: 2, hold: 30, sides: 'single',
     tags: ['flex', 'relax', 'back'],
     cue: {
-      he: ['שכבו על הגב והרימו את הברכיים לכיוון בתי השחי.', 'אחזו בחלק החיצוני של כפות הרגליים.', 'הניחו לאגן ולגב התחתון להישאר ברצפה.', 'נדנדו מעט מצד לצד אם נעים.'],
+      he: ['שכבו על הגב והרימו את הברכיים לכיוון בתי השחי.', 'אחזו בשוקיים או בחלק החיצוני של כפות הרגליים, לפי הרמה.', 'הניחו לאגן ולגב התחתון להישאר ברצפה.', 'נדנדו מעט מצד לצד אם נעים.'],
       en: ['Lie on your back and draw the knees toward the armpits.', 'Hold the outer edges of your feet.', 'Keep the pelvis and lower back resting on the floor.', 'Rock gently side to side if it feels good.'],
       ru: ['Лягте на спину и подтяните колени к подмышкам.', 'Возьмитесь за внешние края стоп.', 'Таз и поясница остаются на полу.', 'Если приятно, слегка покачайтесь из стороны в сторону.'],
     },
@@ -49,7 +49,7 @@ export default [
     id: 'figure-four', sa: 'Supta Kapotasana', en: 'Reclined figure four', he: 'ארבע שכובה', ru: 'Четвёрка лёжа', cat: 'hip opener', sec: 'cool', flow: 90, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'],
     cue: {
-      he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'משכו את הרגל התומכת לעבר החזה.', 'כופפו את כף הרגל העליונה והניחו לברך לרדת החוצה, בלי ללחוץ עליה.'],
+      he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'השאירו את כף הרגל התומכת ברצפה או אחזו מאחורי הירך ומשכו בעדינות, לפי הרמה.', 'כופפו את כף הרגל העליונה כדי להגן על הברך, בלי ללחוץ עליה.'],
       en: ['Lie on your back with the knees bent.', 'Cross one ankle over the opposite thigh.', 'Draw the supporting leg toward your chest.', 'Gently press the outer knee away and release.'],
       ru: ['Лягте на спину, колени согнуты.', 'Положите одну лодыжку на противоположное бедро.', 'Подтяните нижнюю ногу к груди.', 'Мягко отведите колено верхней ноги от себя и расслабьтесь.'],
     },
@@ -79,7 +79,7 @@ export default [
     id: 'hand-to-toe', sa: 'Supta Padangusthasana', en: 'Reclined hand-to-toe', he: 'יד לבוהן בשכיבה', ru: 'Рука к стопе лёжа', cat: 'supine', sec: 'cool', flow: 50, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'],
     cue: {
-      he: ['שכבו על הגב, הרימו רגל אחת למעלה.', 'השתמשו ברצועה סביב כף הרגל.', 'הרגל השנייה נשארת פעילה על הרצפה.', 'משכו קלות ונשמו, בלי לעגל את הגב.'],
+      he: ['שכבו על הגב, הרימו רגל אחת למעלה.', 'השתמשו ברצועה או אחזו בבוהן, לפי הרמה.', 'הרגל השנייה נשארת פעילה על הרצפה.', 'קרבו את הרגל רק כל עוד הראש, הכתפיים והאגן נשארים על הרצפה.'],
       en: ['Lie on your back and raise one leg.', 'Use a strap around the foot.', 'The other leg stays active on the floor.', 'Pull lightly and breathe; do not round the back.'],
       ru: ['Лягте на спину и поднимите одну ногу.', 'Накиньте ремень на стопу.', 'Другая нога прямая и прижата к полу.', 'Слегка потяните и дышите, не округляя спину.'],
     },
@@ -94,7 +94,7 @@ export default [
     id: 'legs-up-wall', sa: 'Viparita Karani', en: 'Legs up the wall', he: 'רגליים על הקיר', ru: 'Ноги на стене', cat: 'inversion-light', sec: 'cool', flow: 95, d: 1, hold: 60, sides: 'single',
     tags: ['relax', 'back'],
     cue: {
-      he: ['שבו ליד הקיר ושכבו על הגב.', 'הניחו את הרגליים על הקיר, האגן קרוב אליו.', 'הידיים רפויות לצדדים, כפות ידיים כלפי מעלה.', 'עצמו עיניים ונשמו לאט.'],
+      he: ['שבו ליד הקיר ושכבו על הגב.', 'הניחו את כפות הרגליים או את הרגליים על הקיר, לפי הרמה.', 'הניחו ידיים לצד הגוף או מעל הראש, לפי הרמה, בלי להכביד על הכתפיים.', 'עצמו עיניים ונשמו לאט.'],
       en: ['Sit beside a wall and lie back.', 'Rest the legs up the wall with the hips close to it.', 'Let the arms fall loosely to the sides, palms up.', 'Close the eyes and breathe slowly.'],
       ru: ['Сядьте у стены и лягте на спину.', 'Положите ноги на стену, таз близко к ней.', 'Руки свободно в стороны, ладони вверх.', 'Закройте глаза и дышите медленно.'],
     },
