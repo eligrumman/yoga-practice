@@ -20,8 +20,8 @@ export default [
     tags: ['strength'],
     cue: {
       he: ['כפות ידיים מתחת לכתפיים, גוף בקו אחד.', 'כווצו את הבטן ואל תתנו לאגן לצנוח.', 'דחפו את הרצפה והרחיקו את העקבים לאחור.', 'נשמו חלק ורציף. אם קשה, הורידו עומס.'],
-      en: ['Palms under the shoulders, body in one line.', 'Engage the belly and do not let the hips sag.', 'Press the floor away and reach the heels back.', 'Keep your breath short and steady.'],
-      ru: ['Ладони под плечами, тело в одну линию.', 'Напрягите живот и не давайте тазу провисать.', 'Отталкивайтесь от пола и тянитесь пятками назад.', 'Дышите коротко и ровно.'],
+      en: ['Palms under the shoulders, body in one line.', 'Engage the belly and do not let the hips sag.', 'Press the floor away and reach the heels back.', 'Breathe smoothly and continuously. If that is difficult, reduce the load.'],
+      ru: ['Ладони под плечами, тело в одну линию.', 'Напрягите живот и не давайте тазу провисать.', 'Отталкивайтесь от пола и тянитесь пятками назад.', 'Дышите ровно и непрерывно. Если это трудно, уменьшите нагрузку.'],
     },
     safe: { he: 'כאבי פרקי כף יד, כתף או גב תחתון: רדו לברכיים. עצרו אם הגב התחתון צונח.', en: 'Wrist, shoulder or lower-back pain: drop to the knees. Stop if the lower back sags.', ru: 'При боли в запястьях, плечах или пояснице опуститесь на колени. Остановитесь, если поясница проваливается.' },
     v: [
@@ -57,7 +57,7 @@ export default [
     v: [
       { he: 'הרימו רק את החזה.', en: 'Lift only the chest.', ru: 'Поднимите только грудь.' },
       { he: 'חזה ורגליים באוויר.', en: 'Chest and legs lifted.', ru: 'Грудь и ноги приподняты.' },
-      { he: 'ידיים פשוטות קדימה, הרמה גבוהה.', en: 'Arms reaching forward, higher lift.', ru: 'Руки вытянуты вперёд, подъём выше.' },
+      { he: 'ידיים פשוטות קדימה, הרמה גבוהה.', en: 'Arms reach forward; keep the body long and the lift controlled.', ru: 'Руки вытянуты вперёд; сохраняйте длину тела и контролируемый подъём.' },
     ],
   },
   {
@@ -68,11 +68,11 @@ export default [
       en: ['Kneel with the hips over the knees.', 'Place the hands on your lower back, fingers down.', 'Lift the chest and open it toward the ceiling.', 'Keep the head and neck comfortable.'],
       ru: ['Встаньте на колени, бёдра над коленями.', 'Положите руки на поясницу, пальцы вниз.', 'Поднимите грудь и раскройте её к потолку.', 'Голова и шея остаются в удобном положении.'],
     },
-    safe: { he: 'בעיות צוואר, לחץ דם או גב תחתון: שמרו את הסנטר קרוב והישארו ידיים במותניים.', en: 'Neck, blood pressure or lower back issues: tuck the chin and keep hands on the lower back.', ru: 'При проблемах с шеей, давлением или поясницей прижмите подбородок и держите руки на пояснице.' },
+    safe: { he: 'בעיות צוואר, לחץ דם או גב תחתון: שמרו את הסנטר קרוב והישארו ידיים במותניים. בהריון: בחרו קשת קטנה ונתמכת עם הידיים על בלוקים או על האגן, או דלגו; בשאלות אישיות התייעצו עם איש מקצוע רפואי.', en: 'Neck, blood pressure or lower back issues: keep the neck comfortable and the gaze forward, with hands on the lower back. Pregnancy: choose a small, supported arch with hands on blocks or hips, or skip the pose; ask a health professional about individual questions.', ru: 'При проблемах с шеей, давлением или поясницей сохраняйте шею в удобном положении и смотрите вперёд, руки держите на пояснице. При беременности выберите небольшой прогиб с опорой и руками на блоках или тазу либо пропустите позу; с индивидуальными вопросами обратитесь к медицинскому специалисту.' },
     v: [
       { he: 'ידיים במותניים, קשת קטנה.', en: 'Hands on the lower back, small arch.', ru: 'Руки на пояснице, небольшой прогиб.' },
       { he: 'קשת בינונית וידיים לכיוון העקבים.', en: 'Medium arch, hands toward the heels.', ru: 'Средний прогиб, руки тянутся к пяткам.' },
-      { he: 'אגן יציב, חזה מורם, הראש נשאר נייטרלי.', en: 'Deeper arch, gaze back.', ru: 'Прогиб глубже, взгляд назад.' },
+      { he: 'אגן יציב, חזה מורם, הראש נשאר נייטרלי.', en: 'Pelvis steady, chest lifted, head comfortably neutral.', ru: 'Таз устойчив, грудь поднята, шея и голова в удобном нейтральном положении.' },
     ],
   },
   {
@@ -83,7 +83,7 @@ export default [
       en: ['Lie on your back, knees bent, heels near the hips.', 'Press the feet down and lift the hips.', 'Keep the knees hip-width apart.', 'Lower after a few breaths, one vertebra at a time.', 'The head stays on the floor, neck relaxed; do not turn the head.'],
       ru: ['Лягте на спину, колени согнуты, пятки у таза.', 'Надавите стопами на пол и поднимите таз.', 'Колени держите на ширине таза.', 'Через несколько вдохов медленно опуститесь, позвонок за позвонком.', 'Голова остаётся на полу, шея расслаблена; не поворачивайте голову.'],
     },
-    safe: { he: 'הראש נשאר על הרצפה והצוואר רפוי; אל תסובבו את הראש בזמן ההחזקה. צוואר רגיש: הניחו שמיכה מתחת לכתפיים, כשהראש נשאר על הרצפה והצוואר חופשי.', en: 'The head stays on the floor, neck relaxed; do not turn the head while holding. Sensitive neck: place a folded blanket under the shoulders.', ru: 'Голова остаётся на полу, шея расслаблена; не поворачивайте голову во время удержания. Если шея чувствительна, подложите сложенное одеяло под плечи.' },
+    safe: { he: 'הראש נשאר על הרצפה והצוואר רפוי; אל תסובבו את הראש בזמן ההחזקה. צוואר רגיש: הניחו שמיכה מתחת לכתפיים, כשהראש נשאר על הרצפה והצוואר חופשי.', en: 'The head stays on the floor, neck relaxed; do not turn the head while holding. Sensitive neck: place a folded blanket under the shoulders, with the head on the floor and the neck free.', ru: 'Голова остаётся на полу, шея расслаблена; не поворачивайте голову во время удержания. Если шея чувствительна, подложите сложенное одеяло под плечи; голова остаётся на полу, шея свободна.' },
     v: [
       { he: 'הרמה נמוכה של האגן.', en: 'Low lift of the hips.', ru: 'Небольшой подъём таза.' },
       { he: 'גשר יציב עם ידיים ליד הגוף.', en: 'Steady bridge with arms alongside.', ru: 'Устойчивый мост, руки вдоль тела.' },
@@ -110,8 +110,8 @@ export default [
     tags: ['flex', 'strength'],
     cue: {
       he: ['מעמד שולחן, צעדו עם רגל אחת קדימה בין הידיים.', 'הברך האחורית על הרצפה, הברך הקדמית מעל הקרסול.', 'הרימו את הגוף ואת הידיים כלפי מעלה.', 'העבירו מעט משקל קדימה, האריכו את עצם הזנב ונשמו.'],
-      en: ['From tabletop, step one foot forward between the hands.', 'Back knee on the floor, front knee over the ankle.', 'Lift the torso and raise the arms.', 'Sink the hips gently forward and breathe.'],
-      ru: ['Из позы стола поставьте одну стопу вперёд между руками.', 'Заднее колено на полу, переднее над лодыжкой.', 'Поднимите корпус и руки вверх.', 'Мягко опустите таз вниз и вперёд и дышите.'],
+      en: ['From tabletop, step one foot forward between the hands.', 'Back knee on the floor, front knee over the ankle.', 'Lift the torso and raise the arms.', 'Shift a little weight forward, lengthen the tailbone down, and breathe.'],
+      ru: ['Из позы стола поставьте одну стопу вперёд между руками.', 'Заднее колено на полу, переднее над лодыжкой.', 'Поднимите корпус и руки вверх.', 'Слегка перенесите вес вперёд, направьте копчик вниз и дышите.'],
     },
     safe: { he: 'כאבי ברכיים: הניחו שמיכה מתחת לברך האחורית. בעיות איזון: השאירו ידיים על הירך.', en: 'Knee pain: pad the back knee with a blanket. Balance issues: keep hands on the front thigh.', ru: 'При боли в коленях подложите одеяло под заднее колено. Если трудно держать равновесие, оставьте руки на переднем бедре.' },
     v: [

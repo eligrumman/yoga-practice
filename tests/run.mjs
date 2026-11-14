@@ -298,7 +298,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     ok(eye && !/כופפו ברכיים|bend the knees|сгибайте колени/i.test(eye) && /איש מקצוע רפואי|clinician|врач/i.test(eye), `${id} eye/BP line has no bent-knee fix and names a clinician ${l}`);
   }
   // row 3: pregnancy lines in the 9 poses never suggest "stay low"; they point to a clinician
-  const PREG = /הריון|pregnan|беремен/i, LOW = /נמוכים|stay low|низко/i, CLIN = /איש מקצוע רפואי|clinician|врач/i;
+  const PREG = /הריון|pregnan|беремен/i, LOW = /נמוכים|stay low|низко/i, CLIN = /איש מקצוע רפואי|clinician|health professional|врач|медицинскому специалисту/i;
   for (const id of ['cobra', 'locust', 'camel', 'boat', 'seated-twist', 'knees-to-chest', 'supine-twist', 'happy-baby', 'child']) for (const l of LANGS) {
     const lines = POSE_BY_ID[id].safety[l].split(/(?<=[.!])\s+/).filter((x) => PREG.test(x));
     ok(lines.every((x) => !LOW.test(x) && CLIN.test(x)), `${id} pregnancy line: no "stay low", names a clinician ${l}`);
@@ -309,6 +309,25 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   ok(!/קצות האצבעות/.test(JSON.stringify(POSE_BY_ID.mountain.variations.map((v) => v.he)) + POSE_V2.mountain.mod.join('')), 'mountain L2 (he) uses בהונות for rising onto the toes');
   // row 5: plank breath does not teach short breaths
   ok(!/קצר/.test(POSE_BY_ID.plank.cues.he.join(' ') + POSE_V2.plank.breath), 'plank breath cue is not "short breaths"');
+
+  // round 5: translated on-screen safety and level text stays aligned with Hebrew
+  for (const l of ['ru', 'en']) {
+    ok(!/short|shortly|коротк/i.test(POSE_BY_ID.plank.cues[l].at(-1)), `plank breath is continuous ${l}`);
+    ok(!/gaze back|взгляд назад/i.test(JSON.stringify(POSE_BY_ID.camel.variations) + POSE_BY_ID.camel.safety[l]), `camel has no gaze-back instruction ${l}`);
+    ok(!/tuck the chin|прижмите подбородок/i.test(POSE_BY_ID.camel.safety[l]), `camel SAFE does not tuck the chin ${l}`);
+    ok(/pelvis|pelvis level|таз ровно/i.test(POSE_BY_ID.tabletop.variations[2][l]), `tabletop L2 keeps pelvis level ${l}`);
+    ok(/return to tabletop|tabletop with control|вернитесь в положение стола/i.test(POSE_BY_ID.tabletop.variations[2][l]), `tabletop L2 returns with control ${l}`);
+    ok(/head on the floor|head stays on the floor|голова остаётся на полу/i.test(POSE_BY_ID.bridge.safety[l]) && /neck free|шея свободна/i.test(POSE_BY_ID.bridge.safety[l]), `bridge blanket keeps head down and neck free ${l}`);
+    ok(/tailbone down|копчик вниз/i.test(POSE_BY_ID['low-lunge'].cues[l][3]), `low-lunge cue four lengthens tailbone ${l}`);
+    ok(!/higher lift|подъём выше/i.test(POSE_BY_ID.locust.variations[2][l]), `locust L2 does not chase lift height ${l}`);
+  }
+  ok(/palms together at the chest/i.test(POSE_BY_ID['revolved-chair'].cues.en.join(' ')) && /ладони вместе у груди/i.test(POSE_BY_ID['revolved-chair'].cues.ru.join(' ')), 'revolved-chair RU/EN keep palms at chest');
+  ok(/heel no higher than the pelvis/i.test(POSE_BY_ID['warrior-3'].variations[2].en) && /пятка не выше таза/i.test(POSE_BY_ID['warrior-3'].variations[2].ru), 'warrior-3 L2 RU/EN cap heel at pelvis');
+  ok(/rest on your side/i.test(POSE_BY_ID['legs-up-wall'].safety.en) && /отдыхайте на боку/i.test(POSE_BY_ID['legs-up-wall'].safety.ru), 'legs-up-wall RU/EN offer side rest in later pregnancy');
+  ok(/health professional/i.test(POSE_BY_ID['legs-up-wall'].safety.en) && /медицинским специалистом/i.test(POSE_BY_ID['legs-up-wall'].safety.ru), 'legs-up-wall RU/EN direct glaucoma or uncontrolled BP questions to a health professional');
+  for (const [l, preg, clinician] of [['he', /בהריון/, /איש מקצוע רפואי/], ['ru', /беременност/i, /медицинскому специалисту/i], ['en', /pregnancy/i, /health professional/i]]) {
+    ok(preg.test(POSE_BY_ID.camel.safety[l]) && clinician.test(POSE_BY_ID.camel.safety[l]), `camel SAFE has supported pregnancy guidance ${l}`);
+  }
 }
 
 // ================= Narration v2 (Hebrew) =================

@@ -98,7 +98,7 @@ export default [
       en: ['Sit beside a wall and lie back.', 'Rest the legs up the wall with the hips close to it.', 'Let the arms fall loosely to the sides, palms up.', 'Close the eyes and breathe slowly.'],
       ru: ['Сядьте у стены и лягте на спину.', 'Положите ноги на стену, таз близко к ней.', 'Руки свободно в стороны, ладони вверх.', 'Закройте глаза и дышите медленно.'],
     },
-    safe: { he: 'גלאוקומה או לחץ דם לא מאוזן: דלגו או התייעצו עם איש מקצוע רפואי. הריון מתקדם: אם השכיבה על הגב לא נוחה, נוחו על הצד. אם מתרחשת נימול ברגליים, הורידו אותן.', en: 'Glaucoma, very high blood pressure or late pregnancy: skip or raise the legs only slightly. If the legs go numb, lower them.', ru: 'При глаукоме, очень высоком давлении или поздней беременности пропустите позу или поднимайте ноги лишь слегка. Если ноги немеют, опустите их.' },
+    safe: { he: 'גלאוקומה או לחץ דם לא מאוזן: דלגו או התייעצו עם איש מקצוע רפואי. הריון מתקדם: אם השכיבה על הגב לא נוחה, נוחו על הצד. אם מתרחשת נימול ברגליים, הורידו אותן.', en: 'Glaucoma or uncontrolled high blood pressure: skip this pose or ask a health professional. In later pregnancy, rest on your side if lying on your back is uncomfortable. If your legs become numb, lower them.', ru: 'При глаукоме или неконтролируемом высоком давлении пропустите позу или проконсультируйтесь с медицинским специалистом. На позднем сроке беременности, если лежать на спине неудобно, отдыхайте на боку. Если ноги немеют, опустите их.' },
     v: [
       { he: 'ברכיים כפופות על הקיר.', en: 'Knees bent against the wall.', ru: 'Колени согнуты, стопы на стене.', props: [{ type: 'wall' }] },
       { he: 'רגליים ישרות על הקיר.', en: 'Legs straight up the wall.', ru: 'Ноги прямые вдоль стены.', props: [{ type: 'wall' }] },

@@ -102,7 +102,7 @@ export default [
     v: [
       { he: 'ידיים במותניים, רגל נמוכה.', en: 'Hands on hips, leg lower.', ru: 'Руки на поясе, нога ниже.' },
       { he: 'גוף במקביל לרצפה.', en: 'Body parallel to the floor.', ru: 'Тело параллельно полу.' },
-      { he: 'העקב לא גבוה מהאגן, ידיים קדימה לצד האוזניים.', en: 'Leg lifted higher with arms forward.', ru: 'Нога выше, руки вперёд.' },
+      { he: 'העקב לא גבוה מהאגן, ידיים קדימה לצד האוזניים.', en: 'Heel no higher than the pelvis, arms forward beside the ears.', ru: 'Пятка не выше таза, руки вперёд вдоль ушей.' },
     ],
   },
   {
@@ -155,14 +155,14 @@ export default [
     tags: ['strength', 'noback'],
     cue: {
       he: ['מעמידת כיסא, חברו כפות ידיים בחזה וסובבו את החזה הצידה.', 'כפות הידיים נשארות יחד בחזה. אפשר להניח יד אחת על בלוק.', 'הסיבוב בא מהחזה, לא מהצוואר.', 'נשמו ופתחו את הכתפיים.'],
-      en: ['From chair pose, twist the chest to one side.', 'One hand toward the floor, the other toward the ceiling.', 'The turn comes from the chest, not the neck.', 'Breathe and open the shoulders.'],
-      ru: ['Из позы стула разверните грудную клетку в сторону.', 'Одна рука к полу, другая к потолку.', 'Поворот идёт от груди, а не от шеи.', 'Дышите и раскрывайте плечи.'],
+      en: ['From chair pose, bring the palms together at the chest and twist the chest to one side.', 'Keep the palms together at the chest. You may place one hand on a block.', 'The turn comes from the chest, not the neck.', 'Breathe and open the shoulders.'],
+      ru: ['Из позы стула соедините ладони у груди и разверните грудную клетку в сторону.', 'Держите ладони вместе у груди. Можно поставить одну руку на блок.', 'Поворот идёт от груди, а не от шеи.', 'Дышите и раскрывайте плечи.'],
     },
     safe: { he: 'בעיות גב או ברכיים: סיבוב קל עם כפות ידיים בחזה. בהריון הימנעו מסיבוב עמוק.', en: 'Back or knee issues: use a gentle twist with palms at the chest. Pregnancy: avoid deep twists.', ru: 'При проблемах со спиной или коленями скручивайтесь мягко, ладони у груди. При беременности избегайте глубоких скручиваний.' },
     v: [
       { he: 'כיסא רדוד וכפות ידיים בחזה.', en: 'Shallow chair, palms together.', ru: 'Неглубокий стул, ладони вместе.' },
       { he: 'כפות ידיים יחד, המרפק מחוץ לירך.', en: 'Palms together, elbow hooked outside the thigh.', ru: 'Ладони вместе, локоть снаружи бедра.' },
-      { he: 'כיסא עמוק וסיבוב רחב, אפשר יד אחת על בלוק.', en: 'Deeper chair and wider twist.', ru: 'Стул глубже, скручивание шире.' },
+      { he: 'כיסא עמוק וסיבוב רחב, אפשר יד אחת על בלוק.', en: 'Deeper chair and wider twist; one hand may rest on a block.', ru: 'Стул глубже, скручивание шире; одну руку можно поставить на блок.' },
     ],
   },
 ];

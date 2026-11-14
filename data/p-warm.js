@@ -12,7 +12,7 @@ export default [
     v: [
       { he: 'על האמות: מקלה על פרקי כף היד.', en: 'On forearms: easier on the wrists.', ru: 'На предплечьях: так легче запястьям.' },
       { he: 'שולחן יציב על כפות הידיים.', en: 'Steady tabletop on your palms.', ru: 'Устойчивый стол на ладонях.' },
-      { he: 'הושיטו יד אחת קדימה ורגל נגדית אחורה, האגן ישר, וחזרו לשולחן בשליטה.', en: 'Reach one arm forward and the opposite leg back, and hold.', ru: 'Вытяните одну руку вперёд, а противоположную ногу назад, и задержитесь.' },
+      { he: 'הושיטו יד אחת קדימה ורגל נגדית אחורה, האגן ישר, וחזרו לשולחן בשליטה.', en: 'Reach one arm forward and the opposite leg back, keep the pelvis level, then return to tabletop with control.', ru: 'Вытяните одну руку вперёд, а противоположную ногу назад, удерживайте таз ровно и плавно вернитесь в положение стола.' },
     ],
   },
   {

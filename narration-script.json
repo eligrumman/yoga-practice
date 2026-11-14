@@ -1537,12 +1537,12 @@
  {
   "id": "pose.revolved-chair.cue.1",
   "lang": "ru",
-  "text": "Из позы стула разверните грудную клетку в сторону."
+  "text": "Из позы стула соедините ладони у груди и разверните грудную клетку в сторону."
  },
  {
   "id": "pose.revolved-chair.cue.1",
   "lang": "en",
-  "text": "From chair pose, twist the chest to one side."
+  "text": "From chair pose, bring the palms together at the chest and twist the chest to one side."
  },
  {
   "id": "pose.revolved-chair.cue.2",
@@ -1552,12 +1552,12 @@
  {
   "id": "pose.revolved-chair.cue.2",
   "lang": "ru",
-  "text": "Одна рука к полу, другая к потолку."
+  "text": "Держите ладони вместе у груди. Можно поставить одну руку на блок."
  },
  {
   "id": "pose.revolved-chair.cue.2",
   "lang": "en",
-  "text": "One hand toward the floor, the other toward the ceiling."
+  "text": "Keep the palms together at the chest. You may place one hand on a block."
  },
  {
   "id": "pose.revolved-chair.cue.3",
@@ -1762,12 +1762,12 @@
  {
   "id": "pose.plank.cue.4",
   "lang": "ru",
-  "text": "Дышите коротко и ровно."
+  "text": "Дышите ровно и непрерывно. Если это трудно, уменьшите нагрузку."
  },
  {
   "id": "pose.plank.cue.4",
   "lang": "en",
-  "text": "Keep your breath short and steady."
+  "text": "Breathe smoothly and continuously. If that is difficult, reduce the load."
  },
  {
   "id": "pose.cobra.name",
@@ -2317,12 +2317,12 @@
  {
   "id": "pose.low-lunge.cue.4",
   "lang": "ru",
-  "text": "Мягко опустите таз вниз и вперёд и дышите."
+  "text": "Слегка перенесите вес вперёд, направьте копчик вниз и дышите."
  },
  {
   "id": "pose.low-lunge.cue.4",
   "lang": "en",
-  "text": "Sink the hips gently forward and breathe."
+  "text": "Shift a little weight forward, lengthen the tailbone down, and breathe."
  },
  {
   "id": "pose.half-split.name",
