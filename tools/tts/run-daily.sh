@@ -2,6 +2,7 @@
 # Daily resume run (called by launchd com.eli.yoga-tts). Generates narration MP3s, then publishes them
 # (commit + push) so GitHub Pages serves them. Stops itself when everything is generated.
 # Fail-safe: every failure is logged to tools/tts/run.log and the script exits; nothing retries in a loop.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" # launchd has a minimal PATH; ffmpeg lives in /opt/homebrew/bin
 REPO=/Users/user/agents/yoga
 LOG="$REPO/tools/tts/run.log"
 TRAILER='Claude-Session: https://claude.ai/code/session_01PbMySQXABWHaFV21ukrRuT'
