@@ -302,3 +302,20 @@ Astra ran with wrapper `--write --cd <worktree>` (workspace-write + network, ext
 | 8 | warrior-3 L2, tabletop L2, bridge, low-lunge, locust RU/EN | P2 | RU/EN lag behind Hebrew safety wording | OPEN |
 | 9 | high-lunge Hebrew name "מצעד גבוה" | P2 | Means "high march" | OPEN for Owner (name change) |
 | 10 | generated back plan 30 min | P2 | Holds reach 60 s/side; savasana 4:25 | OPEN; Owner question 3 (20 s cobra) not decided |
+
+## Round 5 (part 2) 2026-11-14
+
+| # | Item | Decision |
+|---|---|---|
+| 3-8 | RU/EN safety mismatches (plank, revolved chair, camel, warrior-3, tabletop, bridge, low lunge, locust) | FIXED in ae22460 |
+| 6 | legs-up-wall RU/EN SAFE | FIXED in ae22460 (matches Hebrew) |
+| 7 | camel pregnancy line | FIXED in ae22460 (he/ru/en, shallow supported option or skip) |
+| new | triangle | ADDED e5013c9 (3 levels, 2 sides) |
+| new | wide-legged forward fold | ADDED c609729 (3 levels) |
+| new | extended side angle | ADDED 5ef6e75 (3 levels, 2 sides; camera fixed to az 90 after screenshot review) |
+| new | sun salutation A home version (seq engine, "flow" badge) | ADDED 8115e9c |
+| new | gentle seated flow, warrior flow | ADDED f6d9700 |
+| 9 | "מצעד גבוה" rename | REJECT for now: left for Owner |
+| 10 | back plan 60 s holds / 4:25 savasana / 20 s cobra | OPEN (Owner question 3 undecided) |
+
+Note: Astra's own browser hung all round; figures were verified from my screenshots (review/round5/new/).

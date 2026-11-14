@@ -5,3 +5,4 @@
 2026-11-13 round3 figure fixes: 228999a + c5c72b0 pushed to worktree-yoga-narration-v2 and main (ff); smoke he/ru/en x 375/1280 OK; tests 6799 pass; hands/feet shape (item 15) not done
 2026-11-13 | full-screen player + transcript + procedural music + he fix cues | dc33220 | 7266 tests pass | 74 new he TTS segments (v2 total 449) | live smoke he/ru/en x 375/1280 OK
 2026-11-14 round5 partial: pigeon+crow (2aa8518); Astra usage limit until 06:42; reviews content-only; 10398 tests pass; smoke he/ru/en x 375/1280 OK
+2026-11-14 round5 part2: triangle, wide-legged fold, extended side angle, sun salutation A, gentle flow, warrior flow (f6d9700); 11698 tests pass; smoke he/ru/en x 375/1280 OK
