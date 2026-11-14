@@ -79,6 +79,19 @@ export default async function figureTests(ok) {
     const P = POSES.find((q) => q.id === id);
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
   }
+  // ---- wide-legged fold: beginner/intermediate hands are supported by the block tops, not floating above them
+  const wide = POSES.find((q) => q.id === 'wide-legged-fold');
+  for (const l of [0, 1]) {
+    const F = poseFrames(wide, l), S = solve(F.hold), block = F.props.find((p) => p.type === 'block');
+    const armOffset = (side) => Math.hypot(S.J['shoulder' + side][0] - S.J['wrist' + side][0], S.J['shoulder' + side][2] - S.J['wrist' + side][2]);
+    for (const side of ['R', 'L']) {
+      const hand = lowest(S, 'hand' + side);
+      ok(Math.abs(hand - block.h) <= 0.25, `wide-legged-fold L${l} ${side} palm rests on block (${hand.toFixed(2)} vs ${block.h.toFixed(2)})`);
+      ok(armOffset(side) <= 3 && Math.abs(F.hold['elbow' + side][2]) <= 1, `wide-legged-fold L${l} ${side} arm reaches straight down`);
+      ok(S.hands[side].n[1] < -0.99, `wide-legged-fold L${l} ${side} palm flat on block`);
+    }
+  }
+  ok(wide.spec.levels[0].hold.pelvis.rot[2] < wide.spec.levels[1].hold.pelvis.rot[2] && wide.spec.levels[0].props[0].h > wide.spec.levels[1].props[0].h, 'wide-legged-fold L1 folds deeper onto a lower block than L0');
   // ---- lunges / warriors: front knee over the ankle, front sole flat
   for (const id of ['warrior-1', 'warrior-2', 'extended-side-angle', 'high-lunge', 'low-lunge']) {
     const P = POSES.find((q) => q.id === id);
