@@ -327,3 +327,21 @@ Note: Astra's own browser hung all round; figures were verified from my screensh
 
 ## Round 5 part 5 2026-11-14
 - wide-legged-fold: now a symmetric wide straddle with the torso centred between the legs (b58ab7f); L2 clasp behind the back kept. L0/L1 fold deeper and the rig contact check puts the palms on the blocks (new regression tests), but in the render the hands still look slightly above/behind the blocks: hands-to-blocks still open. Tests 11758/0.
+
+## Round 6 2026-11-14 (Astra browsed the LIVE site itself; chrome-headless-shell wrapper)
+Evidence: review/round6/ (c1b..c5 = per-pose L0/L1/L2 x 2D/3D holds, c6 = flows/plans/player, f3a/f3b = before/after contact sheets). Findings files: review/round6/<chunk>/findings.md.
+Method lesson: the library animation loops enter/hold/leave every 10 s, so "wait 5 s then screenshot" lands in the leave phase and shows half-drawn poses (first c1 run: false "upright kneeling" P1s, discarded). Fix: click the pause button (#pp) first; a level tab click while paused draws the finished hold frame. c1b..c5 used that.
+| P | Item | Status |
+|---|---|---|
+| P1 | numbered Hebrew cues contradict the level text (tabletop, child, legs-up-wall, locust, cobra, warrior-1, low-lunge, camel, supine-twist, happy-baby, knees-to-chest, figure-four, hand-to-toe, extended-side-angle) | FIXED 0c86e0e (level-neutral cues, he only) |
+| P1 | seated-twist safety wording "פיצול דיסק" | FIXED 0c86e0e |
+| P1 | morning-wakeup floor/standing churn; starter-day-3 cold start; desk-break ends on mountain; generator 17-19 poses | FIXED 889951d (generator cap 12, final rest 3/5 min, relax no standing) |
+| P1 | figures vs text: uttanasana L0, half-lift L2, extended-side-angle L0/L1, half-split L2, camel L2, plank L2 | FIXED b239254 |
+| P1 | figures vs text: knees-to-chest, happy-baby, supine-twist, legs-up-wall, figure-four L1, hand-to-toe L2, pigeon L1/L2, cat-cow cow end | FIXED f3f83d3 (pigeon/happy-baby still look odd, see open) |
+| P2 | missing prop lines (pillow supine-twist L0, child, tabletop) | FIXED 0c86e0e (cushion drawn at knees) |
+| P2 | player fix tag has no space in text | FIXED 0c86e0e |
+| P2 | pause aria-label "not toggling" | REJECT: already toggles (player.js:369) |
+| P2 | dark mode light with data-theme=dark | REJECT: dark is prefers-color-scheme only by design; real dark still unverified in headless |
+| P1 | sun-salutation-a visual jumps fold -> all-fours; warrior-flow crossed-leg transition | OPEN |
+| P2 | #/plans shows no presets; savasana L1/L2 near-identical; bridge levels close; English subtitles in he UI; mobile player bar | OPEN |
+| P3 | Astra could not observe console errors | OPEN (smoke reports none) |

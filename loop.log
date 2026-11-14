@@ -10,3 +10,4 @@
 2026-11-14 round5 part3-4: fixed triangle, extended-side-angle, wide-legged-fold, gentle-flow, sun-salutation-a figures; tests 11745/0; smoke he/ru/en 375+1280 OK
 2026-11-14 round5 part5: wide-legged-fold symmetric straddle (b58ab7f); tests 11758/0; Pages verified, smoke he/ru/en x 375/1280 OK; hands-to-blocks visually still open
 2026-11-14 round5 part6: wide-legged-fold L0/L1 reshaped (straight-leg hip hinge, palms on blocks 30.4/11.3, az52 camera); test now uses renderer blockBoxes; earlier 'hands floating' shots were mid-transition captures; tests 11776/0; Pages verified, smoke he/ru/en x 375/1280 OK
+2026-11-14 round6: Astra live review (46 poses x3 levels x 2D/3D, flows, plans, player); fixes 0c86e0e cues, 889951d plans/generator, b239254 + f3f83d3 figures; tests 11439/0 (11776 before; fewer generated-plan items); smoke he/ru/en x 375/1280 OK
