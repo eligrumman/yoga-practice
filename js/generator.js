@@ -22,8 +22,8 @@ const RELAX_OUT = new Set(['low-lunge', 'high-lunge', 'cobra', 'locust', 'camel'
 const SUPINE_OR_PRONE = new Set(['cobra', 'locust', 'bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']);
 export const needsPregnancyNote = (items) => items.some((it) => { const p = POSE_BY_ID[it.pose]; return !!p && (SUPINE_OR_PRONE.has(p.id) || p.category === 'twist' || p.category === 'balance'); });
 export const isBackbend = (id) => POSE_BY_ID[id]?.category === 'backbend';
-// savasana never takes more than ~15% of the session (30 min: 4.5 min)
-export const savasanaCap = (minutes) => Math.max(60, grid(minutes * 60 * 0.15));
+// First-time plans finish with enough quiet time to settle: 3 min at 20, 5 min at 30.
+export const savasanaCap = (minutes) => minutes >= 30 ? 300 : minutes >= 20 ? 180 : Math.max(60, grid(minutes * 60 * 0.15));
 // Two backbends never touch: a Child goes between them. An existing Child is moved there; a second pair gets a short extra Child.
 function separateBackbends(items, level) {
   const out = [];
@@ -100,23 +100,23 @@ function rank(p, focus, level) {
 }
 const cmp = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; };
 
-// beginner holds are short (about 20-30 s, cobra shortest); the time is filled with more easy poses, not longer holds
+// Beginner plans use fewer shapes and unhurried holds instead of filling time with novelty.
 const baseHold = (p, level) => (level === 'beginner' ? Math.min(30, p.holdSeconds) : p.holdSeconds);
 function slotNominal(p, f, level) {
   const hold = baseHold(p, level);
   return (p.sides === 'both' ? 2 : 1) * (grid(hold * f) + DEFAULT_TRANSITION);
 }
 
-// ---- beginner plans: few poses, longer holds. Item counts (incl. Savasana): 10 min ~9, 20 min ~16, 30 min ~22.
+// ---- beginner plans: at most twelve distinct shapes, including Savasana.
 // A two-sided pose is ONE item (each side gets the full hold). Cat-Cow is one 'cat-cow' flow item.
-const BEG_BODY = { 10: 8, 20: 16, 30: 23 };
+const BEG_BODY = { 10: 8, 20: 10, 30: 11 };
 const BEG_STAND_CAP = { 10: 3, 20: 4, 30: 5 };
 const CATCOW_FLOW_BREATHS = 6; // 3 breath cycles of about 10 s
 function begRange(p) {
   if (p.id === 'cobra') return [15, 20];
-  if (p.id === 'upward-salute' || p.id === 'half-lift') return [15, 30];
-  if (p.section === 'stand' || p.section === 'bal') return [20, 45];
-  return [30, 45];
+  if (p.id === 'upward-salute' || p.id === 'half-lift') return [20, 60];
+  if (p.section === 'stand' || p.section === 'bal') return [25, 75];
+  return [35, REST_POSES.has(p.id) ? 180 : 75];
 }
 function generateBeginner({ minutes, focus, avoid }) {
   const T = minutes * 60;
@@ -126,13 +126,13 @@ function generateBeginner({ minutes, focus, avoid }) {
   const bySec = (sx) => pool.filter((p) => p.section === sx).sort((a, b) => cmp(rank(a, focus, 'beginner'), rank(b, focus, 'beginner')) || (a.sides === 'both' ? 0 : 1) - (b.sides === 'both' ? 0 : 1));
   // two-sided poses first within equal rank: each side is held in full, so they fill the time with fewer items
   const lists = { stand: bySec('stand').concat(bySec('bal')), floor: bySec('floor'), cool: bySec('cool') };
-  const N = BEG_BODY[minutes] ?? Math.round(minutes * 0.7);
+  const N = focus === 'relax' ? Math.min(9, BEG_BODY[minutes] ?? 9) : (BEG_BODY[minutes] ?? 10);
   const hasSalute = pool.some((p) => p.id === 'upward-salute');
-  const warmN = 1 + (minutes >= 20 && hasSalute ? 1 : 0); // cat-cow (+ upward salute)
+  const warmN = 1 + (focus !== 'relax' && minutes >= 20 && hasSalute ? 1 : 0); // cat-cow (+ upward salute outside relaxation)
   const R = N - warmN;
   const sw = w.stand + w.bal, tot = sw + w.floor + w.cool;
   const standCap = (BEG_STAND_CAP[minutes] ?? 4) + (focus === 'strength' ? 1 : 0); // strength leans on the legs
-  const stand = Math.max(2, Math.min(standCap, Math.round((R * sw) / tot)));
+  const stand = focus === 'relax' ? 0 : Math.max(2, Math.min(standCap, Math.round((R * sw) / tot)));
   let floor = Math.max(1, Math.round(((R - stand) * w.floor) / (w.floor + w.cool)));
   floor = Math.min(floor, lists.floor.length, R - stand - 1);
   let counts = { stand: Math.min(stand, lists.stand.length), floor, cool: R - stand - floor };
@@ -155,13 +155,11 @@ function generateBeginner({ minutes, focus, avoid }) {
   const body = () => items.slice(0, -1);
   const range = (it) => begRange(POSE_BY_ID[it.pose]);
   // grow holds in 5 s steps, round-robin (deterministic), until the plan reaches T minus savasana
-  let i = 0, extra = 0; // extra: only when the pool is exhausted (e.g. back-friendly 30 min), holds may stretch up to +15 s
-  const maxItems = { 10: 10, 20: 18, 30: 24 }[minutes] ?? 24;
+  let i = 0;
+  const maxItems = 12;
   for (let guard = 0; guard < 4000; guard++) {
     if (T - planSeconds(items) < 5) break;
-    // extra: one-sided rest poses (REST_POSES) may stretch up to +30 s past their range; active poses +15 s only when the pool is exhausted; two-sided rest poses up to +15 s; cobra never
-    const room = (it) => { const q = POSE_BY_ID[it.pose]; return q.id === 'cobra' || q.id === 'bridge' ? 0 : !REST_POSES.has(q.id) ? (extra >= 45 ? 15 : 0) : q.sides === 'both' ? Math.min(extra, 30) : extra; };
-    const cand = body().filter((it) => it.pose !== 'gentle-flow' && it.unit === 'sec' && it.amount + 5 <= range(it)[1] + room(it));
+    const cand = body().filter((it) => it.pose !== 'gentle-flow' && it.unit === 'sec' && it.amount + 5 <= range(it)[1]);
     if (!cand.length) {
       // all holds at their maximum and still more than ~2 min short: add one more easy pose (cool-down first), within the item cap
       const left = T - planSeconds(items);
@@ -172,16 +170,15 @@ function generateBeginner({ minutes, focus, avoid }) {
         const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items = separateBackbends(items, 0); items.push(sv);
         continue;
       }
-      if (extra < 45 && left > 30) { extra += 15; continue; }
       break;
     }
     cand[i++ % cand.length].amount += 5;
   }
   // overflow at minimum holds: shrink savasana first
   savasana.amount = Math.max(30, savasana.amount + Math.min(0, T - planSeconds(items)));
-  // savasana absorbs what is left, but never more than ~15% of the session (the plan may end a little under T instead)
+  // Savasana absorbs the small rounding remainder while preserving the required final-rest floor.
   const rest = T - planSeconds(body());
-  savasana.amount = Math.max(30, Math.min(savCap, grid(rest - DEFAULT_TRANSITION)));
+  savasana.amount = Math.min(600, Math.max(savCap, grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
 }
 

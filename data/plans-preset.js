@@ -15,9 +15,9 @@ export const PRESETS = [
     },
     items: [
       b('tabletop', 1, 3), b('cat', 1, 4), b('cow', 1, 4), s('downward-dog', 0, 25),
-      s('uttanasana', 0, 20), s('upward-salute', 1, 15), s('warrior-1', 0, 20), s('warrior-2', 0, 20),
-      s('chair', 0, 20), s('mountain', 1, 20), s('tree', 0, 20), s('cobra', 0, 20),
-      s('child', 1, 25), s('knees-to-chest', 1, 25), s('savasana', 1, 165),
+      s('cobra', 0, 20), s('child', 1, 25), s('uttanasana', 0, 20), s('upward-salute', 1, 15),
+      s('warrior-1', 0, 20), s('warrior-2', 0, 20), s('chair', 0, 20), s('mountain', 1, 20),
+      s('tree', 0, 20), s('knees-to-chest', 1, 25), s('savasana', 1, 165),
     ],
   },
   {
@@ -118,13 +118,13 @@ export const PRESETS = [
     id: 'desk-break', minutes: 5, level: 0,
     name: { he: 'הפסקה מהשולחן', ru: 'Перерыв за рабочим столом', en: 'Desk break' },
     desc: {
-      he: 'חמש דקות להתעוררות אחרי ישיבה ארוכה: כתפיים, גב וירכיים. בלי רצפה, אפשר גם בבגדי עבודה.',
-      ru: 'Пять минут, чтобы размяться после долгого сидения: плечи, спина и бёдра. Пол не нужен, подойдёт и рабочая одежда.',
-      en: 'Five minutes to shake off long sitting: shoulders, back and hips. No floor needed, works in work clothes.',
+      he: 'חמש דקות להתעוררות אחרי ישיבה ארוכה: תנועות עמידה פשוטות ומנוחה קצרה בישיבה. מתאים גם לבגדי עבודה.',
+      ru: 'Пять минут после долгого сидения: простые движения стоя и короткий отдых сидя. Подойдёт и рабочая одежда.',
+      en: 'Five minutes after long sitting: simple standing movements and a short seated recovery. Works in work clothes.',
     },
     items: [
-      s('mountain', 0, 20), s('upward-salute', 0, 15), s('half-lift', 0, 15), s('uttanasana', 0, 25),
-      s('warrior-1', 0, 20), s('warrior-2', 0, 20), s('chair', 0, 30), s('mountain', 0, 65),
+      s('mountain', 0, 40), s('upward-salute', 0, 40), s('half-lift', 0, 40),
+      s('uttanasana', 0, 45), s('chair', 0, 45), s('easy-seat', 0, 55),
     ],
   },
 ];
@@ -167,9 +167,9 @@ export const STARTER_PATH = [
       en: 'Meet mountain, chair and warrior one. The legs begin to work.',
     },
     items: [
-      s('mountain', 0, 55), s('upward-salute', 0, 35), s('uttanasana', 0, 40), s('chair', 0, 35),
-      s('warrior-1', 0, 45), s('child', 0, 65),
-      s('knees-to-chest', 0, 60), s('savasana', 0, 175),
+      b('cat-cow', 0, 12), s('mountain', 0, 35), s('upward-salute', 0, 25), s('uttanasana', 0, 30),
+      s('chair', 0, 30), s('warrior-1', 0, 40), s('child', 0, 50),
+      s('knees-to-chest', 0, 50), s('savasana', 0, 165),
     ],
   },
   {

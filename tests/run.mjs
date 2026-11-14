@@ -110,6 +110,15 @@ for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
 const av = generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoid: ['downward-dog', 'tree', 'cobra'] });
 ok(!av.items.some((i) => ['downward-dog', 'tree', 'cobra'].includes(i.pose)), 'avoid list respected');
 ok(Math.abs(planSeconds(av.items) / 60 - 20) <= 1, 'avoid plan still ~20 min');
+for (const m of [20, 30]) for (const f of FOCUSES) {
+  const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
+  ok(new Set(g.items.map((i) => i.pose)).size <= 12, `first-time ${m}/${f} has at most 12 distinct poses`);
+  ok(g.items.at(-1).amount >= (m === 20 ? 180 : 300), `first-time ${m}/${f} reserves final rest`);
+}
+for (const m of [20, 30]) {
+  const g = generatePlan({ minutes: m, focus: 'relax', level: 'beginner' });
+  ok(g.items.every((i) => POSE_BY_ID[i.pose].section !== 'stand' && POSE_BY_ID[i.pose].section !== 'bal'), `first-time relax ${m} has no standing poses`);
+}
 for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   const ids = generatePlan({ minutes: m, focus: f, level: l }).items.map((i) => i.pose);
   ok(!ids.includes('crow'), `crow safety gate: excluded from generated ${m}/${f}/${l}`);
@@ -207,13 +216,13 @@ for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
     ok(ids.indexOf('warrior-2') >= 0 && ids.indexOf('triangle') > ids.indexOf('warrior-2') && ext > ids.indexOf('triangle'), `extended-side-angle follows warrior-2 and triangle in ${m}/${l}`);
   }
 }
-ok(generatePlan({ minutes: 30, focus: 'general', level: 'beginner' }).items.some((i) => i.pose === 'triangle'), 'triangle may enter beginner general plans');
+ok(!generatePlan({ minutes: 30, focus: 'general', level: 'beginner' }).items.some((i) => ['warrior-3', 'dancer'].includes(i.pose)), '30-minute beginner general plan keeps advanced balances out');
 ok(!STARTER_PATH.some((p) => p.items.some((i) => i.pose === 'wide-legged-fold')), 'wide-legged fold excluded from 7-day starter path');
 
 const REST_HOLD = new Set(['child', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'knees-to-chest', 'happy-baby', 'figure-four', 'supine-twist', 'legs-up-wall']);
-// ---- beginner plans: easy poses only, few items, 30-45 s holds on the floor, ONE Cat-Cow flow item, two-sided poses count once
+// ---- beginner plans: easy poses only, at most twelve distinct shapes, ONE Cat-Cow flow item
 const BEG_OK = new Set(['chair', 'warrior-1', 'warrior-2', 'triangle', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
-const BEG_ITEMS = { 10: [8, 10], 20: [14, 18], 30: [19, 24] }; // total items incl. Savasana
+const BEG_ITEMS = { 10: [8, 10], 20: [8, 12], 30: [8, 12] }; // total items incl. Savasana
 for (const f of FOCUSES) {
   for (const m of LENGTHS) {
     const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
@@ -223,15 +232,14 @@ for (const f of FOCUSES) {
     ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat', 'crow', 'pigeon', 'extended-side-angle'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
     ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
     const nStand = g.items.filter((i) => POSE_BY_ID[i.pose].section === 'stand').length;
-    ok(nStand >= 2 && nStand <= (m === 30 ? 5 : 4) + (f === 'strength' ? 1 : 0), `beginner ${m}/${f} has ${nStand} standing poses (2-4, up to 5 at 30 min)`);
+    ok(f === 'relax' ? nStand === 0 : nStand >= 2 && nStand <= (m === 30 ? 5 : 4) + (f === 'strength' ? 1 : 0), `beginner ${m}/${f} standing block is focused (${nStand})`);
     ok(new Set(g.items.map((i) => i.pose)).size === g.items.length, `beginner ${m}/${f} no repeated pose item (two sides = one item)`);
     const body = g.items.slice(0, -1).filter((i) => i.unit === 'sec');
     for (const i of body) {
       const p = POSE_BY_ID[i.pose];
       if (i.pose === 'cobra') ok(i.amount >= 15 && i.amount <= 20, `beginner ${m}/${f} cobra short`);
-      // the savasana cap (15%) leaves time over: only passive rest poses are held longer (up to 90 s), active poses stay <= 45 s (60 s when the pool is exhausted)
-      else if (['floor', 'cool'].includes(p.section)) ok(i.amount >= 30 && i.amount <= (REST_HOLD.has(i.pose) ? 90 : m === 30 && (f === 'back' || f === 'relax') ? 60 : 45), `beginner ${m}/${f} ${i.pose} floor hold 30-45 s, rest poses up to 90 s (${i.amount})`);
-      else ok(i.amount >= 15 && i.amount <= (m === 30 && (f === 'back' || f === 'relax') ? 60 : 45), `beginner ${m}/${f} ${i.pose} hold (${i.amount})`);
+      else if (['floor', 'cool'].includes(p.section)) ok(i.amount >= 30 && i.amount <= (REST_HOLD.has(i.pose) ? 180 : 75), `beginner ${m}/${f} ${i.pose} unhurried floor hold (${i.amount})`);
+      else ok(i.amount >= 20 && i.amount <= 75, `beginner ${m}/${f} ${i.pose} hold (${i.amount})`);
     }
     const cc = g.items.filter((i) => i.pose === 'cat-cow');
     ok(cc.length === 1 && cc[0].unit === 'breath' && cc[0].amount >= 4 && cc[0].amount <= 8, `beginner ${m}/${f} exactly one Cat-Cow flow item`);
@@ -634,18 +642,26 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     const g = generatePlan({ minutes: mins, focus: f, level: lvl, avoid }), tag = `${lvl}/${f}/${mins}/${avoid.join('+') || '-'}`;
     backOk(g.items, tag);
     const sv = g.items.at(-1);
-    ok(sv.pose === 'savasana' && sv.amount <= savasanaCap(mins) + 5 && sv.amount / planSeconds(g.items) <= 0.17, `${tag}: savasana ${sv.amount}s within the ~15% cap`);
+    const restFloor = lvl === 'beginner' && mins >= 30 ? 300 : lvl === 'beginner' && mins >= 20 ? 180 : 30;
+    ok(sv.pose === 'savasana' && sv.amount >= restFloor && sv.amount <= 600, `${tag}: savasana ${sv.amount}s meets the final-rest floor`);
     if (lvl === 'beginner') ok(g.items.slice(0, 2).some((it) => WARM.has(it.pose)), `${tag}: beginner opens with a warm-up (${g.items[0].pose})`);
   }
   ok(generatePlan({ minutes: 10, focus: 'general', level: 'beginner' }).items[0].pose === 'cat-cow', 'beginner 10 min starts with cat-cow');
   ok(generatePlan({ minutes: 10, focus: 'general', level: 'beginner', avoid: ['cat-cow'] }).items[0].pose === 'tabletop', 'cat-cow avoided: tabletop breaths warm up instead');
   for (const p of ALL_PRESETS) backOk(p.items, `preset ${p.id}`);
-  ok(savasanaCap(10) <= 90 && savasanaCap(30) <= 270 && savasanaCap(5) >= 60, 'savasana cap: 15% of session, 60 s floor');
+  ok(savasanaCap(10) <= 90 && savasanaCap(20) >= 180 && savasanaCap(30) >= 300, 'first-time final rest: 3 min at 20, 5 min at 30');
   const P = Object.fromEntries(ALL_PRESETS.map((p) => [p.id, p]));
   const seq = (id) => P[id].items.map((i) => i.pose);
   ok(seq('desk-break').at(-1) !== 'revolved-chair', 'desk-break does not end on revolved-chair');
+  ok(seq('desk-break').at(-1) === 'easy-seat' && seq('desk-break').filter((id) => POSE_BY_ID[id].section === 'stand').length <= 5, 'desk-break is simple standing movement followed by distinct seated recovery');
   { const s = seq('core-balance'); ok(s.every((x, i) => !(x === 'tree' && s[i + 1] === 'dancer')), 'core-balance: no tree directly before dancer'); ok(/קיר|כיסא/.test(P['core-balance'].desc.he), 'core-balance mentions a wall or chair'); }
   ok(!seq('starter-day-3').includes('tree') && !seq('starter-day-3').includes('warrior-2'), 'day 3 trimmed to standing basics (no tree, no warrior-2)');
+  ok(['allfours', 'seated-warm', 'seated'].includes(POSITION[seq('starter-day-3')[0]]), 'starter-day-3 starts with a floor warm-up pose');
+  {
+    const bands = seq('morning-wakeup').map((id) => POSITION[id] === 'stand' ? 'standing' : id === 'savasana' || ['supine', 'allfours', 'prone', 'kneel', 'seated', 'seated-warm'].includes(POSITION[id]) ? 'floor' : 'floor');
+    const changes = bands.filter((band, i) => i && band !== bands[i - 1]).length;
+    ok(changes <= 2, `morning-wakeup has at most one floor-standing transition pair (${bands.join('>')})`);
+  }
   { const h = (id, pose) => P[id].items.find((i) => i.pose === pose)?.amount; ok(h('beginner-foundations', 'downward-dog') === 30 && h('beginner-foundations', 'tree') <= 30 && h('beginner-foundations', 'cobra') <= 20, 'beginner-foundations: dog 30, tree <=30, cobra short'); ok(h('starter-day-5', 'plank') <= 15 && h('starter-day-6', 'tree') <= 30, 'starter days: plank 15 s, tree <=30 s'); }
   ok(!seq('full-flow').includes('camel') && !seq('back-relief').includes('cobra'), 'full-flow has no camel; back-relief has no cobra');
   ok(seq('back-relief').some((x) => x === 'child' || x === 'seated-fold' || x === 'uttanasana'), 'back-relief has a fold or child');
