@@ -1,7 +1,7 @@
 // 3D (three.js) renderer. Draws the SAME solved primitives (rig.js solve()) as the 2D SVG renderer.
 // three.js is loaded lazily from a pinned CDN URL; callers fall back to 2D if loadThree() rejects.
 // Render-on-demand: the caller drives animation by calling draw() each frame (draw() renders).
-import { solve, FACE } from './rig.js';
+import { solve, FACE, blockBox } from './rig.js';
 import { inkOn, inkSoftId, inkEdgeId, inkTwinK } from './inkstyle.js';
 
 export const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
@@ -415,8 +415,8 @@ export class Renderer3D {
       o.obj.visible = vis;
       if (!vis) continue;
       if (o.type === 'block') {
-        const w = S.J[(o.joint || 'wrist') + o.k], h = Math.max(0.01, o.h * ke);
-        o.obj.position.set(w[0], h / 2, w[2]); o.obj.scale.set(24, h, 12);
+        const b = blockBox(S.J[(o.joint || 'wrist') + o.k], Math.max(0.01, o.h * ke));
+        o.obj.position.set(...b.c); o.obj.scale.set(...b.size);
       } else if (o.type === 'cushion') {
         const pl = o.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = Math.max(0.01, o.h * ke);
         o.obj.position.set(pl[0] - 2, h / 2, pl[2]); o.obj.scale.set(o.w, h, 36);

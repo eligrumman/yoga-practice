@@ -1,7 +1,7 @@
 // 2D SVG renderer. Draws the SAME solved primitives (rig.js solve()) that the 3D renderer uses.
 // Sphere-hulls, tapered capsules and ellipsoids are projected orthographically, sorted by depth
 // (painter's algorithm) and filled with soft gradients lit from the upper left.
-import { solve, camera, project, app, FACE } from './rig.js';
+import { solve, camera, project, app, FACE, blockBoxes } from './rig.js';
 import { inkOn, inkSoftId, inkEdgeId, inkTwinK } from './inkstyle.js';
 
 export const VBW = 400, VBH = 300, FLOOR = 262;
@@ -316,12 +316,7 @@ export class Renderer2D {
     };
     for (const p of props) {
       if (p.type === 'block') {
-        const h = p.h || 22;
-        const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
-        for (const [joint, k] of anchors) {
-          const w = S.J[joint + k];
-          box(this.back, [w[0], h / 2 * Math.max(0.01, Math.min(1, e * 1.4)), w[2]], [24, h * Math.max(0.01, Math.min(1, e * 1.4)), 12], 'prop-block');
-        }
+        for (const b of blockBoxes([p], S, e)) box(this.back, b.c, b.size, 'prop-block');
       } else if (p.type === 'cushion') {
         const pl = p.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = (p.h || 12) * Math.min(1, e * 1.4);
         box(this.back, [pl[0] - 2, h / 2, pl[2]], [(p.w || 56), h, 36], 'prop-cushion');

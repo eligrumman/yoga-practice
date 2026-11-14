@@ -412,3 +412,20 @@ export function clampFrame(f) {
   return o;
 }
 export const round1 = (x) => Math.round(x * 10) / 10;
+
+// ---------------------------------------------------------------- props: the block box both renderers draw
+// A yoga block stands on the floor under a wrist joint (ankle for leg props): centre [x, h/2, z], size [24, h, 12]; its top face is at y = h.
+export const BLOCK_FOOTPRINT = [24, 12];
+export function blockBox(anchor, h) {
+  return { c: [anchor[0], h / 2, anchor[2]], size: [BLOCK_FOOTPRINT[0], h, BLOCK_FOOTPRINT[1]], top: h };
+}
+// every block of a prop list for a solved figure (e = prop visibility 0..1; the renderers grow the block height while the props fade in)
+export function blockBoxes(props, S, e = 1) {
+  const ke = Math.max(0, Math.min(1, e * 1.4)), out = [];
+  for (const p of props || []) {
+    if (p.type !== 'block') continue;
+    const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
+    for (const [joint, k] of anchors) out.push({ joint, k, ...blockBox(S.J[joint + k], Math.max(0.01, (p.h || 22) * ke)) });
+  }
+  return out;
+}

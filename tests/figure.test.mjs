@@ -3,7 +3,7 @@
 import { POSES } from '../data/poses.js';
 import { poseFrames } from '../js/figure.js';
 import { attachSpecs } from '../js/specs.js';
-import { solve, primBox, zeroFrame, swapLR, validateFrame, JOINTS } from '../js/rig.js';
+import { solve, primBox, zeroFrame, swapLR, validateFrame, JOINTS, blockBoxes } from '../js/rig.js';
 import { readFileSync } from 'node:fs';
 
 const TOL = 2.0; // world units (the figure is about 200 tall)
@@ -79,17 +79,27 @@ export default async function figureTests(ok) {
     const P = POSES.find((q) => q.id === id);
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
   }
-  // ---- wide-legged fold: beginner/intermediate hands are supported by the block tops, not floating above them
+  // ---- wide-legged fold: the palms rest on the block tops that the renderers draw (blockBoxes is the shared box both use)
   const wide = POSES.find((q) => q.id === 'wide-legged-fold');
+  const sub3 = (a, b) => a.map((v, i) => v - b[i]), len3 = (v) => Math.hypot(...v);
+  const bend = (a, b, c) => 180 - (Math.acos(sub3(a, b).reduce((s, v, i) => s + v * sub3(c, b)[i], 0) / len3(sub3(a, b)) / len3(sub3(c, b))) * 180) / Math.PI;
   for (const l of [0, 1]) {
-    const F = poseFrames(wide, l), S = solve(F.hold), block = F.props.find((p) => p.type === 'block');
-    const armOffset = (side) => Math.hypot(S.J['shoulder' + side][0] - S.J['wrist' + side][0], S.J['shoulder' + side][2] - S.J['wrist' + side][2]);
+    const F = poseFrames(wide, l), S = solve(F.hold), boxes = blockBoxes(F.props, S, 1), J = S.J;
+    ok(boxes.length === 2, `wide-legged-fold L${l} draws two blocks`);
     for (const side of ['R', 'L']) {
-      const hand = lowest(S, 'hand' + side);
-      ok(Math.abs(hand - block.h) <= 0.25, `wide-legged-fold L${l} ${side} palm rests on block (${hand.toFixed(2)} vs ${block.h.toFixed(2)})`);
-      ok(armOffset(side) <= 3 && Math.abs(F.hold['elbow' + side][2]) <= 1, `wide-legged-fold L${l} ${side} arm reaches straight down`);
+      const bx = boxes.find((b) => b.k === side); if (!bx) { ok(false, `wide-legged-fold L${l} ${side} block exists`); continue; }
+      const palmPrims = S.prims.filter((p) => ['palm', 'fing', 'thumb'].includes(p.id.slice(0, -1)) && p.id.endsWith(side));
+      const hand = Math.min(...palmPrims.map((p) => primBox(p).lo));
+      ok(Math.abs(hand - bx.top) <= 0.5, `wide-legged-fold L${l} ${side} palm touches the block top it is drawn on (${hand.toFixed(2)} vs ${bx.top.toFixed(2)})`);
+      const pp = S.prims.find((p) => p.id === 'palm' + side), pts = pp.pts; const cx = pts.reduce((s, q) => s + q[0], 0) / pts.length, cz = pts.reduce((s, q) => s + q[2], 0) / pts.length;
+      ok(Math.abs(cx - bx.c[0]) <= bx.size[0] / 2 && Math.abs(cz - bx.c[2]) <= bx.size[2] / 2, `wide-legged-fold L${l} ${side} palm centre is over the block footprint`);
+      ok(Math.hypot(J['wrist' + side][0] - J['shoulder' + side][0], J['wrist' + side][2] - J['shoulder' + side][2]) <= 3 && Math.abs(F.hold['elbow' + side][2]) <= 1, `wide-legged-fold L${l} ${side} arm reaches straight down`);
       ok(S.hands[side].n[1] < -0.99, `wide-legged-fold L${l} ${side} palm flat on block`);
+      ok(bend(J['hip' + side], J['knee' + side], J['ankle' + side]) <= 12, `wide-legged-fold L${l} ${side} knee is soft, not bent`);
     }
+    ok(bend(J.pelvis, J.spine1, J.spine3) <= 12, `wide-legged-fold L${l} back stays long and flat`);
+    ok(Math.abs(J.ankleR[0] - J.ankleL[0]) < 1 && Math.abs(J.ankleR[2] + J.ankleL[2]) < 1 && Math.abs(S.head.c[2]) < 1 && Math.abs(J.pelvis[2]) < 1, `wide-legged-fold L${l} straddle symmetric, torso centred`);
+    ok(J.ankleR[0] - J.hipR[0] > -12 && J.ankleR[0] - J.hipR[0] < 12, `wide-legged-fold L${l} feet under the hips (hinge at the hips)`);
   }
   ok(wide.spec.levels[0].hold.pelvis.rot[2] < wide.spec.levels[1].hold.pelvis.rot[2] && wide.spec.levels[0].props[0].h > wide.spec.levels[1].props[0].h, 'wide-legged-fold L1 folds deeper onto a lower block than L0');
   // ---- lunges / warriors: front knee over the ankle, front sole flat
