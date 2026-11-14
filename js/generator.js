@@ -45,7 +45,7 @@ function separateBackbends(items, level) {
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
   ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
-  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'half-lift', 'uttanasana']],
+  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'triangle', 'half-lift', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
   ['prone', ['cobra', 'locust', 'child']],
@@ -58,7 +58,7 @@ export const POSITIONS = SEQ.map(([n]) => n);
 export const POSITION = {}; const SEQ_RANK = {};
 SEQ.forEach(([name, ids]) => ids.forEach((id) => { POSITION[id] = name; SEQ_RANK[id] = Object.keys(SEQ_RANK).length; }));
 // easy two-sided/standing poses a beginner may meet in the first weeks (beyond difficulty 1), to fill time without longer holds
-export const BEGINNER_EXTRA = new Set(['chair', 'warrior-1', 'warrior-2', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
+export const BEGINNER_EXTRA = new Set(['chair', 'warrior-1', 'warrior-2', 'triangle', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
 export const CATCOW_CYCLES = 3, CATCOW_BREATHS = 3;
 const NAMES = {
   general: { he: 'תכנית ראשונה', ru: 'Первая практика', en: 'First-time plan' },
@@ -82,14 +82,16 @@ function candidates({ focus, level, avoid }) {
   return POSES.filter((p) => p.section !== 'rest'
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
     && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
+    && (p.id !== 'triangle' || focus === 'general') // introduce Triangle only in a balanced general sequence
     && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !out(p) && !avoid.has(p.id));
 }
 
 function rank(p, focus, level) {
   const tag = FOCUS_TAG[focus];
   const match = tag && p.tags.includes(tag) ? 0 : 1;
+  const ease = p.id === 'warrior-2' ? 1.1 : p.id === 'triangle' ? 1.2 : p.difficulty;
   // beginners: prefer one-sided poses (every second side doubles the time on a pose)
-  return [match, p.difficulty, level === 'beginner' ? 0 : 0, p.flow];
+  return [match, ease, level === 'beginner' ? 0 : 0, p.flow];
 }
 const cmp = (a, b) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; };
 

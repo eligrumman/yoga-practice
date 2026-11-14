@@ -15,6 +15,7 @@ const CONTACT = [
   ['plank', [0, 1], ['handR', 'handL', 'footR', 'footL']], ['plank', [2], ['handR', 'handL', 'footR']],
   ['crow', [0], ['handR', 'handL', 'footR', 'footL']], ['crow', [1], ['handR', 'handL', 'footR']], ['crow', [2], ['handR', 'handL']],
   ['pigeon', [1, 2], ['handR', 'handL', 'footR', 'footL']],
+  ['triangle', ALL, ['footR', 'footL']],
   ['downward-dog', ALL, ['handR', 'handL', 'footR', 'footL']], ['cobra', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['child', ALL, ['handR', 'handL', 'footR', 'footL']], ['bridge', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['uttanasana', [1, 2], ['handR', 'handL']], ['half-lift', [2], ['handR', 'handL']], ['savasana', ALL, ['handR', 'handL', 'footR', 'footL']],
@@ -44,6 +45,11 @@ export default async function figureTests(ok) {
   // ---- mirror keeps the hands
   const P1 = POSES.find((q) => q.id === 'warrior-2'); const h = poseFrames(P1, 1).hold; const A = solve(h), B = solve(swapLR(h));
   ok(Math.abs(lowest(A, 'handR') - lowest(B, 'handL')) < 0.2 && Math.abs(lowest(A, 'footL') - lowest(B, 'footR')) < 0.2, 'side mirror swaps hands and feet');
+  const tri = POSES.find((q) => q.id === 'triangle');
+  for (const l of ALL) {
+    const f = poseFrames(tri, l).hold; const m = swapLR(f); const X = solve(f), Y = solve(m);
+    ok(Math.abs(lowest(X, 'footR') - lowest(Y, 'footL')) < 0.2 && Math.abs(lowest(X, 'footL') - lowest(Y, 'footR')) < 0.2, `triangle L${l} mirrors floor contacts`);
+  }
   // ---- every pose / level: frames valid, primitives finite, nothing under the floor
   for (const P of POSES) for (const l of ALL) {
     const fr = poseFrames(P, l); const S = solve(fr.hold);

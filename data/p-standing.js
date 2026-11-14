@@ -61,6 +61,21 @@ export default [
     ],
   },
   {
+    id: 'triangle', sa: 'Utthita Trikonasana', en: 'Triangle', he: 'משולש', ru: 'Треугольник', cat: 'standing', sec: 'stand', flow: 42, d: 2, hold: 25, sides: 'both',
+    tags: ['flex', 'back'],
+    cue: {
+      he: ['פתחו פסיעה רחבה ונוחה, כף הרגל הקדמית פונה קדימה והאחורית הצידה.', 'הטו את האגן לכיוון הרגל הקדמית והאריכו את הגוף קדימה.', 'הניחו יד על כיסא, בלוק, השוק או הקרסול; הרימו את היד השנייה.', 'השאירו את שני צדי הגוף ארוכים ונשמו בלי להכריח את העומק.'],
+      en: ['Take a comfortable wide stance and turn the front foot forward.', 'Hinge toward the front leg and keep the spine long.', 'Rest the lower hand on a support, shin, or ankle; reach the other arm up.', 'Keep breathing and do not force the depth.'],
+      ru: ['Поставьте стопы широко, переднюю стопу направьте вперёд.', 'Наклонитесь к передней ноге, сохраняя спину длинной.', 'Поставьте нижнюю руку на опору, голень или лодыжку; верхнюю поднимите.', 'Дышите свободно и не углубляйте позу через силу.'],
+    },
+    safe: { he: 'בהריון תרגלו בעמידה קצרה יותר, עם תמיכה ובלי ללחוץ על הבטן. בסחרחורת או בלחץ דם לא מאוזן השאירו את המבט קדימה או מטה, היעזרו בקיר ועלו לאט. כאב בברך, במפשעה או בגב הוא סימן להקטין טווח או לצאת.', en: 'During pregnancy, shorten the stance, use support, and avoid compressing the belly. With dizziness or uncontrolled blood pressure, keep the gaze forward or down, use a wall, and rise slowly. Stop or reduce the range for knee, groin, or back pain.', ru: 'При беременности сократите стойку, используйте опору и не сдавливайте живот. При головокружении или неконтролируемом давлении смотрите вперёд или вниз, используйте стену и поднимайтесь медленно. При боли в колене, паху или спине уменьшите амплитуду или выйдите из позы.' },
+    v: [
+      { he: 'פסיעה קצרה, הברך הקדמית יכולה להתכופף, והיד על כיסא, בלוק גבוה או השוק; אפשר להישען בגב על קיר.', en: 'Short stance; the front knee may bend, with the hand on a chair, high block, or shin.', ru: 'Короткая стойка; переднее колено можно согнуть, рука на стуле, высоком блоке или голени.', props: [{ type: 'block', h: 34 }, { type: 'wall' }] },
+      { he: 'פסיעה בינונית, יד על בלוק ליד השוק או הקרסול, והגוף ארוך ופתוח.', en: 'Medium stance, hand on a block by the shin or ankle, torso long and open.', ru: 'Средняя стойка, рука на блоке у голени или лодыжки, корпус длинный и раскрытый.', props: [{ type: 'block', h: 22 }] },
+      { he: 'הושיטו את היד אל הקרסול או אל הרצפה מחוץ לכף הרגל, רק כל עוד עמוד השדרה נשאר ארוך.', en: 'Reach toward the ankle or floor outside the foot only while the spine stays long.', ru: 'Тянитесь к лодыжке или полу снаружи стопы, только пока позвоночник остаётся длинным.' },
+    ],
+  },
+  {
     id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: 'מצעד גבוה', ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {

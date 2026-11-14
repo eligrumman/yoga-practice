@@ -960,6 +960,96 @@
   "text": "Gaze over the front hand."
  },
  {
+  "id": "pose.triangle.name",
+  "lang": "he",
+  "text": "משולש"
+ },
+ {
+  "id": "pose.triangle.name",
+  "lang": "ru",
+  "text": "Треугольник"
+ },
+ {
+  "id": "pose.triangle.name",
+  "lang": "en",
+  "text": "Triangle"
+ },
+ {
+  "id": "pose.triangle.intro",
+  "lang": "he",
+  "text": "תנוחת משולש."
+ },
+ {
+  "id": "pose.triangle.intro",
+  "lang": "ru",
+  "text": "Поза: Треугольник."
+ },
+ {
+  "id": "pose.triangle.intro",
+  "lang": "en",
+  "text": "Pose: Triangle."
+ },
+ {
+  "id": "pose.triangle.cue.1",
+  "lang": "he",
+  "text": "פתחו פסיעה רחבה ונוחה, כף הרגל הקדמית פונה קדימה והאחורית הצידה."
+ },
+ {
+  "id": "pose.triangle.cue.1",
+  "lang": "ru",
+  "text": "Поставьте стопы широко, переднюю стопу направьте вперёд."
+ },
+ {
+  "id": "pose.triangle.cue.1",
+  "lang": "en",
+  "text": "Take a comfortable wide stance and turn the front foot forward."
+ },
+ {
+  "id": "pose.triangle.cue.2",
+  "lang": "he",
+  "text": "הטו את האגן לכיוון הרגל הקדמית והאריכו את הגוף קדימה."
+ },
+ {
+  "id": "pose.triangle.cue.2",
+  "lang": "ru",
+  "text": "Наклонитесь к передней ноге, сохраняя спину длинной."
+ },
+ {
+  "id": "pose.triangle.cue.2",
+  "lang": "en",
+  "text": "Hinge toward the front leg and keep the spine long."
+ },
+ {
+  "id": "pose.triangle.cue.3",
+  "lang": "he",
+  "text": "הניחו יד על כיסא, בלוק, השוק או הקרסול; הרימו את היד השנייה."
+ },
+ {
+  "id": "pose.triangle.cue.3",
+  "lang": "ru",
+  "text": "Поставьте нижнюю руку на опору, голень или лодыжку; верхнюю поднимите."
+ },
+ {
+  "id": "pose.triangle.cue.3",
+  "lang": "en",
+  "text": "Rest the lower hand on a support, shin, or ankle; reach the other arm up."
+ },
+ {
+  "id": "pose.triangle.cue.4",
+  "lang": "he",
+  "text": "השאירו את שני צדי הגוף ארוכים ונשמו בלי להכריח את העומק."
+ },
+ {
+  "id": "pose.triangle.cue.4",
+  "lang": "ru",
+  "text": "Дышите свободно и не углубляйте позу через силу."
+ },
+ {
+  "id": "pose.triangle.cue.4",
+  "lang": "en",
+  "text": "Keep breathing and do not force the depth."
+ },
+ {
   "id": "pose.high-lunge.name",
   "lang": "he",
   "text": "מצעד גבוה"
@@ -4518,6 +4608,90 @@
   "id": "pose.warrior-2.side",
   "lang": "he",
   "text": "צד שני. פנו לצד השני וכופפו את הברך הקדמית.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.entry.1",
+  "lang": "he",
+  "text": "מלוחם שתיים, ישרו את הברך הקדמית והשאירו פסיעה נוחה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.entry.2",
+  "lang": "he",
+  "text": "האריכו את הגוף לכיוון הרגל הקדמית והניחו יד על תמיכה, על השוק או על הקרסול.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.align.1",
+  "lang": "he",
+  "text": "הרימו את היד העליונה והשאירו את שני צדי הגוף ארוכים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.align.2",
+  "lang": "he",
+  "text": "הברך הקדמית יכולה להישאר מעט כפופה, והחזה פתוח בלי לקרוס קדימה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.breath",
+  "lang": "he",
+  "text": "נשמו ברצף, ובכל שאיפה צרו עוד אורך בגב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, קצרו את הפסיעה, כופפו מעט את הברך והניחו יד על כיסא, בלוק גבוה או השוק; אפשר להיעזר בקיר מאחור.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.mod.L1",
+  "lang": "he",
+  "text": "הניחו יד על בלוק ליד השוק או הקרסול ושמרו על גוף ארוך ופתוח.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הגיעו אל הקרסול או אל הרצפה מחוץ לכף הרגל, רק כל עוד עמוד השדרה נשאר ארוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.fix.1",
+  "lang": "he",
+  "text": "היד התחתונה נוטה למשוך את הגוף למטה. הניחו אותה בקלות על תמיכה והאריכו את שני צדי המותניים.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.triangle.fix.2",
+  "lang": "he",
+  "text": "החזה נוטה להסתובב אל הרצפה. הקטינו את העומק ופתחו אותו בעדינות, בלי להכריח את הצוואר להביט למעלה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.triangle.exit",
+  "lang": "he",
+  "text": "לחצו את כפות הרגליים לרצפה, עלו לאט וחזרו לעמידה זקופה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.triangle.side",
+  "lang": "he",
+  "text": "צד שני. הפנו את כפות הרגליים והאריכו את הגוף מעל הרגל השנייה.",
   "v2": true,
   "prio": "beginner"
  },
