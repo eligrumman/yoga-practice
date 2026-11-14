@@ -420,6 +420,96 @@
   "text": "Step forward, half lift, fold, rise with arms up, then exhale hands to heart."
  },
  {
+  "id": "pose.gentle-flow.name",
+  "lang": "he",
+  "text": "זרימה עדינה"
+ },
+ {
+  "id": "pose.gentle-flow.name",
+  "lang": "ru",
+  "text": "Мягкий поток"
+ },
+ {
+  "id": "pose.gentle-flow.name",
+  "lang": "en",
+  "text": "Gentle Flow"
+ },
+ {
+  "id": "pose.gentle-flow.intro",
+  "lang": "he",
+  "text": "תנוחת זרימה עדינה."
+ },
+ {
+  "id": "pose.gentle-flow.intro",
+  "lang": "ru",
+  "text": "Поза: Мягкий поток."
+ },
+ {
+  "id": "pose.gentle-flow.intro",
+  "lang": "en",
+  "text": "Pose: Gentle Flow."
+ },
+ {
+  "id": "pose.gentle-flow.cue.1",
+  "lang": "he",
+  "text": "שבו גבוה; בשאיפה הרימו ידיים ובנשיפה התארכו לכפיפה צדית ימינה."
+ },
+ {
+  "id": "pose.gentle-flow.cue.1",
+  "lang": "ru",
+  "text": "Сядьте прямо; на вдохе поднимите руки, на выдохе мягко наклонитесь в сторону."
+ },
+ {
+  "id": "pose.gentle-flow.cue.1",
+  "lang": "en",
+  "text": "Sit tall; inhale the arms up and exhale into a comfortable side bend."
+ },
+ {
+  "id": "pose.gentle-flow.cue.2",
+  "lang": "he",
+  "text": "שאפו למרכז ונשפו לכפיפה צדית שמאלה; שמרו את שני צדי האגן כבדים."
+ },
+ {
+  "id": "pose.gentle-flow.cue.2",
+  "lang": "ru",
+  "text": "Вернитесь в центр и повторите в другую сторону."
+ },
+ {
+  "id": "pose.gentle-flow.cue.2",
+  "lang": "en",
+  "text": "Return to center and repeat to the other side."
+ },
+ {
+  "id": "pose.gentle-flow.cue.3",
+  "lang": "he",
+  "text": "חזרו למרכז, התארכו בשאיפה וסובבו בעדינות לכל צד בנשיפה."
+ },
+ {
+  "id": "pose.gentle-flow.cue.3",
+  "lang": "ru",
+  "text": "На вдохе вытянитесь, на выдохе мягко повернитесь в каждую сторону."
+ },
+ {
+  "id": "pose.gentle-flow.cue.3",
+  "lang": "en",
+  "text": "Lengthen on the inhale and turn gently to each side on the exhale."
+ },
+ {
+  "id": "pose.gentle-flow.cue.4",
+  "lang": "he",
+  "text": "סיימו עם ידיים מול הלב ועם נשימה שקטה."
+ },
+ {
+  "id": "pose.gentle-flow.cue.4",
+  "lang": "ru",
+  "text": "Завершите с ладонями у груди и спокойным дыханием."
+ },
+ {
+  "id": "pose.gentle-flow.cue.4",
+  "lang": "en",
+  "text": "Finish with hands at heart and an easy breath."
+ },
+ {
   "id": "pose.cat.name",
   "lang": "he",
   "text": "חתול"
@@ -1048,6 +1138,96 @@
   "id": "pose.warrior-2.cue.4",
   "lang": "en",
   "text": "Gaze over the front hand."
+ },
+ {
+  "id": "pose.warrior-flow.name",
+  "lang": "he",
+  "text": "זרימת לוחמים"
+ },
+ {
+  "id": "pose.warrior-flow.name",
+  "lang": "ru",
+  "text": "Поток воинов"
+ },
+ {
+  "id": "pose.warrior-flow.name",
+  "lang": "en",
+  "text": "Warrior Flow"
+ },
+ {
+  "id": "pose.warrior-flow.intro",
+  "lang": "he",
+  "text": "תנוחת זרימת לוחמים."
+ },
+ {
+  "id": "pose.warrior-flow.intro",
+  "lang": "ru",
+  "text": "Поза: Поток воинов."
+ },
+ {
+  "id": "pose.warrior-flow.intro",
+  "lang": "en",
+  "text": "Pose: Warrior Flow."
+ },
+ {
+  "id": "pose.warrior-flow.cue.1",
+  "lang": "he",
+  "text": "מהר פסעו רגל אחת לאחור; בשאיפה כופפו את הברך הקדמית ועלו ללוחם אחד."
+ },
+ {
+  "id": "pose.warrior-flow.cue.1",
+  "lang": "ru",
+  "text": "Из Горы шагните одной ногой назад и на вдохе войдите в Воина один."
+ },
+ {
+  "id": "pose.warrior-flow.cue.1",
+  "lang": "en",
+  "text": "From Mountain, step one foot back and inhale into Warrior I."
+ },
+ {
+  "id": "pose.warrior-flow.cue.2",
+  "lang": "he",
+  "text": "בנשיפה פתחו את הגוף ואת הידיים ללוחם שניים, כשהברך עוקבת בכיוון האצבעות."
+ },
+ {
+  "id": "pose.warrior-flow.cue.2",
+  "lang": "ru",
+  "text": "На выдохе раскройтесь в Воина два, затем на вдохе — в Обратного воина."
+ },
+ {
+  "id": "pose.warrior-flow.cue.2",
+  "lang": "en",
+  "text": "Exhale open to Warrior II, then inhale into Reverse Warrior."
+ },
+ {
+  "id": "pose.warrior-flow.cue.3",
+  "lang": "he",
+  "text": "בשאיפה הרימו את היד הקדמית ללוחם הפוך; בנשיפה חזרו ללוחם שניים."
+ },
+ {
+  "id": "pose.warrior-flow.cue.3",
+  "lang": "ru",
+  "text": "На выдохе вернитесь в Воина два, выпрямите ногу и соедините стопы."
+ },
+ {
+  "id": "pose.warrior-flow.cue.3",
+  "lang": "en",
+  "text": "Exhale back to Warrior II, straighten the leg, and step together."
+ },
+ {
+  "id": "pose.warrior-flow.cue.4",
+  "lang": "he",
+  "text": "ישרו את הברך, הורידו ידיים וצעדו קדימה; חזרו על כל הרצף בצד השני."
+ },
+ {
+  "id": "pose.warrior-flow.cue.4",
+  "lang": "ru",
+  "text": "Повторите полный круг на другую сторону."
+ },
+ {
+  "id": "pose.warrior-flow.cue.4",
+  "lang": "en",
+  "text": "Repeat the full round on the other side."
  },
  {
   "id": "pose.triangle.name",
@@ -4385,6 +4565,90 @@
   "prio": "rest"
  },
  {
+  "id": "pose.gentle-flow.entry.1",
+  "lang": "he",
+  "text": "שבו גבוה על הרצפה, על כרית או על כיסא, והניחו לאגן להיות יציב.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.entry.2",
+  "lang": "he",
+  "text": "נתחיל סיבוב אחד של זרימה עדינה בישיבה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.align.1",
+  "lang": "he",
+  "text": "שאפו והרימו ידיים. נשפו לכפיפה צדית ימינה, ושאפו חזרה למרכז.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.align.2",
+  "lang": "he",
+  "text": "נשפו לכפיפה צדית שמאלה, ושאפו חזרה למרכז.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.align.3",
+  "lang": "he",
+  "text": "התארכו בשאיפה. בנשיפה סובבו בעדינות ימינה, חזרו למרכז, וסובבו שמאלה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.breath",
+  "lang": "he",
+  "text": "תנו לנשימה להוביל, בלי לעצור ובלי למהר.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.mod.L0",
+  "lang": "he",
+  "text": "שבו על כרית או על כיסא, שמרו על טווח קטן והשאירו את הידיים נמוכות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.mod.L1",
+  "lang": "he",
+  "text": "נועו בטווח נוח, כשהאגן יציב ועמוד השדרה ארוך.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הרימו את הידיים מעל הראש והרחיבו מעט את הטווח.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.gentle-flow.fix.1",
+  "lang": "he",
+  "text": "שימו לב לא לקרוס אל הצד בכפיפה. האריכו את שני צדי המותניים והשאירו את האגן כבד.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.gentle-flow.fix.2",
+  "lang": "he",
+  "text": "שימו לב לא למשוך את הסיבוב בידיים. התארכו תחילה וסובבו רק עד המקום שבו הנשימה נשארת חופשית.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.gentle-flow.exit",
+  "lang": "he",
+  "text": "החזירו ידיים מול הלב, שבו גבוה וקחו נשימה שקטה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
   "id": "pose.cat.entry.1",
   "lang": "he",
   "text": "בואו אל ארבע.",
@@ -4964,6 +5228,97 @@
   "text": "צד שני. פנו לצד השני וכופפו את הברך הקדמית.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.warrior-flow.entry.1",
+  "lang": "he",
+  "text": "עמדו בהר, ברכיים רכות ומבט יציב לפנים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.entry.2",
+  "lang": "he",
+  "text": "נתחיל סיבוב מלא בצד אחד, ואחריו נחזור על כל הרצף בצד השני.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.align.1",
+  "lang": "he",
+  "text": "שאפו, פסעו לאחור ועלו ללוחם אחד. נשפו ופתחו ללוחם שניים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.align.2",
+  "lang": "he",
+  "text": "שאפו ללוחם הפוך, כשהרגליים נשארות יציבות והצד הקדמי מתארך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.align.3",
+  "lang": "he",
+  "text": "נשפו חזרה ללוחם שניים. ישרו את הברך וצעדו קדימה להר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.breath",
+  "lang": "he",
+  "text": "נועו בקצב שמאפשר נשימה רציפה, בלי לעצור.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.mod.L0",
+  "lang": "he",
+  "text": "קצרו את הפסיעה, כופפו מעט והשאירו ידיים במותניים או נמוך; אפשר להיעזר בקיר או בכיסא.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.mod.L1",
+  "lang": "he",
+  "text": "בחרו פסיעה רגילה וכיפוף בינוני, עם ידיים ארוכות ונינוחות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, העמיקו את הכיפוף ושמרו על ידיים ארוכות ועל גב ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.fix.1",
+  "lang": "he",
+  "text": "שימו לב שהברך הקדמית לא קורסת פנימה. כוונו אותה בכיוון אצבעות כף הרגל והקטינו את הכיפוף לפי הצורך.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.warrior-flow.fix.2",
+  "lang": "he",
+  "text": "שימו לב לא לקרוס אל הגב התחתון בלוחם הפוך. האריכו את הצד הקדמי והשאירו את הקשת קטנה ונוחה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.warrior-flow.exit",
+  "lang": "he",
+  "text": "חזרו להר, הניחו לידיים לרדת וקחו נשימה לפני המעבר הלאה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.warrior-flow.side",
+  "lang": "he",
+  "text": "צד שני. פסעו לאחור ברגל השנייה ובצעו שוב את כל הרצף.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.triangle.entry.1",

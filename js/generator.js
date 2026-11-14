@@ -41,11 +41,12 @@ function separateBackbends(items, level) {
   }
   return out;
 }
-// Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
+// Body-position order of a practice: optional seated warm-up -> all fours -> standing -> kneeling -> seated -> prone -> supine -> savasana.
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
+  ['seated-warm', ['gentle-flow']],
   ['allfours', ['tabletop', 'cat-cow', 'sun-salutation-a', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
-  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
+  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
   ['prone', ['cobra', 'locust', 'child']],
@@ -81,6 +82,7 @@ function candidates({ focus, level, avoid }) {
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
   return POSES.filter((p) => p.section !== 'rest'
     && p.id !== 'sun-salutation-a' // inserted explicitly below only for eligible 20+ minute non-beginner plans
+    && p.id !== 'warrior-flow' // inserted explicitly below only for eligible standing blocks
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
     && (p.id !== 'extended-side-angle' || (level !== 'beginner' && focus === 'general'))
     && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
@@ -138,12 +140,13 @@ function generateBeginner({ minutes, focus, avoid }) {
   const picked = [];
   if (!avoidSet.has('cat-cow')) picked.push(POSE_BY_ID['cat-cow']);
   else if (!avoidSet.has('tabletop')) picked.push(POSE_BY_ID.tabletop); // cat-cow skipped: Tabletop breaths still warm the spine
+  else if (!avoidSet.has('gentle-flow')) picked.push(POSE_BY_ID['gentle-flow']); // fully seated warm-up fallback
   if (warmN > 1) picked.push(POSE_BY_ID['upward-salute']);
   for (const sx of ['stand', 'floor', 'cool']) picked.push(...lists[sx].filter((p) => p.id !== 'upward-salute').slice(0, counts[sx]));
 
   let items = picked.filter(Boolean).map((p) => (p.id === 'cat-cow' || p.id === 'tabletop'
     ? { pose: p.id, level: 0, unit: 'breath', amount: p.id === 'tabletop' ? 5 : CATCOW_FLOW_BREATHS }
-    : { pose: p.id, level: 0, unit: 'sec', amount: begRange(p)[0] }));
+    : { pose: p.id, level: 0, unit: 'sec', amount: p.id === 'gentle-flow' ? 60 : begRange(p)[0] }));
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
   items = separateBackbends(items, 0);
   const savCap = savasanaCap(minutes);
@@ -158,7 +161,7 @@ function generateBeginner({ minutes, focus, avoid }) {
     if (T - planSeconds(items) < 5) break;
     // extra: one-sided rest poses (REST_POSES) may stretch up to +30 s past their range; active poses +15 s only when the pool is exhausted; two-sided rest poses up to +15 s; cobra never
     const room = (it) => { const q = POSE_BY_ID[it.pose]; return q.id === 'cobra' || q.id === 'bridge' ? 0 : !REST_POSES.has(q.id) ? (extra >= 45 ? 15 : 0) : q.sides === 'both' ? Math.min(extra, 30) : extra; };
-    const cand = body().filter((it) => it.unit === 'sec' && it.amount + 5 <= range(it)[1] + room(it));
+    const cand = body().filter((it) => it.pose !== 'gentle-flow' && it.unit === 'sec' && it.amount + 5 <= range(it)[1] + room(it));
     if (!cand.length) {
       // all holds at their maximum and still more than ~2 min short: add one more easy pose (cool-down first), within the item cap
       const left = T - planSeconds(items);
@@ -257,10 +260,18 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
     if (warm >= 0) items[warm] = { pose: 'sun-salutation-a', level: lvl, unit: 'sec', amount: 72 };
     else items.push({ pose: 'sun-salutation-a', level: lvl, unit: 'sec', amount: 72 });
   }
+  // Warrior Flow replaces one warrior slot in non-beginner general/strength plans.
+  // Each side receives the complete declared 70-second round.
+  const warriorFlowBlocked = ['warrior-flow', 'pregnancy-avoid', 'blood-pressure-avoid', 'knee-avoid'].some((x) => avoidSet.has(x));
+  if (minutes >= 20 && (focus === 'general' || focus === 'strength') && !warriorFlowBlocked) {
+    const warrior = items.findIndex((it) => it.pose === 'warrior-2' || it.pose === 'warrior-1');
+    const flow = { pose: 'warrior-flow', level: lvl, unit: 'sec', amount: 70 };
+    if (warrior >= 0) items[warrior] = flow; else items.push(flow);
+  }
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
   items = separateBackbends(items, lvl);
   // beginner: no 12-breath Tabletop/Cat. A few Cat-Cow cycles instead (fixed, not stretched by the tuner).
-  const fixed = new WeakSet();
+  const fixed = new WeakSet(items.filter((it) => it.pose === 'gentle-flow' || it.pose === 'warrior-flow'));
   if (beg && items.some((i) => BREATH_POSES.has(i.pose))) {
     const out = []; let flowDone = false;
     const flow = () => { flowDone = true; for (let c = 0; c < CATCOW_CYCLES; c++) for (const id of ['cat', 'cow']) { const x = { pose: id, level: lvl, unit: 'breath', amount: CATCOW_BREATHS }; fixed.add(x); out.push(x); } };

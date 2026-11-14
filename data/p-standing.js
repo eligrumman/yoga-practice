@@ -61,6 +61,25 @@ export default [
     ],
   },
   {
+    id: 'warrior-flow', sa: 'Virabhadrasana flow', en: 'Warrior Flow', he: 'זרימת לוחמים', ru: 'Поток воинов', cat: 'standing', sec: 'stand', flow: 41, d: 2, hold: 70, sides: 'both', isFlow: true,
+    tags: ['strength', 'flex'],
+    cue: {
+      he: ['מהר פסעו רגל אחת לאחור; בשאיפה כופפו את הברך הקדמית ועלו ללוחם אחד.', 'בנשיפה פתחו את הגוף ואת הידיים ללוחם שניים, כשהברך עוקבת בכיוון האצבעות.', 'בשאיפה הרימו את היד הקדמית ללוחם הפוך; בנשיפה חזרו ללוחם שניים.', 'ישרו את הברך, הורידו ידיים וצעדו קדימה; חזרו על כל הרצף בצד השני.'],
+      en: ['From Mountain, step one foot back and inhale into Warrior I.', 'Exhale open to Warrior II, then inhale into Reverse Warrior.', 'Exhale back to Warrior II, straighten the leg, and step together.', 'Repeat the full round on the other side.'],
+      ru: ['Из Горы шагните одной ногой назад и на вдохе войдите в Воина один.', 'На выдохе раскройтесь в Воина два, затем на вдохе — в Обратного воина.', 'На выдохе вернитесь в Воина два, выпрямите ногу и соедините стопы.', 'Повторите полный круг на другую сторону.'],
+    },
+    safe: {
+      he: 'זה אינו ייעוץ רפואי. ברך רגישה: קצרו את הפסיעה, כופפו מעט והיעזרו בקיר או בכיסא; צאו אם מופיע כאב. לחץ דם לא מאוזן או סחרחורת: השאירו ידיים נמוכות, אל תטו את הראש לאחור ועלו לאט. בהריון: הרחיבו את בסיס העמידה, הקטינו טווח והיעזרו בתמיכה.',
+      en: 'Not medical advice. For knee sensitivity, shorten the stance, bend less, and use a wall or chair; stop for pain. With uncontrolled blood pressure or dizziness, keep the arms low, do not tip the head back, and move slowly. During pregnancy, widen the base, reduce the range, and use support.',
+      ru: 'Это не медицинская рекомендация. При чувствительности коленей сократите стойку, сгибайте меньше и используйте стену или стул; при боли выйдите. При неконтролируемом давлении или головокружении держите руки низко, не запрокидывайте голову и двигайтесь медленно. При беременности расширьте опору, уменьшите амплитуду и используйте поддержку.',
+    },
+    v: [
+      { he: 'פסיעה קצרה, ידיים במותניים או נמוך, כיפוף רדוד וקיר או כיסא לפי הצורך.', en: 'Short stance, hands on hips or low, shallow bend, with a wall or chair as needed.', ru: 'Короткая стойка, руки на тазу или невысоко, неглубокий сгиб; при необходимости стена или стул.' },
+      { he: 'פסיעה רגילה, כיפוף בינוני וידיים ארוכות לאורך הרצף.', en: 'Normal stance, medium bend, and long arms through the sequence.', ru: 'Обычная стойка, средний сгиб и вытянутые руки в течение всей связки.' },
+      { he: 'כיפוף עמוק יותר וידיים ארוכות, בלי לאבד את כיוון הברך או את אורך הגב.', en: 'Deeper bend with long arms while keeping knee tracking and spinal length.', ru: 'Более глубокий сгиб и длинные руки при сохранении направления колена и длины спины.' },
+    ],
+  },
+  {
     id: 'triangle', sa: 'Utthita Trikonasana', en: 'Triangle', he: 'משולש', ru: 'Треугольник', cat: 'standing', sec: 'stand', flow: 42, d: 2, hold: 25, sides: 'both',
     tags: ['flex', 'back'],
     cue: {

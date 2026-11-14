@@ -146,6 +146,53 @@ ok(!ALL_PRESETS.some((p) => p.items.some((i) => i.pose === 'crow')), 'crow safet
   const appSrc = readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
   ok(/FLOW_LABEL/.test(appSrc) && /p\.isFlow/.test(appSrc), 'library card and pose page render the flow badge');
 }
+// Gentle Flow: seated, breath-led, one 60-second round and safe for beginner warm-ups.
+{
+  const gentle = POSE_BY_ID['gentle-flow'];
+  ok(gentle?.isFlow && gentle.sides === 'single' && ['he', 'ru', 'en'].every((l) => gentle[l] && gentle.cues[l].length === 4 && gentle.safety[l]), 'gentle flow i18n and library marker complete');
+  const order = ['seated-tall', 'arms-up', 'side-bend-right', 'center-after-right', 'side-bend-left', 'center-after-left', 'twist-right', 'center-after-twist', 'twist-left', 'hands-to-heart'];
+  for (let l = 0; l < 3; l++) {
+    const seq = poseFrames(gentle, l).seq;
+    ok(seq.map((s) => s.name).join() === order.join(), `gentle flow L${l} sequence order`);
+    ok(seq.reduce((n, s) => n + s.dur, 0) === 60, `gentle flow L${l} round is 60 seconds at 1x`);
+    for (const s of seq) {
+      const S = solve(s.frame), boxes = S.prims.map(primBox), lo = Math.min(...boxes.map((b) => b.lo));
+      ok(validateFrame(s.frame).length === 0 && lo > -0.01 && lo <= 0.01, `gentle flow L${l} ${s.name} valid and on the floor`);
+      ok(boxes.filter((b) => b.lo <= 0.01).length <= 2, `gentle flow L${l} ${s.name} has at most two floor contacts`);
+    }
+  }
+  const beginner = generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoid: ['cat-cow', 'tabletop'] });
+  ok(beginner.items.some((i) => i.pose === gentle.id && i.amount === 60), 'gentle flow may warm a beginner general plan as one fixed round');
+  ok(!generatePlan({ minutes: 20, focus: 'general', level: 'beginner', avoid: ['cat-cow', 'tabletop', gentle.id] }).items.some((i) => i.pose === gentle.id), 'gentle flow follows its pose avoid');
+}
+// Warrior Flow: one complete 70-second round per side, mirrored by the standard two-sided engine.
+{
+  const warrior = POSE_BY_ID['warrior-flow'];
+  ok(warrior?.isFlow && warrior.sides === 'both' && ['he', 'ru', 'en'].every((l) => warrior[l] && warrior.cues[l].length === 4 && warrior.safety[l]), 'warrior flow i18n, sides, and library marker complete');
+  const order = ['mountain', 'warrior-one', 'warrior-two', 'reverse-warrior', 'warrior-two-return', 'step-together'];
+  for (let l = 0; l < 3; l++) {
+    const seq = poseFrames(warrior, l).seq;
+    ok(seq.map((s) => s.name).join() === order.join(), `warrior flow L${l} sequence order`);
+    ok(seq.reduce((n, s) => n + s.dur, 0) === 70, `warrior flow L${l} round is 70 seconds at 1x`);
+    for (const s of seq) {
+      const S = solve(s.frame), M = solve(swapLR(s.frame));
+      const boxes = S.prims.map(primBox), mirrorBoxes = M.prims.map(primBox);
+      const lo = Math.min(...boxes.map((b) => b.lo)), mirrorLo = Math.min(...mirrorBoxes.map((b) => b.lo));
+      ok(validateFrame(s.frame).length === 0 && lo > -0.01 && lo <= 0.01, `warrior flow L${l} ${s.name} valid and on the floor`);
+      const contacts = ['R', 'L'].filter((side) => Math.min(S.J[`toe${side}`][1], S.J[`heel${side}`][1]) <= 4).length
+        + ['R', 'L'].filter((side) => Math.min(S.J[`wrist${side}`][1], S.J[`fingers${side}`][1]) <= 4).length;
+      ok(contacts <= 2, `warrior flow L${l} ${s.name} has at most two weight-bearing limb contacts`);
+      ok(M.prims.length === S.prims.length && mirrorLo > -0.01 && mirrorLo <= 0.01, `warrior flow L${l} ${s.name} mirrors cleanly for side two`);
+      for (const side of ['R', 'L']) if (Math.min(S.J[`wrist${side}`][1], S.J[`fingers${side}`][1]) <= 4)
+        ok(S.hands[side].n[1] < -0.9, `warrior flow L${l} ${s.name} weight-bearing palm is flat`);
+    }
+  }
+  ok(generatePlan({ minutes: 20, focus: 'general', level: 'gentle' }).items.some((i) => i.pose === warrior.id && i.amount === 70), 'warrior flow may serve a non-beginner general standing block');
+  ok(generatePlan({ minutes: 20, focus: 'strength', level: 'gentle' }).items.some((i) => i.pose === warrior.id && i.amount === 70), 'warrior flow may serve a non-beginner strength standing block');
+  for (const avoid of [[warrior.id], ['pregnancy-avoid'], ['blood-pressure-avoid'], ['knee-avoid']])
+    ok(!generatePlan({ minutes: 20, focus: 'general', level: 'gentle', avoid }).items.some((i) => i.pose === warrior.id), `warrior flow gated by ${avoid[0]}`);
+  ok(!generatePlan({ minutes: 30, focus: 'general', level: 'beginner' }).items.some((i) => i.pose === warrior.id), 'warrior flow never generated for beginners');
+}
 ok(!STARTER_PATH.some((p) => p.items.some((i) => i.pose === 'pigeon')), 'pigeon excluded from 7-day starter path');
 for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   const ids = generatePlan({ minutes: m, focus: f, level: l }).items.map((i) => i.pose);
@@ -278,9 +325,9 @@ ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only
 ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
 
 // ---- two-sided poses and sides label
-const BOTH = ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe'];
+const BOTH = ['warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe'];
 const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
-ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 16 two-sided poses (got ${gotBoth.join(',')})`);
+ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 17 two-sided poses (got ${gotBoth.join(',')})`);
 for (const l of LANGS) {
   const p = POSE_BY_ID.triangle;
   ok(p[l] && p.cues[l].length === 4 && p.safety[l] && p.variations.every((v) => v[l]), `triangle i18n ${l}`);
@@ -405,7 +452,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 519, `519 v2 segments including sun-salutation-a (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 544, `544 v2 segments including warrior-flow (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -414,9 +461,9 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle|sun-salutation-a)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
   ok(JSON.stringify(SEGS_NOW.filter((s) => !newPoseSegment(s))) === JSON.stringify(legacy), 'pre-existing ru/en/he legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 36, 'legacy narration adds only the 36 required new-pose segments');
+  ok(SEGS_NOW.length === legacy.length + 48, 'legacy narration adds only the 48 required new-pose segments');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
@@ -529,8 +576,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 519 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 519 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 269 * 3, 'narration-script.json has 269 legacy entries in each language');
+  ok(v2s.length === 544 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 544 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 281 * 3, 'narration-script.json has 281 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');

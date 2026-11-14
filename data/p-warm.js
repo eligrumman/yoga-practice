@@ -50,6 +50,25 @@ export default [
     ],
   },
   {
+    id: 'gentle-flow', sa: 'Seated breath flow', en: 'Gentle Flow', he: 'זרימה עדינה', ru: 'Мягкий поток', cat: 'warm-up', sec: 'warm', flow: 19, d: 1, hold: 60, sides: 'single', isFlow: true,
+    tags: ['relax', 'back', 'flex'],
+    cue: {
+      he: ['שבו גבוה; בשאיפה הרימו ידיים ובנשיפה התארכו לכפיפה צדית ימינה.', 'שאפו למרכז ונשפו לכפיפה צדית שמאלה; שמרו את שני צדי האגן כבדים.', 'חזרו למרכז, התארכו בשאיפה וסובבו בעדינות לכל צד בנשיפה.', 'סיימו עם ידיים מול הלב ועם נשימה שקטה.'],
+      en: ['Sit tall; inhale the arms up and exhale into a comfortable side bend.', 'Return to center and repeat to the other side.', 'Lengthen on the inhale and turn gently to each side on the exhale.', 'Finish with hands at heart and an easy breath.'],
+      ru: ['Сядьте прямо; на вдохе поднимите руки, на выдохе мягко наклонитесь в сторону.', 'Вернитесь в центр и повторите в другую сторону.', 'На вдохе вытянитесь, на выдохе мягко повернитесь в каждую сторону.', 'Завершите с ладонями у груди и спокойным дыханием.'],
+    },
+    safe: {
+      he: 'זה אינו ייעוץ רפואי. שבו על כרית או על כיסא אם האגן מתגלגל לאחור. הקטינו את הטווח אם הגב, הצוואר, הכתפיים או הברכיים אינם נינוחים; אל תמשכו את הגוף בכוח בסיבוב.',
+      en: 'Not medical advice. Sit on a cushion or chair if the pelvis rolls back. Keep the range small if the back, neck, shoulders, or knees are uncomfortable, and never pull into the twist.',
+      ru: 'Это не медицинская рекомендация. Сядьте на подушку или стул, если таз отклоняется назад. Уменьшите амплитуду при дискомфорте в спине, шее, плечах или коленях; не тяните себя в поворот силой.',
+    },
+    v: [
+      { he: 'שבו על כרית או בגובה כיסא, עם טווח קטן וידיים נמוכות.', en: 'Sit on a cushion or chair-height support, with a small range and low arms.', ru: 'Сядьте на подушку или опору высотой со стул, двигайтесь в небольшой амплитуде, руки невысоко.' },
+      { he: 'ישיבה נוחה, טווח רגיל ותנועה שקטה עם הנשימה.', en: 'Comfortable seat, normal range, and calm breath-led movement.', ru: 'Удобное положение сидя, обычная амплитуда и спокойное движение с дыханием.' },
+      { he: 'טווח מלא יותר, ידיים מעל הראש ועמוד שדרה ארוך.', en: 'Fuller range with arms overhead and a long spine.', ru: 'Более полная амплитуда, руки над головой, позвоночник вытянут.' },
+    ],
+  },
+  {
     id: 'cat', sa: 'Marjaryasana', en: 'Cat', he: 'חתול', cat: 'warm-up', sec: 'warm', flow: 20, d: 1, hold: 30, sides: 'single',
     ru: 'Кошка', tags: ['relax', 'back', 'flex'],
     cue: {
