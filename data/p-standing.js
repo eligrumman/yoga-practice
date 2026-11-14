@@ -76,6 +76,20 @@ export default [
     ],
   },
   {
+    id: 'wide-legged-fold', sa: 'Prasarita Padottanasana', en: 'Wide-legged forward fold', he: 'כפיפה קדימה בפיסוק רחב', ru: 'Наклон вперёд с широко расставленными ногами', cat: 'forward fold', sec: 'stand', flow: 44, d: 2, hold: 30, sides: 'single', tags: ['flex', 'relax', 'noback'],
+    cue: {
+      he: ['פתחו את כפות הרגליים בערך לאורך רגל, מקבילות זו לזו.', 'רככו את הברכיים והטו את האגן קדימה, כשהחזה מתארך הרחק ממנו.', 'הניחו ידיים על הירכיים, השוקיים, בלוקים או הרצפה — לפי גובה שמאפשר גב ארוך.', 'חלקו משקל על כל כף הרגל, נשמו ברצף ואל תרדפו אחרי הרצפה.'],
+      en: ['Step the feet about one leg-length apart and keep them parallel.', 'Soften the knees and hinge from the hips with a long spine.', 'Rest the hands on the legs, blocks, or floor at a comfortable height.', 'Keep breathing and distribute weight through both feet.'],
+      ru: ['Расставьте стопы примерно на длину ноги и держите их параллельно.', 'Смягчите колени и наклонитесь от таза с длинной спиной.', 'Поставьте руки на ноги, блоки или пол на удобной высоте.', 'Дышите свободно и равномерно распределяйте вес.'],
+    },
+    safe: { he: 'בלחץ דם לא מאוזן, גלאוקומה או לחץ תוך־עיני: אל תורידו את הראש מתחת ללב ובדקו עם איש מקצוע רפואי איזו גרסה מתאימה. בהריון השאירו פיסוק מרווח, כפיפה רדודה וידיים גבוהות. ברגישות בגב התחתון או במיתרי הברך כופפו ברכיים והקטינו עומק. עלו לאט עם גב ארוך. אין כאן ייעוץ רפואי.', en: 'With uncontrolled blood pressure, glaucoma, or eye-pressure concerns, keep the head above the heart and ask a clinician which version is appropriate. During pregnancy, stay shallow with wide feet and high hand support. With lower-back or hamstring sensitivity, bend the knees and reduce the depth. Rise slowly with a long spine. This is not medical advice.', ru: 'При неконтролируемом давлении, глаукоме или повышенном внутриглазном давлении держите голову выше сердца и уточните подходящий вариант у врача. При беременности оставляйте широкий шаг, неглубокий наклон и высокую опору для рук. При чувствительности поясницы или задней поверхности бедра согните колени и уменьшите глубину. Поднимайтесь медленно с длинной спиной. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'חצי כפיפה: ברכיים רכות, גב שטוח וידיים על הירכיים, השוקיים או בלוקים גבוהים; אפשר קיר מאחור.', en: 'Half fold with soft knees, a flat back, and hands on the thighs, shins, or high blocks.', ru: 'Полунаклон: колени мягкие, спина ровная, руки на бёдрах, голенях или высоких блоках.', props: [{ type: 'block', arms: ['R', 'L'], h: 34 }, { type: 'wall' }] },
+      { he: 'רגליים ישרות אך לא נעולות, ידיים על בלוקים או על הרצפה מתחת לכתפיים; הראש מתקרב לרצפה רק בנוחות.', en: 'Legs straight but not locked; hands on blocks or floor under the shoulders.', ru: 'Ноги прямые, но не переразогнуты; руки на блоках или на полу под плечами.', props: [{ type: 'block', arms: ['R', 'L'], h: 22 }] },
+      { he: 'שלבו ידיים מאחורי הגב והרחיקו אותן בעדינות, כשהראש משתחרר לכיוון הרצפה בלי לאבד אורך בגב.', en: 'Clasp the hands behind the back and release the head toward the floor without forcing.', ru: 'Сцепите руки за спиной и направьте голову к полу без усилия.' },
+    ],
+  },
+  {
     id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: 'מצעד גבוה', ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {

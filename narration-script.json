@@ -1050,6 +1050,96 @@
   "text": "Keep breathing and do not force the depth."
  },
  {
+  "id": "pose.wide-legged-fold.name",
+  "lang": "he",
+  "text": "כפיפה קדימה בפיסוק רחב"
+ },
+ {
+  "id": "pose.wide-legged-fold.name",
+  "lang": "ru",
+  "text": "Наклон вперёд с широко расставленными ногами"
+ },
+ {
+  "id": "pose.wide-legged-fold.name",
+  "lang": "en",
+  "text": "Wide-legged forward fold"
+ },
+ {
+  "id": "pose.wide-legged-fold.intro",
+  "lang": "he",
+  "text": "תנוחת כפיפה קדימה בפיסוק רחב."
+ },
+ {
+  "id": "pose.wide-legged-fold.intro",
+  "lang": "ru",
+  "text": "Поза: Наклон вперёд с широко расставленными ногами."
+ },
+ {
+  "id": "pose.wide-legged-fold.intro",
+  "lang": "en",
+  "text": "Pose: Wide-legged forward fold."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.1",
+  "lang": "he",
+  "text": "פתחו את כפות הרגליים בערך לאורך רגל, מקבילות זו לזו."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.1",
+  "lang": "ru",
+  "text": "Расставьте стопы примерно на длину ноги и держите их параллельно."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.1",
+  "lang": "en",
+  "text": "Step the feet about one leg-length apart and keep them parallel."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.2",
+  "lang": "he",
+  "text": "רככו את הברכיים והטו את האגן קדימה, כשהחזה מתארך הרחק ממנו."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.2",
+  "lang": "ru",
+  "text": "Смягчите колени и наклонитесь от таза с длинной спиной."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.2",
+  "lang": "en",
+  "text": "Soften the knees and hinge from the hips with a long spine."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.3",
+  "lang": "he",
+  "text": "הניחו ידיים על הירכיים, השוקיים, בלוקים או הרצפה — לפי גובה שמאפשר גב ארוך."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.3",
+  "lang": "ru",
+  "text": "Поставьте руки на ноги, блоки или пол на удобной высоте."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.3",
+  "lang": "en",
+  "text": "Rest the hands on the legs, blocks, or floor at a comfortable height."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.4",
+  "lang": "he",
+  "text": "חלקו משקל על כל כף הרגל, נשמו ברצף ואל תרדפו אחרי הרצפה."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.4",
+  "lang": "ru",
+  "text": "Дышите свободно и равномерно распределяйте вес."
+ },
+ {
+  "id": "pose.wide-legged-fold.cue.4",
+  "lang": "en",
+  "text": "Keep breathing and distribute weight through both feet."
+ },
+ {
   "id": "pose.high-lunge.name",
   "lang": "he",
   "text": "מצעד גבוה"
@@ -4694,6 +4784,83 @@
   "text": "צד שני. הפנו את כפות הרגליים והאריכו את הגוף מעל הרגל השנייה.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.wide-legged-fold.entry.1",
+  "lang": "he",
+  "text": "פתחו את כפות הרגליים בערך לאורך רגל והשאירו אותן מקבילות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.entry.2",
+  "lang": "he",
+  "text": "רככו ברכיים והטו את האגן קדימה עם גב ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.align.1",
+  "lang": "he",
+  "text": "הניחו את הידיים בגובה שמאפשר לחזה להתארך קדימה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.align.2",
+  "lang": "he",
+  "text": "חלקו את המשקל על כל כף הרגל ואל תנעלו ברכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.breath",
+  "lang": "he",
+  "text": "בשאיפה האריכו את הגב. בנשיפה שמרו על העומק הנוח.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.mod.L0",
+  "lang": "he",
+  "text": "הישארו בחצי כפיפה עם ידיים על ירכיים, שוקיים או בלוקים גבוהים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.mod.L1",
+  "lang": "he",
+  "text": "הניחו ידיים מתחת לכתפיים על בלוקים או על הרצפה, ורככו את הברכיים לפי הצורך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.mod.L2",
+  "lang": "he",
+  "text": "אם הגב נשאר ארוך, שלבו ידיים מאחורי הגב והרפו את הראש לכיוון הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.wide-legged-fold.fix.1",
+  "lang": "he",
+  "text": "הגב נוטה להתעגל כדי להגיע נמוך. הגביהו את הידיים, כופפו ברכיים והאריכו את החזה קדימה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.wide-legged-fold.fix.2",
+  "lang": "he",
+  "text": "המשקל נוטה לברוח לעקבים והברכיים להינעל. לחצו את כל כף הרגל והשאירו את הברכיים רכות.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.wide-legged-fold.exit",
+  "lang": "he",
+  "text": "הניחו ידיים על הירכיים, האריכו את החזה קדימה ועלו לאט לעמידה.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.high-lunge.entry.1",
