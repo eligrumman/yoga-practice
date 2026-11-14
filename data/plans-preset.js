@@ -29,11 +29,11 @@ export const PRESETS = [
       en: 'An introduction to the basic poses at a calm pace. Every pose is explained and held for a comfortable time.',
     },
     items: [
-      b('tabletop', 0, 6), b('cat', 0, 8), b('cow', 0, 8), s('downward-dog', 0, 50),
+      b('tabletop', 0, 6), b('cat', 0, 8), b('cow', 0, 8), s('downward-dog', 0, 30),
       s('half-lift', 0, 35), s('uttanasana', 0, 40), s('upward-salute', 0, 35), s('mountain', 0, 40),
-      s('warrior-1', 0, 40), s('warrior-2', 0, 40), s('chair', 0, 35), s('tree', 0, 40),
-      s('cobra', 0, 40), s('child', 0, 50), s('bridge', 0, 40), s('knees-to-chest', 0, 50),
-      s('supine-twist', 0, 50), s('savasana', 0, 225),
+      s('warrior-1', 0, 40), s('warrior-2', 0, 40), s('chair', 0, 35), s('tree', 0, 30),
+      s('cobra', 0, 20), s('child', 0, 60), s('bridge', 0, 40), s('knees-to-chest', 0, 60),
+      s('supine-twist', 0, 55), s('savasana', 0, 255),
     ],
   },
   {
@@ -46,9 +46,9 @@ export const PRESETS = [
     },
     items: [
       b('tabletop', 0, 6), b('cat', 0, 10), b('cow', 0, 10), s('child', 0, 65),
-      s('downward-dog', 0, 40), s('half-lift', 0, 35), s('cobra', 0, 35), s('bridge', 0, 40),
+      s('downward-dog', 0, 40), s('half-lift', 0, 35), s('child', 0, 45), s('bridge', 0, 40),
       s('knees-to-chest', 0, 55), s('supine-twist', 0, 55), s('happy-baby', 0, 50), s('figure-four', 0, 50),
-      s('savasana', 0, 165),
+      s('savasana', 0, 155),
     ],
   },
   {
@@ -84,16 +84,16 @@ export const PRESETS = [
     id: 'core-balance', minutes: 20, level: 1,
     name: { he: 'ליבה ושיווי משקל', ru: 'Кор и равновесие', en: 'Core & balance' },
     desc: {
-      he: 'חיזוק הבטן והרגליים ותרגול של איזון. הרצף כולל פלאנק, סירה ועמידה על רגל אחת.',
-      ru: 'Укрепляет живот и ноги и тренирует равновесие. В последовательности планка, лодка и стойка на одной ноге.',
-      en: 'Strengthens the belly and legs and trains balance. The sequence includes plank, boat and one-leg stands.',
+      he: 'חיזוק הבטן והרגליים ותרגול של איזון. הרצף כולל פלאנק, סירה ועמידה על רגל אחת; בעמידות האיזון אפשר להישען על קיר או על כיסא.',
+      ru: 'Укрепляет живот и ноги и тренирует равновесие. В последовательности планка, лодка и стойка на одной ноге; в балансах можно опереться на стену или стул.',
+      en: 'Strengthens the belly and legs and trains balance. The sequence includes plank, boat and one-leg stands; for the balance poses you can lean on a wall or a chair.',
     },
     items: [
-      b('tabletop', 1, 5), b('cat', 1, 6), b('cow', 1, 6), s('plank', 1, 40),
-      s('downward-dog', 1, 55), s('chair', 1, 45), s('warrior-1', 1, 45), s('warrior-3', 1, 40),
-      s('tree', 1, 45), s('dancer', 1, 40), s('high-lunge', 1, 45), s('boat', 1, 40),
-      s('locust', 1, 30), s('bridge', 1, 45), s('child', 1, 55), s('supine-twist', 1, 55),
-      s('savasana', 1, 150),
+      b('tabletop', 1, 5), b('cat', 1, 6), b('cow', 1, 6), s('plank', 1, 35),
+      s('downward-dog', 1, 50), s('chair', 1, 40), s('warrior-3', 1, 35), s('warrior-1', 1, 40),
+      s('tree', 1, 45), s('high-lunge', 1, 40), s('dancer', 1, 40), s('boat', 1, 40),
+      s('locust', 1, 30), s('child', 1, 50), s('bridge', 1, 40), s('knees-to-chest', 1, 45),
+      s('supine-twist', 1, 60), s('savasana', 1, 150),
     ],
   },
   {
@@ -109,9 +109,9 @@ export const PRESETS = [
       s('plank', 1, 35), s('cobra', 1, 35), s('downward-dog', 1, 40), s('half-lift', 1, 25),
       s('uttanasana', 1, 40), s('upward-salute', 1, 25), s('chair', 1, 40), s('warrior-1', 1, 40),
       s('warrior-2', 1, 40), s('high-lunge', 1, 40), s('tree', 1, 40), s('warrior-3', 1, 35),
-      s('revolved-chair', 1, 35), s('low-lunge', 1, 50), s('camel', 1, 25), s('bridge', 1, 40),
-      s('locust', 1, 25), s('cobbler', 1, 55), s('seated-fold', 1, 55), s('seated-twist', 1, 40),
-      s('knees-to-chest', 1, 50), s('supine-twist', 1, 55), s('savasana', 1, 220),
+      s('revolved-chair', 1, 35), s('low-lunge', 1, 50), s('locust', 1, 25), s('child', 1, 40),
+      s('cobbler', 1, 55), s('seated-fold', 1, 50), s('seated-twist', 1, 40), s('bridge', 1, 40),
+      s('knees-to-chest', 1, 45), s('supine-twist', 1, 55), s('savasana', 1, 220),
     ],
   },
   {
@@ -124,8 +124,7 @@ export const PRESETS = [
     },
     items: [
       s('mountain', 0, 20), s('upward-salute', 0, 15), s('half-lift', 0, 15), s('uttanasana', 0, 25),
-      s('chair', 0, 20), s('warrior-1', 0, 15), s('warrior-2', 0, 15), s('revolved-chair', 0, 15),
-      s('mountain', 0, 55),
+      s('warrior-1', 0, 20), s('warrior-2', 0, 20), s('chair', 0, 30), s('mountain', 0, 65),
     ],
   },
 ];
@@ -155,7 +154,7 @@ export const STARTER_PATH = [
     },
     items: [
       b('tabletop', 0, 5), b('cat', 0, 7), b('cow', 0, 7), s('downward-dog', 0, 25),
-      s('child', 0, 40), s('cobra', 0, 20), s('bridge', 0, 25), s('supine-twist', 0, 35),
+      s('cobra', 0, 20), s('child', 0, 40), s('bridge', 0, 25), s('supine-twist', 0, 35),
       s('savasana', 0, 155),
     ],
   },
@@ -168,9 +167,9 @@ export const STARTER_PATH = [
       en: 'Meet mountain, chair and warrior one. The legs begin to work.',
     },
     items: [
-      s('mountain', 0, 40), s('upward-salute', 0, 25), s('uttanasana', 0, 30), s('chair', 0, 25),
-      s('warrior-1', 0, 30), s('warrior-2', 0, 30), s('tree', 0, 25), s('child', 0, 50),
-      s('knees-to-chest', 0, 40), s('savasana', 0, 155),
+      s('mountain', 0, 55), s('upward-salute', 0, 35), s('uttanasana', 0, 40), s('chair', 0, 35),
+      s('warrior-1', 0, 45), s('child', 0, 65),
+      s('knees-to-chest', 0, 60), s('savasana', 0, 175),
     ],
   },
   {
@@ -196,10 +195,10 @@ export const STARTER_PATH = [
       en: 'We add a kneeling plank and leg strength, still with plenty of rest.',
     },
     items: [
-      b('tabletop', 0, 6), b('cat', 0, 7), b('cow', 0, 7), s('plank', 0, 20),
+      b('tabletop', 0, 6), b('cat', 0, 7), b('cow', 0, 7), s('plank', 0, 15),
       s('downward-dog', 0, 35), s('chair', 0, 30), s('warrior-1', 0, 30), s('warrior-2', 0, 30),
       s('cobra', 0, 30), s('child', 0, 45), s('bridge', 0, 30), s('supine-twist', 0, 35),
-      s('savasana', 0, 160),
+      s('savasana', 0, 165),
     ],
   },
   {
@@ -213,8 +212,8 @@ export const STARTER_PATH = [
     items: [
       b('tabletop', 0, 5), b('cat', 0, 7), b('cow', 0, 7), s('downward-dog', 0, 35),
       s('uttanasana', 0, 35), s('mountain', 0, 25), s('chair', 0, 25), s('warrior-1', 0, 35),
-      s('warrior-2', 0, 35), s('tree', 0, 35), s('cobra', 0, 25), s('child', 0, 40),
-      s('cobbler', 0, 40), s('knees-to-chest', 0, 40), s('supine-twist', 0, 40), s('savasana', 0, 150),
+      s('warrior-2', 0, 35), s('tree', 0, 30), s('cobra', 0, 25), s('child', 0, 40),
+      s('cobbler', 0, 40), s('knees-to-chest', 0, 40), s('supine-twist', 0, 40), s('savasana', 0, 155),
     ],
   },
   {

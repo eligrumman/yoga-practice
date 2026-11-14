@@ -162,6 +162,11 @@ const T = {
     ru: 'Материалы сайта не являются медицинским советом. Если вы беременны, травмированы или у вас есть заболевания, проконсультируйтесь со специалистом перед практикой. Если появилась боль, прекратите занятие.',
     en: 'This site is not medical advice. If you are pregnant, injured or have a medical condition, consult a professional before practicing. Stop if you feel pain.',
   },
+  pregNote: {
+    he: 'בהריון? דלגו על שכיבה על הבטן או על הגב כשלא נוח, והישענו על תמיכה בתנוחות שיווי משקל. התייעצו עם הצוות הרפואי.',
+    ru: 'Беременность? Пропускайте позы лёжа на животе или на спине, если неудобно, и держитесь за опору в балансах. Посоветуйтесь с врачом.',
+    en: 'Pregnant? Skip lying on the belly or back when it is uncomfortable, and use support in balance poses. Check with your medical team.',
+  },
   privacy: { he: 'הכל נשמר רק במכשיר שלכם. בלי חשבונות ובלי מעקב.', ru: 'Всё хранится только на вашем устройстве. Без аккаунтов и слежки.', en: 'Everything stays on your device. No accounts, no tracking.' },
   notFound: { he: 'העמוד לא נמצא', ru: 'Страница не найдена', en: 'Page not found' },
   mine: { he: 'שלי', ru: 'мой', en: 'mine' },

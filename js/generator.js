@@ -16,15 +16,42 @@ const WEIGHTS = {
 };
 const FOCUS_TAG = { general: null, flexibility: 'flex', strength: 'strength', relax: 'relax', back: 'back' };
 const BREATH_POSES = new Set(['tabletop', 'cat', 'cow']);
+// relax plans: no lunge, backbend, plank or boat peaks
+const RELAX_OUT = new Set(['low-lunge', 'high-lunge', 'cobra', 'locust', 'camel', 'bridge', 'plank', 'boat', 'warrior-3', 'dancer']);
+// Plans with prone, supine, twist or balance poses get a short pregnancy line on the plan screen (Savasana alone does not count)
+const SUPINE_OR_PRONE = new Set(['cobra', 'locust', 'bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']);
+export const needsPregnancyNote = (items) => items.some((it) => { const p = POSE_BY_ID[it.pose]; return !!p && (SUPINE_OR_PRONE.has(p.id) || p.category === 'twist' || p.category === 'balance'); });
+export const isBackbend = (id) => POSE_BY_ID[id]?.category === 'backbend';
+// savasana never takes more than ~15% of the session (30 min: 4.5 min)
+export const savasanaCap = (minutes) => Math.max(60, grid(minutes * 60 * 0.15));
+// Two backbends never touch: a Child goes between them. An existing Child is moved there; a second pair gets a short extra Child.
+function separateBackbends(items, level) {
+  const out = [];
+  for (const it of items) {
+    const prev = out[out.length - 1];
+    if (prev && isBackbend(prev.pose) && isBackbend(it.pose)) {
+      const j = items.findIndex((x) => x.pose === 'child');
+      const usedChild = out.some((x) => x.pose === 'child');
+      if (j >= 0 && !usedChild) out.push(items[j]);
+      else if (!usedChild) out.push({ pose: 'child', level, unit: 'sec', amount: 30 });
+      else out.push({ pose: 'child', level, unit: 'sec', amount: 20 }); // a second, short Child (the plan's own Child is already used)
+    }
+    if (it.pose === 'child' && out.includes(it)) continue;
+    out.push(it);
+  }
+  return out;
+}
 // Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
   ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank']],
   ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'half-lift', 'uttanasana']],
-  ['kneel', ['low-lunge', 'half-split', 'camel', 'child']],
+  ['kneel', ['low-lunge', 'half-split', 'camel']],
+  // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
+  ['prone', ['cobra', 'locust', 'child']],
   ['seated', ['easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'boat']],
-  ['prone', ['cobra', 'locust']],
-  ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'supine-twist', 'legs-up-wall']],
+  // legs-up-wall sits before the twist so the plan can close twist -> savasana
+  ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']],
   ['rest', ['savasana']],
 ];
 export const POSITIONS = SEQ.map(([n]) => n);
@@ -43,13 +70,16 @@ const NAMES = {
 
 // longest beginner hold per pose: cobra is the shortest (20 s)
 const maxSec = (p) => (p.id === 'cobra' ? 20 : 40);
+// passive, restful poses that may be held longer when the savasana cap leaves time over
+const REST_POSES = new Set(['child', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'knees-to-chest', 'happy-baby', 'figure-four', 'supine-twist', 'legs-up-wall']);
 const grid = (x) => Math.round(x / 5) * 5;
 
 function candidates({ focus, level, avoid }) {
   // beginner: difficulty-1 poses plus a short list of easy extras (no Tree, Warrior III, Plank, Half-split...)
   const maxD = focus === 'back' && level !== 'beginner' ? 2 : 3;
+  const out = (p) => focus === 'relax' && RELAX_OUT.has(p.id);
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
-  return POSES.filter((p) => p.section !== 'rest' && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !avoid.has(p.id));
+  return POSES.filter((p) => p.section !== 'rest' && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !out(p) && !avoid.has(p.id));
 }
 
 function rank(p, focus, level) {
@@ -91,21 +121,25 @@ function generateBeginner({ minutes, focus, avoid }) {
   const warmN = 1 + (minutes >= 20 && hasSalute ? 1 : 0); // cat-cow (+ upward salute)
   const R = N - warmN;
   const sw = w.stand + w.bal, tot = sw + w.floor + w.cool;
-  const stand = Math.max(2, Math.min(BEG_STAND_CAP[minutes] ?? 4, Math.round((R * sw) / tot)));
+  const standCap = (BEG_STAND_CAP[minutes] ?? 4) + (focus === 'strength' ? 1 : 0); // strength leans on the legs
+  const stand = Math.max(2, Math.min(standCap, Math.round((R * sw) / tot)));
   let floor = Math.max(1, Math.round(((R - stand) * w.floor) / (w.floor + w.cool)));
   floor = Math.min(floor, lists.floor.length, R - stand - 1);
   let counts = { stand: Math.min(stand, lists.stand.length), floor, cool: R - stand - floor };
   if (counts.cool > lists.cool.length) { counts.floor += counts.cool - lists.cool.length; counts.cool = lists.cool.length; counts.floor = Math.min(counts.floor, lists.floor.length); }
   const picked = [];
   if (!avoidSet.has('cat-cow')) picked.push(POSE_BY_ID['cat-cow']);
+  else if (!avoidSet.has('tabletop')) picked.push(POSE_BY_ID.tabletop); // cat-cow skipped: Tabletop breaths still warm the spine
   if (warmN > 1) picked.push(POSE_BY_ID['upward-salute']);
   for (const sx of ['stand', 'floor', 'cool']) picked.push(...lists[sx].filter((p) => p.id !== 'upward-salute').slice(0, counts[sx]));
 
-  let items = picked.filter(Boolean).map((p) => (p.id === 'cat-cow'
-    ? { pose: p.id, level: 0, unit: 'breath', amount: CATCOW_FLOW_BREATHS }
+  let items = picked.filter(Boolean).map((p) => (p.id === 'cat-cow' || p.id === 'tabletop'
+    ? { pose: p.id, level: 0, unit: 'breath', amount: p.id === 'tabletop' ? 5 : CATCOW_FLOW_BREATHS }
     : { pose: p.id, level: 0, unit: 'sec', amount: begRange(p)[0] }));
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
-  const savasana = { pose: 'savasana', level: 0, unit: 'sec', amount: Math.max(60, grid(T * 0.15)) };
+  items = separateBackbends(items, 0);
+  const savCap = savasanaCap(minutes);
+  const savasana = { pose: 'savasana', level: 0, unit: 'sec', amount: savCap };
   items.push(savasana);
   const body = () => items.slice(0, -1);
   const range = (it) => begRange(POSE_BY_ID[it.pose]);
@@ -114,27 +148,29 @@ function generateBeginner({ minutes, focus, avoid }) {
   const maxItems = { 10: 10, 20: 18, 30: 24 }[minutes] ?? 24;
   for (let guard = 0; guard < 4000; guard++) {
     if (T - planSeconds(items) < 5) break;
-    const cand = body().filter((it) => it.unit === 'sec' && it.amount + 5 <= range(it)[1] + (it.pose === 'cobra' ? 0 : extra));
+    // extra: one-sided rest poses (REST_POSES) may stretch up to +30 s past their range; active poses +15 s only when the pool is exhausted; two-sided rest poses up to +15 s; cobra never
+    const room = (it) => { const q = POSE_BY_ID[it.pose]; return q.id === 'cobra' || q.id === 'bridge' ? 0 : !REST_POSES.has(q.id) ? (extra >= 45 ? 15 : 0) : q.sides === 'both' ? Math.min(extra, 30) : extra; };
+    const cand = body().filter((it) => it.unit === 'sec' && it.amount + 5 <= range(it)[1] + room(it));
     if (!cand.length) {
       // all holds at their maximum and still more than ~2 min short: add one more easy pose (cool-down first), within the item cap
       const left = T - planSeconds(items);
       const nStand = items.filter((it) => POSE_BY_ID[it.pose].section === 'stand').length;
-      const more = [...lists.cool, ...lists.floor, ...(nStand < (BEG_STAND_CAP[minutes] ?? 4) ? lists.stand : [])].find((p) => !items.some((it) => it.pose === p.id));
+      const more = [...lists.cool, ...lists.floor, ...(nStand < standCap ? lists.stand : [])].find((p) => !items.some((it) => it.pose === p.id));
       if (left > 150 && more && items.length < maxItems) {
         items.splice(items.length - 1, 0, { pose: more.id, level: 0, unit: 'sec', amount: begRange(more)[0] });
-        const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items.push(sv);
+        const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items = separateBackbends(items, 0); items.push(sv);
         continue;
       }
-      if (extra < 30 && left - DEFAULT_TRANSITION > 420) { extra += 15; continue; }
+      if (extra < 45 && left > 30) { extra += 15; continue; }
       break;
     }
     cand[i++ % cand.length].amount += 5;
   }
   // overflow at minimum holds: shrink savasana first
   savasana.amount = Math.max(30, savasana.amount + Math.min(0, T - planSeconds(items)));
-  // still short: savasana absorbs the rest (up to 5 min for 10-20 min plans, 10 min at 30)
+  // savasana absorbs what is left, but never more than ~15% of the session (the plan may end a little under T instead)
   const rest = T - planSeconds(body());
-  savasana.amount = Math.max(30, Math.min(minutes >= 30 ? 600 : minutes >= 20 ? 300 : 240, grid(rest - DEFAULT_TRANSITION)));
+  savasana.amount = Math.max(30, Math.min(savCap, grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
 }
 
@@ -206,6 +242,7 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
     }
   }
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
+  items = separateBackbends(items, lvl);
   // beginner: no 12-breath Tabletop/Cat. A few Cat-Cow cycles instead (fixed, not stretched by the tuner).
   const fixed = new WeakSet();
   if (beg && items.some((i) => BREATH_POSES.has(i.pose))) {
@@ -251,7 +288,7 @@ export function generatePlan({ minutes = 20, focus = 'general', level = 'beginne
   }
   // let savasana absorb what is left (30-480 s, up to 600 s for a 30 min beginner plan)
   const rest = T - planSeconds(body());
-  items[items.length - 1].amount = Math.max(30, Math.min(beg ? 600 : 480, grid(rest - DEFAULT_TRANSITION)));
+  items[items.length - 1].amount = Math.max(30, Math.min(Math.max(beg ? 0 : 0, savasanaCap(minutes)), grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level };
 }
 

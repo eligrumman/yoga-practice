@@ -3,7 +3,7 @@ import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { attachSpecs } from './specs.js';
 import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
-import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
+import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, needsPregnancyNote } from './generator.js';
 import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
 import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
@@ -104,6 +104,7 @@ function presetCard(p) {
       el('h3', {}, p.name[lang]), // starter names already begin with "Day N:"
       el('div', { class: 'meta' }, el('span', { class: 'badge' }, (hasBreaths(p.items) ? approxMin(mins * 60, lang) : `${mins} ${T('min')}`)), levelBadge(p.level))),
     el('p', {}, p.desc[lang]),
+    needsPregnancyNote(p.items) ? el('p', { class: 'hint small preg-note' }, T('pregNote')) : null,
     el('div', { class: 'row-btns' },
       el('button', { class: 'btn primary', onclick: () => go(`/player/preset:${p.id}`) }, '▶ ' + T('play')),
       el('button', { class: 'btn', onclick: () => copyPreset(p) }, T('copy'))));
@@ -201,7 +202,7 @@ function viewLibrary() {
 function viewPose(id) {
   const p = POSE_BY_ID[id];
   if (!p) { main.append(el('p', { class: 'empty' }, T('notFound'))); return null; }
-  let level = 1, speed = 1;
+  let level = 0, speed = 1; // open on the beginner level (L0)
   const svg = svgEl('fig big'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', poseName(p));
   const fig = new Figure(svg); const anim = new Animator(fig);
   const tabs = el('div', { class: 'tabs', role: 'tablist' });
@@ -243,7 +244,7 @@ function viewPose(id) {
         el('div', { class: 'note safety' }, el('strong', {}, '⚠ ' + T('safety') + ': '), p.safety[lang]),
         el('div', { class: 'note easier' }, el('strong', {}, '✓ ' + T('easier') + ': '), p.variations[0][lang]),
         el('div', { class: 'row-btns' }, addSel))));
-  setLevel(1); anim.start();
+  setLevel(level); anim.start();
   return () => anim.destroy();
 }
 
@@ -294,6 +295,7 @@ function viewPlan(id) {
   if (!plan) { main.append(el('p', { class: 'empty' }, T('notFound'))); return null; }
   const listEl = el('ol', { class: 'items', id: 'items' });
   const totalEl = el('div', { class: 'total', id: 'total' });
+  const pregEl = el('p', { class: 'hint small preg-note', id: 'preg-note' }, T('pregNote'));
   const savedEl = el('span', { class: 'save-state', id: 'save-state', role: 'status', 'aria-live': 'polite' }, T('savedAuto'));
   const flashSaved = () => { savedEl.textContent = T('savedAuto'); savedEl.classList.add('flash'); clearTimeout(flashSaved.t); flashSaved.t = setTimeout(() => savedEl.classList.remove('flash'), 1500); };
   const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTotal(plan.items)} \u00b7 ${nPoses(plan.items.length, lang)}`; flashSaved(); };
@@ -356,6 +358,7 @@ function viewPlan(id) {
   const draw = () => {
     listEl.replaceChildren(...(plan.items.length ? plan.items.map(row) : [el('li', { class: 'empty' }, T('empty'))]));
     totalEl.textContent = `${T('total')}: ${fmtTotal(plan.items)} \u00b7 ${nPoses(plan.items.length, lang)}`;
+    pregEl.hidden = !needsPregnancyNote(plan.items);
   };
   // picker
   const pick = el('select', { id: 'pick', 'aria-label': T('addPose') }, POSES.map((p) => el('option', { value: p.id }, `${poseName(p)} — ${p.sanskrit}`)));
@@ -369,6 +372,7 @@ function viewPlan(id) {
       el('button', { class: 'btn', onclick: () => $('#import-here').click() }, T('import')),
       el('input', { type: 'file', id: 'import-here', accept: '.json,application/json', hidden: true, onchange: (e) => { const f = e.target.files[0]; if (f) importFile(f, (rec) => go(`/plan/${rec.id}`)); e.target.value = ''; } }),
       el('button', { class: 'btn danger', onclick: () => { if (confirm(T('confirmDel'))) { store.deletePlan(plan.id); go('/plans'); } } }, T('del'))),
+    pregEl,
     listEl,
     el('div', { class: 'add-row' }, pick, el('button', { class: 'btn primary', id: 'add', onclick: () => {
       const p = POSE_BY_ID[pick.value]; plan.items.push({ pose: p.id, level: 1, unit: 'sec', amount: p.holdSeconds }); save(); draw();
