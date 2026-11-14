@@ -319,3 +319,8 @@ Astra ran with wrapper `--write --cd <worktree>` (workspace-write + network, ext
 | 10 | back plan 60 s holds / 4:25 savasana / 20 s cobra | OPEN (Owner question 3 undecided) |
 
 Note: Astra's own browser hung all round; figures were verified from my screenshots (review/round5/new/).
+
+## Round 5 (parts 3-4) 2026-11-14
+- Triangle and extended side angle: figures fixed (side view camera, torso tilt, arms). Wide-legged fold: 3/4 camera, palms on blocks, L2 clasped hands behind back (still a slight A-frame stance; L0 foot overlaps blocks).
+- gentle-flow: twist/side-bend arm no longer crosses the face (L0-L2). sun-salutation-a: 8 forward-fold frames now have straight arms (L0-L2).
+- Reports: review/round5/r5-fix-figures-1..4.md. Tests 11745 passed, 0 failed. Still weak: sun-salutation 2D figure is small, warrior-flow L0 first frame awkward, no full live visual review.

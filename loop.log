@@ -7,3 +7,4 @@
 2026-11-14 round5 partial: pigeon+crow (2aa8518); Astra usage limit until 06:42; reviews content-only; 10398 tests pass; smoke he/ru/en x 375/1280 OK
 2026-11-14 round5 part2: triangle, wide-legged fold, extended side angle, sun salutation A, gentle flow, warrior flow (f6d9700); 11698 tests pass; smoke he/ru/en x 375/1280 OK
 2026-11-14 daily cycle: end-of-session check-in on finish screen (easy/ok/hard suggests next preset, js/checkin.js) | efbb81b | 11745 tests pass (was 11698) | TTS 0 new (09:10 run: ffmpeg missing + 429 quota; 615 pending)
+2026-11-14 round5 part3-4: fixed triangle, extended-side-angle, wide-legged-fold, gentle-flow, sun-salutation-a figures; tests 11745/0; smoke he/ru/en 375+1280 OK
