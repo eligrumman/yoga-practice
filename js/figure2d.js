@@ -2,7 +2,7 @@
 // Sphere-hulls, tapered capsules and ellipsoids are projected orthographically, sorted by depth
 // (painter's algorithm) and filled with soft gradients lit from the upper left.
 import { solve, camera, project, app, FACE } from './rig.js';
-import { inkOn, inkJitter } from './inkstyle.js';
+import { inkOn, inkSoftId, inkEdgeId, inkTwinK } from './inkstyle.js';
 
 export const VBW = 400, VBH = 300, FLOOR = 262;
 const NS = 'http://www.w3.org/2000/svg';
@@ -128,7 +128,8 @@ export class Renderer2D {
   constructor(svg, { floor = true, ink = inkOn() } = {}) {
     ensureDefs();
     this.ink = !!ink;
-    if (this.ink) { ensureInkDefs(); svg.classList.add('fig-ink'); }
+    svg.classList.toggle('fig-ink', this.ink);
+    if (this.ink) ensureInkDefs();
     this.svg = svg;
     svg.setAttribute('viewBox', `0 0 ${VBW} ${VBH}`);
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
@@ -154,7 +155,7 @@ export class Renderer2D {
     const { cam, scale, cx } = view;
     const S = solve(frame, { breath });
     const PX = (p) => { const s = project(cam, p); return [200 + (s[0] - cx) * scale, FLOOR - s[1] * scale, s[2]]; };
-    const mat = (m, far) => `url(#fg-${this.ink ? 'ink-' : ''}${m}${far ? '-far' : ''})`;
+    const mat = (m, far, id) => `url(#fg-${this.ink && !inkSoftId(id) ? 'ink-' : ''}${m}${far ? '-far' : ''})`;
     // body depth reference (so the far limbs read darker)
     let dsum = 0;
     for (const k of ['pelvis', 'spine3']) dsum += PX(S.J[k])[2];
@@ -195,7 +196,7 @@ export class Renderer2D {
       if (it.hull) {
         el.setAttribute('d', it.d);
         const farH = !TORSO.has(id) && !id.startsWith('h_') && it.wz < S.J.pelvis[2] - 3 && it.key < dref - 4;
-        if (it.p.g === 'rad') { el.setAttribute('fill', mat(it.p.mat, farH)); continue; }
+        if (it.p.g === 'rad') { el.setAttribute('fill', mat(it.p.mat, farH, id)); continue; }
         // shaded across the hull's long axis (first -> last sphere), light from the upper left
         const cs = it.cs, a = cs[0], b = cs[cs.length - 1], dx = b[0] - a[0], dy = b[1] - a[1], dl = Math.hypot(dx, dy);
         let nx = -0.5 / 0.986, ny = -0.85 / 0.986;
@@ -204,7 +205,7 @@ export class Renderer2D {
         for (const c of cs) { const v = c[0] * nx + c[1] * ny; hi = Math.max(hi, v + c[2]); lo = Math.min(lo, v - c[2]); }
         const gk = id + (farH ? 'f' : 'n');
         let g = this.lgs.get(gk);
-        if (!g) { g = linGrad(this.defs, `${this.uid}-${gk}`, MATS[it.p.mat], farH, this.ink); this.lgs.set(gk, g); }
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${gk}`, MATS[it.p.mat], farH, this.ink && !inkSoftId(id)); this.lgs.set(gk, g); }
         g.setAttribute('x1', (nx * hi).toFixed(2)); g.setAttribute('y1', (ny * hi).toFixed(2));
         g.setAttribute('x2', (nx * lo).toFixed(2)); g.setAttribute('y2', (ny * lo).toFixed(2));
         el.setAttribute('fill', `url(#${this.uid}-${gk})`);
@@ -213,7 +214,7 @@ export class Renderer2D {
       const far = it.cap ? (it.p.p0[2] + it.p.p1[2]) / 2 < S.J.pelvis[2] - 3 && PX(it.p.p0)[2] < dref - 4 : false;
       const farEll = !it.cap && it.p.c[2] < S.J.pelvis[2] - 6 && it.key < dref - 4;
       const m = it.p.mat;
-      const fill = mat(m, it.cap ? far : farEll && !id.startsWith('h_'));
+      const fill = mat(m, it.cap ? far : farEll && !id.startsWith('h_'), id);
       if (it.cap) {
         el.setAttribute('d', it.d);
         // cylindrical shading: linear gradient across the limb axis, light from the upper left
@@ -222,7 +223,7 @@ export class Renderer2D {
         const rr = Math.max(it.p.r0, it.p.r1) * scale, mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
         const key = id + (far ? 'f' : 'n');
         let g = this.lgs.get(key);
-        if (!g) { g = linGrad(this.defs, `${this.uid}-${key}`, MATS[m], far, this.ink); this.lgs.set(key, g); }
+        if (!g) { g = linGrad(this.defs, `${this.uid}-${key}`, MATS[m], far, this.ink && !inkSoftId(id)); this.lgs.set(key, g); }
         g.setAttribute('x1', (mx + nx * rr).toFixed(2)); g.setAttribute('y1', (my + ny * rr).toFixed(2));
         g.setAttribute('x2', (mx - nx * rr).toFixed(2)); g.setAttribute('y2', (my - ny * rr).toFixed(2));
         el.setAttribute('fill', `url(#${this.uid}-${key})`);
@@ -234,7 +235,7 @@ export class Renderer2D {
       }
       el.setAttribute('fill', fill);
     }
-    if (this.ink) this.inkPass(items, scale);
+    if (this.ink) this.inkPass(items);
     if (sig !== this.order) {
       // the face features sit right on top of the face piece
       const ids = items.map((i) => i.p.id);
@@ -260,18 +261,18 @@ export class Renderer2D {
     return S;
   }
 
-  // ink style: per-part stroke width (varies a little, thinner on the face) and a thicker twin underneath for the silhouette
-  inkPass(items, scale) {
-    const lw = 0.55 + 0.5 * scale;
+  // ink style: a hairline silhouette (a fill-and-stroke twin of every part drawn underneath the body, so only the outer edge shows),
+  // plus a thin inner line on hands and feet. Widths are screen pixels (non-scaling stroke), set in CSS.
+  inkPass(items) {
     if (!this.twins) this.twins = new Map();
     for (const it of items) {
       const id = it.p.id, el = this.els.get(id);
-      const w = lw * inkJitter(id) * (id === 'h_head' ? 0.7 : id === 'h_nose' ? 0.25 : id.startsWith('h_ear') ? 0.4 : it.p.mat === 'hair' ? 0.85 : 1);
-      el.style.strokeWidth = w.toFixed(2);
+      if (inkEdgeId(id)) el.classList.add('fp-edge');
+      const k = inkTwinK(id);
+      if (!k) continue;
       let tw = this.twins.get(id);
-      if (!tw) { tw = mk(el.tagName, { class: 'fig-twin' }); this.twins.set(id, tw); this.under.appendChild(tw); }
+      if (!tw) { tw = mk(el.tagName, { class: 'fig-twin' }); if (k < 1) tw.style.setProperty('--tw-k', String(k)); this.twins.set(id, tw); this.under.appendChild(tw); }
       for (const a of ['d', 'cx', 'cy', 'rx', 'ry', 'transform']) { const v = el.getAttribute(a); if (v !== null) tw.setAttribute(a, v); }
-      tw.style.strokeWidth = (w * 2.6).toFixed(2);
     }
   }
 

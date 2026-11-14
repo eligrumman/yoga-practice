@@ -2,7 +2,7 @@
 // three.js is loaded lazily from a pinned CDN URL; callers fall back to 2D if loadThree() rejects.
 // Render-on-demand: the caller drives animation by calling draw() each frame (draw() renders).
 import { solve, FACE } from './rig.js';
-import { inkOn, inkJitter } from './inkstyle.js';
+import { inkOn, inkSoftId, inkEdgeId, inkTwinK } from './inkstyle.js';
 
 export const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
@@ -59,11 +59,17 @@ export class Renderer3D {
       // toon shading: a 3-step gradient map (hard-edged light / mid / shade), plus an inverted-hull ink outline per mesh
       this.toonMap = new T.DataTexture(Uint8Array.from([120, 190, 255]), 3, 1, T.RedFormat);
       this.toonMap.minFilter = this.toonMap.magFilter = T.NearestFilter; this.toonMap.generateMipmaps = false; this.toonMap.needsUpdate = true;
-      this.inkMats = [1.5, 1.9, 2.3].map((px) => this._inkMat(px));
+      // hairline outlines (screen px): the body and head are pushed back a little in depth so they hide behind neighbouring parts
+      // (no joint lines, silhouette only); hands and feet keep theirs. The face and head use a smooth ramp instead of hard steps.
+      this.inkMats = { body: this._inkMat(1, 7), head: this._inkMat(0.75, 7), edge: this._inkMat(0.8, 0) };
+      this.softMap = new T.DataTexture(Uint8Array.from([150, 175, 200, 225, 245, 255]), 6, 1, T.RedFormat);
+      this.softMap.minFilter = this.softMap.magFilter = T.LinearFilter; this.softMap.generateMipmaps = false; this.softMap.needsUpdate = true;
+      this.softMats = {};
     }
     for (const [m, v] of Object.entries(MATS)) {
       this.mats[m] = this.ink ? new T.MeshToonMaterial({ color: FALLBACK[v], gradientMap: this.toonMap })
         : new T.MeshStandardMaterial({ color: FALLBACK[v], roughness: m === 'hair' ? 0.7 : 0.82, metalness: 0 });
+      if (this.ink) this.softMats[m] = new T.MeshToonMaterial({ color: FALLBACK[v], gradientMap: this.softMap });
     }
     this.figure = new T.Group();
     this.scene.add(this.figure);
@@ -103,10 +109,10 @@ export class Renderer3D {
 
   // ---------------------------------------------------------------- helpers
   // ink outline: back faces pushed outwards along the view-space normal by a constant number of screen pixels
-  _inkMat(px) {
+  _inkMat(px, push) {
     const m = new this.T.ShaderMaterial({
-      uniforms: { uPx: { value: new this.T.Vector2(px * 2 / 300, px * 2 / 300) }, uCol: { value: new this.T.Color('#2b1d15') } },
-      vertexShader: `uniform vec2 uPx; void main(){ vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      uniforms: { uPx: { value: new this.T.Vector2(px * 2 / 300, px * 2 / 300) }, uPush: { value: push }, uCol: { value: new this.T.Color('#7a6354') } },
+      vertexShader: `uniform vec2 uPx; uniform float uPush; void main(){ vec4 mv = modelViewMatrix * vec4(position, 1.0); mv.z -= uPush; vec4 p = projectionMatrix * mv;
         vec2 d = (projectionMatrix * vec4(normalize(normalMatrix * normal), 0.0)).xy; float l = length(d);
         if (l > 1e-5) p.xy += d / l * uPx * p.w; gl_Position = p; }`,
       fragmentShader: 'uniform vec3 uCol; void main(){ gl_FragColor = vec4(uCol, 1.0); }',
@@ -114,11 +120,13 @@ export class Renderer3D {
     });
     m.userData.px = px; return m;
   }
-  _inkSize() { if (!this.inkMats) return; for (const m of this.inkMats) m.uniforms.uPx.value.set(m.userData.px * 2 / Math.max(1, this.w), m.userData.px * 2 / Math.max(1, this.h)); }
-  // child mesh sharing the geometry; the jitter picks one of three line weights per part
+  _inkSize() { if (!this.inkMats) return; for (const m of Object.values(this.inkMats)) m.uniforms.uPx.value.set(m.userData.px * 2 / Math.max(1, this.w), m.userData.px * 2 / Math.max(1, this.h)); }
+  // child mesh sharing the geometry; hands and feet, head and body get different weights, nose and ears none
   _outline(mesh, id) {
     if (!this.ink) return;
-    const o = new this.T.Mesh(mesh.geometry, this.inkMats[Math.min(2, Math.floor((inkJitter(id) - 0.85) / 0.1001))]);
+    const k = inkTwinK(id);
+    if (!k) return;
+    const o = new this.T.Mesh(mesh.geometry, this.inkMats[inkEdgeId(id) ? 'edge' : k < 1 ? 'head' : 'body']);
     o.frustumCulled = false; mesh.add(o); mesh.userData.outline = o;
   }
   _radialTex(stops) {
@@ -133,13 +141,13 @@ export class Renderer3D {
     try {
       const cs = getComputedStyle(document.documentElement);
       const get = (n, d) => (cs.getPropertyValue(n).trim() || d);
-      for (const [m, v] of Object.entries(MATS)) this.mats[m].color.set(get('--' + v, FALLBACK[v]));
+      for (const [m, v] of Object.entries(MATS)) { this.mats[m].color.set(get('--' + v, FALLBACK[v])); this.softMats?.[m]?.color.set(get('--' + v, FALLBACK[v])); }
       this.propMats.block.color.set(get('--prop-block', '#7ba7a0'));
       this.propMats.cush.color.set(get('--prop-cush', '#d8b4a0'));
       this.propMats.strap.color.set(get('--prop-strap', '#c9794f'));
       this.propMats.wall.color.set(get('--prop-wall', '#d9d6cf'));
       this.faceMats.ink.color.set(get('--fig-ink', '#4a3328'));
-      if (this.inkMats) for (const m of this.inkMats) m.uniforms.uCol.value.set(get('--ink-line', '#2b1d15'));
+      if (this.inkMats) for (const m of Object.values(this.inkMats)) m.uniforms.uCol.value.set(get('--ink-line', '#7a6354')).lerp(new this.T.Color(get('--bg', '#f6f3ee')), 0.2);
       const dark = (() => { const bg = get('--bg', '#f6f3ee'); const c = new this.T.Color(bg); return (c.r + c.g + c.b) / 3 < 0.4; })();
       this.floorMat.color.set(get('--floor', '#b9b2a5'));
       this.floorMat.map.needsUpdate = false;
@@ -273,10 +281,12 @@ export class Renderer3D {
     return S;
   }
 
+  _mat(p) { return (this.ink && inkSoftId(p.id) ? this.softMats[p.mat] : null) || this.mats[p.mat] || this.mats.skin; }
+
   _ell(p) {
     let it = this.items.get(p.id);
     if (!it) {
-      const mesh = new this.T.Mesh(this.sphereG, this.mats[p.mat] || this.mats.skin);
+      const mesh = new this.T.Mesh(this.sphereG, this._mat(p));
       mesh.matrixAutoUpdate = false; mesh.frustumCulled = false;
       this.figure.add(mesh); this._outline(mesh, p.id); it = { mesh }; this.items.set(p.id, it);
     }
@@ -291,7 +301,7 @@ export class Renderer3D {
     let it = this.items.get(p.id);
     if (!it) {
       const g = this.hullG.clone();
-      const mesh = new this.T.Mesh(g, this.mats[p.mat] || this.mats.skin);
+      const mesh = new this.T.Mesh(g, this._mat(p));
       mesh.matrixAutoUpdate = false; mesh.frustumCulled = false;
       this.figure.add(mesh); this._outline(mesh, p.id); it = { mesh, own: g }; this.items.set(p.id, it);
     }
@@ -326,7 +336,7 @@ export class Renderer3D {
     const T = this.T;
     let it = this.items.get(p.id);
     if (!it) {
-      const mat = this.mats[p.mat] || this.mats.skin;
+      const mat = this._mat(p);
       const mk = (g) => { const m = new T.Mesh(g, mat); m.matrixAutoUpdate = false; m.frustumCulled = false; this.figure.add(m); this._outline(m, p.id + (m.geometry === this.cylG ? 'b' : 's')); return m; };
       it = { body: mk(this.cylG), s0: mk(this.sphereG), s1: mk(this.sphereG) };
       this.items.set(p.id, it);
@@ -467,8 +477,8 @@ export class Renderer3D {
     for (const it of this.items.values()) it.own?.dispose();
     for (const o of this.propObjs) o.obj.traverse?.((n) => { if (n.geometry && n.geometry !== this.sphereG) n.geometry.dispose(); });
     for (const g of this.geoms) g.dispose();
-    for (const m of [...Object.values(this.mats), ...(this.inkMats || []), ...Object.values(this.propMats), ...Object.values(this.faceMats), this.shadowMat, this.floorMat]) { m.map?.dispose(); m.dispose(); }
-    this.toonMap?.dispose();
+    for (const m of [...Object.values(this.mats), ...Object.values(this.inkMats || {}), ...Object.values(this.softMats || {}), ...Object.values(this.propMats), ...Object.values(this.faceMats), this.shadowMat, this.floorMat]) { m.map?.dispose(); m.dispose(); }
+    this.toonMap?.dispose(); this.softMap?.dispose();
     this.renderer.dispose();
     try { this.renderer.forceContextLoss(); } catch (e) { /* */ }
     cv.remove();

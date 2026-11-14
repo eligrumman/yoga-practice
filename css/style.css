@@ -220,10 +220,14 @@ body.in-player{overflow:hidden}
 .fs-ring .count{width:100%;height:100%;left:0;right:0;inset-inline:0;margin:0;font-size:.62rem;white-space:nowrap}
 .player.fs .p-ctrl .fs-next{flex-direction:row;align-items:center;flex:0 1 auto}
 .fs-next-txt{text-align:start}
-/* optional ink style (?style=ink): warm dark contour, round joins, flat cel tones */
-:root{--ink-line:#2b1d15}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink-line:#150e0a}}
-.fig-ink .fp{stroke:var(--ink-line);stroke-linejoin:round;stroke-linecap:round}
-.fig-ink .fig-twin{fill:var(--ink-line);stroke:var(--ink-line);stroke-linejoin:round;stroke-linecap:round}
-.fig-ink .fig-eye,.fig-ink .fig-brow{stroke:var(--ink-line)}
-.fig-ink .prop-block,.fig-ink .prop-cushion{stroke:var(--ink-line);stroke-width:1;stroke-linejoin:round}
+/* optional ink style (settings "סגנון ציור" or ?style=ink): hairline warm contour, flat cel tones, calm face.
+   Widths are screen pixels (non-scaling stroke); --ink-k thins them on small thumbnails. */
+:root{--ink-line:#7a6354}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink-line:#b39d8c}}
+:root[data-theme=dark]{--ink-line:#b39d8c}
+.fig-ink .fp{stroke:none}
+.fig-ink .fp-edge{stroke:var(--ink-line);stroke-opacity:.75;stroke-width:calc(var(--ink-k,1)*.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.fig-ink .fig-under{opacity:.8}
+.fig-ink .fig-twin{fill:var(--ink-line);stroke:var(--ink-line);stroke-width:calc(var(--ink-k,1)*var(--tw-k,1)*1.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.fig-ink .prop-block,.fig-ink .prop-cushion{stroke:var(--ink-line);stroke-opacity:.8;stroke-width:calc(var(--ink-k,1)*.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.fig.mini,.fig.item-fig{--ink-k:.65}.fig.card-fig{--ink-k:.85}
