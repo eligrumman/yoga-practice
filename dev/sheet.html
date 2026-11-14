@@ -6,9 +6,9 @@ body{font:11px sans-serif;margin:4px}
 .c{border:1px solid var(--line)}svg.fig{width:100%;display:block;background:var(--bg)}
 </style><div class=g id=g></div>
 <script type=module>
-// Contact sheet: every pose x level, straight from poses/<id>.json. ?p=id,id  ?l=0|1|2  ?c=cols  ?a=1 (alt frame)  ?s=1 (start frame)
+// Contact sheet: every pose x level, straight from poses/<id>.json. ?p=id,id  ?l=0|1|2  ?c=cols  ?a=1 (alt frame)  ?s=1 (start frame)  ?seq=1&n=4 (every sequence step plus n-1 in-between blends, as the player draws them; &m=1 mirrored)
 import { Renderer2D, fitView } from '../js/figure2d.js';
-import { fullFrame, overlay } from '../js/rig.js';
+import { fullFrame, overlay, blendFrames, swapLR } from '../js/rig.js';
 const q = new URLSearchParams(location.search);
 const lv = q.get('l') ? [+q.get('l')] : [0, 1, 2];
 const only = q.get('p'); const g = document.getElementById('g');
@@ -20,6 +20,18 @@ for (const id of idx) {
   const spec = await (await fetch(`../poses/${id}.json`)).json();
   for (const l of lv) {
     const lvl = spec.levels[l];
+    if (q.get('seq') && lvl.seq) {
+      const N = +(q.get('n') || 4), mir = q.get('m') ? swapLR : (f) => f, sq = lvl.seq.map((st) => ({ ...st, frame: mir(fullFrame(st.frame)) }));
+      const cam = lvl.camera || spec.camera, view = fitView(sq.map((st) => st.frame), cam);
+      sq.forEach((st, i) => {
+        for (let k = 0; k < N; k++) {
+          const nx = sq[(i + 1) % sq.length], u = k / N, f = k ? blendFrames(st.frame, nx.frame, u * u * (3 - 2 * u)) : st.frame;
+          const d = document.createElement('div'); d.className = 'c'; d.innerHTML = `<div>${id} L${l} ${i}.${k} ${st.name}${k ? ' -> ' + nx.name : ''}</div><svg class=fig></svg>`; g.append(d);
+          new Renderer2D(d.querySelector('svg')).draw(f, { props: lvl.props, view });
+        }
+      });
+      n++; continue;
+    }
     const d = document.createElement('div'); d.className = 'c';
     d.innerHTML = `<div>${id} L${l}</div><svg class=fig></svg>`; g.append(d);
     try {

@@ -3,7 +3,8 @@
 import { POSES } from '../data/poses.js';
 import { poseFrames } from '../js/figure.js';
 import { attachSpecs } from '../js/specs.js';
-import { solve, primBox, zeroFrame, swapLR, validateFrame, JOINTS, blockBoxes } from '../js/rig.js';
+import { solve, primBox, zeroFrame, swapLR, validateFrame, JOINTS, blockBoxes, blendFrames } from '../js/rig.js';
+import { fitView, framesBounds, VBH, FLOOR } from '../js/figure2d.js';
 import { readFileSync } from 'node:fs';
 
 const TOL = 2.0; // world units (the figure is about 200 tall)
@@ -63,6 +64,26 @@ export default async function figureTests(ok) {
     ok(validateFrame(fr.hold).length === 0, `${P.id} L${l} hold within joint limits`);
     ok(S.prims.every((p) => Number.isFinite(primBox(p).lo)), `${P.id} L${l} primitives finite`);
     ok(Math.min(...S.prims.map((p) => primBox(p).lo)) > -0.01, `${P.id} L${l} nothing below the floor`);
+  }
+  // ---- generic floor test: no body point below the floor for any pose, level, mirror or frame (start, hold, alt, sequence steps, enter/leave blends),
+  //      both in world space and as drawn (projected px under the floor line stay inside the canvas margin, so no limb is clipped or reads as sunk)
+  const BELOW_PX = 30; // canvas has VBH - FLOOR = 38 px under the floor line
+  for (const P of POSES) for (const l of ALL) for (const mir of [0, 1]) {
+    const fr = poseFrames(P, l); const m = (f) => (mir ? swapLR(f) : f);
+    const holds = [fr.hold, fr.alt, ...(fr.seq || []).map((q) => q.frame)].filter(Boolean).map(m);
+    const frames = [m(fr.start), ...holds];
+    for (const u of [0.25, 0.5, 0.75]) frames.push(blendFrames(m(fr.start), holds[0], u));
+    const lowY = Math.min(...frames.map((f) => Math.min(...solve(f).prims.map((p) => primBox(p).lo))));
+    const view = fitView(holds, fr.camera); const b = framesBounds(frames, view.cam);
+    const px = Math.max(0, -b.sy0 * view.scale);
+    ok(lowY > -0.01 && px <= BELOW_PX && FLOOR + px <= VBH, `${P.id} L${l}${mir ? ' mirrored' : ''} nothing below the floor in any frame (${px.toFixed(1)}px under the line)`);
+  }
+  // ---- warrior flow: through every transition (both sides) one leg never crosses over the other
+  const wf = POSES.find((q) => q.id === 'warrior-flow');
+  for (const l of ALL) for (const mir of [0, 1]) {
+    const seq = poseFrames(wf, l).seq.map((q) => (mir ? swapLR(q.frame) : q.frame)); let gap = 1e9;
+    seq.forEach((a, i) => { const b = seq[(i + 1) % seq.length]; for (let k = 0; k <= 20; k++) { const u = k / 20, J = solve(blendFrames(a, b, u * u * (3 - 2 * u))).J; gap = Math.min(gap, J.ankleR[2] - J.ankleL[2], J.toeR[2] - J.toeL[2], J.kneeR[2] - J.kneeL[2]); } });
+    ok(gap >= 8, `warrior-flow L${l}${mir ? ' mirrored' : ''} feet and knees never cross in a transition (min gap ${gap.toFixed(1)})`);
   }
   // ---- spec files keep full frames (the tuner builds one slider group per joint from them)
   for (const P of POSES) {
@@ -181,7 +202,8 @@ export default async function figureTests(ok) {
       ok(Math.abs(F.hold.kneeL[2]) <= 1 && S.J.ankleL[0] < S.J.hipL[0] - 70, `pigeon L${l} keeps the back leg long behind the hip`);
     }
     const P2f = poseFrames(pigeon, 2);
-    ok(Math.max(...['spine1', 'spine2', 'spine3'].map((j) => Math.abs(P2f.hold[j][2]))) <= 3, 'pigeon L2 folds with a long spine over the L1 leg base');
+    const P2s = solve(P2f.hold);
+    ok(P2s.J.head[0] > P2s.J.hipR[0] + 40 && P2s.J.head[1] < P2s.J.hipR[1] + 12 && P2s.J.wristR[0] > P2s.J.head[0], 'pigeon L2 folds forward over the front shin with the arms reaching past the head');
 
     const catcow = POSES.find((q) => q.id === 'cat-cow');
     for (const l of ALL) {

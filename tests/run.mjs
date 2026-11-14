@@ -133,9 +133,9 @@ ok(!ALL_PRESETS.some((p) => p.items.some((i) => i.pose === 'crow')), 'crow safet
   const sun = POSE_BY_ID['sun-salutation-a'];
   ok(sun?.isFlow && ['he', 'ru', 'en'].every((l) => sun[l] && sun.cues[l].length === 4 && sun.safety[l]), 'sun flow i18n and library marker complete');
   const orders = [
-    ['mountain', 'arms-up', 'fold', 'half-lift', 'knees-down', 'knees-chest-chin', 'low-cobra', 'child-reset', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
-    ['mountain', 'arms-up', 'fold', 'half-lift', 'knees-plank', 'lower-to-belly', 'low-cobra', 'downward-dog', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
-    ['mountain', 'arms-up', 'fold', 'half-lift', 'full-plank', 'lower-to-belly', 'cobra', 'downward-dog', 'step-through-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'step-back', 'knees-down', 'knees-chest-chin', 'low-cobra', 'child-reset', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'step-back', 'knees-plank', 'lower-to-belly', 'low-cobra', 'downward-dog', 'step-forward-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
+    ['mountain', 'arms-up', 'fold', 'half-lift', 'step-back', 'full-plank', 'lower-to-belly', 'cobra', 'downward-dog', 'step-through-half-lift', 'fold-return', 'rise-arms-up', 'hands-to-heart'],
   ];
   for (let l = 0; l < 3; l++) {
     const seq = poseFrames(sun, l).seq;

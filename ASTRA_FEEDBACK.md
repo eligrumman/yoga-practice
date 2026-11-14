@@ -345,3 +345,17 @@ Method lesson: the library animation loops enter/hold/leave every 10 s, so "wait
 | P1 | sun-salutation-a visual jumps fold -> all-fours; warrior-flow crossed-leg transition | OPEN |
 | P2 | #/plans shows no presets; savasana L1/L2 near-identical; bridge levels close; English subtitles in he UI; mobile player bar | OPEN |
 | P3 | Astra could not observe console errors | OPEN (smoke reports none) |
+
+## Round 7 2026-11-14 (Astra confirmed on the LIVE site, then fixed locally)
+Astra browse #1 (live): CONFIRMED happy-baby L0-L2, pigeon L0-L2, hand-to-toe L2, knees-to-chest L0, sun-salutation-a (fold to all-fours jump), warrior-flow (foot crossing). NOT SEEN: supine-twist L1/L2 (nothing clipped on the live build, but the floor test below found and fixed the projected overshoot), camel L2 (head only mildly extended; left unchanged, no concrete evidence to fix).
+| # | Item | Status |
+|---|---|---|
+| 1 | happy-baby L0-L2: knees wide toward the armpits, shins vertical, soles up, hands on shins (L0) / feet (L1, L2); camera az28 el12 | FIXED |
+| 2 | supine-twist L2 below the floor line: camera az26 el14 plus renderer fix (fitView now seats the lowest floor-resting part on the line); generic floor test added (every pose x level x mirror x frame incl. sequence steps and enter/leave blends: world y >= -0.01 and <= 30 px under the line) | FIXED; only offender the test found beyond supine-twist was my own first happy-baby camera (el24), lowered |
+| 3 | pigeon L1: upright on the hands, block under the front hip (block `at` now mirrors with the pose), shin across the mat, back leg straight, top of foot down, hips square. L2: folds forward over the front shin, arms reaching. Camera az12 el7 (side view; the old az65 view foreshortened the stance) | FIXED |
+| 4 | hand-to-toe L2: both hands at the raised foot | FIXED |
+| 5 | knees-to-chest L0: right knee hugged with both hands on the shin, left leg long, no stray arm | FIXED |
+| 6a | sun-salutation-a: new `step-back` step (hands down, one leg stepped back) between half-lift and the plank/knees steps in all three levels; round still 72 s | FIXED |
+| 6b | warrior-flow: the 3D feet never crossed (min lateral gap 14-18 units, now a test); the cross was the az70 near-frontal camera projecting the staggered stance as an X. Camera az28 el6 | FIXED (camera) |
+| 7 | camel L2 head | NOT SEEN by Astra; unchanged |
+Dev tool: dev/sheet.html?p=<id>&seq=1&n=4 renders every flow step plus in-between blends as the player draws them (&m=1 mirrored).

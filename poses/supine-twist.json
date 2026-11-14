@@ -1,7 +1,7 @@
 {
   "id": "supine-twist",
   "format": 1,
-  "camera": {"az":60,"el":22},
+  "camera": {"az":26,"el":14},
   "start": {
     "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, -90] },
     "spine1": [0, 0, 0],

@@ -2,8 +2,8 @@
   "id": "warrior-flow",
   "format": 1,
   "camera": {
-    "az": 70,
-    "el": 5
+    "az": 28,
+    "el": 6
   },
   "start": {
     "pelvis": {

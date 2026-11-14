@@ -12,6 +12,7 @@ const mirrorSide = (v) => (v === 'R' ? 'L' : v === 'L' ? 'R' : Array.isArray(v) 
 export const mirrorProps = (props) => props.map((p) => {
   const o = { ...p };
   for (const k of ['arm', 'leg', 'arms', 'legs', 'side']) if (k in o) o[k] = mirrorSide(o[k]);
+  if (typeof o.at === 'string' && /^(hip|knee|ankle|wrist)[RL]$/.test(o.at)) o.at = o.at.slice(0, -1) + mirrorSide(o.at.slice(-1)); // block under hipR -> hipL on the other side
   return o;
 });
 
@@ -174,7 +175,7 @@ export class Animator {
     const view = viewFor(pose, level, mirror);
     // the hold view can be zoomed in far more than the standing start frame fits: ease the framing from the start view to the hold view
     const sv = fitView([fullFrame(start)], P.camera, { maxScale: 1.45 });
-    this.cfg = { start: fullFrame(start), hold, alt, seq, props, mode, intro, view, startView: sv.scale < view.scale ? sv : null, cam: P.camera };
+    this.cfg = { start: fullFrame(start), hold, alt, seq, props, mode, intro, view, startView: sv.scale < view.scale || sv.base !== view.base ? sv : null, cam: P.camera };
     this.time = 0;
     this.frame(0);
   }
@@ -220,7 +221,7 @@ export class Animator {
     const { f, e, breath } = this.frameAt(time);
     const c = this.cfg;
     let view = c.view;
-    if (c.startView) { const k = Math.min(1, Math.max(0, e)); view = { cam: view.cam, scale: c.startView.scale + (view.scale - c.startView.scale) * k, cx: c.startView.cx + (view.cx - c.startView.cx) * k }; }
+    if (c.startView) { const k = Math.min(1, Math.max(0, e)); view = { cam: view.cam, scale: c.startView.scale + (view.scale - c.startView.scale) * k, cx: c.startView.cx + (view.cx - c.startView.cx) * k, base: c.startView.base + (view.base - c.startView.base) * k }; }
     this.fig.draw(f, { props: c.props, e, breath, view, cam: c.cam });
   }
   loop = (now) => {

@@ -74,7 +74,7 @@ function linGrad(defs, id, v, far, cel) {
 // ------------------------------------------------------------ fitting
 // A view = { cam, scale, cx }: orthographic camera, px per model unit, model-space screen-x centre.
 export function framesBounds(frames, cam) {
-  let sx0 = 1e9, sx1 = -1e9, sy1 = -1e9, sy0 = 1e9;
+  let sx0 = 1e9, sx1 = -1e9, sy1 = -1e9, sy0 = 1e9, sf = 0; // sf: lowest projected edge of anything that rests on the floor (world y <= 1.5)
   for (const f of frames) {
     const S = solve(f);
     for (const p of S.prims) {
@@ -84,17 +84,21 @@ export function framesBounds(frames, cam) {
         const s = project(cam, q), r = p.kind === 'hull' ? q[3] : r0;
         sx0 = Math.min(sx0, s[0] - r); sx1 = Math.max(sx1, s[0] + r);
         sy1 = Math.max(sy1, s[1] + r); sy0 = Math.min(sy0, s[1] - r);
+        const ry = p.kind === 'ell' ? Math.hypot(p.ax[0][1], p.ax[1][1], p.ax[2][1]) : r;
+        if (q[1] - ry <= 1.5) sf = Math.min(sf, s[1] - r);
       }
     }
   }
-  return { sx0, sx1, sy0, sy1 };
+  return { sx0, sx1, sy0, sy1, sf };
 }
 export function fitView(frames, camSpec, { minScale = 0.7, maxScale = 2.1, pad = 1 } = {}) {
   const cam = camera(camSpec.az, camSpec.el);
   const b = framesBounds(frames, cam);
-  const w = (b.sx1 - b.sx0) * pad + 14, h = Math.max(1, b.sy1) + 8;
+  // base: a limb lying on the floor towards the camera projects below the floor line (el > 0); lift the figure so the lowest resting part sits ON the line
+  const base = b.sf;
+  const w = (b.sx1 - b.sx0) * pad + 14, h = Math.max(1, b.sy1 - base) + 8;
   const scale = Math.max(minScale, Math.min(maxScale, (VBW - 44) / w, (FLOOR - 22) / h));
-  return { cam, scale, cx: (b.sx0 + b.sx1) / 2 };
+  return { cam, scale, cx: (b.sx0 + b.sx1) / 2, base };
 }
 
 // ------------------------------------------------------------ geometry helpers
@@ -152,9 +156,9 @@ export class Renderer2D {
 
   // frame: full frame; props: [{type,...}]; e: 0..1 prop visibility; view from fitView
   draw(frame, { props = [], e = 1, breath = 0, view }) {
-    const { cam, scale, cx } = view;
+    const { cam, scale, cx, base = 0 } = view;
     const S = solve(frame, { breath });
-    const PX = (p) => { const s = project(cam, p); return [200 + (s[0] - cx) * scale, FLOOR - s[1] * scale, s[2]]; };
+    const PX = (p) => { const s = project(cam, p); return [200 + (s[0] - cx) * scale, FLOOR - (s[1] - base) * scale, s[2]]; };
     const mat = (m, far, id) => `url(#fg-${this.ink && !inkSoftId(id) ? 'ink-' : ''}${m}${far ? '-far' : ''})`;
     // body depth reference (so the far limbs read darker)
     let dsum = 0;
