@@ -1,7 +1,6 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS } from '../data/poses.js';
 import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
-import { inkStyle } from './inkstyle.js';
 import { attachSpecs } from './specs.js';
 import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS } from './generator.js';
@@ -132,8 +131,7 @@ function settingsSection() {
     el('label', { class: 'row' }, el('span', {}, T('holdMult')), sel([[0.75, '0.75×'], [1, '1×'], [1.5, '1.5×']], s.holdMult, (v) => store.saveSettings({ holdMult: +v }))),
     el('label', { class: 'row' }, el('span', {}, T('transition')), sel([[3, '3 ' + T('sec')], [5, '5 ' + T('sec')], [8, '8 ' + T('sec')]], s.transition, (v) => store.saveSettings({ transition: +v }))),
     el('label', { class: 'row' }, el('span', {}, T('narration')), sel(NARR_LEVELS.map((d) => [d, T('narrLvl', d)]), s.narration, (v) => store.saveSettings({ narration: v }))),
-    el('label', { class: 'row' }, el('span', {}, T('narrLang')), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], s.narrLang, (v) => { store.saveSettings({ narrLang: v }); applyNarr(); })),
-    el('label', { class: 'row' }, el('span', {}, T('drawStyle')), sel([['plain', T('drawPlain')], ['ink', T('drawInk')]], inkStyle.on ? 'ink' : 'plain', (v) => inkStyle.set(v === 'ink'))));
+    el('label', { class: 'row' }, el('span', {}, T('narrLang')), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], s.narrLang, (v) => { store.saveSettings({ narrLang: v }); applyNarr(); })));
 }
 
 // ---------------- generator dialog ----------------

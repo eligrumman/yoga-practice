@@ -1,6 +1,5 @@
 // Guided player: timer, looping figure, narration schedule, next preview, finish screen.
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
-import { inkStyle } from './inkstyle.js';
 import { slots, planSeconds, fmtTime } from './plan.js';
 import { tr, poseOf, finishStats } from './i18n.js';
 import { store, streak, countsForStreak } from './store.js';
@@ -191,7 +190,6 @@ export class Player {
       row(T('musicVol'), el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: this.st.musicVol, 'aria-label': T('musicVol'), oninput: (e) => { music.setVolume(+e.target.value); store.saveSettings({ musicVol: +e.target.value }); this.st = store.settings; } })),
       row(T('narrLang'), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], nl, (v) => { store.saveSettings({ narrLang: v }); this.st = store.settings; this.nar.setLang(v || this.lang); if (this.list && !this.done && this.phase === 'hold') this.renderTranscript(this.slot()); })),
       row(T('narration'), sel(NARR_LEVELS.map((d) => [d, T('narrLvl', d)]), this.st.narration, (v) => { store.saveSettings({ narration: v }); this.st = store.settings; })),
-      row(T('drawStyle'), sel([['plain', T('drawPlain')], ['ink', T('drawInk')]], inkStyle.on ? 'ink' : 'plain', (v) => inkStyle.set(v === 'ink'))),
       row(T('voiceVol'), el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: this.st.volume, 'aria-label': T('voiceVol'), oninput: (e) => { this.nar.volume = +e.target.value; store.saveSettings({ volume: +e.target.value }); } })),
       el('div', { class: 'row' }, this.btnMute, el('label', { class: 'chip sm' }, el('input', { type: 'checkbox', checked: this.st.beep, onchange: (e) => { store.saveSettings({ beep: e.target.checked }); this.st = store.settings; } }), T('beep')),
         el('button', { class: 'btn', onclick: () => this.anim.replay() }, '▷ ' + T('replayEntry'))));

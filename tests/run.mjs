@@ -443,35 +443,25 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   }
 }
 
-// ---- optional ink figure style: off by default; user setting (localStorage yoga.style) or ?style=ink override
+// ---- ink figure style: the only style (no setting, no override)
 {
-  const { inkRequested, inkOn, inkStyle, inkStored, INK_KEY, inkSoftId, inkEdgeId, inkTwinK } = await import('../js/inkstyle.js');
-  ok(inkRequested('') === false && inkOn('') === false, 'ink: off by default (no query)');
-  ok(inkRequested('?style=ink') === true && inkOn('?style=ink') === true, 'ink: ?style=ink turns it on');
-  ok(inkRequested(new URL('http://x/?style=ink#/pose/tree').search) === true, 'ink: query with hash route still on');
-  ok(inkRequested('?style=other') === false && inkRequested('?ink=1') === false && inkRequested('?style=') === false, 'ink: other values stay off');
-  ok(inkRequested('?a=1&style=ink') === true, 'ink: works beside other params');
-  ok(typeof location === 'undefined' && inkOn() === false, 'ink: no location (node) -> default off');
-  ok(INK_KEY === 'yoga.style' && inkStored() === false, 'ink: storage key yoga.style, nothing stored -> off');
-  // the setting persists (fake localStorage), notifies listeners, and the URL override still works on top
-  const store_ = {}; let notified = 0;
-  globalThis.localStorage = { getItem: (k) => (k in store_ ? store_[k] : null), setItem: (k, v) => { store_[k] = String(v); } };
-  const offL = inkStyle.onChange(() => notified++);
-  inkStyle.set(true);
-  ok(store_['yoga.style'] === 'ink' && inkStored() && inkStyle.on && inkOn(''), 'ink: setting on persists in localStorage yoga.style');
-  inkStyle.set(false);
-  ok(store_['yoga.style'] === 'plain' && !inkStored() && !inkStyle.on && inkOn('?style=ink'), 'ink: setting off persists, ?style=ink still overrides');
-  ok(notified === 2, 'ink: listeners notified on every change (figures and thumbnails re-draw)');
-  offL(); inkStyle.set(true); ok(notified === 2, 'ink: unsubscribe works');
-  delete globalThis.localStorage;
-  ok(inkOn('') === false, 'ink: no storage -> off');
+  const { inkOn, inkSoftId, inkEdgeId, inkTwinK } = await import('../js/inkstyle.js');
+  const inkMod = await import('../js/inkstyle.js');
+  ok(inkOn() === true && inkOn('') === true && inkOn('?style=plain') === true, 'ink: always on, no URL override');
+  ok(!('inkStyle' in inkMod) && !('inkRequested' in inkMod) && !('inkStored' in inkMod) && !('INK_KEY' in inkMod), 'ink: no setting API exported');
+  const i18nSrc = readFileSync(new URL('../js/i18n.js', import.meta.url), 'utf8');
+  ok(!/drawStyle|drawPlain|drawInk/.test(i18nSrc), 'ink: no style toggle strings in i18n');
+  for (const f of ['app.js', 'player.js', 'figure.js']) {
+    const src = readFileSync(new URL('../js/' + f, import.meta.url), 'utf8');
+    ok(!/drawStyle|inkStyle|yoga\.style/.test(src), `ink: ${f} has no style toggle or yoga.style usage`);
+  }
   // face: no cel crescent on the head, nose, ears, hair; no outline on nose and ears; hands and feet keep an inner line
   for (const id of ['h_head', 'h_nose', 'h_earR', 'h_earL', 'h_hair', 'h_bun']) ok(inkSoftId(id), `ink: ${id} keeps the soft gradient (no cel shade)`);
   for (const id of ['uarmR', 'thighL', 'chest', 'palmR', 'footL']) ok(!inkSoftId(id), `ink: ${id} gets cel shading`);
   ok(inkTwinK('h_nose') === 0 && inkTwinK('h_earR') === 0 && inkTwinK('h_head') < 1 && inkTwinK('uarmR') === 1, 'ink: no outline on nose/ears, thinner on head');
   ok(['palmR', 'thumbL', 'fingR', 'footL', 'toesR'].every(inkEdgeId) && !['pelvis', 'uarmR', 'shankL', 'h_head'].some(inkEdgeId), 'ink: inner lines only on hands and feet');
   const src2d = readFileSync(new URL('../js/figure2d.js', import.meta.url), 'utf8'), src3d = readFileSync(new URL('../js/figure3d.js', import.meta.url), 'utf8');
-  ok(/ink = inkOn\(\)/.test(src2d) && /ink = inkOn\(\)/.test(src3d), 'ink: both renderers default to inkOn()');
+  ok(/ink = inkOn\(\)/.test(src2d) && /ink = inkOn\(\)/.test(src3d), 'ink: both renderers default to inkOn() (always true)');
   ok(/farH, this\.ink && !inkSoftId\(id\)\)/.test(src2d) && /this\.ink && !inkSoftId\(id\)\); this\.lgs\.set\(key/.test(src2d) && /this\.ink && !inkSoftId\(id\) \? 'ink-'/.test(src2d) && /if \(cel\) \{ celStops/.test(src2d), '2d: cel gradients only when ink');
   ok(/this\.ink \? new T\.MeshToonMaterial/.test(src3d) && /: new T\.MeshStandardMaterial/.test(src3d), '3d: toon material only when ink, standard otherwise');
   ok(/if \(!this\.ink\) return;/.test(src3d), '3d: outline only when ink');

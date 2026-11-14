@@ -1,23 +1,10 @@
-// Optional "ink" figure style: a hairline warm contour around the silhouette, hands and feet, flat cel shading on the body,
-// a calm soft-shaded face. Off by default.
-// On when the URL query says ?style=ink (override; hash routes keep working: /?style=ink#/pose/tree)
-// or the user picked "קו מצויר" in the settings (localStorage key yoga.style = 'ink').
-export const INK_KEY = 'yoga.style';
-export function inkRequested(search) {
-  try { return new URLSearchParams(search ?? (typeof location !== 'undefined' ? location.search : '')).get('style') === 'ink'; } catch { return false; }
-}
-export function inkStored() {
-  try { return localStorage.getItem(INK_KEY) === 'ink'; } catch { return false; }
-}
-export const inkOn = (search) => inkRequested(search) || inkStored();
-
-const subs = new Set();
-export const inkStyle = {
-  get on() { return inkOn(); },
-  get forced() { return inkRequested(); }, // the URL override wins over the stored choice
-  set(on) { try { localStorage.setItem(INK_KEY, on ? 'ink' : 'plain'); } catch { /* private mode: no persistence */ } subs.forEach((f) => f()); },
-  onChange(fn) { subs.add(fn); return () => subs.delete(fn); },
-};
+// Ink figure style is the only style (Owner decision): a hairline warm contour around the silhouette, hands and feet,
+// flat cel shading on the body, a calm soft-shaded face. No setting, no URL override.
+// The plain (non-ink) branches in figure2d.js / figure3d.js are kept but unreachable (ink is always passed as true by default);
+// removing them is riskier than leaving them.
+export const inkOn = () => true;
+// drop the retired setting from old installs
+try { localStorage.removeItem('yoga.style'); } catch { /* no storage */ }
 
 // the face and head keep the soft gradient even in ink mode (no cel crescent across the cheek)
 export const inkSoftId = (id) => id.startsWith('h_');

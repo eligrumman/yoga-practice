@@ -3,7 +3,6 @@
 // Motion data comes from pose.spec (poses/<id>.json, attached by specs.js). The same frames drive 2D and 3D.
 import { blendFrames, swapLR, solve, fullFrame } from './rig.js';
 import { Renderer2D, fitView } from './figure2d.js';
-import { inkStyle } from './inkstyle.js';
 
 export { FLOOR, VBW, VBH } from './figure2d.js';
 export { solve };
@@ -100,15 +99,6 @@ export class Figure {
     this.r2 = new Renderer2D(svg, { floor });
     this.r3 = null; this.host = null; this.loading = false; this.dead = false; this.last = null;
     this.off = view3d.on(() => this.apply());
-    this.offInk = inkStyle.onChange(() => this.reink());
-    this.apply();
-  }
-
-  // the drawing style changed: rebuild both renderers in place (2D now, 3D on demand), keep the pose
-  reink() {
-    if (this.dead) return;
-    this.r2 = new Renderer2D(this.svg, { floor: this.floor });
-    if (this.r3) { try { this.r3.dispose(); } catch { /* ignore */ } this.host?.remove(); this.r3 = null; this.host = null; }
     this.apply();
   }
 
@@ -158,7 +148,7 @@ export class Figure {
   resetCamera() { this.r3?.reset(); }
 
   dispose() {
-    this.dead = true; this.off?.(); this.offInk?.();
+    this.dead = true; this.off?.();
     try { this.r3?.dispose(); } catch { /* ignore */ }
     this.host?.remove(); this.r3 = null; this.host = null;
     this.svg.style.display = '';
@@ -236,17 +226,10 @@ export class Animator {
   currentFrame() { return this.frameAt(this.time).f; }
 }
 
-// Static render of the hold position in 2D (cards, thumbnails, previews). Re-drawn in place when the drawing style changes.
-const statics = new Set();
-inkStyle.onChange(() => { for (const x of [...statics]) { if (!x.svg.isConnected) statics.delete(x); else x.redo(); } });
+// Static render of the hold position in 2D (cards, thumbnails, previews).
 export function renderStatic(svg, pose, level = 1, { mirror = false, floor = true } = {}) {
-  const redo = () => {
-    const r = new Renderer2D(svg, { floor });
-    const P = poseFrames(pose, level);
-    r.draw(mirror ? swapLR(P.hold) : P.hold, { props: mirror ? mirrorProps(P.props) : P.props, e: 1, view: viewFor(pose, level, mirror) });
-    return r;
-  };
-  if (statics.size > 300) for (const x of [...statics]) if (!x.svg.isConnected) statics.delete(x);
-  statics.add({ svg, redo });
-  return redo();
+  const r = new Renderer2D(svg, { floor });
+  const P = poseFrames(pose, level);
+  r.draw(mirror ? swapLR(P.hold) : P.hold, { props: mirror ? mirrorProps(P.props) : P.props, e: 1, view: viewFor(pose, level, mirror) });
+  return r;
 }
