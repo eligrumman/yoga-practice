@@ -285,3 +285,20 @@ Date 2026-11-14. Fixed: rows 1-10, 12-19, 21-24, 27, 28 (24 rows). Rejected as d
 10. Row 6, 8, 14, 15 level progression by range.
 
 **Skill note.** Sol could not read the skill files in one of four calls (call 1), so Step 0 coverage was done by me from the discovered pose list and by Sol only as an "n/n poses reviewed" line. Coverage by chunk: 17/17, 20/20, plans 6 generated plus 15 presets.
+
+## Round 5 (2026-11-14) - partial
+
+Astra ran with wrapper `--write --cd <worktree>` (workspace-write + network, external Chrome over CDP). Browser sessions hung under parallel load, so the library and plans reviews are content-only (no live visual pass). Then Astra hit the ChatGPT usage limit (resets 06:42).
+
+| # | Area | Sev | Finding | Decision |
+|---|---|---|---|---|
+| 1 | pigeon L1/L2 figure | P1 | Looked like a lunge, not pigeon | FIXED: pigeon.json reshaped, camera az 45 |
+| 2 | pose page props line | P2 | Showed the word "prop" for any pose with props (pre-existing) | FIXED: js/app.js maps prop type to label |
+| 3 | plank RU/EN cue "breath short" | P1 | Contradicts Hebrew | OPEN (RU/EN safety, allowed) |
+| 4 | revolved-chair RU/EN arms | P1 | Contradicts Hebrew palms-together | OPEN |
+| 5 | camel RU/EN L2 "gaze back" / chin | P1 | Contradicts Hebrew neutral head | OPEN |
+| 6 | legs-up-wall RU/EN SAFE | P1 | Mismatch with Hebrew (Owner question 2: mismatch) | OPEN, replacement text in review/round5/r5-libB.md |
+| 7 | camel pregnancy line | P2 | Owner question 1: Astra says YES (supported shallow option, may skip) | OPEN |
+| 8 | warrior-3 L2, tabletop L2, bridge, low-lunge, locust RU/EN | P2 | RU/EN lag behind Hebrew safety wording | OPEN |
+| 9 | high-lunge Hebrew name "מצעד גבוה" | P2 | Means "high march" | OPEN for Owner (name change) |
+| 10 | generated back plan 30 min | P2 | Holds reach 60 s/side; savasana 4:25 | OPEN; Owner question 3 (20 s cobra) not decided |
