@@ -324,3 +324,6 @@ Note: Astra's own browser hung all round; figures were verified from my screensh
 - Triangle and extended side angle: figures fixed (side view camera, torso tilt, arms). Wide-legged fold: 3/4 camera, palms on blocks, L2 clasped hands behind back (still a slight A-frame stance; L0 foot overlaps blocks).
 - gentle-flow: twist/side-bend arm no longer crosses the face (L0-L2). sun-salutation-a: 8 forward-fold frames now have straight arms (L0-L2).
 - Reports: review/round5/r5-fix-figures-1..4.md. Tests 11745 passed, 0 failed. Still weak: sun-salutation 2D figure is small, warrior-flow L0 first frame awkward, no full live visual review.
+
+## Round 5 part 5 2026-11-14
+- wide-legged-fold: now a symmetric wide straddle with the torso centred between the legs (b58ab7f); L2 clasp behind the back kept. L0/L1 fold deeper and the rig contact check puts the palms on the blocks (new regression tests), but in the render the hands still look slightly above/behind the blocks: hands-to-blocks still open. Tests 11758/0.
