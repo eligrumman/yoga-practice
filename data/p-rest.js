@@ -8,7 +8,7 @@ export default [
       en: ['Lie on your back and draw both knees toward the chest.', 'Hug the knees or the shins.', 'Let the shoulders and head rest on the floor.', 'Breathe deeply; a gentle rock is fine.'],
       ru: ['Лягте на спину и подтяните оба колена к груди.', 'Обхватите колени или голени руками.', 'Пусть плечи и голова лежат на полу.', 'Дышите глубоко, можно слегка покачаться.'],
     },
-    safe: { he: 'בהריון מתקדם או כאבי ברכיים: פתחו מעט את הברכיים או חבקו ירך אחת.', en: 'Late pregnancy or knee pain: open the knees slightly or hug one leg.', ru: 'При поздней беременности или боли в коленях слегка раздвиньте колени или обнимите одну ногу.' },
+    safe: { he: 'כאבי ברכיים: חבקו ירך אחת בכל פעם. בהריון: דלגו ברגע שהשכיבה על הגב לא נוחה, והעדיפו שכיבה על הצד; התייעצו עם איש מקצוע רפואי.', en: 'Knee pain: hug one leg at a time. Pregnancy: skip it as soon as lying on the back is uncomfortable, lie on your side instead, and ask your clinician.', ru: 'При боли в коленях обнимайте по одной ноге. При беременности пропустите позу, как только лежать на спине становится неудобно, лучше лягте на бок, и спросите врача.' },
     v: [
       { he: 'ברך אחת בכל פעם.', en: 'One knee at a time.', ru: 'По одному колену.' },
       { he: 'שתי ברכיים לחזה.', en: 'Both knees to the chest.', ru: 'Оба колена к груди.' },
@@ -23,7 +23,7 @@ export default [
       en: ['Lie on your back with the knees bent.', 'Lower both knees to one side.', 'Open the arms wide and keep the shoulders on the floor.', 'Turn your gaze the other way and breathe.'],
       ru: ['Лягте на спину, колени согнуты.', 'Опустите оба колена в одну сторону.', 'Раскройте руки в стороны, плечи остаются на полу.', 'Поверните голову в другую сторону и дышите.'],
     },
-    safe: { he: 'כאבי גב תחתון או הריון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות.', en: 'Lower back pain or pregnancy: place a cushion under the knees and go only as far as comfortable.', ru: 'При боли в пояснице или беременности подложите подушку под колени и опускайте их лишь до комфортного уровня.' },
+    safe: { he: 'כאבי גב תחתון: הניחו כרית מתחת לברכיים ורדו רק עד נוחות. בהריון: דלגו ברגע שהשכיבה על הגב לא נוחה, ובחרו סיבוב פתוח בישיבה או שכיבה על הצד; התייעצו עם איש מקצוע רפואי.', en: 'Lower back pain: place a cushion under the knees and go only as far as comfortable. Pregnancy: skip it as soon as lying on the back is uncomfortable, choose an open seated twist or lie on your side, and ask your clinician.', ru: 'При боли в пояснице подложите подушку под колени и опускайте их лишь до комфортного уровня. При беременности пропустите позу, как только лежать на спине становится неудобно, выберите открытое скручивание сидя или лягте на бок и спросите врача.' },
     v: [
       { he: 'ברכיים על כרית, סיבוב קטן.', en: 'Knees on a cushion, small twist.', ru: 'Колени на подушке, небольшое скручивание.' },
       { he: 'שתי ברכיים לצד.', en: 'Both knees to the side.', ru: 'Оба колена в сторону.' },
@@ -38,7 +38,7 @@ export default [
       en: ['Lie on your back and draw the knees toward the armpits.', 'Hold the outer edges of your feet.', 'Keep the pelvis and lower back resting on the floor.', 'Rock gently side to side if it feels good.'],
       ru: ['Лягте на спину и подтяните колени к подмышкам.', 'Возьмитесь за внешние края стоп.', 'Таз и поясница остаются на полу.', 'Если приятно, слегка покачайтесь из стороны в сторону.'],
     },
-    safe: { he: 'כאבי צוואר או הריון מתקדם: אחזו בשוקיים או ברצועה, ושמרו את הראש על הרצפה.', en: 'Neck pain or late pregnancy: hold the shins or a strap and keep the head down.', ru: 'При боли в шее или поздней беременности держитесь за голени или ремень, голова лежит на полу.' },
+    safe: { he: 'כאבי צוואר: אחזו בשוקיים או ברצועה, ושמרו את הראש על הרצפה. בהריון: דלגו ברגע שהשכיבה על הגב לא נוחה, והעדיפו שכיבה על הצד; התייעצו עם איש מקצוע רפואי.', en: 'Neck pain: hold the shins or a strap and keep the head down. Pregnancy: skip it as soon as lying on the back is uncomfortable, lie on your side instead, and ask your clinician.', ru: 'При боли в шее держитесь за голени или ремень, голова лежит на полу. При беременности пропустите позу, как только лежать на спине становится неудобно, лучше лягте на бок, и спросите врача.' },
     v: [
       { he: 'אחיזה בשוקיים.', en: 'Hold the shins.', ru: 'Держите голени.' },
       { he: 'אחיזה בקצוות כפות הרגליים.', en: 'Hold the outer feet.', ru: 'Держите внешние края стоп.' },
@@ -49,7 +49,7 @@ export default [
     id: 'figure-four', sa: 'Supta Kapotasana', en: 'Reclined figure four', he: 'ארבע שכובה', ru: 'Четвёрка лёжа', cat: 'hip opener', sec: 'cool', flow: 90, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'],
     cue: {
-      he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'משכו את הרגל התומכת לעבר החזה.', 'לחצו קלות את הברך שבחוץ והרפו.'],
+      he: ['שכבו על הגב, ברכיים כפופות.', 'הניחו קרסול אחד על הירך הנגדית.', 'משכו את הרגל התומכת לעבר החזה.', 'כופפו את כף הרגל העליונה והניחו לברך לרדת החוצה, בלי ללחוץ עליה.'],
       en: ['Lie on your back with the knees bent.', 'Cross one ankle over the opposite thigh.', 'Draw the supporting leg toward your chest.', 'Gently press the outer knee away and release.'],
       ru: ['Лягте на спину, колени согнуты.', 'Положите одну лодыжку на противоположное бедро.', 'Подтяните нижнюю ногу к груди.', 'Мягко отведите колено верхней ноги от себя и расслабьтесь.'],
     },
@@ -83,7 +83,7 @@ export default [
       en: ['Sit beside a wall and lie back.', 'Rest the legs up the wall with the hips close to it.', 'Let the arms fall loosely to the sides, palms up.', 'Close the eyes and breathe slowly.'],
       ru: ['Сядьте у стены и лягте на спину.', 'Положите ноги на стену, таз близко к ней.', 'Руки свободно в стороны, ладони вверх.', 'Закройте глаза и дышите медленно.'],
     },
-    safe: { he: 'גלאוקומה, לחץ דם גבוה מאוד או הריון מתקדם: דלגו או הרימו את הרגליים רק מעט. אם מתרחשת נימול ברגליים, הורידו אותן.', en: 'Glaucoma, very high blood pressure or late pregnancy: skip or raise the legs only slightly. If the legs go numb, lower them.', ru: 'При глаукоме, очень высоком давлении или поздней беременности пропустите позу или поднимайте ноги лишь слегка. Если ноги немеют, опустите их.' },
+    safe: { he: 'גלאוקומה או לחץ דם לא מאוזן: דלגו או התייעצו עם איש מקצוע רפואי. הריון מתקדם: אם השכיבה על הגב לא נוחה, נוחו על הצד. אם מתרחשת נימול ברגליים, הורידו אותן.', en: 'Glaucoma, very high blood pressure or late pregnancy: skip or raise the legs only slightly. If the legs go numb, lower them.', ru: 'При глаукоме, очень высоком давлении или поздней беременности пропустите позу или поднимайте ноги лишь слегка. Если ноги немеют, опустите их.' },
     v: [
       { he: 'ברכיים כפופות על הקיר.', en: 'Knees bent against the wall.', ru: 'Колени согнуты, стопы на стене.', props: [{ type: 'wall' }] },
       { he: 'רגליים ישרות על הקיר.', en: 'Legs straight up the wall.', ru: 'Ноги прямые вдоль стены.', props: [{ type: 'wall' }] },

@@ -274,6 +274,34 @@ for (const [l, re] of [['he', /הראש נשאר על הרצפה/], ['ru', /Го
 ok(!/clasp|שלובות|сцеплен/.test(JSON.stringify(POSE_BY_ID.bridge.variations)), 'bridge L2 text does not promise clasped hands the figure cannot show');
 for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filters label ${l}`);
 
+// ================= Round 4 (yoga master) pose-text regressions =================
+{
+  const { POSE_V2 } = await import('../data/narration-he-v2.js');
+  // row 1: downward dog has the head BELOW the heart, never "above"
+  for (const l of LANGS) {
+    const s = POSE_BY_ID['downward-dog'].safety[l];
+    ok(!/מעל הלב|above the heart|выше сердца/i.test(s), `dog SAFE does not put the head above the heart ${l}`);
+  }
+  ok(/מתחת ללב/.test(POSE_BY_ID['downward-dog'].safety.he), 'dog SAFE (he) says the head is below the heart');
+  // row 2: glaucoma / blood pressure never fixed by "bend the knees"; clinician is named
+  for (const id of ['downward-dog', 'uttanasana']) for (const l of LANGS) {
+    const eye = POSE_BY_ID[id].safety[l].split(/(?<=[.!])\s+/).filter((x) => /גלאוקומה|glaucoma|глаукоме/i.test(x)).join(' ');
+    ok(eye && !/כופפו ברכיים|bend the knees|сгибайте колени/i.test(eye) && /איש מקצוע רפואי|clinician|врач/i.test(eye), `${id} eye/BP line has no bent-knee fix and names a clinician ${l}`);
+  }
+  // row 3: pregnancy lines in the 9 poses never suggest "stay low"; they point to a clinician
+  const PREG = /הריון|pregnan|беремен/i, LOW = /נמוכים|stay low|низко/i, CLIN = /איש מקצוע רפואי|clinician|врач/i;
+  for (const id of ['cobra', 'locust', 'camel', 'boat', 'seated-twist', 'knees-to-chest', 'supine-twist', 'happy-baby', 'child']) for (const l of LANGS) {
+    const lines = POSE_BY_ID[id].safety[l].split(/(?<=[.!])\s+/).filter((x) => PREG.test(x));
+    ok(lines.every((x) => !LOW.test(x) && CLIN.test(x)), `${id} pregnancy line: no "stay low", names a clinician ${l}`);
+  }
+  // row 4: plank L1 is on the toes (בהונות), not the fingertips
+  ok(/בהונות/.test(POSE_BY_ID.plank.variations[1].he) && !/אצבעות/.test(POSE_BY_ID.plank.variations[1].he), 'plank L1 (he) says בהונות');
+  ok(/בהונות/.test(POSE_V2.plank.mod[1]) && !/קצות האצבעות/.test(POSE_V2.plank.mod[1]), 'plank L1 narration (he) says בהונות');
+  ok(!/קצות האצבעות/.test(JSON.stringify(POSE_BY_ID.mountain.variations.map((v) => v.he)) + POSE_V2.mountain.mod.join('')), 'mountain L2 (he) uses בהונות for rising onto the toes');
+  // row 5: plank breath does not teach short breaths
+  ok(!/קצר/.test(POSE_BY_ID.plank.cues.he.join(' ') + POSE_V2.plank.breath), 'plank breath cue is not "short breaths"');
+}
+
 // ================= Narration v2 (Hebrew) =================
 {
   const { POSE_V2, SEGMENTS_V2, INTRO, CLOSE, INTRO_VARIANTS, CLOSE_VARIANTS } = await import('../data/narration-he-v2.js');

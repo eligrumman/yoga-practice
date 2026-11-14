@@ -214,34 +214,34 @@ Calls: (1) poses tabletop..downward-dog, BLOCKED (Sol's host could not read SKIL
 
 | # | Pose / area | Sev | Issue | Source | Fix (not implemented) | Decision | Reason |
 |---|---|---|---|---|---|---|---|
-| 1 | downward-dog SAFE | P1 | "הרמת הראש מעל הלב היא הפוכה עדינה" is reversed: in dog the head is below the heart | Claude-master; NCCIH https://www.nccih.nih.gov/health/yoga-effectiveness-and-safety (verified, glaucoma/BP modifications) | "ראש מתחת ללב" | ADOPT | Factual error in a safety line |
-| 2 | downward-dog, uttanasana SAFE | P1 | "shorten or skip" / "bend knees or avoid" for glaucoma and high BP: bent knees do not remove head-below-heart | Sol (P0) + Claude-master; AAO https://www.aao.org/eye-health/news/yoga-poses-may-impact-eye-pressure-glaucoma (unverified) | Separate back/disc from eye/BP; for glaucoma/uncontrolled BP: skip or use half-lift/tabletop, ask a clinician | ADOPT | Safety wording; severity lowered to P1 |
-| 3 | cobra, locust, camel, boat, seated-twist, knees-to-chest, supine-twist, happy-baby, child | P1 | Pregnancy lines offer "stay low" / partial lift / wider knees for prone, closed-twist or supine poses; grip or range change does not address belly pressure or supine lying | Sol + Claude-master; ACOG https://www.acog.org/womens-health/faqs/exercise-during-pregnancy (unverified), NCCIH (verified: avoid long flat on back) | Replace with "skip once lying on the belly/back is uncomfortable, choose side-lying or an open twist", plus "ask your clinician" | ADOPT | Safety, 9 poses share one pattern |
-| 4 | plank L1 | P1 | "על קצות האצבעות" means fingertips, not toes | Claude-master | "על קצות הבהונות" | ADOPT | Wrong word, risky for wrists |
-| 5 | plank BREATH | P2 | "נשמו קצר וקבוע" teaches breath restriction | Sol + Claude-master | "נשמו חלק ורציף; אם אי אפשר, הורידו עומס" | ADOPT | Clarity/safety |
-| 6 | cobra L2 | P2 | Progression = higher chest and straighter arms: lumbar compression | Sol + Claude-master | Progress by chest length and control, soft elbows | ADOPT | Level logic |
-| 7 | locust FIX | P3 | "הדקו את הישבן" with "הרימו גבוה" prompts lumbar crunch | Sol | Moderate engagement, length through legs | ADOPT | Small cue change |
-| 8 | camel L2 | P2 | "קשת עמוקה יותר, מבט לאחור" treats neck/lumbar range as advancement and conflicts with the neck warning | Sol | Progress by stable pelvis and chest lift; head neutral | ADOPT | Level logic |
-| 9 | warrior-1 | P2 | Cue "צעדו רחב" vs L0 "צעד קצר"; forced square pelvis with grounded back foot; L2 back-bend in the lunge | Claude-master + Sol; Inside Yoga https://insideyoga.org/asana-library/virabhadrasana-i-traditional/ (verified, square hips) vs Yoga Journal ?scope=anon (tucked tailbone not forced); sources disagree | "Pelvis generally forward, without forcing"; offer shorter stance or lifted heel (high-lunge) | ADOPT | Safer default for beginners |
-| 10 | warrior-2 | P2 | No back-foot cue; "push the knee out" is imprecise | Claude-master + Sol | Back foot parallel to the mat edge; knee tracks toward 2nd/3rd toe | ADOPT | Clarity |
+| 1 | downward-dog SAFE | P1 | "הרמת הראש מעל הלב היא הפוכה עדינה" is reversed: in dog the head is below the heart | Claude-master; NCCIH https://www.nccih.nih.gov/health/yoga-effectiveness-and-safety (verified, glaucoma/BP modifications) | "ראש מתחת ללב" | ADOPT, FIXED | Factual error in a safety line |
+| 2 | downward-dog, uttanasana SAFE | P1 | "shorten or skip" / "bend knees or avoid" for glaucoma and high BP: bent knees do not remove head-below-heart | Sol (P0) + Claude-master; AAO https://www.aao.org/eye-health/news/yoga-poses-may-impact-eye-pressure-glaucoma (unverified) | Separate back/disc from eye/BP; for glaucoma/uncontrolled BP: skip or use half-lift/tabletop, ask a clinician | ADOPT, FIXED | Safety wording; severity lowered to P1 |
+| 3 | cobra, locust, camel, boat, seated-twist, knees-to-chest, supine-twist, happy-baby, child | P1 | Pregnancy lines offer "stay low" / partial lift / wider knees for prone, closed-twist or supine poses; grip or range change does not address belly pressure or supine lying | Sol + Claude-master; ACOG https://www.acog.org/womens-health/faqs/exercise-during-pregnancy (unverified), NCCIH (verified: avoid long flat on back) | Replace with "skip once lying on the belly/back is uncomfortable, choose side-lying or an open twist", plus "ask your clinician" | ADOPT, FIXED | Safety, 9 poses share one pattern |
+| 4 | plank L1 | P1 | "על קצות האצבעות" means fingertips, not toes | Claude-master | "על קצות הבהונות" | ADOPT, FIXED | Wrong word, risky for wrists |
+| 5 | plank BREATH | P2 | "נשמו קצר וקבוע" teaches breath restriction | Sol + Claude-master | "נשמו חלק ורציף; אם אי אפשר, הורידו עומס" | ADOPT, FIXED | Clarity/safety |
+| 6 | cobra L2 | P2 | Progression = higher chest and straighter arms: lumbar compression | Sol + Claude-master | Progress by chest length and control, soft elbows | ADOPT, FIXED | Level logic |
+| 7 | locust FIX | P3 | "הדקו את הישבן" with "הרימו גבוה" prompts lumbar crunch | Sol | Moderate engagement, length through legs | ADOPT, FIXED | Small cue change |
+| 8 | camel L2 | P2 | "קשת עמוקה יותר, מבט לאחור" treats neck/lumbar range as advancement and conflicts with the neck warning | Sol | Progress by stable pelvis and chest lift; head neutral | ADOPT, FIXED | Level logic |
+| 9 | warrior-1 | P2 | Cue "צעדו רחב" vs L0 "צעד קצר"; forced square pelvis with grounded back foot; L2 back-bend in the lunge | Claude-master + Sol; Inside Yoga https://insideyoga.org/asana-library/virabhadrasana-i-traditional/ (verified, square hips) vs Yoga Journal ?scope=anon (tucked tailbone not forced); sources disagree | "Pelvis generally forward, without forcing"; offer shorter stance or lifted heel (high-lunge) | ADOPT, FIXED | Safer default for beginners |
+| 10 | warrior-2 | P2 | No back-foot cue; "push the knee out" is imprecise | Claude-master + Sol | Back foot parallel to the mat edge; knee tracks toward 2nd/3rd toe | ADOPT, FIXED | Clarity |
 | 11 | chair, high-lunge, warrior-2 | P3 | Sol (P1): "knee above ankle / not past toes" is not universal | Sol; JSCR doi 10.1519/1533-4287(2003)017<0629 (unverified) | n/a | REJECT | Knee over ankle is the conservative beginner default in Yoga Journal and Iyengar sources; only a wording tweak "knee follows the toes" is worth adding |
-| 12 | uttanasana EXIT | P2 | "חוליה אחר חוליה, וראש אחרון" contradicts "hinge from hips" and loads flexed lumbar spine (disc warning already in SAFE) | Claude-master + Sol; Yoga Journal Standing Forward Bend (unverified) | Bent knees, hands to thighs, hinge up with a long spine | ADOPT | Contradiction inside the pose |
-| 13 | revolved-chair | P2 | Cue says hand to floor; entry and L0/L1 use prayer hands; awkward "מכסא כופפים" | Claude-master + Sol | Prayer hands as the base; floor hand only as an advanced option with a block | ADOPT | Contradictory variants |
-| 14 | dancer | P2 | "הקרסול הנגדי" ambiguous; L2 "lean deeper, lift higher" is range as progress | Claude-master + Sol | Name the lifted foot; progress while ribs stay controlled | ADOPT | Clarity/safety |
-| 15 | warrior-3 L2 | P2 | "הרימו את הרגל גבוה יותר" past the torso line opens the pelvis / arches the back | Sol | Heel no higher than the pelvis; progress by arm position | ADOPT | Level logic |
-| 16 | high-lunge L0/L2 | P2 | L0 lean forward, L2 arch back | Claude-master | Upright torso at L0; keep ribs in at L2 | ADOPT | Alignment |
-| 17 | cat CUE/ALIGN | P2 | "והשעינו את האגן" (lean the pelvis) does not describe a posterior tilt | Sol (P1) | "הטו את האגן אחורה, עצם הזנב פנימה" | ADOPT | Clarity; P2 since text still reads naturally |
-| 18 | tabletop L2 | P3 | Opposite arm/leg lacks keep-hips-level and return cue | Sol | Add both cues | ADOPT | Small |
-| 19 | mountain L2 | P3 | Heel raise as a level with no wall/chair option, while SAFE mentions dizziness | Sol | Wall/chair beside the heel raise | ADOPT | Fall risk |
+| 12 | uttanasana EXIT | P2 | "חוליה אחר חוליה, וראש אחרון" contradicts "hinge from hips" and loads flexed lumbar spine (disc warning already in SAFE) | Claude-master + Sol; Yoga Journal Standing Forward Bend (unverified) | Bent knees, hands to thighs, hinge up with a long spine | ADOPT, FIXED | Contradiction inside the pose |
+| 13 | revolved-chair | P2 | Cue says hand to floor; entry and L0/L1 use prayer hands; awkward "מכסא כופפים" | Claude-master + Sol | Prayer hands as the base; floor hand only as an advanced option with a block | ADOPT, FIXED | Contradictory variants |
+| 14 | dancer | P2 | "הקרסול הנגדי" ambiguous; L2 "lean deeper, lift higher" is range as progress | Claude-master + Sol | Name the lifted foot; progress while ribs stay controlled | ADOPT, FIXED | Clarity/safety |
+| 15 | warrior-3 L2 | P2 | "הרימו את הרגל גבוה יותר" past the torso line opens the pelvis / arches the back | Sol | Heel no higher than the pelvis; progress by arm position | ADOPT, FIXED | Level logic |
+| 16 | high-lunge L0/L2 | P2 | L0 lean forward, L2 arch back | Claude-master | Upright torso at L0; keep ribs in at L2 | ADOPT, FIXED | Alignment |
+| 17 | cat CUE/ALIGN | P2 | "והשעינו את האגן" (lean the pelvis) does not describe a posterior tilt | Sol (P1) | "הטו את האגן אחורה, עצם הזנב פנימה" | ADOPT, FIXED | Clarity; P2 since text still reads naturally |
+| 18 | tabletop L2 | P3 | Opposite arm/leg lacks keep-hips-level and return cue | Sol | Add both cues | ADOPT, FIXED | Small |
+| 19 | mountain L2 | P3 | Heel raise as a level with no wall/chair option, while SAFE mentions dizziness | Sol | Wall/chair beside the heel raise | ADOPT, FIXED | Fall risk |
 | 20 | half-lift L2 | P3 | Fingertips to floor as the top level | Sol | Hands anywhere that keeps the spine long | REJECT | L0/L1 already allow thighs/shins; "range" is one accepted dial in level-progression.md |
-| 21 | bridge | P2 | Blanket "מתחת לכתפיים" without head-on-floor note; knee-width cue self-conflicting | Sol | Head on floor, neck free; one clear hip-width cue | ADOPT | Cervical safety |
-| 22 | child | P2 | Knee pain and pregnancy: cushion at the heels still gives deep knee flexion / belly pressure | Sol | Knees wide, hips raised on support, or use another rest pose | ADOPT | Safety |
-| 23 | low-lunge | P3 | "הניחו לאגן לשקוע" invites passive lumbar extension | Sol | Small controlled weight shift, tailbone long | ADOPT | Cue |
-| 24 | figure-four | P2 | "לחצו את הברך" presses the joint | Sol | Flex the foot, adjust the other leg; no knee pressing | ADOPT | Joint safety |
+| 21 | bridge | P2 | Blanket "מתחת לכתפיים" without head-on-floor note; knee-width cue self-conflicting | Sol | Head on floor, neck free; one clear hip-width cue | ADOPT, FIXED | Cervical safety |
+| 22 | child | P2 | Knee pain and pregnancy: cushion at the heels still gives deep knee flexion / belly pressure | Sol | Knees wide, hips raised on support, or use another rest pose | ADOPT, FIXED | Safety |
+| 23 | low-lunge | P3 | "הניחו לאגן לשקוע" invites passive lumbar extension | Sol | Small controlled weight shift, tailbone long | ADOPT, FIXED | Cue |
+| 24 | figure-four | P2 | "לחצו את הברך" presses the joint | Sol | Flex the foot, adjust the other leg; no knee pressing | ADOPT, FIXED | Joint safety |
 | 25 | half-split | P3 | Toes toward the shin can raise neural tension | Sol | Optional ankle, stop on tingling | REJECT | Not in the supplied text; no evidence the cue is mandatory |
 | 26 | easy-seat L2, legs-up-wall L2 | P3 | Prayer hands / arms overhead called "advanced" | Sol | Treat as comfort options | REJECT | Hand position is a legitimate low-stakes variant |
-| 27 | legs-up-wall SAFE | P2 | "לחץ דם גבוה מאוד" vague; supine tolerance in late pregnancy | Sol; AAO https://www.aao.org/eye-health/tips-prevention/does-yoga-increase-glaucoma-risk (unverified) | "Glaucoma or uncontrolled BP: ask a clinician"; side-lying rest alternative | ADOPT | Safety |
-| 28 | savasana EXIT | P3 | "אין צורך לזוז עד שאזמין אתכם" assumes narration continues | Sol | Add "you may get up any time" and a full self-led return | ADOPT | Audio can stop |
+| 27 | legs-up-wall SAFE | P2 | "לחץ דם גבוה מאוד" vague; supine tolerance in late pregnancy | Sol; AAO https://www.aao.org/eye-health/tips-prevention/does-yoga-increase-glaucoma-risk (unverified) | "Glaucoma or uncontrolled BP: ask a clinician"; side-lying rest alternative | ADOPT, FIXED | Safety |
+| 28 | savasana EXIT | P3 | "אין צורך לזוז עד שאזמין אתכם" assumes narration continues | Sol | Add "you may get up any time" and a full self-led return | ADOPT, FIXED | Audio can stop |
 | 29 | pose page | P2 | Default level tab is "בינוני" not "מתחילים" (seen at 375px: screenshots/round4-pose-tree-375.png) | Claude-master | Default to the beginner level | ADOPT | First-time user lands on the harder variant |
 | 30 | generator 10 min | P2 | No warm-up in the 10-minute beginner plan | Claude-master (review/round4/plans.txt) | Start with tabletop/cat-cow | ADOPT | Sequencing |
 | 31 | generator order | P2 | Transitions: cobbler to cobra, uttanasana to child, cobra to bridge, legs-up-wall to savasana by category order | Sol + Claude-master | Order by body position, add a neutral between backbends | ADOPT | Sequencing |
@@ -256,6 +256,17 @@ Calls: (1) poses tabletop..downward-dog, BLOCKED (Sol's host could not read SKIL
 | 40 | plan metadata | P3 | Level-0 plans contain easy-seat L1 | Sol | n/a | REJECT | Benign: level changes the figure, not a safety property |
 | 41 | hips-hamstrings | P3 | easy-seat between cobbler and hand-to-toe | Sol | n/a | REJECT | Easy-seat is a reasonable rest |
 | 42 | starter-day-5 plank L0 | P3 | Label says only "plank L0" | Sol | n/a | REJECT | Not evidenced; the level text states knees |
+
+### Round 4 fix note, pose text (rows 1-28)
+
+Date 2026-11-14. Fixed: rows 1-10, 12-19, 21-24, 27, 28 (24 rows). Rejected as decided: 11, 20, 25, 26. Rows 29-39 (plans, generator, pose-page default level) are handled separately.
+
+- Hebrew rewritten in `data/p-*.js` (cue, SAFE, level text) and `data/narration-he-v2.js` (entry/align/breath/mod/exit/fix), so on-screen text, transcript and narration agree. 38 Hebrew narration segments changed (13 legacy cue segments, 25 v2 segments); `narration-script.json` re-exported. The daily TTS job will re-record them by hash; `tools/tts/state.json` untouched.
+- RU/EN changed only for rows 1-3 (SAFE lines of downward-dog, uttanasana, and the pregnancy lines of cobra, locust, boat, seated-twist, knees-to-chest, supine-twist, happy-baby, child). Row 4 needed no RU/EN change (they already say toes). RU/EN narration segments are unchanged, because SAFE lines are not spoken.
+- Row 3 camel: the camel SAFE line has no pregnancy sentence, so nothing to replace; none was added.
+- Row 4 also applied to mountain L2, which had the same wrong word (fingertips for toes).
+- Row 27 legs-up-wall SAFE is Hebrew only (Owner: Hebrew first); EN/RU keep the older wording.
+- Regression tests added in `tests/run.mjs` (dog head below heart, eye/BP lines, pregnancy lines in the 9 poses, plank/mountain toes, plank breath).
 
 **Figures.** Contact sheets at L0 and L2 (screenshots/round4-sheet-L0.png) show no new defects beyond round 3; I did not raise figure rows because Sol had no image access and joint numbers alone would be speculation.
 

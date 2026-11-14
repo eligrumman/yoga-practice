@@ -12,7 +12,7 @@ export default [
     v: [
       { he: 'ברכיים רכות, ידיים רפויות.', en: 'Soft knees, relaxed arms.', ru: 'Колени мягкие, руки расслаблены.' },
       { he: 'עמידה זקופה ויציבה.', en: 'Tall, steady stance.', ru: 'Прямая, устойчивая стойка.' },
-      { he: 'כפות ידיים בחזה ועמידה על קצות האצבעות.', en: 'Palms at the chest and rise onto the toes.', ru: 'Ладони у груди, подъём на носки.' },
+      { he: 'כפות ידיים בחזה ועלייה על קצות הבהונות, ליד קיר או כיסא.', en: 'Palms at the chest and rise onto the toes.', ru: 'Ладони у груди, подъём на носки.' },
     ],
   },
   {
@@ -34,22 +34,22 @@ export default [
     id: 'warrior-1', sa: 'Virabhadrasana I', en: 'Warrior I', he: 'לוחם 1', ru: 'Воин один', cat: 'standing', sec: 'stand', flow: 30, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {
-      he: ['צעדו רחב, הברך הקדמית מעל הקרסול.', 'הרגל האחורית ישרה ועקב לחוץ לרצפה.', 'הרימו את הידיים והארכו את הגוף.', 'אגן ישר קדימה, נשימה רגועה.'],
+      he: ['צעדו צעד נוח, הברך הקדמית מעל הקרסול.', 'הרגל האחורית ישרה ועקב לחוץ לרצפה.', 'הרימו את הידיים והארכו את הגוף.', 'האגן פונה בערך קדימה, בלי לכפות. נשימה רגועה.'],
       en: ['Step wide with the front knee over the ankle.', 'Keep the back leg straight and the heel pressing down.', 'Raise the arms and lengthen the body.', 'Square the hips forward and breathe calmly.'],
       ru: ['Сделайте широкий шаг, передняя нога согнута, колено над лодыжкой.', 'Задняя нога прямая, пятка прижата к полу.', 'Поднимите руки и вытяните корпус.', 'Таз направьте вперёд и дышите ровно.'],
     },
     safe: { he: 'בעיות ברכיים או כתפיים: קצרו את הצעד, הורידו ידיים למותניים.', en: 'Knee or shoulder issues: shorten the stance and place hands on hips.', ru: 'При проблемах с коленями или плечами сделайте шаг короче, руки на пояс.' },
     v: [
-      { he: 'צעד קצר, כף רגל אחורית שטוחה ומופנית החוצה, ידיים למעלה.', en: 'Shorter stance, back foot flat and turned out, arms up.', ru: 'Короткий шаг, задняя стопа плоско и развёрнута наружу, руки вверх.' },
-      { he: 'צעד רחב, ידיים למעלה.', en: 'Wide stance, arms up.', ru: 'Широкий шаг, руки вверх.' },
-      { he: 'כיפוף עמוק יותר ופתיחת חזה לאחור.', en: 'Deeper bend with a gentle chest-opening arch.', ru: 'Глубже в выпад, грудь раскрыта назад.' },
+      { he: 'צעד קצר, כף רגל אחורית שטוחה ומופנית החוצה או עקב אחורי מורם, ידיים למעלה.', en: 'Shorter stance, back foot flat and turned out, arms up.', ru: 'Короткий шаг, задняя стопа плоско и развёрнута наружу, руки вверх.' },
+      { he: 'צעד בינוני, ידיים למעלה.', en: 'Wide stance, arms up.', ru: 'Широкий шаг, руки вверх.' },
+      { he: 'כיפוף עמוק יותר, צלעות פנימה וחזה פתוח, בלי לקמר את הגב.', en: 'Deeper bend with a gentle chest-opening arch.', ru: 'Глубже в выпад, грудь раскрыта назад.' },
     ],
   },
   {
     id: 'warrior-2', sa: 'Virabhadrasana II', en: 'Warrior II', he: 'לוחם 2', ru: 'Воин два', cat: 'standing', sec: 'stand', flow: 40, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'back'],
     cue: {
-      he: ['רגליים רחבות, הברך הקדמית מכופפת מעל הקרסול.', 'פשטו ידיים לצדדים בגובה כתפיים.', 'הגוף זקוף, האגן במרכז בין הרגליים.', 'מבט מעל היד הקדמית.'],
+      he: ['רגליים רחבות, כף הרגל האחורית מקבילה לקצה המזרן.', 'פשטו ידיים לצדדים בגובה כתפיים.', 'הברך הקדמית מעל הקרסול ופונה אל האצבעות; הגוף זקוף והאגן במרכז.', 'מבט מעל היד הקדמית.'],
       en: ['Feet wide apart, front knee bent over the ankle.', 'Extend the arms to the sides at shoulder height.', 'Keep the torso upright, hips centered between the legs.', 'Gaze over the front hand.'],
       ru: ['Ноги широко, передняя согнута, колено над лодыжкой.', 'Разведите руки в стороны на уровне плеч.', 'Корпус прямой, таз по центру между ногами.', 'Смотрите поверх передней руки.'],
     },
@@ -70,9 +70,9 @@ export default [
     },
     safe: { he: 'בעיות ברכיים או איזון: החזיקו כיסא או קיר, או הורידו את הברך האחורית.', en: 'Knee or balance issues: hold a chair or wall, or lower the back knee.', ru: 'При проблемах с коленями или равновесием держитесь за стул или стену либо опустите заднее колено.' },
     v: [
-      { he: 'צעד קצר, עקב אחורי מורם, גוף מעט קדימה, ידיים למעלה.', en: 'Short stance, back heel lifted, torso slightly forward, arms up.', ru: 'Короткий шаг, пятка сзади приподнята, корпус слегка вперёд, руки вверх.' },
+      { he: 'צעד קצר, עקב אחורי מורם, גוף זקוף, ידיים למעלה.', en: 'Short stance, back heel lifted, torso slightly forward, arms up.', ru: 'Короткий шаг, пятка сзади приподнята, корпус слегка вперёд, руки вверх.' },
       { he: 'ידיים למעלה, רגל אחורית ישרה.', en: 'Arms up, back leg straight.', ru: 'Руки вверх, задняя нога прямая.' },
-      { he: 'כיפוף עמוק וקשת קלה לאחור.', en: 'Deeper bend with a slight backbend.', ru: 'Глубже, лёгкий прогиб назад.' },
+      { he: 'כיפוף עמוק, צלעות פנימה וגב ארוך.', en: 'Deeper bend with a slight backbend.', ru: 'Глубже, лёгкий прогиб назад.' },
     ],
   },
   {
@@ -102,14 +102,14 @@ export default [
     v: [
       { he: 'ידיים במותניים, רגל נמוכה.', en: 'Hands on hips, leg lower.', ru: 'Руки на поясе, нога ниже.' },
       { he: 'גוף במקביל לרצפה.', en: 'Body parallel to the floor.', ru: 'Тело параллельно полу.' },
-      { he: 'רגל מורמת גבוה וידיים קדימה.', en: 'Leg lifted higher with arms forward.', ru: 'Нога выше, руки вперёд.' },
+      { he: 'העקב לא גבוה מהאגן, ידיים קדימה לצד האוזניים.', en: 'Leg lifted higher with arms forward.', ru: 'Нога выше, руки вперёд.' },
     ],
   },
   {
     id: 'dancer', sa: 'Natarajasana', en: 'Dancer', he: 'רקדן', ru: 'Танцор', cat: 'balance', sec: 'bal', flow: 30, d: 3, hold: 20, sides: 'both',
     tags: ['flex', 'noback'],
     cue: {
-      he: ['עמדו על רגל אחת ואחזו בקרסול הנגדי מאחור.', 'דחפו את כף הרגל אל היד, והחזה נפתח.', 'הושיטו יד קדימה לשיווי משקל.', 'מבט קבוע לנקודה אחת.'],
+      he: ['עמדו על רגל אחת, כופפו את הברך החופשית ואחזו בקרסול שלה מאחור.', 'דחפו את כף הרגל אל היד, והחזה נפתח.', 'הושיטו יד קדימה לשיווי משקל.', 'מבט קבוע לנקודה אחת.'],
       en: ['Stand on one leg and hold the opposite ankle behind you.', 'Press the foot into the hand as the chest opens.', 'Reach the other arm forward for balance.', 'Keep a steady gaze on one point.'],
       ru: ['Встаньте на одну ногу и возьмите другую за лодыжку сзади.', 'Давите стопой в ладонь и раскрывайте грудь.', 'Вторую руку вытяните вперёд для равновесия.', 'Смотрите в одну точку.'],
     },
@@ -117,7 +117,7 @@ export default [
     v: [
       { he: 'מתיחת ירך בעמידה, גוף זקוף.', en: 'Standing thigh stretch, torso upright.', ru: 'Растяжка бедра стоя, корпус прямой.' },
       { he: 'הרמת הרגל לאחור והישענות קלה קדימה.', en: 'Lift the leg back and lean slightly forward.', ru: 'Поднимите ногу назад и слегка наклонитесь.' },
-      { he: 'הישענות עמוקה קדימה ורגל גבוהה.', en: 'Deeper forward lean with the leg higher.', ru: 'Глубже вперёд, нога выше.' },
+      { he: 'הישענות קדימה והרמת רגל, כשהצלעות נשארות פנימה.', en: 'Deeper forward lean with the leg higher.', ru: 'Глубже вперёд, нога выше.' },
     ],
   },
   {
@@ -128,7 +128,7 @@ export default [
       en: ['Fold from the hips, not from the back.', 'Let the head and neck hang heavy.', 'Bend the knees as much as you need.', 'Rise slowly when you finish.'],
       ru: ['Наклоняйтесь от бёдер, а не от спины.', 'Пусть голова и шея свободно свисают.', 'Согните колени настолько, насколько нужно.', 'В конце поднимайтесь медленно.'],
     },
-    safe: { he: 'בעיות גב או דיסק, לחץ דם גבוה, גלאוקומה: כופפו ברכיים או הימנעו.', en: 'Back or disc problems, high blood pressure, glaucoma: bend the knees or skip.', ru: 'При проблемах со спиной, высоком давлении или глаукоме сгибайте колени либо пропустите позу.' },
+    safe: { he: 'בעיות גב או דיסק: כופפו ברכיים והשאירו את הגב ארוך. גלאוקומה או לחץ דם לא מאוזן: דלגו או עצרו בהרמה למחצית עם ידיים על הירכיים, והתייעצו עם איש מקצוע רפואי.', en: 'Back or disc problems: bend the knees and keep the spine long. Glaucoma or uncontrolled high blood pressure: skip, or stay in a half-lift with hands on the thighs, and ask your clinician.', ru: 'При проблемах со спиной сгибайте колени и держите спину длинной. При глаукоме или неконтролируемом высоком давлении пропустите позу или остановитесь в полунаклоне, руки на бёдрах, и спросите врача.' },
     v: [
       { he: 'ברכיים כפופות וידיים על השוקיים.', en: 'Bent knees, hands on shins.', ru: 'Колени согнуты, руки на голенях.' },
       { he: 'רגליים ישרות, ידיים לרצפה.', en: 'Legs straight, hands toward the floor.', ru: 'Ноги прямые, руки к полу.' },
@@ -154,7 +154,7 @@ export default [
     id: 'revolved-chair', sa: 'Parivrtta Utkatasana', en: 'Revolved chair', he: 'כיסא מסתובב', ru: 'Стул со скручиванием', cat: 'twist', sec: 'stand', flow: 55, d: 2, hold: 20, sides: 'both',
     tags: ['strength', 'noback'],
     cue: {
-      he: ['מכסא כופפים ברכיים ומסובבים את החזה הצידה.', 'יד אחת אל הרצפה, השנייה כלפי התקרה.', 'הסיבוב בא מהחזה, לא מהצוואר.', 'נשמו ופתחו את הכתפיים.'],
+      he: ['מעמידת כיסא, חברו כפות ידיים בחזה וסובבו את החזה הצידה.', 'כפות הידיים נשארות יחד בחזה. אפשר להניח יד אחת על בלוק.', 'הסיבוב בא מהחזה, לא מהצוואר.', 'נשמו ופתחו את הכתפיים.'],
       en: ['From chair pose, twist the chest to one side.', 'One hand toward the floor, the other toward the ceiling.', 'The turn comes from the chest, not the neck.', 'Breathe and open the shoulders.'],
       ru: ['Из позы стула разверните грудную клетку в сторону.', 'Одна рука к полу, другая к потолку.', 'Поворот идёт от груди, а не от шеи.', 'Дышите и раскрывайте плечи.'],
     },
@@ -162,7 +162,7 @@ export default [
     v: [
       { he: 'כיסא רדוד וכפות ידיים בחזה.', en: 'Shallow chair, palms together.', ru: 'Неглубокий стул, ладони вместе.' },
       { he: 'כפות ידיים יחד, המרפק מחוץ לירך.', en: 'Palms together, elbow hooked outside the thigh.', ru: 'Ладони вместе, локоть снаружи бедра.' },
-      { he: 'כיסא עמוק וסיבוב רחב.', en: 'Deeper chair and wider twist.', ru: 'Стул глубже, скручивание шире.' },
+      { he: 'כיסא עמוק וסיבוב רחב, אפשר יד אחת על בלוק.', en: 'Deeper chair and wider twist.', ru: 'Стул глубже, скручивание шире.' },
     ],
   },
 ];

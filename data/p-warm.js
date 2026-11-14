@@ -12,7 +12,7 @@ export default [
     v: [
       { he: 'על האמות: מקלה על פרקי כף היד.', en: 'On forearms: easier on the wrists.', ru: 'На предплечьях: так легче запястьям.' },
       { he: 'שולחן יציב על כפות הידיים.', en: 'Steady tabletop on your palms.', ru: 'Устойчивый стол на ладонях.' },
-      { he: 'הושיטו יד אחת קדימה ורגל נגדית אחורה והחזיקו.', en: 'Reach one arm forward and the opposite leg back, and hold.', ru: 'Вытяните одну руку вперёд, а противоположную ногу назад, и задержитесь.' },
+      { he: 'הושיטו יד אחת קדימה ורגל נגדית אחורה, האגן ישר, וחזרו לשולחן בשליטה.', en: 'Reach one arm forward and the opposite leg back, and hold.', ru: 'Вытяните одну руку вперёд, а противоположную ногу назад, и задержитесь.' },
     ],
   },
   {
@@ -34,7 +34,7 @@ export default [
     id: 'cat', sa: 'Marjaryasana', en: 'Cat', he: 'חתול', cat: 'warm-up', sec: 'warm', flow: 20, d: 1, hold: 30, sides: 'single',
     ru: 'Кошка', tags: ['relax', 'back', 'flex'],
     cue: {
-      he: ['בנשיפה עגלו את הגב כלפי התקרה.', 'הכניסו את הסנטר אל החזה והשעינו את האגן.', 'דחפו את הרצפה והרחיקו את השכמות זו מזו.', 'חזרו לנוע לאט עם הנשימה.'],
+      he: ['בנשיפה עגלו את הגב כלפי התקרה.', 'הכניסו את הסנטר אל החזה, הטו את האגן אחורה ועצם הזנב פנימה.', 'דחפו את הרצפה והרחיקו את השכמות זו מזו.', 'חזרו לנוע לאט עם הנשימה.'],
       en: ['Exhale and round your back toward the ceiling.', 'Tuck your chin and tilt your pelvis under.', 'Push the floor away and spread the shoulder blades.', 'Keep moving slowly with your breath.'],
       ru: ['На выдохе округлите спину к потолку.', 'Подтяните подбородок к груди и подкрутите таз, копчик вниз.', 'Отталкивайтесь от пола и разводите лопатки.', 'Двигайтесь медленно, в ритме дыхания.'],
     },
