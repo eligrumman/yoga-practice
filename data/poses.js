@@ -7,6 +7,7 @@ import rest from './p-rest.js';
 export const CATEGORIES = [
   'warm-up', 'standing', 'balance', 'forward fold', 'backbend', 'twist',
   'hip opener', 'inversion-light', 'floor/seated', 'supine', 'rest',
+  'arm balance',
 ];
 export const CATEGORY_LABELS = {
   'warm-up': { he: 'חימום', en: 'Warm-up', ru: 'Разминка' },
@@ -16,6 +17,7 @@ export const CATEGORY_LABELS = {
   backbend: { he: 'כפיפה אחורה', en: 'Backbend', ru: 'Прогибы' },
   twist: { he: 'סיבוב', en: 'Twist', ru: 'Скручивания' },
   'hip opener': { he: 'פתיחת ירכיים', en: 'Hip opener', ru: 'Раскрытие бёдер' },
+  'arm balance': { he: 'שיווי משקל על הידיים', en: 'Arm balance', ru: 'Баланс на руках' },
   'inversion-light': { he: 'הפוכה עדינה', en: 'Gentle inversion', ru: 'Лёгкая инверсия' },
   'floor/seated': { he: 'ישיבה / רצפה', en: 'Floor / seated', ru: 'Сидя / на полу' },
   supine: { he: 'שכיבה על הגב', en: 'Supine', ru: 'Лёжа на спине' },

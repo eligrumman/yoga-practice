@@ -317,12 +317,13 @@ export class Renderer2D {
     for (const p of props) {
       if (p.type === 'block') {
         const h = p.h || 22;
-        for (const k of p.arms || ['R']) {
-          const w = S.J['wrist' + k];
+        const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
+        for (const [joint, k] of anchors) {
+          const w = S.J[joint + k];
           box(this.back, [w[0], h / 2 * Math.max(0.01, Math.min(1, e * 1.4)), w[2]], [24, h * Math.max(0.01, Math.min(1, e * 1.4)), 12], 'prop-block');
         }
       } else if (p.type === 'cushion') {
-        const pl = S.J.pelvis, h = (p.h || 12) * Math.min(1, e * 1.4);
+        const pl = p.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = (p.h || 12) * Math.min(1, e * 1.4);
         box(this.back, [pl[0] - 2, h / 2, pl[2]], [(p.w || 56), h, 36], 'prop-cushion');
       } else if (p.type === 'wall') {
         const b = S.bounds;

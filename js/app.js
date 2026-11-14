@@ -214,7 +214,7 @@ function viewPose(id) {
     for (const b of tabs.children) { b.setAttribute('aria-selected', b.dataset.l == n); }
     const v = p.variations[n];
     varText.textContent = v[lang];
-    propsLine.textContent = `${T('props')}: ` + (v.props.length ? v.props.map((x) => T('prop', x)).join(', ') : T('noProps'));
+    propsLine.textContent = `${T('props')}: ` + (v.props.length ? [...new Set(v.props.map((x) => (typeof x === 'string' ? x : x.type)))].map((x) => T('prop', x)).join(', ') : T('noProps'));
   };
   [0, 1, 2].forEach((n) => tabs.append(el('button', { class: 'tab', role: 'tab', 'data-l': n, id: `lv${n}`, onclick: () => setLevel(n) }, LEVEL_LABELS[n][lang])));
   const fav = el('button', { class: 'btn icon', id: 'fav', 'aria-label': T('star'), onclick: () => { const on = store.toggleFav(p.id); fav.textContent = on ? '★' : '☆'; } }, store.favorites.includes(p.id) ? '★' : '☆');

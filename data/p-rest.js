@@ -61,6 +61,21 @@ export default [
     ],
   },
   {
+    id: 'pigeon', sa: 'Eka Pada Rajakapotasana', en: 'Pigeon', he: 'יונה', ru: 'Поза голубя', cat: 'hip opener', sec: 'cool', flow: 92, d: 2, hold: 30, sides: 'both',
+    tags: ['flex', 'noback'],
+    cue: {
+      he: ['מעמד ארבע, הביאו ברך אחת קדימה והניחו אותה מאחורי כף היד באותו צד.', 'החליקו את הרגל השנייה לאחור והשאירו את כף הרגל הקדמית כפופה.', 'תמכו באגן אם הוא נשאר באוויר והאריכו את עמוד השדרה לפני ירידה.', 'חזרו לארבע לאט והחליפו צד.'],
+      en: ['From all fours, bring one knee forward behind the same-side hand.', 'Slide the other leg back and keep the front foot flexed.', 'Support a floating hip and lengthen the spine before lowering.', 'Return slowly to all fours and change sides.'],
+      ru: ['Из положения на четвереньках перенесите одно колено вперёд за одноимённую ладонь.', 'Отведите другую ногу назад и держите переднюю стопу согнутой.', 'Подоприте таз, если он висит, и вытяните позвоночник перед наклоном.', 'Медленно вернитесь на четвереньки и смените сторону.'],
+    },
+    safe: { he: 'אין לדחוף דרך כאב בברך. השאירו את העקב הקדמי קרוב לאגן ותמכו בירך בבלוק או שמיכה. פגיעת ברך או ירך, החלפת מפרק, כאב במפרק העצה והכסל או הריון: העדיפו ארבע שכובה או דלגו והתייעצו עם איש מקצוע רפואי. אין כאן ייעוץ רפואי.', en: 'Never push through knee pain. Keep the front heel near the pelvis and support the hip with a block or blanket. With knee or hip injury, joint replacement, SI pain, or pregnancy, choose reclined figure four or skip and ask a clinician. This is not medical advice.', ru: 'Не продолжайте при боли в колене. Держите переднюю пятку ближе к тазу и подоприте бедро блоком или одеялом. При травме колена или бедра, замене сустава, боли в крестцово-подвздошной области или беременности выберите четвёрку лёжа либо пропустите и спросите врача. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'ארבע שכובה: קרסול על הירך הנגדית, כף הרגל התחתונה על הרצפה.', en: 'Reclined figure four with the lower foot on the floor.', ru: 'Четвёрка лёжа, нижняя стопа на полу.' },
+      { he: 'יונה זקופה, העקב הקדמי קרוב לאגן ובלוק או שמיכה מתחת לירך לפי הצורך.', en: 'Upright pigeon, front heel near the pelvis; support the hip as needed.', ru: 'Голубь с вертикальным корпусом; пятка ближе к тазу, под бедром опора.', props: [{ type: 'block', h: 12 }] },
+      { he: 'הטיה קדימה מעל השוק הקדמית רק כל עוד הברך והאגן שקטים.', en: 'Fold forward over the front shin only while the knee and hip stay comfortable.', ru: 'Наклоняйтесь над передней голенью лишь пока колену и тазу удобно.' },
+    ],
+  },
+  {
     id: 'hand-to-toe', sa: 'Supta Padangusthasana', en: 'Reclined hand-to-toe', he: 'יד לבוהן בשכיבה', ru: 'Рука к стопе лёжа', cat: 'supine', sec: 'cool', flow: 50, d: 2, hold: 30, sides: 'both',
     tags: ['flex', 'back', 'noback'],
     cue: {

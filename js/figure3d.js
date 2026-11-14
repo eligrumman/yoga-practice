@@ -395,9 +395,10 @@ export class Renderer3D {
       const box = () => new T.Mesh(new T.BoxGeometry(1, 1, 1), this.propMats.block);
       for (const p of props || []) {
         if (p.type === 'block') {
-          for (const k of p.arms || ['R']) { const m = box(); m.userData = { k, h: p.h || 22 }; this.propGroup.add(m); this.propObjs.push({ type: 'block', obj: m, k, h: p.h || 22 }); }
+          const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
+          for (const [joint, k] of anchors) { const m = box(); m.userData = { k, h: p.h || 22 }; this.propGroup.add(m); this.propObjs.push({ type: 'block', obj: m, joint, k, h: p.h || 22 }); }
         } else if (p.type === 'cushion') {
-          const m = box(); m.material = this.propMats.cush; this.propGroup.add(m); this.propObjs.push({ type: 'cushion', obj: m, h: p.h || 12, w: p.w || 56 });
+          const m = box(); m.material = this.propMats.cush; this.propGroup.add(m); this.propObjs.push({ type: 'cushion', obj: m, h: p.h || 12, w: p.w || 56, at: p.at });
         } else if (p.type === 'wall') {
           const m = new T.Mesh(new T.PlaneGeometry(140, 215).rotateY(Math.PI / 2), this.propMats.wall); this.propGroup.add(m); this.propObjs.push({ type: 'wall', obj: m });
         } else if (p.type === 'strap') {
@@ -414,10 +415,10 @@ export class Renderer3D {
       o.obj.visible = vis;
       if (!vis) continue;
       if (o.type === 'block') {
-        const w = S.J['wrist' + o.k], h = Math.max(0.01, o.h * ke);
+        const w = S.J[(o.joint || 'wrist') + o.k], h = Math.max(0.01, o.h * ke);
         o.obj.position.set(w[0], h / 2, w[2]); o.obj.scale.set(24, h, 12);
       } else if (o.type === 'cushion') {
-        const pl = S.J.pelvis, h = Math.max(0.01, o.h * ke);
+        const pl = o.at === 'front' ? [S.bounds.maxX + 20, 0, 0] : S.J.pelvis, h = Math.max(0.01, o.h * ke);
         o.obj.position.set(pl[0] - 2, h / 2, pl[2]); o.obj.scale.set(o.w, h, 36);
       } else if (o.type === 'wall') {
         o.obj.position.set(S.bounds.maxX + 8, 107.5, 0);

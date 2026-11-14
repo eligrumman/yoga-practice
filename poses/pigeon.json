@@ -1,0 +1,31 @@
+{
+  "id": "pigeon",
+  "format": 1,
+  "camera": {"az":65,"el":12},
+  "start": {
+    "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, -90] },
+    "spine1": [0,0,0], "spine2": [0,0,0], "spine3": [0,0,0], "neck": [0,0,0], "head": [0,0,0],
+    "shoulderR": [0,0,-8], "elbowR": [0,0,3], "wristR": [0,0,0], "hipR": [0,0,53], "kneeR": [0,0,129], "ankleR": [0,0,-14],
+    "shoulderL": [0,0,-8], "elbowL": [0,0,3], "wristL": [0,0,0], "hipL": [0,0,53], "kneeL": [0,0,129], "ankleL": [0,0,-14]
+  },
+  "levels": [
+    {"level":0,"camera":{"az":28,"el":12},"hold":{
+      "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, -90] },
+      "spine1": [0,0,1], "spine2": [0,0,1], "spine3": [0,0,1], "neck": [0,0,1], "head": [0,0,1],
+      "shoulderR": [0,0,-8], "elbowR": [0,0,2], "wristR": [0,0,0], "hipR": [0,0,55], "kneeR": [0,0,135], "ankleR": [0,0,-10],
+      "shoulderL": [0,0,-8], "elbowL": [0,0,2], "wristL": [0,0,0], "hipL": [42,35,92], "kneeL": [0,0,112], "ankleL": [0,0,20]
+    },"props":[]},
+    {"level":1,"hold":{
+      "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 65] },
+      "spine1": [0,0,-12], "spine2": [0,0,-12], "spine3": [0,0,-12], "neck": [0,0,5], "head": [0,0,5],
+      "shoulderR": [0,0,20], "elbowR": [0,0,0], "wristR": [0,0,10], "hipR": [48,45,120], "kneeR": [0,0,145], "ankleR": [0,0,15],
+      "shoulderL": [0,0,20], "elbowL": [0,0,0], "wristL": [0,0,10], "hipL": [0.9,11.3,11.6], "kneeL": [0,-11.2,28.5], "ankleL": [-9.6,-32.3,-68.8]
+    },"props":[{"type":"block","h":12}]},
+    {"level":2,"hold":{
+      "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 65] },
+      "spine1": [0,0,17.3], "spine2": [0,0,23.5], "spine3": [0,0,23.7], "neck": [0,0,20.5], "head": [0,0,-12.8],
+      "shoulderR": [42.5,-19,138], "elbowR": [0,-17.9,90.9], "wristR": [14.3,76,39.1], "hipR": [32.5,54.9,96.2], "kneeR": [0,1.9,140.2], "ankleR": [-17,0.7,-31],
+      "shoulderL": [42.5,-19,138], "elbowL": [0,-17.9,90.9], "wristL": [14.3,76,39.1], "hipL": [0.9,11.3,11.6], "kneeL": [0,-11.2,28.5], "ankleL": [-9.6,-32.3,-68.8]
+    },"props":[]}
+  ]
+}

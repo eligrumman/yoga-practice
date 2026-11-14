@@ -210,4 +210,19 @@ export default [
       { he: 'צורת V: רגליים ישרות, ידיים מקבילות לרצפה.', en: 'V shape: straight legs, arms parallel to the floor.', ru: 'Буква V: ноги прямые, руки параллельно полу.' },
     ],
   },
+  {
+    id: 'crow', sa: 'Bakasana', en: 'Crow', he: 'עורב', ru: 'Бакасана', cat: 'arm balance', sec: 'floor', flow: 95, d: 3, hold: 15, sides: 'single',
+    tags: ['strength', 'noback', 'advanced'],
+    cue: {
+      he: ['כרעו, פתחו את האצבעות והניחו כפות ידיים ברוחב הכתפיים.', 'כופפו מרפקים מעט, הצמידו ברכיים לזרועות והעבירו משקל קדימה בהדרגה.', 'דחפו את הרצפה, הרחיבו את הגב העליון והשאירו מבט מעט קדימה.', 'צאו לאחור מיד אם יש כאב בשורש כף היד או אם הנשימה נעצרת.'],
+      en: ['Squat, spread the fingers and place the palms shoulder-width apart.', 'Bend the elbows slightly, bring the knees to the arms and shift forward gradually.', 'Press the floor away, broaden the upper back and look slightly forward.', 'Step back at once if the wrists hurt or the breath stops.'],
+      ru: ['Присядьте, разведите пальцы и поставьте ладони на ширине плеч.', 'Слегка согните локти, прижмите колени к рукам и постепенно перенесите вес вперёд.', 'Оттолкнитесь от пола, расширьте верх спины и смотрите немного вперёд.', 'Сразу отступите, если болят запястья или задерживается дыхание.'],
+    },
+    safe: { he: 'תנאי מקדים: חמישה נשימות נוחות בקרש, שורשי כף יד מחוממים וכתפיים ללא כאב. הניחו שמיכה מקופלת לפני הפנים ולמדו לרדת ברגליים. כאב בשורש כף היד, במרפק או בכתף, הריון או לחץ דם שאינו מאוזן: דלגו. אין כאן ייעוץ רפואי.', en: 'Prerequisites: five comfortable plank breaths, warmed wrists and pain-free shoulders. Put a folded blanket in front of the face and learn to step down. Skip with wrist, elbow or shoulder pain, during pregnancy, or with uncontrolled blood pressure. This is not medical advice.', ru: 'Условия: пять спокойных дыханий в планке, разогретые запястья и плечи без боли. Положите сложенное одеяло перед лицом и учитесь опускать стопы. Пропустите при боли в запястье, локте или плече, во время беременности или при неконтролируемом давлении. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'עקבים על בלוק, כפות רגליים נשארות על הרצפה והמשקל נע מעט קדימה.', en: 'Heels on a block; feet stay down as weight shifts slightly forward.', ru: 'Пятки на блоке; стопы остаются на полу, вес немного смещается вперёд.', props: [{ type: 'block', legs: ['R', 'L'], h: 12 }] },
+      { he: 'רגל אחת מתרוממת או רק אצבעותיה מרחפות; שמיכה מקופלת לפני הפנים.', en: 'One foot lifts or its toes hover; keep a folded blanket in front.', ru: 'Одна стопа поднимается или пальцы зависают; впереди сложенное одеяло.', props: [{ type: 'cushion', h: 6 }] },
+      { he: 'שתי כפות הרגליים באוויר, ברכיים נתמכות בזרועות והגב העליון רחב.', en: 'Both feet lift, knees rest on the arms and the upper back stays broad.', ru: 'Обе стопы подняты, колени опираются на руки, верх спины широкий.' },
+    ],
+  },
 ];

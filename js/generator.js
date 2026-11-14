@@ -44,14 +44,14 @@ function separateBackbends(items, level) {
 // Body-position order of a practice: all fours (warm-up) -> standing -> kneeling -> seated -> prone -> supine -> savasana.
 // SEQ is the total order; a generated plan is sorted by it so there is never a supine -> kneeling/standing jump.
 const SEQ = [
-  ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank']],
+  ['allfours', ['tabletop', 'cat-cow', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
   ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'half-lift', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
   ['prone', ['cobra', 'locust', 'child']],
   ['seated', ['easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'boat']],
   // legs-up-wall sits before the twist so the plan can close twist -> savasana
-  ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']],
+  ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'pigeon', 'hand-to-toe', 'legs-up-wall', 'supine-twist']],
   ['rest', ['savasana']],
 ];
 export const POSITIONS = SEQ.map(([n]) => n);
@@ -79,7 +79,10 @@ function candidates({ focus, level, avoid }) {
   const maxD = focus === 'back' && level !== 'beginner' ? 2 : 3;
   const out = (p) => focus === 'relax' && RELAX_OUT.has(p.id);
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
-  return POSES.filter((p) => p.section !== 'rest' && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !out(p) && !avoid.has(p.id));
+  return POSES.filter((p) => p.section !== 'rest'
+    && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
+    && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
+    && okLevel(p) && !(focus === 'back' && p.tags.includes('noback')) && !out(p) && !avoid.has(p.id));
 }
 
 function rank(p, focus, level) {

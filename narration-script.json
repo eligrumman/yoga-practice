@@ -2865,6 +2865,96 @@
   "text": "Keep the belly active and the breath calm."
  },
  {
+  "id": "pose.crow.name",
+  "lang": "he",
+  "text": "עורב"
+ },
+ {
+  "id": "pose.crow.name",
+  "lang": "ru",
+  "text": "Бакасана"
+ },
+ {
+  "id": "pose.crow.name",
+  "lang": "en",
+  "text": "Crow"
+ },
+ {
+  "id": "pose.crow.intro",
+  "lang": "he",
+  "text": "תנוחת עורב."
+ },
+ {
+  "id": "pose.crow.intro",
+  "lang": "ru",
+  "text": "Поза: Бакасана."
+ },
+ {
+  "id": "pose.crow.intro",
+  "lang": "en",
+  "text": "Pose: Crow."
+ },
+ {
+  "id": "pose.crow.cue.1",
+  "lang": "he",
+  "text": "כרעו, פתחו את האצבעות והניחו כפות ידיים ברוחב הכתפיים."
+ },
+ {
+  "id": "pose.crow.cue.1",
+  "lang": "ru",
+  "text": "Присядьте, разведите пальцы и поставьте ладони на ширине плеч."
+ },
+ {
+  "id": "pose.crow.cue.1",
+  "lang": "en",
+  "text": "Squat, spread the fingers and place the palms shoulder-width apart."
+ },
+ {
+  "id": "pose.crow.cue.2",
+  "lang": "he",
+  "text": "כופפו מרפקים מעט, הצמידו ברכיים לזרועות והעבירו משקל קדימה בהדרגה."
+ },
+ {
+  "id": "pose.crow.cue.2",
+  "lang": "ru",
+  "text": "Слегка согните локти, прижмите колени к рукам и постепенно перенесите вес вперёд."
+ },
+ {
+  "id": "pose.crow.cue.2",
+  "lang": "en",
+  "text": "Bend the elbows slightly, bring the knees to the arms and shift forward gradually."
+ },
+ {
+  "id": "pose.crow.cue.3",
+  "lang": "he",
+  "text": "דחפו את הרצפה, הרחיבו את הגב העליון והשאירו מבט מעט קדימה."
+ },
+ {
+  "id": "pose.crow.cue.3",
+  "lang": "ru",
+  "text": "Оттолкнитесь от пола, расширьте верх спины и смотрите немного вперёд."
+ },
+ {
+  "id": "pose.crow.cue.3",
+  "lang": "en",
+  "text": "Press the floor away, broaden the upper back and look slightly forward."
+ },
+ {
+  "id": "pose.crow.cue.4",
+  "lang": "he",
+  "text": "צאו לאחור מיד אם יש כאב בשורש כף היד או אם הנשימה נעצרת."
+ },
+ {
+  "id": "pose.crow.cue.4",
+  "lang": "ru",
+  "text": "Сразу отступите, если болят запястья или задерживается дыхание."
+ },
+ {
+  "id": "pose.crow.cue.4",
+  "lang": "en",
+  "text": "Step back at once if the wrists hurt or the breath stops."
+ },
+ {
   "id": "pose.knees-to-chest.name",
   "lang": "he",
   "text": "ברכיים לחזה"
@@ -3223,6 +3313,96 @@
   "id": "pose.figure-four.cue.4",
   "lang": "en",
   "text": "Gently press the outer knee away and release."
+ },
+ {
+  "id": "pose.pigeon.name",
+  "lang": "he",
+  "text": "יונה"
+ },
+ {
+  "id": "pose.pigeon.name",
+  "lang": "ru",
+  "text": "Поза голубя"
+ },
+ {
+  "id": "pose.pigeon.name",
+  "lang": "en",
+  "text": "Pigeon"
+ },
+ {
+  "id": "pose.pigeon.intro",
+  "lang": "he",
+  "text": "תנוחת יונה."
+ },
+ {
+  "id": "pose.pigeon.intro",
+  "lang": "ru",
+  "text": "Поза голубя."
+ },
+ {
+  "id": "pose.pigeon.intro",
+  "lang": "en",
+  "text": "Pose: Pigeon."
+ },
+ {
+  "id": "pose.pigeon.cue.1",
+  "lang": "he",
+  "text": "מעמד ארבע, הביאו ברך אחת קדימה והניחו אותה מאחורי כף היד באותו צד."
+ },
+ {
+  "id": "pose.pigeon.cue.1",
+  "lang": "ru",
+  "text": "Из положения на четвереньках перенесите одно колено вперёд за одноимённую ладонь."
+ },
+ {
+  "id": "pose.pigeon.cue.1",
+  "lang": "en",
+  "text": "From all fours, bring one knee forward behind the same-side hand."
+ },
+ {
+  "id": "pose.pigeon.cue.2",
+  "lang": "he",
+  "text": "החליקו את הרגל השנייה לאחור והשאירו את כף הרגל הקדמית כפופה."
+ },
+ {
+  "id": "pose.pigeon.cue.2",
+  "lang": "ru",
+  "text": "Отведите другую ногу назад и держите переднюю стопу согнутой."
+ },
+ {
+  "id": "pose.pigeon.cue.2",
+  "lang": "en",
+  "text": "Slide the other leg back and keep the front foot flexed."
+ },
+ {
+  "id": "pose.pigeon.cue.3",
+  "lang": "he",
+  "text": "תמכו באגן אם הוא נשאר באוויר והאריכו את עמוד השדרה לפני ירידה."
+ },
+ {
+  "id": "pose.pigeon.cue.3",
+  "lang": "ru",
+  "text": "Подоприте таз, если он висит, и вытяните позвоночник перед наклоном."
+ },
+ {
+  "id": "pose.pigeon.cue.3",
+  "lang": "en",
+  "text": "Support a floating hip and lengthen the spine before lowering."
+ },
+ {
+  "id": "pose.pigeon.cue.4",
+  "lang": "he",
+  "text": "חזרו לארבע לאט והחליפו צד."
+ },
+ {
+  "id": "pose.pigeon.cue.4",
+  "lang": "ru",
+  "text": "Медленно вернитесь на четвереньки и смените сторону."
+ },
+ {
+  "id": "pose.pigeon.cue.4",
+  "lang": "en",
+  "text": "Return slowly to all fours and change sides."
  },
  {
   "id": "pose.hand-to-toe.name",
@@ -6064,6 +6244,83 @@
   "prio": "rest"
  },
  {
+  "id": "pose.crow.entry.1",
+  "lang": "he",
+  "text": "כרעו והניחו כפות ידיים ברוחב הכתפיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.entry.2",
+  "lang": "he",
+  "text": "פתחו אצבעות וכופפו מעט את המרפקים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.align.1",
+  "lang": "he",
+  "text": "הצמידו ברכיים לזרועות והעבירו משקל קדימה בהדרגה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.align.2",
+  "lang": "he",
+  "text": "דחפו את הרצפה והשאירו מבט מעט קדימה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.breath",
+  "lang": "he",
+  "text": "נשמו ברצף. אם הנשימה נעצרת, הורידו רגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.mod.L0",
+  "lang": "he",
+  "text": "השאירו את כפות הרגליים על הרצפה והגביהו עקבים על בלוק או שמיכה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.mod.L1",
+  "lang": "he",
+  "text": "הרימו כף רגל אחת בלבד, עם שמיכה מקופלת לפני הפנים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.mod.L2",
+  "lang": "he",
+  "text": "אם התנאים המקדימים מתקיימים, הרימו שתי כפות רגליים ושמרו גב עליון רחב.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.crow.fix.1",
+  "lang": "he",
+  "text": "המרפקים נוטים להיפתח הצידה. כוונו אותם לאחור ודחפו את הרצפה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.crow.fix.2",
+  "lang": "he",
+  "text": "קל להביט ישר למטה ולהיעצר בנשימה. הביטו מעט קדימה והורידו רגליים אם הנשימה אינה זורמת.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.crow.exit",
+  "lang": "he",
+  "text": "הורידו רגל אחת ואז את השנייה, שבו לאחור ושחררו את שורשי כפות הידיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
   "id": "pose.knees-to-chest.entry.1",
   "lang": "he",
   "text": "שכבו על הגב.",
@@ -6391,6 +6648,90 @@
   "text": "צד שני. הצליבו את הקרסול השני.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.pigeon.entry.1",
+  "lang": "he",
+  "text": "מעמד ארבע, הביאו ברך אחת קדימה מאחורי כף היד.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.entry.2",
+  "lang": "he",
+  "text": "החליקו את הרגל השנייה לאחור ותמכו באגן לפי הצורך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.align.1",
+  "lang": "he",
+  "text": "השאירו את העקב הקדמי קרוב לאגן ואת כף הרגל כפופה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.align.2",
+  "lang": "he",
+  "text": "האריכו את הגב ואל תדחפו דרך כאב בברך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.breath",
+  "lang": "he",
+  "text": "נשמו אל צדי האגן בלי לנסות להעמיק.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.mod.L0",
+  "lang": "he",
+  "text": "אם נוח לכם, בחרו ארבע שכובה והשאירו את כף הרגל התחתונה על הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.mod.L1",
+  "lang": "he",
+  "text": "הישארו זקופים ביונה עם תמיכה מתחת לירך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.mod.L2",
+  "lang": "he",
+  "text": "אם הברך והאגן שקטים, הטו את הגוף קדימה מעל השוק.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.fix.1",
+  "lang": "he",
+  "text": "האגן נוטה להישאר באוויר. הניחו תמיכה מתחת לירך במקום להכריח אותו לרצפה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.pigeon.fix.2",
+  "lang": "he",
+  "text": "כאב בברך הקדמית אינו מתיחה. קרבו את העקב לאגן או עברו לארבע שכובה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.pigeon.exit",
+  "lang": "he",
+  "text": "לחצו בידיים, חזרו לארבע לאט והחליפו צד.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pigeon.side",
+  "lang": "he",
+  "text": "עכשיו עברו לצד השני.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.hand-to-toe.entry.1",
