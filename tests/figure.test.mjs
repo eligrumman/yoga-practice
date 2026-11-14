@@ -102,6 +102,37 @@ export default async function figureTests(ok) {
     ok(J.ankleR[0] - J.hipR[0] > -12 && J.ankleR[0] - J.hipR[0] < 12, `wide-legged-fold L${l} feet under the hips (hinge at the hips)`);
   }
   ok(wide.spec.levels[0].hold.pelvis.rot[2] < wide.spec.levels[1].hold.pelvis.rot[2] && wide.spec.levels[0].props[0].h > wide.spec.levels[1].props[0].h, 'wide-legged-fold L1 folds deeper onto a lower block than L0');
+  // ---- reviewed standing / kneeling variants keep the support and alignment shown in their level text
+  {
+    const utt = POSES.find((q) => q.id === 'uttanasana'), U0 = solve(poseFrames(utt, 0).hold), U2 = solve(poseFrames(utt, 2).hold);
+    for (const side of ['R', 'L']) {
+      const shin = sub3(U0.J['ankle' + side], U0.J['knee' + side]), hand = sub3(U0.J['wrist' + side], U0.J['knee' + side]);
+      const t = Math.max(0, Math.min(1, hand.reduce((s, v, i) => s + v * shin[i], 0) / shin.reduce((s, v) => s + v * v, 0)));
+      ok(len3(sub3(hand, shin.map((v) => v * t))) <= 8, `uttanasana L0 ${side} hand rests on the front shin`);
+      ok(len3(sub3(U2.J['wrist' + side], U2.J['toe' + side])) <= 8, `uttanasana L2 ${side} hand reaches the big-toe position`);
+    }
+    const half = solve(poseFrames(POSES.find((q) => q.id === 'half-lift'), 2).hold);
+    ok(lowest(half, 'handR') <= 0.5 && lowest(half, 'handL') <= 0.5, 'half-lift L2 fingertips touch the floor');
+    ok(bend(half.J.pelvis, half.J.spine1, half.J.spine3) <= 8, 'half-lift L2 keeps a long flat back');
+    const mt = solve(poseFrames(POSES.find((q) => q.id === 'mountain'), 2).hold);
+    ok(len3(sub3(mt.J.wristR, mt.J.wristL)) <= 6 && mt.J.wristR[1] > mt.J.spine1[1], 'mountain L2 palms meet at the chest');
+    ok(mt.J.heelR[1] - mt.J.toeR[1] > 8 && mt.J.heelL[1] - mt.J.toeL[1] > 8, 'mountain L2 heels are lifted');
+  }
+  {
+    const ext = POSES.find((q) => q.id === 'extended-side-angle'), E0 = solve(poseFrames(ext, 0).hold), F1 = poseFrames(ext, 1), E1 = solve(F1.hold);
+    const forearm = sub3(E0.J.wristR, E0.J.elbowR), thigh = sub3(E0.J.kneeR, E0.J.hipR);
+    const angle = Math.acos(forearm.reduce((s, v, i) => s + v * thigh[i], 0) / len3(forearm) / len3(thigh)) * 180 / Math.PI;
+    ok(angle <= 25 && len3(sub3(E0.J.wristR, E0.J.kneeR)) <= 5, 'extended-side-angle L0 forearm rests along the front thigh');
+    const bx = blockBoxes(F1.props, E1, 1).find((b) => b.k === 'R');
+    ok(bx && Math.abs(lowest(E1, 'handR') - bx.top) <= 0.5, 'extended-side-angle L1 lower hand rests on the block top');
+    const split = solve(poseFrames(POSES.find((q) => q.id === 'half-split'), 2).hold);
+    ok(bend(split.J.pelvis, split.J.spine1, split.J.spine3) <= 10 && bend(split.J.spine1, split.J.spine3, split.head.c) <= 12, 'half-split L2 keeps the spine and neck long');
+    const camel = POSES.find((q) => q.id === 'camel'), C2f = poseFrames(camel, 2), C2 = solve(C2f.hold);
+    ok(C2f.hold.neck[2] >= 20 && C2f.hold.head[2] >= 15, 'camel L2 counter-rotates the neck to neutral');
+    ok(len3(sub3(C2.J.wristR, C2.J.heelR)) <= 22 && len3(sub3(C2.J.wristL, C2.J.heelL)) <= 22, 'camel L2 hands reach the heels');
+    const plank = solve(poseFrames(POSES.find((q) => q.id === 'plank'), 2).hold);
+    ok(bend(plank.J.hipL, plank.J.kneeL, plank.J.ankleL) <= 3 && plank.J.ankleL[1] > plank.J.ankleR[1] + 8, 'plank L2 lifted leg is long, straight, and slightly raised');
+  }
   // ---- lunges / warriors: front knee over the ankle, front sole flat
   for (const id of ['warrior-1', 'warrior-2', 'extended-side-angle', 'high-lunge', 'low-lunge']) {
     const P = POSES.find((q) => q.id === id);
