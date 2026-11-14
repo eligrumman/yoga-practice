@@ -657,6 +657,22 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   ok(/needsPregnancyNote\(plan\.items\)/.test(appSrc) && /preg-note/.test(appSrc), 'plan screen wires the pregnancy note');
 }
 
+{ // end-of-session check-in
+  const { suggestNext, FEELS } = await import('../js/checkin.js');
+  const pre = PRESETS.map((p) => ({ id: p.id, minutes: p.minutes, level: p.level }));
+  ok(FEELS.length === 3, 'three feelings');
+  for (const f of FEELS) for (const p of pre) {
+    const r = suggestNext(f, { id: 'preset:' + p.id, minutes: p.minutes, level: p.level }, pre);
+    ok(r && r.id !== p.id && pre.some((x) => x.id === r.id), `checkin ${f} after ${p.id} gives another real preset`);
+    if (f === 'hard') ok(r.minutes <= p.minutes || r.level === 0, `checkin hard after ${p.id} is not longer and harder`);
+    if (f === 'easy') ok(r.minutes > p.minutes || r.level > p.level || p.minutes === Math.max(...pre.map((x) => x.minutes)), `checkin easy after ${p.id} steps up`);
+  }
+  ok(suggestNext('ok', { minutes: 10 }, []) === null, 'checkin with no presets is null');
+  ok(['howWasIt', 'feelEasy', 'feelOk', 'feelHard', 'nextSuggest'].every((k) => ['he', 'ru', 'en'].every((l) => tr(k, l) && tr(k, l) !== k)), 'checkin strings he/ru/en');
+  const ps = readFileSync(new URL('../js/player.js', import.meta.url), 'utf8');
+  ok(/id: 'checkin'/.test(ps) && /suggestNext/.test(ps), 'finish screen wires the check-in');
+}
+
 { const pt = await import('./player.test.mjs'); pass += pt.pass; fail += pt.fail; } // player: fix cues, music, transcript
 
 await (await import('./figure.test.mjs')).default(ok);

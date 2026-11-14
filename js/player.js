@@ -2,6 +2,8 @@
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { slots, planSeconds, fmtTime } from './plan.js';
 import { tr, poseOf, finishStats } from './i18n.js';
+import { suggestNext, FEELS } from './checkin.js';
+import { ALL_PRESETS } from '../data/plans-preset.js';
 import { store, streak, countsForStreak } from './store.js';
 import { NARR_LEVELS, slotPlan, introSeq, introSeconds, poseV2Ids, sessionIds, closingPlays } from './narration-plan.js';
 import { segText } from '../data/narration.js';
@@ -397,11 +399,23 @@ export class Player {
       el('p', {}, fs.text),
       el('p', { class: 'stat', id: 'finish-stat' }, fs.stat),
       el('p', { class: 'small', id: 'finish-planned' }, fs.planned),
+      el('div', { class: 'checkin', id: 'checkin' },
+        el('p', { class: 'small' }, this.T('howWasIt')),
+        el('div', { class: 'row-btns' }, FEELS.map((f) => el('button', { class: 'btn', 'data-feel': f, onclick: () => this.checkin(f) }, this.T('feel' + f[0].toUpperCase() + f.slice(1)))))),
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary', onclick: () => this.again() }, this.T('again')),
         el('button', { class: 'btn', onclick: () => this.exit(true) }, this.T('home')))));
     this.releaseWake(); document.removeEventListener('visibilitychange', this._vis); this.nar.onSpeaking = () => {};
     this.onFinish?.();
+  }
+  checkin(feel) {
+    const box = this.root.querySelector('#checkin'); if (!box) return;
+    const cur = { id: this.plan.id, minutes: Math.round(this.totalAll / 60), level: this.plan.preset?.level };
+    const pick = suggestNext(feel, cur, ALL_PRESETS.filter((p) => !p.day));
+    box.innerHTML = '';
+    if (!pick) return;
+    box.append(el('p', { class: 'small', id: 'checkin-next' }, `${this.T('nextSuggest')}: ${pick.name[this.lang]} (${pick.minutes} ${this.T('min')})`),
+      el('button', { class: 'btn primary', 'data-next': pick.id, onclick: () => { this.destroy(); location.hash = `/player/preset:${pick.id}`; } }, '▶ ' + this.T('play')));
   }
   again() { this.destroy(); const p = new Player(this.root, { plan: this.plan, narrator: this.nar, lang: this.lang, onExit: this.onExit, onFinish: this.onFinish }); p.start(); this.successor = p; }
   releaseWake() { try { this.wake?.release(); } catch { /* none */ } this.wake = null; }

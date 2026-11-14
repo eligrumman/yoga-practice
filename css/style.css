@@ -231,3 +231,4 @@ body.in-player{overflow:hidden}
 .fig-ink .fig-twin{fill:var(--ink-line);stroke:var(--ink-line);stroke-width:calc(var(--ink-k,1)*var(--tw-k,1)*1.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
 .fig-ink .prop-block,.fig-ink .prop-cushion{stroke:var(--ink-line);stroke-opacity:.8;stroke-width:calc(var(--ink-k,1)*.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round}
 .fig.mini,.fig.item-fig{--ink-k:.65}.fig.card-fig{--ink-k:.85}
+.checkin{margin:1.2rem 0}
