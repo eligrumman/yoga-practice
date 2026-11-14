@@ -424,7 +424,7 @@ export function blockBoxes(props, S, e = 1) {
   const ke = Math.max(0, Math.min(1, e * 1.4)), out = [];
   for (const p of props || []) {
     if (p.type !== 'block') continue;
-    const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
+    const anchors = p.at ? [[p.at, '']] : p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
     for (const [joint, k] of anchors) out.push({ joint, k, ...blockBox(S.J[joint + k], Math.max(0.01, (p.h || 22) * ke)) });
   }
   return out;

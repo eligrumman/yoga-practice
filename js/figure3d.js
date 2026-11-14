@@ -395,7 +395,7 @@ export class Renderer3D {
       const box = () => new T.Mesh(new T.BoxGeometry(1, 1, 1), this.propMats.block);
       for (const p of props || []) {
         if (p.type === 'block') {
-          const anchors = p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
+          const anchors = p.at ? [[p.at, '']] : p.legs ? p.legs.map((k) => ['ankle', k]) : (p.arms || ['R']).map((k) => ['wrist', k]);
           for (const [joint, k] of anchors) { const m = box(); m.userData = { k, h: p.h || 22 }; this.propGroup.add(m); this.propObjs.push({ type: 'block', obj: m, joint, k, h: p.h || 22 }); }
         } else if (p.type === 'cushion') {
           const m = box(); m.material = this.propMats.cush; this.propGroup.add(m); this.propObjs.push({ type: 'cushion', obj: m, h: p.h || 12, w: p.w || 56, at: p.at });

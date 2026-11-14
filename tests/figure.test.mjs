@@ -14,7 +14,7 @@ const CONTACT = [
   ['cat', ALL, ['handR', 'handL', 'footR', 'footL']], ['cow', ALL, ['handR', 'handL', 'footR', 'footL']], ['cat-cow', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['plank', [0, 1], ['handR', 'handL', 'footR', 'footL']], ['plank', [2], ['handR', 'handL', 'footR']],
   ['crow', [0], ['handR', 'handL', 'footR', 'footL']], ['crow', [1], ['handR', 'handL', 'footR']], ['crow', [2], ['handR', 'handL']],
-  ['pigeon', [1, 2], ['handR', 'handL', 'footR', 'footL']],
+  ['pigeon', [1], ['footR', 'footL']], ['pigeon', [2], ['handR', 'handL', 'footR', 'footL']],
   ['triangle', ALL, ['footR', 'footL']],
   ['extended-side-angle', ALL, ['footR', 'footL']], ['extended-side-angle', [2], ['handR']],
   ['wide-legged-fold', ALL, ['footR', 'footL']],
@@ -132,6 +132,63 @@ export default async function figureTests(ok) {
     ok(len3(sub3(C2.J.wristR, C2.J.heelR)) <= 22 && len3(sub3(C2.J.wristL, C2.J.heelL)) <= 22, 'camel L2 hands reach the heels');
     const plank = solve(poseFrames(POSES.find((q) => q.id === 'plank'), 2).hold);
     ok(bend(plank.J.hipL, plank.J.kneeL, plank.J.ankleL) <= 3 && plank.J.ankleL[1] > plank.J.ankleR[1] + 8, 'plank L2 lifted leg is long, straight, and slightly raised');
+  }
+  // ---- reviewed supine holds keep their grounded base, bilateral symmetry, and named contacts
+  {
+    const knees = POSES.find((q) => q.id === 'knees-to-chest');
+    const K0 = solve(poseFrames(knees, 0).hold), K1 = solve(poseFrames(knees, 1).hold), K2 = solve(poseFrames(knees, 2).hold);
+    ok(lowest(K0, 'footL') <= TOL && bend(K0.J.hipR, K0.J.kneeR, K0.J.ankleR) >= 45, 'knees-to-chest L0 keeps one foot down and the drawn-in knee bent');
+    ok(bend(K1.J.hipR, K1.J.kneeR, K1.J.ankleR) >= 45 && Math.abs(K1.head.c[1] - K0.head.c[1]) <= 3, 'knees-to-chest L1 bends both lower legs with the head grounded');
+    ok(K2.head.c[1] > K1.head.c[1] + 5 && K2.J.pelvis[1] <= K1.J.pelvis[1] + 1, 'knees-to-chest L2 lifts only the head and shoulder-blade end over a stable pelvis');
+
+    const baby = POSES.find((q) => q.id === 'happy-baby');
+    for (const l of ALL) {
+      const S = solve(poseFrames(baby, l).hold);
+      for (const part of ['shoulder', 'elbow', 'wrist', 'hip', 'knee', 'ankle']) {
+        const r = S.J[part + 'R'], q = S.J[part + 'L'];
+        ok(Math.abs(r[0] - q[0]) <= 0.1 && Math.abs(r[1] - q[1]) <= 0.1 && Math.abs(r[2] + q[2]) <= 0.1, `happy-baby L${l} ${part} is bilaterally symmetric`);
+      }
+      ok(Math.abs(S.head.c[1] - S.J.pelvis[1]) <= 4, `happy-baby L${l} head and sacrum share the grounded base`);
+    }
+
+    const twist = POSES.find((q) => q.id === 'supine-twist');
+    for (const l of ALL) {
+      const S = solve(poseFrames(twist, l).hold);
+      ok(S.J.kneeR[2] < -20 && (l === 2 || S.J.kneeL[2] < -20), `supine-twist L${l} bent knee${l === 2 ? '' : 's'} lower clearly to one side`);
+      ok(Math.abs(S.J.shoulderR[1] - S.J.shoulderL[1]) <= 1, `supine-twist L${l} shoulders stay level on the floor`);
+    }
+    const T0f = poseFrames(twist, 0), T0 = solve(T0f.hold), cushion = T0f.props[0];
+    ok(cushion?.type === 'cushion' && cushion.at === 'knees' && Math.min(T0.J.kneeR[1], T0.J.kneeL[1]) <= cushion.h + 12, 'supine-twist L0 knees visibly meet their cushion');
+    const T2 = solve(poseFrames(twist, 2).hold);
+    ok(bend(T2.J.hipL, T2.J.kneeL, T2.J.ankleL) <= 3 && len3(sub3(T2.J.wristL, T2.J.kneeR)) <= 3, 'supine-twist L2 keeps one leg long and the opposite hand on the crossed knee');
+  }
+  {
+    const wall = POSES.find((q) => q.id === 'legs-up-wall'), W0 = solve(poseFrames(wall, 0).hold), W1 = solve(poseFrames(wall, 1).hold), W2 = solve(poseFrames(wall, 2).hold);
+    ok(bend(W0.J.hipR, W0.J.kneeR, W0.J.ankleR) >= 70 && W0.J.ankleR[0] > W0.J.kneeR[0] + 35, 'legs-up-wall L0 bends the knees with soles toward the wall');
+    ok(bend(W1.J.hipR, W1.J.kneeR, W1.J.ankleR) <= 3 && bend(W2.J.hipR, W2.J.kneeR, W2.J.ankleR) <= 3, 'legs-up-wall L1/L2 extend both legs along the wall');
+    ok(W2.J.wristR[0] < W2.head.c[0] - 25, 'legs-up-wall L2 reaches both arms overhead');
+
+    const four = solve(poseFrames(POSES.find((q) => q.id === 'figure-four'), 1).hold), thigh = four.J.hipR.map((v, i) => (v + four.J.kneeR[i]) / 2);
+    ok(four.J.ankleR[1] > four.J.pelvis[1] + 35 && len3(sub3(four.J.wristR, thigh)) <= 5 && len3(sub3(four.J.wristL, thigh)) <= 5, 'figure-four L1 lifts the lower leg and clasps both hands behind the thigh');
+    const toe = solve(poseFrames(POSES.find((q) => q.id === 'hand-to-toe'), 2).hold);
+    ok(Math.abs(toe.head.c[1] - toe.J.pelvis[1]) <= 4, 'hand-to-toe L2 rests the head, neck, and shoulders on the floor');
+
+    const pigeon = POSES.find((q) => q.id === 'pigeon'), P1f = poseFrames(pigeon, 1), P1 = solve(P1f.hold), P2 = solve(poseFrames(pigeon, 2).hold);
+    const hipBlock = blockBoxes(P1f.props, P1, 1)[0];
+    ok(hipBlock?.joint === 'hipR' && hipBlock.top >= P1.J.hipR[1] - 15, 'pigeon L1 support rises directly under the front hip');
+    for (const l of [1, 2]) {
+      const F = poseFrames(pigeon, l), S = solve(F.hold);
+      ok(Math.abs(F.hold.kneeL[2]) <= 1 && S.J.ankleL[0] < S.J.hipL[0] - 70, `pigeon L${l} keeps the back leg long behind the hip`);
+    }
+    const P2f = poseFrames(pigeon, 2);
+    ok(Math.max(...['spine1', 'spine2', 'spine3'].map((j) => Math.abs(P2f.hold[j][2]))) <= 3, 'pigeon L2 folds with a long spine over the L1 leg base');
+
+    const catcow = POSES.find((q) => q.id === 'cat-cow');
+    for (const l of ALL) {
+      const F = poseFrames(catcow, l), cow = solve(F.alt);
+      ok(F.alt.pelvis.rot[2] < F.hold.pelvis.rot[2] - 25 && F.alt.spine2[2] > F.hold.spine2[2] + 15, `cat-cow L${l} cow tilts the pelvis and softens the belly away from cat`);
+      ok(cow.head.c[0] > cow.J.spine3[0], `cat-cow L${l} cow keeps the chest lifted and neck long`);
+    }
   }
   // ---- lunges / warriors: front knee over the ankle, front sole flat
   for (const id of ['warrior-1', 'warrior-2', 'extended-side-angle', 'high-lunge', 'low-lunge']) {

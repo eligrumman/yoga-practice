@@ -35,14 +35,14 @@
         "shoulderR": [0, 0, -10],
         "elbowR": [0, 0, 2],
         "wristR": [0, 0, 0],
-        "hipR": [0, 0, 55],
-        "kneeR": [0, 0, -5],
+        "hipR": [0, 0, 90],
+        "kneeR": [0, 0, 90],
         "ankleR": [0, 0, 0],
         "shoulderL": [0, 0, -10],
         "elbowL": [0, 0, 2],
         "wristL": [0, 0, 0],
-        "hipL": [0, 0, 55],
-        "kneeL": [0, 0, -5],
+        "hipL": [0, 0, 90],
+        "kneeL": [0, 0, 90],
         "ankleL": [0, 0, 0]
       },
       "props": [{"type":"wall"}]
