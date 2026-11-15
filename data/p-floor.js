@@ -106,7 +106,7 @@ export default [
     ],
   },
   {
-    id: 'low-lunge', sa: 'Anjaneyasana', en: 'Low lunge', he: 'מצעד נמוך', ru: 'Низкий выпад', cat: 'hip opener', sec: 'floor', flow: 70, d: 1, hold: 25, sides: 'both',
+    id: 'low-lunge', sa: 'Anjaneyasana', en: 'Low lunge', he: "לאנג' נמוך", ru: 'Низкий выпад', cat: 'hip opener', sec: 'floor', flow: 70, d: 1, hold: 25, sides: 'both',
     tags: ['flex', 'strength'],
     cue: {
       he: ['מעמד שולחן, צעדו עם רגל אחת קדימה בין הידיים.', 'הברך האחורית על הרצפה, הברך הקדמית מעל הקרסול.', 'הניחו ידיים על תמיכה או הרימו אותן, לפי הרמה.', 'העבירו מעט משקל קדימה, האריכו את עצם הזנב ונשמו.'],

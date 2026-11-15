@@ -68,7 +68,7 @@ export default [
     ],
   },
   {
-    id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: 'מצעד גבוה', ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
+    id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: "לאנג' גבוה", ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'], start: 'stand',
     kf: { t: 82, s: 82, h: 86, a: [80, 80], l: [-10, -90, 0], m: [-150, -150, -78], fix: { m: { x: -128 } } },
     cue: {

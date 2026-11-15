@@ -1502,7 +1502,7 @@
  {
   "id": "pose.high-lunge.name",
   "lang": "he",
-  "text": "מצעד גבוה"
+  "text": "לאנג' גבוה"
  },
  {
   "id": "pose.high-lunge.name",
@@ -1517,7 +1517,7 @@
  {
   "id": "pose.high-lunge.intro",
   "lang": "he",
-  "text": "תנוחת מצעד גבוה."
+  "text": "תנוחת לאנג' גבוה."
  },
  {
   "id": "pose.high-lunge.intro",
@@ -2777,7 +2777,7 @@
  {
   "id": "pose.low-lunge.name",
   "lang": "he",
-  "text": "מצעד נמוך"
+  "text": "לאנג' נמוך"
  },
  {
   "id": "pose.low-lunge.name",
@@ -2792,7 +2792,7 @@
  {
   "id": "pose.low-lunge.intro",
   "lang": "he",
-  "text": "תנוחת מצעד נמוך."
+  "text": "תנוחת לאנג' נמוך."
  },
  {
   "id": "pose.low-lunge.intro",

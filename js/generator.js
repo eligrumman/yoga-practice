@@ -84,6 +84,7 @@ function candidates({ focus, level, avoid }) {
     && p.id !== 'sun-salutation-a' // inserted explicitly below only for eligible 20+ minute non-beginner plans
     && p.id !== 'warrior-flow' // inserted explicitly below only for eligible standing blocks
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
+    && !(focus === 'back' && p.id === 'cobra') // back plans skip Cobra (as the hand-made back-relief preset); Child and supine poses replace it
     && (p.id !== 'extended-side-angle' || (level !== 'beginner' && focus === 'general'))
     && (p.id !== 'pigeon' || (level !== 'beginner' && focus === 'flexibility'))
     && (p.id !== 'wide-legged-fold' || (level !== 'beginner' && (focus === 'general' || focus === 'flexibility')))
@@ -112,11 +113,13 @@ function slotNominal(p, f, level) {
 const BEG_BODY = { 10: 8, 20: 10, 30: 11 };
 const BEG_STAND_CAP = { 10: 3, 20: 4, 30: 5 };
 const CATCOW_FLOW_BREATHS = 6; // 3 breath cycles of about 10 s
-function begRange(p) {
+// Active holds stop at 45 s; only restful poses (REST_POSES: child, easy-seat, legs-up-wall, supine restful...) may stay longer.
+export const BEG_ACTIVE_MAX = 45, BEG_REST_MAX = 300, BEG_SAVASANA_MAX = 600; // plan items are limited to 600 s
+function begRange(p, minutes = 20) {
   if (p.id === 'cobra') return [15, 20];
-  if (p.id === 'upward-salute' || p.id === 'half-lift') return [20, 60];
-  if (p.section === 'stand' || p.section === 'bal') return [25, 75];
-  return [35, REST_POSES.has(p.id) ? 180 : 75];
+  if (p.id === 'upward-salute' || p.id === 'half-lift') return [20, BEG_ACTIVE_MAX];
+  if (p.section === 'stand' || p.section === 'bal') return [25, BEG_ACTIVE_MAX];
+  return REST_POSES.has(p.id) ? [35, minutes >= 30 ? BEG_REST_MAX : 180] : [35, BEG_ACTIVE_MAX];
 }
 function generateBeginner({ minutes, focus, avoid }) {
   const T = minutes * 60;
@@ -131,10 +134,10 @@ function generateBeginner({ minutes, focus, avoid }) {
   const warmN = 1 + (focus !== 'relax' && minutes >= 20 && hasSalute ? 1 : 0); // cat-cow (+ upward salute outside relaxation)
   const R = N - warmN;
   const sw = w.stand + w.bal, tot = sw + w.floor + w.cool;
-  const standCap = (BEG_STAND_CAP[minutes] ?? 4) + (focus === 'strength' ? 1 : 0); // strength leans on the legs
+  const standCap = (BEG_STAND_CAP[minutes] ?? 4) + (focus === 'strength' && minutes < 30 ? 1 : 0); // strength leans on the legs; at 30 min the 45 s cap needs a rest pose for the freed time
   const stand = focus === 'relax' ? 0 : Math.max(2, Math.min(standCap, Math.round((R * sw) / tot)));
   let floor = Math.max(1, Math.round(((R - stand) * w.floor) / (w.floor + w.cool)));
-  floor = Math.min(floor, lists.floor.length, R - stand - 1);
+  floor = Math.min(floor, lists.floor.length, R - stand - (minutes >= 30 ? 2 : 1)); // 30 min: at least two cool-down/rest poses to take the time freed by the 45 s active cap
   let counts = { stand: Math.min(stand, lists.stand.length), floor, cool: R - stand - floor };
   if (counts.cool > lists.cool.length) { counts.floor += counts.cool - lists.cool.length; counts.cool = lists.cool.length; counts.floor = Math.min(counts.floor, lists.floor.length); }
   const picked = [];
@@ -153,7 +156,7 @@ function generateBeginner({ minutes, focus, avoid }) {
   const savasana = { pose: 'savasana', level: 0, unit: 'sec', amount: savCap };
   items.push(savasana);
   const body = () => items.slice(0, -1);
-  const range = (it) => begRange(POSE_BY_ID[it.pose]);
+  const range = (it) => begRange(POSE_BY_ID[it.pose], minutes);
   // grow holds in 5 s steps, round-robin (deterministic), until the plan reaches T minus savasana
   let i = 0;
   const maxItems = 12;
@@ -166,7 +169,7 @@ function generateBeginner({ minutes, focus, avoid }) {
       const nStand = items.filter((it) => POSE_BY_ID[it.pose].section === 'stand').length;
       const more = [...lists.cool, ...lists.floor, ...(nStand < standCap ? lists.stand : [])].find((p) => !items.some((it) => it.pose === p.id));
       if (left > 150 && more && items.length < maxItems) {
-        items.splice(items.length - 1, 0, { pose: more.id, level: 0, unit: 'sec', amount: begRange(more)[0] });
+        items.splice(items.length - 1, 0, { pose: more.id, level: 0, unit: 'sec', amount: begRange(more, minutes)[0] });
         const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items = separateBackbends(items, 0); items.push(sv);
         continue;
       }
@@ -178,7 +181,7 @@ function generateBeginner({ minutes, focus, avoid }) {
   savasana.amount = Math.max(30, savasana.amount + Math.min(0, T - planSeconds(items)));
   // Savasana absorbs the small rounding remainder while preserving the required final-rest floor.
   const rest = T - planSeconds(body());
-  savasana.amount = Math.min(600, Math.max(savCap, grid(rest - DEFAULT_TRANSITION)));
+  savasana.amount = Math.min(BEG_SAVASANA_MAX, Math.max(savCap, grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
 }
 

@@ -238,8 +238,8 @@ for (const f of FOCUSES) {
     for (const i of body) {
       const p = POSE_BY_ID[i.pose];
       if (i.pose === 'cobra') ok(i.amount >= 15 && i.amount <= 20, `beginner ${m}/${f} cobra short`);
-      else if (['floor', 'cool'].includes(p.section)) ok(i.amount >= 30 && i.amount <= (REST_HOLD.has(i.pose) ? 180 : 75), `beginner ${m}/${f} ${i.pose} unhurried floor hold (${i.amount})`);
-      else ok(i.amount >= 20 && i.amount <= 75, `beginner ${m}/${f} ${i.pose} hold (${i.amount})`);
+      else if (['floor', 'cool'].includes(p.section)) ok(i.amount >= 30 && i.amount <= (REST_HOLD.has(i.pose) ? (m >= 30 ? 300 : 180) : 45), `beginner ${m}/${f} ${i.pose} unhurried floor hold (${i.amount})`);
+      else ok(i.amount >= 20 && i.amount <= 45, `beginner ${m}/${f} ${i.pose} active hold 20-45 s (${i.amount})`);
     }
     const cc = g.items.filter((i) => i.pose === 'cat-cow');
     ok(cc.length === 1 && cc[0].unit === 'breath' && cc[0].amount >= 4 && cc[0].amount <= 8, `beginner ${m}/${f} exactly one Cat-Cow flow item`);
@@ -247,6 +247,17 @@ for (const f of FOCUSES) {
     ok(g.items[0].pose === 'cat-cow', `beginner ${m}/${f} starts with the Cat-Cow flow`);
   }
 }
+// beginner plans: no active hold above 45 s (only rest poses and Savasana run longer); back plans never contain Cobra
+for (const f of FOCUSES) for (const m of LENGTHS) for (const avoid of [[], ['cat-cow'], ['child']]) {
+  const g = generatePlan({ minutes: m, focus: f, level: 'beginner', avoid });
+  for (const i of g.items.filter((x) => x.unit === 'sec' && x.pose !== 'savasana' && !REST_HOLD.has(x.pose) && x.pose !== 'gentle-flow')) ok(i.amount <= 45, `beginner ${m}/${f}/${avoid.join('+') || '-'} active ${i.pose} <= 45 s (${i.amount})`);
+  ok(g.items.length <= 12, `beginner ${m}/${f} keeps the 12-item cap`);
+}
+for (const m of LENGTHS) for (const l of GEN_LEVELS) for (const avoid of [[], ['child'], ['cat-cow', 'child']]) {
+  const g = generatePlan({ minutes: m, focus: 'back', level: l, avoid });
+  ok(!g.items.some((i) => i.pose === 'cobra'), `back plan ${m}/${l}/${avoid.join('+') || '-'} has no cobra`);
+}
+ok(generatePlan({ minutes: 30, focus: 'back', level: 'beginner' }).items.every((i) => i.amount <= 300 || i.pose === 'savasana'), '30 min beginner back plan: no pose beyond 300 s except Savasana');
 // cat-cow flow pose: alternates two frames (cow <-> cat) in the animator and has its own narration
 const CC = POSE_BY_ID['cat-cow'];
 ok(CC && [0, 1, 2].every((n) => poseFrames(CC, n).alt), 'cat-cow has an alternate (cat) frame on every level');

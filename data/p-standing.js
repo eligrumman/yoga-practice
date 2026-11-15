@@ -124,7 +124,7 @@ export default [
     ],
   },
   {
-    id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: 'מצעד גבוה', ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
+    id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: "לאנג' גבוה", ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {
       he: ['צעד גדול קדימה, עקב אחורי מורם.', 'הברך הקדמית מעל הקרסול.', 'הרגל האחורית פעילה וישרה.', 'הרימו את הידיים והארכו את הגוף.'],

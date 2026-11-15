@@ -300,8 +300,8 @@ Astra ran with wrapper `--write --cd <worktree>` (workspace-write + network, ext
 | 6 | legs-up-wall RU/EN SAFE | P1 | Mismatch with Hebrew (Owner question 2: mismatch) | OPEN, replacement text in review/round5/r5-libB.md |
 | 7 | camel pregnancy line | P2 | Owner question 1: Astra says YES (supported shallow option, may skip) | OPEN |
 | 8 | warrior-3 L2, tabletop L2, bridge, low-lunge, locust RU/EN | P2 | RU/EN lag behind Hebrew safety wording | OPEN |
-| 9 | high-lunge Hebrew name "מצעד גבוה" | P2 | Means "high march" | OPEN for Owner (name change) |
-| 10 | generated back plan 30 min | P2 | Holds reach 60 s/side; savasana 4:25 | OPEN; Owner question 3 (20 s cobra) not decided |
+| 9 | high-lunge Hebrew name "מצעד גבוה" | P2 | Means "high march" | DONE 2026-11-15 (Owner approved): renamed to "לאנג' גבוה"; low-lunge aligned to "לאנג' נמוך" |
+| 10 | generated back plan 30 min | P2 | Holds reach 60 s/side; savasana 4:25 | DONE 2026-11-15 (Owner approved): cobra removed from generated back plans; 30 min beginner back plan holds <=45 s (active), savasana 5:00 |
 
 ## Round 5 (part 2) 2026-11-14
 
@@ -315,8 +315,8 @@ Astra ran with wrapper `--write --cd <worktree>` (workspace-write + network, ext
 | new | extended side angle | ADDED 5ef6e75 (3 levels, 2 sides; camera fixed to az 90 after screenshot review) |
 | new | sun salutation A home version (seq engine, "flow" badge) | ADDED 8115e9c |
 | new | gentle seated flow, warrior flow | ADDED f6d9700 |
-| 9 | "מצעד גבוה" rename | REJECT for now: left for Owner |
-| 10 | back plan 60 s holds / 4:25 savasana / 20 s cobra | OPEN (Owner question 3 undecided) |
+| 9 | "מצעד גבוה" rename | DONE 2026-11-15 (Owner approved): "מצעד גבוה" -> "לאנג' גבוה" |
+| 10 | back plan 60 s holds / 4:25 savasana / 20 s cobra | DONE 2026-11-15 (Owner approved): cobra out of generated back plans; active holds capped at 45 s; plan size stays at 12 items |
 
 Note: Astra's own browser hung all round; figures were verified from my screenshots (review/round5/new/).
 
@@ -359,3 +359,11 @@ Astra browse #1 (live): CONFIRMED happy-baby L0-L2, pigeon L0-L2, hand-to-toe L2
 | 6b | warrior-flow: the 3D feet never crossed (min lateral gap 14-18 units, now a test); the cross was the az70 near-frontal camera projecting the staggered stance as an X. Camera az28 el6 | FIXED (camera) |
 | 7 | camel L2 head | NOT SEEN by Astra; unchanged |
 Dev tool: dev/sheet.html?p=<id>&seq=1&n=4 renders every flow step plus in-between blends as the player draws them (&m=1 mirrored).
+
+## Owner items 2026-11-15
+
+| Item | Status |
+|---|---|
+| "מצעד גבוה" rename (he only) | DONE |
+| back-plan cobra | DONE |
+| plan size (12-item cap kept, active holds <=45 s, rest poses and savasana take the time) | DONE |

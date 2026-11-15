@@ -114,7 +114,7 @@ export default [
     ],
   },
   {
-    id: 'low-lunge', sa: 'Anjaneyasana', en: 'Low lunge', he: 'מצעד נמוך', ru: 'Низкий выпад', cat: 'hip opener', sec: 'floor', flow: 70, d: 1, hold: 25, sides: 'both',
+    id: 'low-lunge', sa: 'Anjaneyasana', en: 'Low lunge', he: "לאנג' נמוך", ru: 'Низкий выпад', cat: 'hip opener', sec: 'floor', flow: 70, d: 1, hold: 25, sides: 'both',
     tags: ['flex', 'strength'], start: 'kneel',
     kf: { t: 92, s: 92, h: 92, a: [92, 94], l: [5, -92, 0], m: [-100, 178, 180] },
     cue: {
