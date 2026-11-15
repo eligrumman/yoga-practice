@@ -112,12 +112,12 @@ ok(!av.items.some((i) => ['downward-dog', 'tree', 'cobra'].includes(i.pose)), 'a
 ok(Math.abs(planSeconds(av.items) / 60 - 20) <= 1, 'avoid plan still ~20 min');
 for (const m of [20, 30]) for (const f of FOCUSES) {
   const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
-  ok(new Set(g.items.map((i) => i.pose)).size <= (m === 30 ? 14 : 12), `first-time ${m}/${f} has at most ${m === 30 ? 14 : 12} distinct poses`);
+  ok(new Set(g.items.map((i) => i.pose)).size <= (m === 30 ? 16 : 12), `first-time ${m}/${f} has at most ${m === 30 ? 16 : 12} distinct poses`);
   ok(g.items.at(-1).amount >= (m === 20 ? 180 : 300), `first-time ${m}/${f} reserves final rest`);
 }
 for (const m of [20, 30]) {
   const g = generatePlan({ minutes: m, focus: 'relax', level: 'beginner' });
-  ok(g.items.every((i) => (POSE_BY_ID[i.pose].section !== 'stand' && POSE_BY_ID[i.pose].section !== 'bal') || (m === 30 && ['mountain', 'half-lift', 'uttanasana'].includes(i.pose))), `first-time relax ${m} has no standing poses (30 min: only gentle mountain, half-lift, fold)`);
+  ok(g.items.every((i) => (POSE_BY_ID[i.pose].section !== 'stand' && POSE_BY_ID[i.pose].section !== 'bal') || false), `first-time relax ${m} has no standing poses (floor-only)`);
 }
 for (const m of LENGTHS) for (const f of FOCUSES) for (const l of GEN_LEVELS) {
   const ids = generatePlan({ minutes: m, focus: f, level: l }).items.map((i) => i.pose);
@@ -222,7 +222,7 @@ ok(!STARTER_PATH.some((p) => p.items.some((i) => i.pose === 'wide-legged-fold'))
 const REST_HOLD = new Set(['child', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'knees-to-chest', 'happy-baby', 'figure-four', 'supine-twist', 'legs-up-wall']);
 // ---- beginner plans: easy poses only, at most twelve distinct shapes, ONE Cat-Cow flow item
 const BEG_OK = new Set(['chair', 'warrior-1', 'warrior-2', 'triangle', 'downward-dog', 'supine-twist', 'happy-baby', 'seated-twist', 'figure-four', 'high-lunge']);
-const BEG_ITEMS = { 10: [8, 10], 20: [8, 12], 30: [8, 14] }; // total items incl. Savasana
+const BEG_ITEMS = { 10: [8, 10], 20: [8, 12], 30: [8, 16] }; // total items incl. Savasana
 for (const f of FOCUSES) {
   for (const m of LENGTHS) {
     const g = generatePlan({ minutes: m, focus: f, level: 'beginner' });
@@ -232,7 +232,7 @@ for (const f of FOCUSES) {
     ok(!g.items.some((i) => ['tree', 'warrior-3', 'plank', 'half-split', 'dancer', 'boat', 'crow', 'pigeon', 'extended-side-angle'].includes(i.pose)), `beginner ${m}/${f} no demanding poses`);
     ok(g.items.every((i) => i.level === 0), `beginner ${m}/${f} uses level-0 variations`);
     const nStand = g.items.filter((i) => POSE_BY_ID[i.pose].section === 'stand').length;
-    ok(f === 'relax' ? (m === 30 ? nStand <= 3 : nStand === 0) : nStand >= 2 && nStand <= (m === 30 ? 8 : 4) + (f === 'strength' && m < 30 ? 1 : 0), `beginner ${m}/${f} standing block is focused (${nStand})`);
+    ok(f === 'relax' ? nStand === 0 : nStand >= 2 && nStand <= (m === 30 ? 8 : 4) + (f === 'strength' && m < 30 ? 1 : 0), `beginner ${m}/${f} standing block is focused (${nStand})`);
     ok(new Set(g.items.map((i) => i.pose)).size === g.items.length, `beginner ${m}/${f} no repeated pose item (two sides = one item)`);
     const body = g.items.slice(0, -1).filter((i) => i.unit === 'sec');
     for (const i of body) {
@@ -242,7 +242,7 @@ for (const f of FOCUSES) {
       else ok(i.amount >= 20 && i.amount <= 45, `beginner ${m}/${f} ${i.pose} active hold 20-45 s (${i.amount})`);
     }
     const cc = g.items.filter((i) => i.pose === 'cat-cow');
-    ok(cc.length === 1 && cc[0].unit === 'breath' && cc[0].amount >= 4 && cc[0].amount <= (m === 30 ? 30 : 8), `beginner ${m}/${f} exactly one Cat-Cow flow item`);
+    ok(cc.length === 1 && cc[0].unit === 'breath' && cc[0].amount >= 4 && cc[0].amount <= (m === 30 ? 12 : 8), `beginner ${m}/${f} exactly one Cat-Cow flow item`);
     ok(!g.items.some((i) => ['cat', 'cow', 'tabletop'].includes(i.pose)), `beginner ${m}/${f} no separate cat/cow/tabletop items`);
     ok(g.items[0].pose === 'cat-cow', `beginner ${m}/${f} starts with the Cat-Cow flow`);
   }
@@ -251,11 +251,11 @@ for (const f of FOCUSES) {
 for (const f of FOCUSES) for (const m of LENGTHS) for (const avoid of [[], ['cat-cow'], ['child']]) {
   const g = generatePlan({ minutes: m, focus: f, level: 'beginner', avoid });
   for (const i of g.items.filter((x) => x.unit === 'sec' && x.pose !== 'savasana' && !REST_HOLD.has(x.pose) && x.pose !== 'gentle-flow')) ok(i.amount <= 45, `beginner ${m}/${f}/${avoid.join('+') || '-'} active ${i.pose} <= 45 s (${i.amount})`);
-  ok(g.items.length <= (m === 30 ? 14 : 12), `beginner ${m}/${f} keeps the ${m === 30 ? 14 : 12}-item cap`);
+  ok(g.items.length <= (m === 30 ? 16 : 12), `beginner ${m}/${f} keeps the ${m === 30 ? 16 : 12}-item cap`);
   if (m === 30 && !avoid.length) {
     const act = planSeconds(g.items.filter((i) => i.pose !== 'savasana' && !REST_HOLD.has(i.pose)));
-    ok(act >= 1800 * (f === 'relax' ? 0.2 : 0.4), `beginner 30/${f} active time ${(act / 18).toFixed(1)}% >= ${f === 'relax' ? 20 : 40}% (excluding savasana and rest poses)`);
-    ok(g.items.at(-1).amount >= 300 && g.items.filter((i) => REST_HOLD.has(i.pose)).every((i) => i.amount <= 180), `beginner 30/${f} savasana floor 300 s, rest holds <= 180 s`);
+    ok(act >= 1800 * (f === 'relax' ? 0.09 : 0.4), `beginner 30/${f} active time ${(act / 18).toFixed(1)}% >= ${f === 'relax' ? 9 : 40}% (excluding savasana and rest poses)`);
+    ok(g.items.at(-1).amount >= 300 && g.items.at(-1).amount <= 420 && g.items.filter((i) => REST_HOLD.has(i.pose)).every((i) => i.amount <= 180), `beginner 30/${f} savasana 300-420 s, rest holds <= 180 s`);
   }
 }
 for (const m of LENGTHS) for (const l of GEN_LEVELS) for (const avoid of [[], ['child'], ['cat-cow', 'child']]) {

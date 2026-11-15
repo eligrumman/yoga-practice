@@ -112,10 +112,11 @@ function slotNominal(p, f, level) {
 // A two-sided pose is ONE item (each side gets the full hold). Cat-Cow is one 'cat-cow' flow item.
 const BEG_BODY = { 10: 8, 20: 10, 30: 11 };
 const BEG_STAND_CAP = { 10: 3, 20: 4, 30: 5 };
-const RELAX_STAND = new Set(['mountain', 'half-lift', 'uttanasana']); // 30 min relax plans take only these gentle standing poses as extra active time
+const RELAX_STAND = new Set(); // relax plans stay floor-only: no standing poses, even as extra active time
 const CATCOW_FLOW_BREATHS = 6; // 3 breath cycles of about 10 s
 // Active holds stop at 45 s; only restful poses (REST_POSES: child, easy-seat, legs-up-wall, supine restful...) may stay longer.
 export const BEG_ACTIVE_MAX = 45, BEG_REST_MAX = 180, BEG_SAVASANA_MAX = 600; // plan items are limited to 600 s
+const savMax = (minutes) => (minutes >= 30 ? 420 : BEG_SAVASANA_MAX); // 30 min: Savasana floor 300 s, cap 420 s
 function begRange(p, minutes = 20) {
   if (p.id === 'cobra') return [15, 20];
   if (p.id === 'upward-salute' || p.id === 'half-lift') return [20, BEG_ACTIVE_MAX];
@@ -149,7 +150,7 @@ function generateBeginner({ minutes, focus, avoid }) {
   for (const sx of ['stand', 'floor', 'cool']) picked.push(...lists[sx].filter((p) => p.id !== 'upward-salute').slice(0, counts[sx]));
 
   let items = picked.filter(Boolean).map((p) => (p.id === 'cat-cow' || p.id === 'tabletop'
-    ? { pose: p.id, level: 0, unit: 'breath', amount: p.id === 'tabletop' ? 5 : (minutes >= 30 ? CATCOW_FLOW_BREATHS * 3 : CATCOW_FLOW_BREATHS) }
+    ? { pose: p.id, level: 0, unit: 'breath', amount: p.id === 'tabletop' ? 5 : (minutes >= 30 ? CATCOW_FLOW_BREATHS * 2 : CATCOW_FLOW_BREATHS) }
     : { pose: p.id, level: 0, unit: 'sec', amount: p.id === 'gentle-flow' ? 60 : begRange(p)[0] }));
   items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]);
   items = separateBackbends(items, 0);
@@ -160,11 +161,13 @@ function generateBeginner({ minutes, focus, avoid }) {
   const range = (it) => begRange(POSE_BY_ID[it.pose], minutes);
   // grow holds in 5 s steps, round-robin (deterministic), until the plan reaches T minus savasana
   let i = 0;
-  const maxItems = minutes >= 30 ? 14 : 12; // 30 min: up to two extra easy ACTIVE poses keep the plan from turning passive under the 45 s cap
-  const pickMore = () => {
+  const maxItems = minutes >= 30 ? 16 : 12; // 30 min: up to four extra easy ACTIVE poses keep the plan from turning passive under the 45 s cap
+  const capacity = (list) => planSeconds(list.map((it) => ({ ...it, amount: it.pose === 'savasana' ? savMax(minutes) : it.unit === 'sec' && it.pose !== 'gentle-flow' ? begRange(POSE_BY_ID[it.pose], minutes)[1] : it.amount })));
+  const pickMore = (restOnly = false) => {
     const nStand = items.filter((it) => POSE_BY_ID[it.pose].section === 'stand').length;
     // 30 min: easy ACTIVE poses first, two-sided ones before one-sided (each side is a full hold), up to two more standing poses than the base cap
     const activeFirst = [...lists.floor.filter((p) => !REST_POSES.has(p.id)), ...(nStand < standCap + 3 ? lists.stand.filter((p) => focus !== 'relax' || RELAX_STAND.has(p.id)) : [])].sort((a, b) => (a.sides === 'both' ? 0 : 1) - (b.sides === 'both' ? 0 : 1));
+    if (restOnly) return [...lists.cool, ...lists.floor.filter((p) => REST_POSES.has(p.id))].find((p) => !items.some((it) => it.pose === p.id));
     return (minutes >= 30 ? [...activeFirst, ...lists.cool, ...lists.floor] : [...lists.cool, ...lists.floor, ...(nStand < standCap ? lists.stand : [])]).find((p) => !items.some((it) => it.pose === p.id));
   };
   const addMore = (more) => {
@@ -172,12 +175,16 @@ function generateBeginner({ minutes, focus, avoid }) {
     const sv = items.pop(); items.sort((x, y) => SEQ_RANK[x.pose] - SEQ_RANK[y.pose]); items = separateBackbends(items, 0); items.push(sv);
   };
   // 30 min: fill the item allowance with active poses first, so the freed time does not all go to rest poses
-  if (minutes >= 30) for (let m = pickMore(); m && items.length < maxItems; m = pickMore()) addMore(m);
+  // (an active pose that would leave the plan unable to reach T with holds at their maximum is replaced by a rest pose)
+  if (minutes >= 30) for (let m = pickMore(); m && items.length < maxItems; m = pickMore()) {
+    const trial = items.slice(0, -1).concat([{ pose: m.id, level: 0, unit: 'sec', amount: begRange(m, minutes)[0] }, items.at(-1)]);
+    if (capacity(trial) < T - 45) { const r = pickMore(true); if (!r) break; m = r; }
+    addMore(m);
+  }
   // 30 min: if active time is still under 40%, swap a surplus rest pose for an easy active one (40%, relax 20%), while holds at their maximum can still reach the target length
   if (minutes >= 30) {
     const target = focus === 'relax' ? 0.2 : 0.4, minRest = focus === 'relax' ? 4 : 2;
     const activeSec = () => planSeconds(items.filter((it) => it.pose !== 'savasana' && !REST_POSES.has(it.pose)));
-    const capacity = (list) => planSeconds(list.map((it) => ({ ...it, amount: it.pose === 'savasana' ? BEG_SAVASANA_MAX : it.unit === 'sec' && it.pose !== 'gentle-flow' ? begRange(POSE_BY_ID[it.pose], minutes)[1] : it.amount })));
     for (let g = 0; g < 4 && activeSec() < T * target; g++) {
       const nStand = items.filter((it) => POSE_BY_ID[it.pose].section === 'stand').length;
       const act = [...lists.floor.filter((p) => !REST_POSES.has(p.id)), ...(hasSalute ? [POSE_BY_ID['upward-salute']] : []), ...(nStand < standCap + 3 ? lists.stand.filter((p) => focus !== 'relax' || RELAX_STAND.has(p.id)) : [])].filter((p) => !items.some((it) => it.pose === p.id)).sort((x, y) => (x.sides === 'both' ? 0 : 1) - (y.sides === 'both' ? 0 : 1))[0];
@@ -190,13 +197,6 @@ function generateBeginner({ minutes, focus, avoid }) {
       if (sep.length > maxItems || capacity(sep) < T - 45) break;
       items = sep;
     }
-  }
-  // still short of the active target: a longer opening Cat-Cow flow (up to 30 breaths) is capacity-neutral extra active time
-  if (minutes >= 30) {
-    const target = focus === 'relax' ? 0.2 : 0.4;
-    const cc = items.find((it) => it.pose === 'cat-cow');
-    const activeSec = () => planSeconds(items.filter((it) => it.pose !== 'savasana' && !REST_POSES.has(it.pose)));
-    while (cc && cc.amount < CATCOW_FLOW_BREATHS * 5 && activeSec() < T * target) cc.amount += 2;
   }
   for (let guard = 0; guard < 4000; guard++) {
     if (T - planSeconds(items) < 5) break;
@@ -214,7 +214,7 @@ function generateBeginner({ minutes, focus, avoid }) {
   savasana.amount = Math.max(30, savasana.amount + Math.min(0, T - planSeconds(items)));
   // Savasana absorbs the small rounding remainder while preserving the required final-rest floor.
   const rest = T - planSeconds(body());
-  savasana.amount = Math.min(BEG_SAVASANA_MAX, Math.max(savCap, grid(rest - DEFAULT_TRANSITION)));
+  savasana.amount = Math.min(savMax(minutes), Math.max(savCap, grid(rest - DEFAULT_TRANSITION)));
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
 }
 
