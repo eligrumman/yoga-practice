@@ -693,5 +693,26 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 { const pt = await import('./player.test.mjs'); pass += pt.pass; fail += pt.fail; } // player: fix cues, music, transcript
 
 await (await import('./figure.test.mjs')).default(ok);
+// ---- 7-day starter progress
+{
+  const { cleanStarterDays, nextStarterDay, STARTER_DAYS, store } = await import('../js/store.js');
+  ok(STARTER_DAYS === 7 && STARTER_PATH.length === 7, 'starter path has 7 days');
+  ok(JSON.stringify(cleanStarterDays([3, 1, 3, '2', 0, 8, 'x', null, 1.5])) === '[1,2,3]', 'cleanStarterDays dedups, sorts, drops invalid');
+  ok(cleanStarterDays('bad').length === 0 && cleanStarterDays(undefined).length === 0, 'cleanStarterDays non-array -> []');
+  ok(nextStarterDay([]) === 1 && nextStarterDay([1, 2]) === 3 && nextStarterDay([1, 3]) === 2, 'nextStarterDay first missing day');
+  ok(nextStarterDay([1, 2, 3, 4, 5, 6, 7]) === null, 'nextStarterDay null when all done');
+  store.resetStarter();
+  ok(store.starterDone.length === 0, 'starter starts empty');
+  store.markStarterDone(2); store.markStarterDone(2); store.markStarterDone(99);
+  ok(JSON.stringify(store.starterDone) === '[2]', 'markStarterDone is idempotent and ignores invalid days');
+  store.resetStarter();
+  ok(store.starterDone.length === 0, 'resetStarter clears');
+  for (const p of STARTER_PATH) ok(Number.isInteger(p.day) && p.day >= 1 && p.day <= 7, `${p.id} has a day number`);
+  for (const l of LANGS) for (const k of ['starterProgress', 'starterNext', 'starterAllDone', 'starterDoneBadge', 'starterReset']) ok(tr(k, l).length > 3, `i18n ${k} ${l}`);
+  ok(tr('starterProgress', 'he').includes('{n}') && tr('starterNext', 'en').includes('{n}'), 'starter strings keep {n} placeholder');
+  const src = readFileSync(new URL('../js/player.js', import.meta.url), 'utf8');
+  ok(/counted && this\.plan\.preset\?\.day\) store\.markStarterDone/.test(src), 'player marks the starter day done only for a counted session');
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

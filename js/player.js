@@ -389,6 +389,7 @@ export class Player {
     const actual = this.actualSec;
     store.addHistory(this.plan.name, actual, this.totalAll);
     const counted = countsForStreak(actual, this.totalAll);
+    if (counted && this.plan.preset?.day) store.markStarterDone(this.plan.preset.day);
     const st = streak(store.history);
     const fs = finishStats(this.lang, actual, this.totalAll, st, counted);
     this.beep(660, 0.3);

@@ -4,7 +4,7 @@ import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { attachSpecs } from './specs.js';
 import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
 import { generatePlan, FOCUSES, LENGTHS, GEN_LEVELS, needsPregnancyNote } from './generator.js';
-import { store, streak, histMinutes, DEFAULT_SETTINGS } from './store.js';
+import { store, streak, histMinutes, DEFAULT_SETTINGS, STARTER_DAYS, nextStarterDay } from './store.js';
 import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
 import { NARR_LEVELS } from './narration-plan.js';
@@ -97,17 +97,27 @@ function copyPreset(p) {
 }
 
 // ---------------- home ----------------
-function presetCard(p) {
+function presetCard(p, done = []) {
   const mins = p.minutes;
-  return el('article', { class: 'card preset' },
+  const isDone = !!p.day && done.includes(p.day);
+  return el('article', { class: 'card preset' + (isDone ? ' done' : ''), 'data-day': p.day || null },
     el('div', { class: 'preset-top' },
-      el('h3', {}, p.name[lang]), // starter names already begin with "Day N:"
+      el('h3', {}, isDone ? [el('span', { class: 'badge done-badge' }, '✓ ' + T('starterDoneBadge')), ' ', p.name[lang]] : p.name[lang]), // starter names already begin with "Day N:"
       el('div', { class: 'meta' }, el('span', { class: 'badge' }, (hasBreaths(p.items) ? approxMin(mins * 60, lang) : `${mins} ${T('min')}`)), levelBadge(p.level))),
     el('p', {}, p.desc[lang]),
     needsPregnancyNote(p.items) ? el('p', { class: 'hint small preg-note' }, T('pregNote')) : null,
     el('div', { class: 'row-btns' },
       el('button', { class: 'btn primary', onclick: () => go(`/player/preset:${p.id}`) }, '▶ ' + T('play')),
       el('button', { class: 'btn', onclick: () => copyPreset(p) }, T('copy'))));
+}
+function starterProgressBlock() {
+  const done = store.starterDone, nxt = nextStarterDay(done);
+  return el('div', { class: 'starter-progress', id: 'starter-progress' },
+    el('p', { class: 'stat', id: 'starter-count' }, T('starterProgress').replace('{n}', done.length)),
+    el('div', { class: 'starter-dots', role: 'img', 'aria-label': T('starterProgress').replace('{n}', done.length) },
+      Array.from({ length: STARTER_DAYS }, (_, i) => el('span', { class: 'dot' + (done.includes(i + 1) ? ' on' : ''), 'aria-hidden': 'true' }, String(i + 1)))),
+    el('p', { class: 'hint small', id: 'starter-next' }, nxt ? T('starterNext').replace('{n}', nxt) : T('starterAllDone')),
+    done.length ? el('button', { class: 'btn small', id: 'starter-reset', onclick: () => { store.resetStarter(); route(); } }, T('starterReset')) : null);
 }
 function viewHome() {
   const hist = store.history; const st = streak(hist);
@@ -117,8 +127,8 @@ function viewHome() {
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary xl', id: 'btn-gen', onclick: openGenerator }, '✨ ' + T('firstPlan')),
         el('a', { class: 'btn xl', href: '#/library' }, T('navLibrary')))),
-    el('section', {}, el('h2', {}, T('presets')), el('div', { class: 'grid cards', id: 'presets' }, PRESETS.map(presetCard))),
-    el('section', {}, el('h2', {}, T('starter')), el('p', { class: 'hint' }, T('starterHint')), el('div', { class: 'grid cards', id: 'starter' }, STARTER_PATH.map(presetCard))),
+    el('section', {}, el('h2', {}, T('presets')), el('div', { class: 'grid cards', id: 'presets' }, PRESETS.map((p) => presetCard(p)))),
+    el('section', {}, el('h2', {}, T('starter')), el('p', { class: 'hint' }, T('starterHint')), starterProgressBlock(), el('div', { class: 'grid cards', id: 'starter' }, STARTER_PATH.map((p) => presetCard(p, store.starterDone)))),
     settingsSection(),
     el('section', {}, el('h2', {}, T('history')),
       hist.length ? el('div', {}, el('p', { class: 'stat' }, `${T('streak')}: ${st}`),

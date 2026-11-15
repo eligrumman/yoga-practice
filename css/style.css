@@ -232,3 +232,8 @@ body.in-player{overflow:hidden}
 .fig-ink .prop-block,.fig-ink .prop-cushion{stroke:var(--ink-line);stroke-opacity:.8;stroke-width:calc(var(--ink-k,1)*.7px);vector-effect:non-scaling-stroke;stroke-linejoin:round}
 .fig.mini,.fig.item-fig{--ink-k:.65}.fig.card-fig{--ink-k:.85}
 .checkin{margin:1.2rem 0}
+.starter-progress{margin:.4rem 0 1rem}
+.starter-dots{display:flex;gap:.4rem;margin:.4rem 0;flex-wrap:wrap}
+.starter-dots .dot{width:2rem;height:2rem;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.9rem;background:var(--bg)}
+.starter-dots .dot.on{background:var(--lv0);border-color:currentColor;font-weight:700}
+.preset.done .done-badge{background:var(--lv0)}

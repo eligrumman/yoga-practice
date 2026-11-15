@@ -51,8 +51,25 @@ export const store = {
     set('history', h.slice(0, 400));
   },
   setHistory(h) { set('history', h); },
+
+  // 7-day starter path: sorted list of completed day numbers (1..7), this device only.
+  get starterDone() { return cleanStarterDays(get('starterDone', [])); },
+  markStarterDone(day) { const d = cleanStarterDays([...this.starterDone, day]); set('starterDone', d); return d; },
+  resetStarter() { set('starterDone', []); },
   setFavs(f) { set('favs', f); },
 };
+
+export const STARTER_DAYS = 7;
+export function cleanStarterDays(v) {
+  if (!Array.isArray(v)) return [];
+  return [...new Set(v.map(Number).filter((n) => Number.isInteger(n) && n >= 1 && n <= STARTER_DAYS))].sort((a, b) => a - b);
+}
+// Next day to practise: the first day not yet done, or null when all seven are done.
+export function nextStarterDay(done) {
+  const d = cleanStarterDays(done);
+  for (let i = 1; i <= STARTER_DAYS; i++) if (!d.includes(i)) return i;
+  return null;
+}
 
 export const dayKey = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
