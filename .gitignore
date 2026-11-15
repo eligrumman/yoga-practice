@@ -8,3 +8,4 @@ dev/
 .DS_Store
 review/
 .claude/
+tools/tts/status.txt
