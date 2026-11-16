@@ -349,9 +349,9 @@ ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only
 ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
 
 // ---- two-sided poses and sides label
-const BOTH = ['warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe'];
+const BOTH = ['warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe', 'pyramid'];
 const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
-ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 17 two-sided poses (got ${gotBoth.join(',')})`);
+ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 18 two-sided poses (got ${gotBoth.join(',')})`);
 for (const l of LANGS) {
   const p = POSE_BY_ID.triangle;
   ok(p[l] && p.cues[l].length === 4 && p.safety[l] && p.variations.every((v) => v[l]), `triangle i18n ${l}`);
@@ -476,7 +476,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 544, `544 v2 segments including warrior-flow (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 556, `556 v2 segments including pyramid (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -485,10 +485,10 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|pyramid|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
   const legacyRuEn = (xs) => xs.filter((s) => !newPoseSegment(s)).map(({ id, ru, en }) => ({ id, ru, en }));
   ok(JSON.stringify(legacyRuEn(SEGS_NOW)) === JSON.stringify(legacyRuEn(legacy)), 'pre-existing ru/en legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 48, 'legacy narration adds only the 48 required new-pose segments');
+  ok(SEGS_NOW.length === legacy.length + 54, 'legacy narration adds only the 54 required new-pose segments');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');

@@ -124,6 +124,20 @@ export default [
     ],
   },
   {
+    id: 'pyramid', sa: 'Parsvottanasana', en: 'Pyramid', he: 'פירמידה', ru: 'Пирамида', cat: 'forward fold', sec: 'stand', flow: 46, d: 2, hold: 30, sides: 'both', tags: ['flex', 'noback'],
+    cue: {
+      he: ['פסעו קדימה ברגל אחת והשאירו את שתי הרגליים ישרות, כשכף הרגל האחורית פונה מעט החוצה.', 'לחצו את שתי כפות הרגליים לרצפה וכוונו את האגן ישר קדימה, מול הרגל הקדמית.', 'בשאיפה האריכו את הגב, ובנשיפה הטו את הגוף קדימה מן מפרקי הירכיים, עם ידיים על בלוקים.', 'השאירו את הברכיים ישרות אך לא נעולות, והמשיכו לנשום לפני שעולים לאט.'],
+      en: ['Step one foot forward with both legs straight, the back foot turned out slightly.', 'Press both feet into the floor and square the hips toward the front leg.', 'Inhale to lengthen the spine, then exhale and fold forward from the hip joints, hands on blocks.', 'Keep both knees straight but not locked, and keep breathing before you rise slowly.'],
+      ru: ['Шагните одной ногой вперёд, обе ноги прямые, задняя стопа слегка развёрнута наружу.', 'Прижмите обе стопы к полу и направьте таз прямо, к передней ноге.', 'На вдохе вытяните спину, на выдохе наклонитесь вперёд от тазобедренных суставов, руки на блоках.', 'Колени прямые, но не заблокированы; продолжайте дышать и поднимайтесь медленно.'],
+    },
+    safe: { he: 'בלחץ דם לא מאוזן, גלאוקומה או סחרחורת: השאירו את הראש מעל הלב, ידיים על בלוקים גבוהים או על קיר, ובדקו עם איש מקצוע רפואי מה מתאים לכם. בהריון קצרו את הפסיעה, פתחו את הרגליים לרוחב אגן ונשארו בחצי כפיפה עם ידיים גבוהות. ברגישות בגב התחתון או במיתרי הברך הקטינו את העומק וכופפו מעט את הברכיים. עלו לאט עם גב ארוך. אין כאן ייעוץ רפואי.', en: 'With uncontrolled blood pressure, glaucoma, or dizziness, keep the head above the heart, rest the hands on high blocks or a wall, and ask a clinician what suits you. During pregnancy, shorten the stance, keep the feet hip-width apart, and stay in a half fold with the hands high. With lower-back or hamstring sensitivity, reduce the depth and soften the knees slightly. Rise slowly with a long spine. This is not medical advice.', ru: 'При неконтролируемом давлении, глаукоме или головокружении держите голову выше сердца, опирайте руки на высокие блоки или стену и уточните у врача, что вам подходит. При беременности сделайте шаг короче, поставьте стопы на ширине таза и оставайтесь в полунаклоне с высокой опорой для рук. При чувствительности поясницы или задней поверхности бедра уменьшите глубину и слегка согните колени. Поднимайтесь медленно с длинной спиной. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'פסיעה קצרה וחצי כפיפה עם גב שטוח; ידיים על בלוקים גבוהים או על קיר.', en: 'Short stance and a half fold with a flat back; hands on tall blocks or a wall.', ru: 'Короткий шаг и полунаклон с ровной спиной; руки на высоких блоках или на стене.', props: [{ type: 'block', arms: ['R', 'L'], h: 32.3 }] },
+      { he: 'פסיעה בינונית, גב ארוך וידיים על בלוקים נמוכים לצד כף הרגל הקדמית.', en: 'Medium stance, long back, hands on low blocks beside the front foot.', ru: 'Средний шаг, длинная спина, руки на низких блоках рядом с передней стопой.', props: [{ type: 'block', arms: ['R', 'L'], h: 8.6 }] },
+      { he: 'כפות הידיים על הרצפה לצד כף הרגל הקדמית, והחזה מתקרב לירך בלי לעגל את הגב.', en: 'Palms on the floor beside the front foot, chest moving toward the thigh without rounding the back.', ru: 'Ладони на полу рядом с передней стопой, грудь тянется к бедру без округления спины.' },
+    ],
+  },
+  {
     id: 'high-lunge', sa: 'Ashta Chandrasana', en: 'High lunge', he: "לאנג' גבוה", ru: 'Высокий выпад', cat: 'standing', sec: 'stand', flow: 45, d: 2, hold: 25, sides: 'both',
     tags: ['strength', 'flex'],
     cue: {

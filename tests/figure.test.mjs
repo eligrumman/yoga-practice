@@ -123,6 +123,30 @@ export default async function figureTests(ok) {
     ok(J.ankleR[0] - J.hipR[0] > -12 && J.ankleR[0] - J.hipR[0] < 12, `wide-legged-fold L${l} feet under the hips (hinge at the hips)`);
   }
   ok(wide.spec.levels[0].hold.pelvis.rot[2] < wide.spec.levels[1].hold.pelvis.rot[2] && wide.spec.levels[0].props[0].h > wide.spec.levels[1].props[0].h, 'wide-legged-fold L1 folds deeper onto a lower block than L0');
+  // ---- pyramid: straight legs, both feet flat, back foot turned out, hips hinge; palms on the drawn blocks (L0, L1) or on the floor (L2)
+  {
+    const pyr = POSES.find((q) => q.id === 'pyramid'); ok(!!pyr && pyr.sides === 'both', 'pyramid exists and is two-sided');
+    for (const l of ALL) {
+      const F = poseFrames(pyr, l), S = solve(F.hold), J = S.J, boxes = blockBoxes(F.props, S, 1);
+      ok(lowest(S, 'footR') <= TOL && lowest(S, 'footL') <= TOL, `pyramid L${l} both feet on the floor`);
+      for (const side of ['R', 'L']) {
+        ok(!(bend(J['hip' + side], J['knee' + side], J['ankle' + side]) > 6), `pyramid L${l} ${side} leg straight`);
+        const palmPrims = S.prims.filter((p) => ['palm', 'fing', 'thumb'].includes(p.id.slice(0, -1)) && p.id.endsWith(side));
+        const hand = Math.min(...palmPrims.map((p) => primBox(p).lo));
+        const bx = boxes.find((b) => b.k === side);
+        if (l < 2) { ok(!!bx && Math.abs(hand - bx.top) <= 0.5, `pyramid L${l} ${side} palm on the block it is drawn on (${hand.toFixed(2)} vs ${bx ? bx.top.toFixed(2) : 'none'})`); }
+        else ok(!bx && hand <= TOL, `pyramid L${l} ${side} palm on the floor (${hand.toFixed(2)})`);
+      }
+      ok(J.ankleR[0] - J.ankleL[0] > 70, `pyramid L${l} long stance (${(J.ankleR[0] - J.ankleL[0]).toFixed(0)} cm)`);
+      ok(Math.abs(J.ankleR[1] - J.ankleL[1]) < 1.5, `pyramid L${l} both ankles at the same height`);
+      ok(F.hold.hipL[1] >= 30 && F.hold.hipR[1] === 0, `pyramid L${l} back foot turned out, front foot straight`);
+      ok(Math.abs(J.hipR[2] + J.hipL[2]) < 0.1 && J.head[2] === 0, `pyramid L${l} hips square (no twist)`);
+      ok(!(Math.abs(bend(J.pelvis, J.spine1, J.spine3)) > 12), `pyramid L${l} back long`);
+    }
+    const P = (l) => poseFrames(pyr, l).hold.pelvis.rot[2];
+    ok(P(0) < P(1) && P(1) < P(2), 'pyramid folds deeper with the level');
+    ok(pyr.spec.levels[0].props[0].h > pyr.spec.levels[1].props[0].h && pyr.spec.levels[2].props.length === 0, 'pyramid block gets lower: L0 tall, L1 low, L2 none');
+  }
   // ---- reviewed standing / kneeling variants keep the support and alignment shown in their level text
   {
     const utt = POSES.find((q) => q.id === 'uttanasana'), U0 = solve(poseFrames(utt, 0).hold), U2 = solve(poseFrames(utt, 2).hold);

@@ -182,7 +182,7 @@
  {
   "id": "pose.tabletop.cue.1",
   "lang": "he",
-  "text": "ידיים מתחת לכתפיים, ברכיים מתחת לירכיים."
+  "text": "ידיים או אמות מתחת לכתפיים, לפי הרמה; ברכיים מתחת לאגן."
  },
  {
   "id": "pose.tabletop.cue.1",
@@ -212,7 +212,7 @@
  {
   "id": "pose.tabletop.cue.3",
   "lang": "he",
-  "text": "לחצו בעדינות את כף היד אל הרצפה."
+  "text": "לחצו בעדינות דרך בסיס התמיכה."
  },
  {
   "id": "pose.tabletop.cue.3",
@@ -1007,7 +1007,7 @@
  {
   "id": "pose.warrior-1.cue.2",
   "lang": "he",
-  "text": "הרגל האחורית ישרה ועקב לחוץ לרצפה."
+  "text": "הרגל האחורית ישרה; מקמו את העקב לפי הרמה."
  },
  {
   "id": "pose.warrior-1.cue.2",
@@ -1352,7 +1352,7 @@
  {
   "id": "pose.extended-side-angle.cue.1",
   "lang": "he",
-  "text": "מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו את האמה בעדינות על הירך."
+  "text": "מלוחם שתיים, השאירו את הברך הקדמית מעל הקרסול והניחו אמה על הירך או יד על התמיכה, לפי הרמה."
  },
  {
   "id": "pose.extended-side-angle.cue.1",
@@ -1498,6 +1498,96 @@
   "id": "pose.wide-legged-fold.cue.4",
   "lang": "en",
   "text": "Keep breathing and distribute weight through both feet."
+ },
+ {
+  "id": "pose.pyramid.name",
+  "lang": "he",
+  "text": "פירמידה"
+ },
+ {
+  "id": "pose.pyramid.name",
+  "lang": "ru",
+  "text": "Пирамида"
+ },
+ {
+  "id": "pose.pyramid.name",
+  "lang": "en",
+  "text": "Pyramid"
+ },
+ {
+  "id": "pose.pyramid.intro",
+  "lang": "he",
+  "text": "תנוחת פירמידה."
+ },
+ {
+  "id": "pose.pyramid.intro",
+  "lang": "ru",
+  "text": "Поза: Пирамида."
+ },
+ {
+  "id": "pose.pyramid.intro",
+  "lang": "en",
+  "text": "Pose: Pyramid."
+ },
+ {
+  "id": "pose.pyramid.cue.1",
+  "lang": "he",
+  "text": "פסעו קדימה ברגל אחת והשאירו את שתי הרגליים ישרות, כשכף הרגל האחורית פונה מעט החוצה."
+ },
+ {
+  "id": "pose.pyramid.cue.1",
+  "lang": "ru",
+  "text": "Шагните одной ногой вперёд, обе ноги прямые, задняя стопа слегка развёрнута наружу."
+ },
+ {
+  "id": "pose.pyramid.cue.1",
+  "lang": "en",
+  "text": "Step one foot forward with both legs straight, the back foot turned out slightly."
+ },
+ {
+  "id": "pose.pyramid.cue.2",
+  "lang": "he",
+  "text": "לחצו את שתי כפות הרגליים לרצפה וכוונו את האגן ישר קדימה, מול הרגל הקדמית."
+ },
+ {
+  "id": "pose.pyramid.cue.2",
+  "lang": "ru",
+  "text": "Прижмите обе стопы к полу и направьте таз прямо, к передней ноге."
+ },
+ {
+  "id": "pose.pyramid.cue.2",
+  "lang": "en",
+  "text": "Press both feet into the floor and square the hips toward the front leg."
+ },
+ {
+  "id": "pose.pyramid.cue.3",
+  "lang": "he",
+  "text": "בשאיפה האריכו את הגב, ובנשיפה הטו את הגוף קדימה מן מפרקי הירכיים, עם ידיים על בלוקים."
+ },
+ {
+  "id": "pose.pyramid.cue.3",
+  "lang": "ru",
+  "text": "На вдохе вытяните спину, на выдохе наклонитесь вперёд от тазобедренных суставов, руки на блоках."
+ },
+ {
+  "id": "pose.pyramid.cue.3",
+  "lang": "en",
+  "text": "Inhale to lengthen the spine, then exhale and fold forward from the hip joints, hands on blocks."
+ },
+ {
+  "id": "pose.pyramid.cue.4",
+  "lang": "he",
+  "text": "השאירו את הברכיים ישרות אך לא נעולות, והמשיכו לנשום לפני שעולים לאט."
+ },
+ {
+  "id": "pose.pyramid.cue.4",
+  "lang": "ru",
+  "text": "Колени прямые, но не заблокированы; продолжайте дышать и поднимайтесь медленно."
+ },
+ {
+  "id": "pose.pyramid.cue.4",
+  "lang": "en",
+  "text": "Keep both knees straight but not locked, and keep breathing before you rise slowly."
  },
  {
   "id": "pose.high-lunge.name",
@@ -2342,7 +2432,7 @@
  {
   "id": "pose.cobra.cue.1",
   "lang": "he",
-  "text": "שכבו על הבטן, כפות ידיים מתחת לכתפיים."
+  "text": "שכבו על הבטן והניחו אמות או כפות ידיים מתחת לכתפיים, לפי הרמה."
  },
  {
   "id": "pose.cobra.cue.1",
@@ -2447,7 +2537,7 @@
  {
   "id": "pose.locust.cue.2",
   "lang": "he",
-  "text": "הרימו חזה ורגליים יחד, מבלי להרים את הצוואר."
+  "text": "הרימו את החזה, ואת הרגליים לפי הרמה; שמרו את הצוואר ארוך."
  },
  {
   "id": "pose.locust.cue.2",
@@ -2537,7 +2627,7 @@
  {
   "id": "pose.camel.cue.2",
   "lang": "he",
-  "text": "כפות הידיים על הגב התחתון, אצבעות כלפי מטה."
+  "text": "הניחו ידיים על הגב התחתון או על העקבים, לפי הרמה."
  },
  {
   "id": "pose.camel.cue.2",
@@ -2567,7 +2657,7 @@
  {
   "id": "pose.camel.cue.4",
   "lang": "he",
-  "text": "הניחו לראש ולצוואר להישאר נוחים."
+  "text": "שמרו את הראש ניטרלי ואת העורף ארוך."
  },
  {
   "id": "pose.camel.cue.4",
@@ -2732,7 +2822,7 @@
  {
   "id": "pose.child.cue.2",
   "lang": "he",
-  "text": "הושיטו ידיים קדימה והניחו אותן על הרצפה."
+  "text": "הניחו את הידיים לצד הגוף או הושיטו אותן קדימה, לפי הרמה."
  },
  {
   "id": "pose.child.cue.2",
@@ -2837,7 +2927,7 @@
  {
   "id": "pose.low-lunge.cue.3",
   "lang": "he",
-  "text": "הרימו את הגוף ואת הידיים כלפי מעלה."
+  "text": "הניחו ידיים על תמיכה או הרימו אותן, לפי הרמה."
  },
  {
   "id": "pose.low-lunge.cue.3",
@@ -3527,7 +3617,7 @@
  {
   "id": "pose.knees-to-chest.cue.1",
   "lang": "he",
-  "text": "שכבו על הגב וקרבו את שתי הברכיים לחזה."
+  "text": "שכבו על הגב וקרבו ברך אחת או שתיים לחזה, לפי הרמה."
  },
  {
   "id": "pose.knees-to-chest.cue.1",
@@ -3557,7 +3647,7 @@
  {
   "id": "pose.knees-to-chest.cue.3",
   "lang": "he",
-  "text": "הרפו את הכתפיים והראש לרצפה."
+  "text": "השאירו ראש וכתפיים על הרצפה, אלא אם הרמה מזמינה הרמה עדינה."
  },
  {
   "id": "pose.knees-to-chest.cue.3",
@@ -3617,7 +3707,7 @@
  {
   "id": "pose.supine-twist.cue.1",
   "lang": "he",
-  "text": "שכבו על הגב, ברכיים כפופות."
+  "text": "שכבו על הגב; כופפו ברך אחת או שתיים, לפי הרמה."
  },
  {
   "id": "pose.supine-twist.cue.1",
@@ -3632,7 +3722,7 @@
  {
   "id": "pose.supine-twist.cue.2",
   "lang": "he",
-  "text": "הורידו את שתי הברכיים לצד אחד."
+  "text": "העבירו את הברך או הברכיים לצד אחד."
  },
  {
   "id": "pose.supine-twist.cue.2",
@@ -3647,7 +3737,7 @@
  {
   "id": "pose.supine-twist.cue.3",
   "lang": "he",
-  "text": "פתחו את הידיים לצדדים והכתפיים נשארות על הרצפה."
+  "text": "פתחו יד אחת או שתיים לצדדים, לפי הרמה, והשאירו את הכתפיים כבדות."
  },
  {
   "id": "pose.supine-twist.cue.3",
@@ -3722,7 +3812,7 @@
  {
   "id": "pose.happy-baby.cue.2",
   "lang": "he",
-  "text": "אחזו בחלק החיצוני של כפות הרגליים."
+  "text": "אחזו בשוקיים או בחלק החיצוני של כפות הרגליים, לפי הרמה."
  },
  {
   "id": "pose.happy-baby.cue.2",
@@ -3827,7 +3917,7 @@
  {
   "id": "pose.figure-four.cue.3",
   "lang": "he",
-  "text": "משכו את הרגל התומכת לעבר החזה."
+  "text": "השאירו את כף הרגל התומכת ברצפה או אחזו מאחורי הירך ומשכו בעדינות, לפי הרמה."
  },
  {
   "id": "pose.figure-four.cue.3",
@@ -3842,7 +3932,7 @@
  {
   "id": "pose.figure-four.cue.4",
   "lang": "he",
-  "text": "כופפו את כף הרגל העליונה והניחו לברך לרדת החוצה, בלי ללחוץ עליה."
+  "text": "כופפו את כף הרגל העליונה כדי להגן על הברך, בלי ללחוץ עליה."
  },
  {
   "id": "pose.figure-four.cue.4",
@@ -3992,7 +4082,7 @@
  {
   "id": "pose.hand-to-toe.cue.2",
   "lang": "he",
-  "text": "השתמשו ברצועה סביב כף הרגל."
+  "text": "השתמשו ברצועה או אחזו בבוהן, לפי הרמה."
  },
  {
   "id": "pose.hand-to-toe.cue.2",
@@ -4022,7 +4112,7 @@
  {
   "id": "pose.hand-to-toe.cue.4",
   "lang": "he",
-  "text": "משכו קלות ונשמו, בלי לעגל את הגב."
+  "text": "קרבו את הרגל רק כל עוד הראש, הכתפיים והאגן נשארים על הרצפה."
  },
  {
   "id": "pose.hand-to-toe.cue.4",
@@ -4082,7 +4172,7 @@
  {
   "id": "pose.legs-up-wall.cue.2",
   "lang": "he",
-  "text": "הניחו את הרגליים על הקיר, האגן קרוב אליו."
+  "text": "הניחו את כפות הרגליים או את הרגליים על הקיר, לפי הרמה."
  },
  {
   "id": "pose.legs-up-wall.cue.2",
@@ -4097,7 +4187,7 @@
  {
   "id": "pose.legs-up-wall.cue.3",
   "lang": "he",
-  "text": "הידיים רפויות לצדדים, כפות ידיים כלפי מעלה."
+  "text": "הניחו ידיים לצד הגוף או מעל הראש, לפי הרמה, בלי להכביד על הכתפיים."
  },
  {
   "id": "pose.legs-up-wall.cue.3",
@@ -5562,6 +5652,90 @@
   "id": "pose.wide-legged-fold.exit",
   "lang": "he",
   "text": "הניחו ידיים על הירכיים, האריכו את החזה קדימה ועלו לאט לעמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.entry.1",
+  "lang": "he",
+  "text": "פסעו קדימה ברגל אחת, שתי הרגליים ישרות, וסובבו את כף הרגל האחורית מעט החוצה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.entry.2",
+  "lang": "he",
+  "text": "כוונו את האגן ישר קדימה והאריכו את הגב לפני שמתחילים להישען.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.align.1",
+  "lang": "he",
+  "text": "לחצו את שתי כפות הרגליים לרצפה והשאירו את הברכיים ישרות אך לא נעולות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.align.2",
+  "lang": "he",
+  "text": "הטו את הגוף קדימה מן מפרקי הירכיים, עם החזה מתארך הרחק מהאגן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.breath",
+  "lang": "he",
+  "text": "בשאיפה האריכו את הגב. בנשיפה העמיקו רק עד גובה שבו הגב נשאר ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.mod.L0",
+  "lang": "he",
+  "text": "קצרו את הפסיעה, הישארו בחצי כפיפה והניחו ידיים על בלוקים גבוהים או על קיר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.mod.L1",
+  "lang": "he",
+  "text": "פסיעה בינונית, גב ארוך וידיים על בלוקים נמוכים לצד כף הרגל הקדמית.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.mod.L2",
+  "lang": "he",
+  "text": "אם הגב נשאר ארוך, הניחו כפות ידיים על הרצפה והקרבו את החזה אל הירך בלי לעגל.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.fix.1",
+  "lang": "he",
+  "text": "הגב נוטה להתעגל כדי להגיע נמוך. הגביהו את הידיים על בלוקים והאריכו את החזה קדימה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.pyramid.fix.2",
+  "lang": "he",
+  "text": "המשקל נוטה לברוח לעקב האחורי והברך הקדמית נועלת. לחצו את שתי כפות הרגליים לרצפה ורככו מעט את הברך.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.pyramid.exit",
+  "lang": "he",
+  "text": "הניחו ידיים על הירכיים, האריכו את הגב וחזרו לעמידה לאט.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.pyramid.side",
+  "lang": "he",
+  "text": "צד שני. החליפו את הרגליים ופסעו קדימה עם הרגל השנייה.",
   "v2": true,
   "prio": "rest"
  },
