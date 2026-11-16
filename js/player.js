@@ -10,6 +10,7 @@ import { segText } from '../data/narration.js';
 import { LEVEL_LABELS } from '../data/poses.js';
 import { transcriptFor } from './transcript.js';
 import { music, MOODS, normMood } from './music.js';
+import { shouldWaitForSide } from './sideswitch.js';
 
 const el = (tag, attrs = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -60,6 +61,8 @@ export class Player {
     this.elLines = el('ol', { class: 'tx-lines', 'aria-label': T('transcript') });
     this.elCap = el('div', { class: 'caption fs-cap', 'aria-live': 'polite' });
     this.elNotice = el('div', { class: 'notice', hidden: true });
+    this.btnReady = el('button', { class: 'btn primary ready-side', 'data-act': 'ready-side', type: 'button', hidden: true, onclick: () => this.sideReady() }, T('readySide'));
+    this.elReadyLive = el('div', { class: 'sr-only', role: 'status', 'aria-live': 'assertive' });
     this.btnSkipIntro = el('button', { class: 'btn skip-intro', hidden: true, onclick: () => this.skipIntro() }, T('skipIntro'));
     this.elNextName = el('span', { class: 'next-name' });
     this.elNextBigName = el('div', { class: 'fs-nextbig-name' });
@@ -93,7 +96,7 @@ export class Player {
       this.elNotice,
       el('div', { class: 'fs-stage' },
         el('div', { class: 'p-fig' }, this.svg, viewToggle(), this.elSide),
-        el('div', { class: 'fs-tx' }, this.elCap, this.btnSkipIntro, this.elLines, this.elNextBig)),
+        el('div', { class: 'fs-tx' }, this.elCap, this.btnReady, this.elReadyLive, this.btnSkipIntro, this.elLines, this.elNextBig)),
       el('div', { class: 'fs-foot' }, this.settingsBox, this.btnHandle, this.bar));
     this.root.append(this.pl);
     this.lineEls = new Map(); this.onEl = null;
@@ -193,6 +196,7 @@ export class Player {
       row(T('narrLang'), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], nl, (v) => { store.saveSettings({ narrLang: v }); this.st = store.settings; this.nar.setLang(v || this.lang); if (this.list && !this.done && this.phase === 'hold') this.renderTranscript(this.slot()); })),
       row(T('narration'), sel(NARR_LEVELS.map((d) => [d, T('narrLvl', d)]), this.st.narration, (v) => { store.saveSettings({ narration: v }); this.st = store.settings; })),
       row(T('voiceVol'), el('input', { type: 'range', min: 0, max: 1, step: 0.05, value: this.st.volume, 'aria-label': T('voiceVol'), oninput: (e) => { this.nar.volume = +e.target.value; store.saveSettings({ volume: +e.target.value }); } })),
+      el('label', { class: 'row manual-side' }, el('span', {}, T('manualSide')), el('input', { type: 'checkbox', 'data-set': 'manualSide', checked: this.st.manualSide === true, onchange: (e) => { store.saveSettings({ manualSide: e.target.checked }); this.st = store.settings; } })),
       el('div', { class: 'row' }, this.btnMute, el('label', { class: 'chip sm' }, el('input', { type: 'checkbox', checked: this.st.beep, onchange: (e) => { store.saveSettings({ beep: e.target.checked }); this.st = store.settings; } }), T('beep')),
         el('button', { class: 'btn', onclick: () => this.anim.replay() }, '▷ ' + T('replayEntry'))));
   }
@@ -259,7 +263,7 @@ export class Player {
   slot() { return this.list[this.idx]; }
   beginSlot(i, first = false) {
     this.idx = i; const s = this.slot();
-    this.phase = 'hold';
+    this.phase = 'hold'; this.hideReady();
     this.holdTotal = Math.max(5, Math.round(s.hold * this.mult)); this.remain = this.holdTotal;
     this.nextSaid = false; this.midSaid = false;
     const lvl = s.level;
@@ -312,7 +316,7 @@ export class Player {
   tick() {
     const now = performance.now(); const dt = Math.min(1, (now - this.t0) / 1000); this.t0 = now;
     if (this.paused || this.done) return;
-    if (this.phase === 'wait') return;
+    if (this.phase === 'wait' || this.phase === 'waitside') return;
     if (this.phase === 'intro') {
       this.introLeft = Math.max(0, this.introLeft - dt); this.introSpent += dt;
       if (this.introSpent > this.introT * 1.6 + 25) this.endIntro(); // safety: the narrator never finished
@@ -330,6 +334,7 @@ export class Player {
       }
       if (this.remain <= 0) {
         if (this.idx >= this.list.length - 1) return this.finish();
+        if (shouldWaitForSide(this.st.manualSide, s, this.list[this.idx + 1])) return this.waitForSide();
         this.phase = 'trans'; this.remain = this.trans; this.beep(520, 0.12);
         const n = this.list[this.idx + 1];
         const same = n.pose.id === s.pose.id;
@@ -345,14 +350,28 @@ export class Player {
     this.updateUI();
   }
 
+  // manual side switch: hold ends, the player waits for a tap on a real button (focus moves to it, announced via aria-live)
+  waitForSide() {
+    this.phase = 'waitside'; this.remain = 0; this.beep(520, 0.12);
+    if (this.level !== 'off') this.nar.say(['common.switch_sides'], { flush: true });
+    this.btnReady.hidden = false;
+    this.elReadyLive.textContent = this.T('readySideSr');
+    this.showBar();
+    try { this.btnReady.focus({ preventScroll: true }); } catch { /* none */ }
+    this.updateUI();
+  }
+  hideReady() { if (this.btnReady) this.btnReady.hidden = true; if (this.elReadyLive) this.elReadyLive.textContent = ''; }
+  sideReady() { if (this.phase !== 'waitside') return; this.t0 = performance.now(); this.beginSlot(this.idx + 1); try { this.btnPause.focus({ preventScroll: true }); } catch { /* none */ } }
+
   updateUI() {
     const r = Math.max(0, Math.ceil(this.remain));
     let frac;
-    if (this.phase === 'trans') { this.elCount.textContent = String(r); frac = this.trans ? Math.max(0, this.remain) / this.trans : 0; }
+    if (this.phase === 'waitside') { this.elCount.textContent = '0'; frac = 0; }
+    else if (this.phase === 'trans') { this.elCount.textContent = String(r); frac = this.trans ? Math.max(0, this.remain) / this.trans : 0; }
     else if (this.phase === 'intro') { this.elCount.textContent = fmtTime(Math.ceil(this.introLeft)); frac = this.introT ? this.introLeft / this.introT : 0; }
     else { this.elCount.textContent = fmtTime(r); frac = this.holdTotal ? Math.max(0, this.remain) / this.holdTotal : 0; }
     this.ringFg.setAttribute('stroke-dashoffset', String(this.ringC * (1 - Math.min(1, Math.max(0, frac)))));
-    const trans = this.phase === 'trans';
+    const trans = this.phase === 'trans' || this.phase === 'waitside';
     this.pl.classList.toggle('is-trans', trans);
     this.elNextBig.hidden = !trans || this.elNext.hidden;
     this.elCount.classList.toggle('trans', trans);

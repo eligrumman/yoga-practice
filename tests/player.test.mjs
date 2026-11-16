@@ -129,4 +129,32 @@ function fakeCtx() {
   ok(m3.start('soft') === 'pending' && !m3.running, 'music: no WebAudio support degrades silently');
 }
 
+// ---- manual "ready for the other side" switch
+{
+  const { shouldWaitForSide, normManual } = await import('../js/sideswitch.js');
+  const { store, DEFAULT_SETTINGS } = await import('../js/store.js');
+  const { slots } = await import('../js/plan.js');
+  const { tr } = await import('../js/i18n.js');
+  const { readFileSync } = await import('node:fs');
+  ok(DEFAULT_SETTINGS.manualSide === false, 'side: default is automatic switching');
+  ok(normManual(true) && !normManual('true') && !normManual(undefined) && !normManual(1), 'side: only boolean true enables manual switch');
+  const sl = slots([{ pose: 'tree', level: 0, unit: 'sec', amount: 30 }, { pose: 'mountain', level: 0, unit: 'sec', amount: 30 }]);
+  ok(sl.length === 3 && sl[0].sides === 2, 'side: fixture has two tree sides and one single-sided pose');
+  ok(shouldWaitForSide(true, sl[0], sl[1]), 'side: waits after side 1 when enabled');
+  ok(!shouldWaitForSide(false, sl[0], sl[1]), 'side: no wait when disabled (auto behaviour)');
+  ok(!shouldWaitForSide(true, sl[1], sl[2]), 'side: no wait after side 2');
+  ok(!shouldWaitForSide(true, sl[2], undefined), 'side: no wait for one-sided pose / end');
+  ok(!shouldWaitForSide(true, sl[0], sl[2]), 'side: no wait when next is a different pose');
+  for (const k of ['readySide', 'manualSide', 'readySideSr']) for (const l of ['he', 'ru', 'en']) ok(tr(k, l) && tr(k, l).length > 3, `side: i18n ${k}/${l}`);
+  const src = readFileSync(new URL('../js/player.js', import.meta.url), 'utf8');
+  ok(/el\('button', \{ class: 'btn primary ready-side'/.test(src) && /type: 'button'/.test(src), 'side: ready control is a real button');
+  ok(/btnReady\.focus\(/.test(src), 'side: focus moves to the ready button');
+  ok(/aria-live': 'assertive'/.test(src) && /elReadyLive\.textContent = this\.T\('readySideSr'\)/.test(src), 'side: aria-live announces the wait');
+  ok(/phase === 'waitside'\) return;/.test(src), 'side: timer does not run while waiting');
+  ok(/store\.saveSettings\(\{ manualSide: e\.target\.checked \}\)/.test(src), 'side: toggle persists via store.saveSettings');
+  const st = readFileSync(new URL('../js/store.js', import.meta.url), 'utf8');
+  ok(/try \{ localStorage\.setItem/.test(st) && /try \{ const v = localStorage\.getItem/.test(st), 'side: store access is in try/catch');
+  store.saveSettings({ manualSide: true }); ok(store.settings.manualSide === true, 'side: setting round-trips'); store.saveSettings({ manualSide: false });
+}
+
 console.log(`player tests: ${pass} passed, ${fail} failed`);
