@@ -240,3 +240,8 @@ body.in-player{overflow:hidden}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .ready-side{display:block;margin:.6rem auto;min-height:48px;font-size:1.1rem}.ready-side[hidden]{display:none}
 .manual-side{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+/* "anything we should know?" sheet and personal notes */
+#health-dlg .chip.block{display:flex;border-radius:12px;margin:.35rem 0;width:100%}
+#health-dlg h2:focus{outline:none}#health-dlg:focus-within h2:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.note.personal{background:var(--lv1)}.note.safety.hl{border:2px solid var(--accent)}
+#health-row{align-items:center;gap:.6rem;justify-content:space-between;display:flex;flex-wrap:wrap}

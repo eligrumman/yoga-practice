@@ -1,5 +1,6 @@
 // All persistence in localStorage (this device only). Every access is guarded.
 import { resolveNarration } from './narration-plan.js';
+import { cleanHealth } from './health.js';
 const K = 'hyf.';
 const mem = {};
 function get(key, def) {
@@ -57,6 +58,12 @@ export const store = {
   markStarterDone(day) { const d = cleanStarterDays([...this.starterDone, day]); set('starterDone', d); return d; },
   resetStarter() { set('starterDone', []); },
   setFavs(f) { set('favs', f); },
+
+  // 'Anything we should know?' answers: { flags: [...], seen }. Stays on this device; not part of plan export.
+  get health() { return { flags: cleanHealth(get('health', [])), seen: get('healthSeen', false) === true }; },
+  saveHealth(flags) { set('health', cleanHealth(flags)); set('healthSeen', true); },
+  markHealthSeen() { set('healthSeen', true); },
+
 };
 
 export const STARTER_DAYS = 7;

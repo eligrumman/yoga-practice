@@ -9,6 +9,7 @@ import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
 import { NARR_LEVELS } from './narration-plan.js';
 import { Player } from './player.js';
+import { flagsForPose, HEALTH_FLAGS } from './health.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
 const $ = (s, r = document) => r.querySelector(s);
@@ -133,7 +134,42 @@ function viewHome() {
     el('section', {}, el('h2', {}, T('history')),
       hist.length ? el('div', {}, el('p', { class: 'stat' }, `${T('streak')}: ${st}`),
         el('ul', { class: 'hist' }, hist.slice(0, 8).map((h) => el('li', {}, `${h.date} · ${h.plan} · ${histMinutes(h)} ${T('min')}`)))) : el('p', { class: 'hint' }, T('noHistory'))));
+  // first visit: a short, skippable sheet (never while another dialog is open)
+  if (!store.health.seen) setTimeout(() => { if (parseHash().view === 'home' && !document.querySelector('dialog[open]')) openHealthSheet(null); }, 0);
   return null;
+}
+// ---------------- "anything we should know?" sheet ----------------
+const healthList = (flags) => flags.map((f) => T('healthF', f)).join(', ');
+const healthNotes = (flags) => el('span', {}, flags.map((f) => T('healthNote', f)).join(' '), ' ', el('span', { class: 'small' }, T('healthNotMedical') + ' ' + T('healthClinician')));
+function openHealthSheet(opener) {
+  document.getElementById('health-dlg')?.remove();
+  const dlg = el('dialog', { id: 'health-dlg', 'aria-labelledby': 'health-title' });
+  const cur = new Set(store.health.flags);
+  const none = el('input', { type: 'checkbox', id: 'h-none', name: 'none', checked: store.health.seen && cur.size === 0 });
+  const boxes = HEALTH_FLAGS.map((f) => el('input', { type: 'checkbox', id: 'h-' + f, name: f, checked: cur.has(f), onchange: (e) => { if (e.target.checked) none.checked = false; } }));
+  none.addEventListener('change', () => { if (none.checked) boxes.forEach((b) => { b.checked = false; }); });
+  const label = (inp, text) => el('label', { class: 'chip block', for: inp.id }, inp, el('span', {}, text));
+  const title = el('h2', { id: 'health-title', tabindex: '-1' }, T('healthTitle'));
+  const form = el('form', { method: 'dialog', class: 'dlg-body', id: 'health-form' }, title,
+    el('p', { class: 'hint' }, T('healthIntro')),
+    el('fieldset', {}, el('legend', {}, T('healthLegend')),
+      HEALTH_FLAGS.map((f, i) => label(boxes[i], T('healthF', f))), label(none, T('healthNone'))),
+    el('p', { class: 'small', id: 'health-disclaimer' }, T('healthNotMedical') + ' ' + T('healthClinician')),
+    el('div', { class: 'row-btns' },
+      el('button', { class: 'btn primary', id: 'health-save', type: 'submit', value: 'save' }, T('healthSave')),
+      el('button', { class: 'btn', id: 'health-skip', type: 'button', onclick: () => { dlg.close(); finish(); } }, T('healthSkip'))));
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    store.saveHealth(HEALTH_FLAGS.filter((f, i) => boxes[i].checked));
+    toast(T('healthSaved')); dlg.close(); finish(); if (parseHash().view === 'home') route();
+  });
+  dlg.append(form);
+  // Escape or Skip: nothing changes, but the sheet is not shown again on its own
+  let done = false; // runs once, from the close event (Escape) or straight after Skip / Save
+  function finish() { if (done) return; done = true; if (!store.health.seen) store.markHealthSeen(); dlg.remove(); (opener && opener.isConnected ? opener : $('#brand'))?.focus(); }
+  dlg.addEventListener('close', finish);
+  document.body.append(dlg);
+  dlg.showModal(); title.focus();
 }
 function settingsSection() {
   const s = store.settings;
@@ -142,6 +178,8 @@ function settingsSection() {
     el('label', { class: 'row' }, el('span', {}, T('holdMult')), sel([[0.75, '0.75×'], [1, '1×'], [1.5, '1.5×']], s.holdMult, (v) => store.saveSettings({ holdMult: +v }))),
     el('label', { class: 'row' }, el('span', {}, T('transition')), sel([[3, '3 ' + T('sec')], [5, '5 ' + T('sec')], [8, '8 ' + T('sec')]], s.transition, (v) => store.saveSettings({ transition: +v }))),
     el('label', { class: 'row' }, el('span', {}, T('narration')), sel(NARR_LEVELS.map((d) => [d, T('narrLvl', d)]), s.narration, (v) => store.saveSettings({ narration: v }))),
+    el('div', { class: 'row', id: 'health-row' }, el('span', {}, T('healthRow') + ': ', el('span', { class: 'hint', id: 'health-summary' }, store.health.flags.length ? healthList(store.health.flags) : T('healthNoneSaved'))),
+      el('button', { class: 'btn small', id: 'health-edit', type: 'button', onclick: (e) => openHealthSheet(e.currentTarget) }, T('healthEdit'))),
     el('label', { class: 'row' }, el('span', {}, T('narrLang')), sel([['', T('sameAsUI')], ['he', 'עברית'], ['ru', 'Русский'], ['en', 'English']], s.narrLang, (v) => { store.saveSettings({ narrLang: v }); applyNarr(); })));
 }
 
@@ -156,13 +194,14 @@ function openGenerator() {
     el('fieldset', {}, el('legend', {}, T('genLength')), radios('len', LENGTHS.map((m) => [m, `${m} ${T('min')}`]), minutes, (v) => { minutes = +v; })),
     el('fieldset', {}, el('legend', {}, T('genFocus')), radios('foc', FOCUSES.map((f) => [f, T('focus', f)]), focus, (v) => { focus = v; })),
     el('fieldset', {}, el('legend', {}, T('genLevel')), radios('lev', GEN_LEVELS.map((l) => [l, T('glevel', l)]), level, (v) => { level = v; })),
+    store.health.flags.length ? el('p', { class: 'hint small', id: 'gen-health' }, T('healthGenNote').replace('{list}', healthList(store.health.flags))) : null,
     el('details', {}, el('summary', {}, T('genAvoid')),
       el('div', { class: 'avoid' }, POSES.filter((p) => p.section !== 'rest').map((p) =>
         el('label', { class: 'chip sm' }, el('input', { type: 'checkbox', onchange: (e) => { e.target.checked ? avoid.add(p.id) : avoid.delete(p.id); } }), el('span', {}, poseName(p)))))),
     el('div', { class: 'row-btns' },
       el('button', { class: 'btn primary', id: 'gen-go', value: 'go', onclick: (e) => {
         e.preventDefault();
-        const g = generatePlan({ minutes, focus, level, avoid: [...avoid] });
+        const g = generatePlan({ minutes, focus, level, avoid: [...avoid], health: store.health.flags });
         const rec = store.upsertPlan({ id: store.newId(), name: g.name[lang], items: g.items });
         dlg.close(); go(`/plan/${rec.id}`);
       } }, T('genGo')),
@@ -238,6 +277,7 @@ function viewPose(id) {
     else { rec = store.getPlan(v); rec.items.push(item); store.upsertPlan(rec); }
     toast(T('saved') + ': ' + rec.name); addSel.value = '';
   });
+  const hf = flagsForPose(p.id, store.health.flags);
   main.append(
     el('a', { class: 'back', href: '#/library' }, (DIR[lang] === 'rtl' ? '→ ' : '← ') + T('back')),
     el('div', { class: 'pose-page' },
@@ -251,7 +291,8 @@ function viewPose(id) {
         el('div', { class: 'meta' }, el('span', { class: 'badge' }, CATEGORY_LABELS[p.category][lang]), p.isFlow ? el('span', { class: 'badge flow-badge' }, FLOW_LABEL[lang]) : null, el('span', { class: 'dots' }, stars(p.difficulty)),
           el('span', { class: 'badge' }, `${T('hold')}: ${p.holdSeconds} ${T('sec')}` + (p.sides === 'both' ? ` · ${T('sides', 'both')}` : ''))),
         el('h3', {}, T('cues')), el('ol', { class: 'cues' }, p.cues[lang].map((c) => el('li', {}, c))),
-        el('div', { class: 'note safety' }, el('strong', {}, '⚠ ' + T('safety') + ': '), p.safety[lang]),
+        hf.length ? el('div', { class: 'note personal', id: 'personal-note' }, el('strong', {}, '♡ ' + T('healthPersonal') + ': '), healthNotes(hf)) : null,
+        el('div', { class: 'note safety' + (hf.length ? ' hl' : '') }, el('strong', {}, '⚠ ' + T('safety') + ': '), p.safety[lang]),
         el('div', { class: 'note easier' }, el('strong', {}, '✓ ' + T('easier') + ': '), p.variations[0][lang]),
         el('div', { class: 'row-btns' }, addSel))));
   setLevel(level); anim.start();
@@ -382,6 +423,7 @@ function viewPlan(id) {
       el('button', { class: 'btn', onclick: () => $('#import-here').click() }, T('import')),
       el('input', { type: 'file', id: 'import-here', accept: '.json,application/json', hidden: true, onchange: (e) => { const f = e.target.files[0]; if (f) importFile(f, (rec) => go(`/plan/${rec.id}`)); e.target.value = ''; } }),
       el('button', { class: 'btn danger', onclick: () => { if (confirm(T('confirmDel'))) { store.deletePlan(plan.id); go('/plans'); } } }, T('del'))),
+    store.health.flags.length ? el('div', { class: 'note personal', id: 'plan-health-note' }, el('strong', {}, '♡ ' + T('healthPersonal') + ': '), healthNotes(store.health.flags)) : null,
     pregEl,
     listEl,
     el('div', { class: 'add-row' }, pick, el('button', { class: 'btn primary', id: 'add', onclick: () => {

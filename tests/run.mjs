@@ -601,8 +601,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 544 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 544 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 281 * 3, 'narration-script.json has 281 legacy entries in each language');
+  ok(v2s.length === 556 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 556 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 287 * 3, 'narration-script.json has 287 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');
@@ -709,6 +709,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 { const pt = await import('./player.test.mjs'); pass += pt.pass; fail += pt.fail; } // player: fix cues, music, transcript
 
 await (await import('./figure.test.mjs')).default(ok);
+await (await import('./health.test.mjs')).default(ok);
 // ---- 7-day starter progress
 {
   const { cleanStarterDays, nextStarterDay, STARTER_DAYS, store } = await import('../js/store.js');

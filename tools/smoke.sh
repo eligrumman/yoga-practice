@@ -10,7 +10,7 @@ fail() { echo "SMOKE FAIL ($LANG_ ${W}px): $*"; $AB close >/dev/null 2>&1; exit 
 BASE="${URL%%[?#]*}"; X="?x=$RANDOM$RANDOM"
 $AB set viewport "$W" 900 >/dev/null 2>&1
 $AB open "$BASE$X" >/dev/null || fail "cannot open $BASE"
-$AB eval "localStorage.setItem('hyf.lang', JSON.stringify('$LANG_')); localStorage.setItem('hyf.plans', JSON.stringify([{id:'smoke',name:'Smoke',updated:Date.now(),items:[{pose:'mountain',level:0,unit:'sec',amount:5},{pose:'child',level:0,unit:'sec',amount:5}]}])); localStorage.setItem('hyf.settings', JSON.stringify({mute:true,beep:false,wake:false}));" >/dev/null
+$AB eval "localStorage.setItem('hyf.healthSeen', 'true'); localStorage.setItem('hyf.lang', JSON.stringify('$LANG_')); localStorage.setItem('hyf.plans', JSON.stringify([{id:'smoke',name:'Smoke',updated:Date.now(),items:[{pose:'mountain',level:0,unit:'sec',amount:5},{pose:'child',level:0,unit:'sec',amount:5}]}])); localStorage.setItem('hyf.settings', JSON.stringify({mute:true,beep:false,wake:false}));" >/dev/null
 $AB open "$BASE$X#/player/smoke" >/dev/null
 $AB reload >/dev/null; sleep 2
 $AB errors --clear >/dev/null 2>&1

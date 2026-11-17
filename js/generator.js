@@ -1,5 +1,6 @@
 // Deterministic first-time plan generator. Same inputs always give the same plan.
 import { POSES, POSE_BY_ID } from '../data/poses.js';
+import { healthAvoid, cleanHealth } from './health.js';
 import { planSeconds, sideCount, DEFAULT_TRANSITION, BREATH_SEC } from './plan.js';
 
 export const FOCUSES = ['general', 'flexibility', 'strength', 'relax', 'back'];
@@ -219,7 +220,14 @@ function generateBeginner({ minutes, focus, avoid }) {
   return { name: NAMES[focus] || NAMES.general, items, minutes, focus, level: 'beginner' };
 }
 
-export function generatePlan({ minutes = 20, focus = 'general', level = 'beginner', avoid = [] } = {}) {
+// health = answers from the 'anything we should know?' sheet (see health.js). Their soft exclusions are dropped only when the plan cannot otherwise reach its length.
+export function generatePlan({ minutes = 20, focus = 'general', level = 'beginner', avoid = [], health = [] } = {}) {
+  const run = (soft) => genCore({ minutes, focus, level, avoid: [...new Set([...avoid, ...healthAvoid(health, { soft })])] });
+  const plan = run(true);
+  if (!cleanHealth(health).length || Math.abs(planSeconds(plan.items) - minutes * 60) <= 60) return plan;
+  return run(false);
+}
+function genCore({ minutes, focus, level, avoid }) {
   if (level === 'beginner') return generateBeginner({ minutes, focus, avoid });
   const avoidSet = new Set(avoid);
   const T = minutes * 60;
