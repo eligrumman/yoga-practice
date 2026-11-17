@@ -50,7 +50,7 @@ ok(spokeOk, 'budget: speech stays within 65% of the hold');
 { // all poses at a roomy hold: fix.1 present in full mode
   let all = true;
   for (const p of POSES) {
-    if (p.id === 'savasana') continue;
+    if (p.id === 'savasana' || p.id === 'savasana-side') continue;
     const r = NP.slotPlan({ ...base, poseId: p.id, sides: p.sides === 'both' ? 2 : 1, hold: 150, level: 'full' });
     if (!r.ids.includes(`pose.${p.id}.fix.1`)) { all = false; console.log('  no fix.1 in plan for', p.id); }
   }
@@ -77,7 +77,7 @@ ok(spokeOk, 'budget: speech stays within 65% of the hold');
     ok(t.lines.every((l) => !l.id.includes('.fix.')), `transcript ${lang}: no he-only fix lines`);
   }
   let allPoses = true;
-  for (const p of POSES) for (const lang of ['he', 'ru', 'en']) { const t = transcriptFor({ lang, pose: p, lvl: 0 }); if (!t.lines.length) { allPoses = false; console.log('  empty transcript', p.id, lang); } }
+  for (const p of POSES) for (const lang of ['he', 'ru', 'en']) { if (lang !== 'he' && p.id === 'savasana-side') continue; /* Hebrew-only pose */ const t = transcriptFor({ lang, pose: p, lvl: 0 }); if (!t.lines.length) { allPoses = false; console.log('  empty transcript', p.id, lang); } }
   ok(allPoses, 'transcript: every pose has lines in he/ru/en');
 }
 

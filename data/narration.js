@@ -51,7 +51,10 @@ const INTRO = {
 
 export const SEGMENTS = [];
 for (const [k, t] of Object.entries(COMMON)) SEGMENTS.push({ id: `common.${k}`, ...t });
+// Hebrew-only poses: their segments live in narration-he-v2.js (ru/en narration is not expanded)
+export const HE_ONLY_POSES = new Set(['savasana-side']);
 for (const p of POSES) {
+  if (HE_ONLY_POSES.has(p.id)) continue;
   const nm = {};
   for (const l of LANGS) nm[l] = SPOKEN_NAME[p.id]?.[l] || p[l];
   SEGMENTS.push({ id: `pose.${p.id}.name`, ...nm });

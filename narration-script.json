@@ -4417,6 +4417,20 @@
   "prio": "close"
  },
  {
+  "id": "pose.savasana-side.name",
+  "lang": "he",
+  "text": "שכיבת מנוחה על הצד",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.intro",
+  "lang": "he",
+  "text": "תנוחת שכיבת מנוחה על הצד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
   "id": "pose.tabletop.entry.1",
   "lang": "he",
   "text": "בואו אל ארבע.",
@@ -8193,6 +8207,90 @@
   "id": "pose.savasana.exit",
   "lang": "he",
   "text": "הישארו ככל שנוח לכם. אפשר לקום בכל רגע: התגלגלו לצד ועלו לאט לישיבה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.entry.1",
+  "lang": "he",
+  "text": "שכבו על צד שמאל וקחו כרית קטנה מתחת לראש.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.entry.2",
+  "lang": "he",
+  "text": "כופפו מעט את הברכיים. אפשר לשים כרית בין הברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.align.1",
+  "lang": "he",
+  "text": "הניחו את הידיים בנוחות מול החזה.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.align.2",
+  "lang": "he",
+  "text": "הרפו את הפנים, הלסת והבטן.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.align.3",
+  "lang": "he",
+  "text": "הניחו לגוף להיות כבד.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.breath",
+  "lang": "he",
+  "text": "הניחו לנשימה לחזור לקצב טבעי.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.mod.L0",
+  "lang": "he",
+  "text": "כרית קטנה מתחת לראש וברכיים כפופות.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.mod.L1",
+  "lang": "he",
+  "text": "אם נוח לכם, הוסיפו כרית בין הברכיים.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הארכו מעט את הרגליים והניחו את היד התחתונה מתחת לראש.",
+  "v2": true,
+  "prio": "beginner"
+ },
+ {
+  "id": "pose.savasana-side.fix.1",
+  "lang": "he",
+  "text": "הכתף התחתונה נוטה להיכנס אל הצוואר. הרחיקו אותה קלות מהאוזן.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.savasana-side.fix.2",
+  "lang": "he",
+  "text": "אם משהו לא נוח, החליפו צד או הוסיפו כרית. אפשר לשאול רופא או מיילדת.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.savasana-side.exit",
+  "lang": "he",
+  "text": "הישארו ככל שנוח לכם. כשתרצו, התיישבו לאט בעזרת הידיים.",
   "v2": true,
   "prio": "beginner"
  }

@@ -151,9 +151,10 @@ function hePlan(o) {
 // last pose is Savasana (full/short): its own entry/breath + the session closing replace savasana align/mod.
 function savasanaPlan(o) {
   const { level, hold, dur, minutes } = o;
-  const P = POSE_V2.savasana;
-  const intro = 'pose.savasana.intro';
-  const entries = P.entry.map((_, i) => `pose.savasana.entry.${i + 1}`);
+  const sid = o.poseId === 'savasana-side' ? 'savasana-side' : 'savasana';
+  const P = POSE_V2[sid];
+  const intro = `pose.${sid}.intro`;
+  const entries = P.entry.map((_, i) => `pose.${sid}.entry.${i + 1}`);
   const first = level === 'short' ? 'short' : introVariantKey(minutes);
   const order = ['long', 'medium', 'short'].slice(['long', 'medium', 'short'].indexOf(first));
   const build = (variant, fullEntry) => {
@@ -161,7 +162,7 @@ function savasanaPlan(o) {
     const iOut = keys.indexOf('out1');
     const pre = keys.slice(0, iOut), out = keys.slice(iOut);
     const A = [it(intro, PAUSE.afterIntroName), ...(fullEntry && level === 'full' ? entries : entries.slice(0, 1)).map((id) => it(id, PAUSE.afterEntry)),
-      ...(fullEntry && level === 'full' ? [it('pose.savasana.breath', 2)] : []),
+      ...(fullEntry && level === 'full' ? [it(`pose.${sid}.breath`, 2)] : []),
       ...pre.map((kk) => it(CLOSE[kk].id, CLOSE[kk].pauseAfter))];
     const B = out.map((kk, n) => it(CLOSE[kk].id, n === out.length - 1 ? 0 : CLOSE[kk].pauseAfter));
     return { A, B };

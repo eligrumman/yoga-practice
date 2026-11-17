@@ -120,4 +120,19 @@ export default [
       { he: 'ידיים רחוקות מהגוף ועיניים עצומות.', en: 'Arms away from the body, eyes closed.', ru: 'Руки в стороны от тела, глаза закрыты.' },
     ],
   },
+  {
+    id: 'savasana-side', sa: 'Savasana', en: 'Side-lying rest', he: 'שכיבת מנוחה על הצד', ru: 'Шавасана на боку', cat: 'rest', sec: 'rest', flow: 100, d: 1, hold: 90, sides: 'single',
+    tags: ['relax', 'pregnancy'],
+    cue: {
+      he: ['שכבו על צד שמאל, עם כרית קטנה מתחת לראש.', 'כופפו מעט את הברכיים. אפשר לשים כרית בין הברכיים.', 'הניחו את הידיים בנוחות מול החזה.', 'הרפו את הפנים, הלסת והבטן.', 'הניחו לנשימה לחזור לקצב טבעי.'],
+      en: ['Lie on your left side with a small pillow under your head.', 'Bend the knees a little. A pillow between the knees helps.', 'Rest your hands comfortably in front of your chest.', 'Soften the face, jaw and belly.', 'Let the breath return to its natural rhythm.'],
+      ru: ['Лягте на левый бок, под голову положите небольшую подушку.', 'Слегка согните колени. Подушка между коленями поможет.', 'Удобно положите руки перед грудью.', 'Расслабьте лицо, челюсть и живот.', 'Пусть дыхание вернётся к естественному ритму.'],
+    },
+    safe: { he: 'בהריון: מנוחה על הצד במקום על הגב. אם משהו לא נוח, החליפו צד או הוסיפו כרית. התייעצו עם רופא או מיילדת. התכסו אם קר.', en: 'In pregnancy: rest on your side instead of your back. If something is uncomfortable, switch sides or add a pillow. Ask a doctor or midwife. Cover up if you are cold.', ru: 'При беременности отдыхайте на боку, а не на спине. Если неудобно, смените бок или добавьте подушку. Посоветуйтесь с врачом или акушеркой. Укройтесь, если холодно.' },
+    v: [
+      { he: 'כרית קטנה מתחת לראש, ברכיים כפופות.', en: 'Small pillow under the head, knees bent.', ru: 'Небольшая подушка под головой, колени согнуты.' },
+      { he: 'כרית נוספת בין הברכיים.', en: 'A second pillow between the knees.', ru: 'Вторая подушка между коленями.' },
+      { he: 'הרגליים ארוכות יותר, היד התחתונה מתחת לראש.', en: 'Legs longer, the lower arm under the head.', ru: 'Ноги длиннее, нижняя рука под головой.' },
+    ],
+  },
 ];

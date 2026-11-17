@@ -800,6 +800,24 @@ export const POSE_V2 = {
    "אם מתאים לכם, הרחיקו ידיים מהגוף ועצמו עיניים."
   ],
   "exit": "הישארו ככל שנוח לכם. אפשר לקום בכל רגע: התגלגלו לצד ועלו לאט לישיבה."
+ },
+ "savasana-side": {
+  "entry": [
+   "שכבו על צד שמאל וקחו כרית קטנה מתחת לראש.",
+   "כופפו מעט את הברכיים. אפשר לשים כרית בין הברכיים."
+  ],
+  "align": [
+   "הניחו את הידיים בנוחות מול החזה.",
+   "הרפו את הפנים, הלסת והבטן.",
+   "הניחו לגוף להיות כבד."
+  ],
+  "breath": "הניחו לנשימה לחזור לקצב טבעי.",
+  "mod": [
+   "כרית קטנה מתחת לראש וברכיים כפופות.",
+   "אם נוח לכם, הוסיפו כרית בין הברכיים.",
+   "אם מתאים לכם, הארכו מעט את הרגליים והניחו את היד התחתונה מתחת לראש."
+  ],
+  "exit": "הישארו ככל שנוח לכם. כשתרצו, התיישבו לאט בעזרת הידיים."
  }
 };
 
@@ -852,6 +870,7 @@ export const FIX = {
   "hand-to-toe": ["הברך נוטה להתכופף והגב להתעגל. השתמשו ברצועה והשאירו את הרגל התחתונה פעילה.", "האגן נוטה להתרומם. שמרו אותו יציב על הרצפה."],
   "legs-up-wall": ["קל לשבת רחוק מדי מהקיר. קרבו את האגן עד שהרגליים נחות בנוחות.", "אין צורך לנעול את הברכיים. השאירו אותן רפויות."],
   "savasana": ["הגוף נוטה להישאר דרוך. שימו לב ללסת ולכתפיים, והרפו אותן.", "אם הגב התחתון לא נוח, הניחו כרית מתחת לברכיים."],
+  "savasana-side": ["הכתף התחתונה נוטה להיכנס אל הצוואר. הרחיקו אותה קלות מהאוזן.", "אם משהו לא נוח, החליפו צד או הוסיפו כרית. אפשר לשאול רופא או מיילדת."],
 };
 for (const [pid, f] of Object.entries(FIX)) POSE_V2[pid].fix = f;
 
@@ -859,6 +878,8 @@ export const MOD_LEVELS = ['L0', 'L1', 'L2'];
 // Flat list of every v2 segment: [{id, he}]. Hebrew only; ru/en have no v2 segments.
 export const SEGMENTS_V2 = [];
 for (const g of [INTRO, CLOSE]) for (const s of Object.values(g)) SEGMENTS_V2.push({ id: s.id, he: s.he });
+// Hebrew-only poses (not in the ru/en segment list): their name and intro live here.
+SEGMENTS_V2.push({ id: 'pose.savasana-side.name', he: 'שכיבת מנוחה על הצד' }, { id: 'pose.savasana-side.intro', he: 'תנוחת שכיבת מנוחה על הצד.' });
 for (const [pid, t] of Object.entries(POSE_V2)) {
   t.entry.forEach((he, i) => SEGMENTS_V2.push({ id: `pose.${pid}.entry.${i + 1}`, he }));
   t.align.forEach((he, i) => SEGMENTS_V2.push({ id: `pose.${pid}.align.${i + 1}`, he }));

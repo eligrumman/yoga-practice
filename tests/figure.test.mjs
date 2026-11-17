@@ -207,6 +207,27 @@ export default async function figureTests(ok) {
     const T2 = solve(poseFrames(twist, 2).hold);
     ok(bend(T2.J.hipL, T2.J.kneeL, T2.J.ankleL) <= 3 && len3(sub3(T2.J.wristL, T2.J.kneeR)) <= 3, 'supine-twist L2 keeps one leg long and the opposite hand on the crossed knee');
   }
+  { // savasana-side (pregnancy final rest): the figure must really lie on its LEFT side, head supported, knees bent, grounded; the text says exactly that
+    const side = POSES.find((q) => q.id === 'savasana-side');
+    ok(!!side, 'savasana-side pose exists');
+    for (const l of ALL) {
+      const fr = poseFrames(side, l), S = solve(fr.hold);
+      const tag = `savasana-side L${l}`;
+      ok(Math.abs(S.J.shoulderR[1] - S.J.shoulderL[1]) >= 35 && S.J.shoulderL[1] < S.J.shoulderR[1], `${tag}: lies on the left side (shoulders stacked, left one down; dy ${(S.J.shoulderR[1] - S.J.shoulderL[1]).toFixed(1)})`);
+      ok(Math.abs(S.J.hipR[1] - S.J.hipL[1]) >= 15 && S.J.hipL[1] < S.J.hipR[1], `${tag}: hips stacked, left one down`);
+      ok(S.J.head[1] < 45 && S.J.spine3[1] < 45, `${tag}: head and chest low (not supine-upright, not sitting)`);
+      ok(Math.min(...S.prims.map((q) => primBox(q).lo)) > -0.01 && Math.min(...S.prims.map((q) => primBox(q).lo)) < 0.01, `${tag}: grounded (lowest point on the floor)`);
+      const sup = solve(poseFrames(POSES.find((q) => q.id === 'savasana'), l).hold);
+      ok(Math.abs(sup.J.shoulderR[1] - sup.J.shoulderL[1]) <= 1, `${tag}: and plain savasana is still supine (shoulders level)`);
+    }
+    for (const l of [0, 1]) {
+      const fr = poseFrames(side, l), S = solve(fr.hold);
+      ok(bend(S.J.hipL, S.J.kneeL, S.J.ankleL) >= 40 && bend(S.J.hipR, S.J.kneeR, S.J.ankleR) >= 40, `savasana-side L${l}: knees bent (${bend(S.J.hipL, S.J.kneeL, S.J.ankleL).toFixed(0)} deg)`);
+      const cu = fr.props.find((q) => q.type === 'cushion' && q.at === 'head');
+      ok(!!cu && Math.abs(S.J.head[1] - cu.h) <= 22 && S.J.head[1] >= cu.h - 22, `savasana-side L${l}: head rests on a pillow (head y ${S.J.head[1].toFixed(1)}, pillow ${cu?.h})`);
+    }
+    ok(poseFrames(side, 1).props.some((q) => q.type === 'cushion' && q.at === 'knees'), 'savasana-side L1: pillow at the knees');
+  }
   {
     const wall = POSES.find((q) => q.id === 'legs-up-wall'), W0 = solve(poseFrames(wall, 0).hold), W1 = solve(poseFrames(wall, 1).hold), W2 = solve(poseFrames(wall, 2).hold);
     ok(bend(W0.J.hipR, W0.J.kneeR, W0.J.ankleR) >= 70 && W0.J.ankleR[0] > W0.J.kneeR[0] + 35, 'legs-up-wall L0 bends the knees with soles toward the wall');

@@ -79,7 +79,10 @@ for (const s of SEGMENTS) for (const l of LANGS) {
   if (l !== 'en' && t) { ok(!hasLatin(t), `${s.id} ${l} has no Latin letters: ${t}`); ok(!hasDigit(t), `${s.id} ${l} has no digits`); }
 }
 ok(SEGMENTS.some((s) => s.id === 'common.next'), 'common.next');
-for (const p of POSES) { ok(segText(`pose.${p.id}.name`, 'ru') && segText(`pose.${p.id}.intro`, 'he'), `${p.id} name+intro`); ok(cueIds(p.id).length >= 3, `${p.id} cue ids`); }
+for (const p of POSES) {
+  if (p.id === 'savasana-side') { ok(segText('pose.savasana-side.name', 'he') && segText('pose.savasana-side.intro', 'he') && !segText('pose.savasana-side.name', 'ru') && !segText('pose.savasana-side.name', 'en'), 'savasana-side: Hebrew name+intro only (ru/en narration is not expanded)'); continue; }
+  ok(segText(`pose.${p.id}.name`, 'ru') && segText(`pose.${p.id}.intro`, 'he'), `${p.id} name+intro`); ok(cueIds(p.id).length >= 3, `${p.id} cue ids`);
+}
 ok(!/\b(ты|тебя|твой)\b/i.test(SEGMENTS.map((s) => s.ru).join(' ')), 'RU uses Вы, not ты');
 
 // ---- presets
@@ -476,7 +479,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 556, `556 v2 segments including pyramid (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 570, `570 v2 segments including pyramid (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -601,7 +604,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 556 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 556 Hebrew v2 entries');
+  ok(v2s.length === 570 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 570 Hebrew v2 entries');
   ok(script.filter((s) => !s.v2).length === 287 * 3, 'narration-script.json has 287 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');

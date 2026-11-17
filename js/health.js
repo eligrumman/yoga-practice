@@ -29,7 +29,7 @@ export const HEALTH_CARE = {
   back: ['child', 'warrior-2', 'half-lift', 'seated-fold', 'bridge'],
   neck: ['downward-dog', 'legs-up-wall', 'child', 'knees-to-chest'],
   pressure: ['child', 'mountain', 'half-lift', 'upward-salute'],
-  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'child', 'cobbler', 'savasana', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'uttanasana', 'dancer', 'warrior-3'],
+  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'uttanasana', 'dancer', 'warrior-3'],
 };
 
 // Keep only known answers, once each, in a fixed order. Anything else (bad types, "none") is dropped.
@@ -47,3 +47,12 @@ export function flagsForPose(poseId, flags) {
   return cleanHealth(flags).filter((f) => HEALTH_AVOID[f].includes(poseId) || HEALTH_CARE[f].includes(poseId));
 }
 export const avoidsPose = (poseId, flags) => cleanHealth(flags).filter((f) => HEALTH_AVOID[f].includes(poseId));
+
+// Pregnancy: the final rest is taken lying on the side. 'savasana-side' is a real pose (own figure, text and Hebrew narration);
+// it is shown only when pregnancy is set, and replaces 'savasana' in generated plans and in the player. Holds are unchanged.
+export const SIDE_REST = 'savasana-side';
+export const isSavasana = (id) => id === 'savasana' || id === SIDE_REST;
+export const restPoseFor = (poseId, flags) => (poseId === 'savasana' && cleanHealth(flags).includes('pregnancy') ? SIDE_REST : poseId);
+export const swapRest = (items, flags) => (cleanHealth(flags).includes('pregnancy') ? items.map((it) => (it.pose === 'savasana' ? { ...it, pose: SIDE_REST } : it)) : items);
+// Poses kept out of the library and the plan picker unless their answer is set.
+export const hiddenPoses = (flags) => (cleanHealth(flags).includes('pregnancy') ? [] : [SIDE_REST]);

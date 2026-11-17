@@ -9,7 +9,7 @@ import { tr, UI_LANGS, DIR, nPoses, approxMin } from './i18n.js';
 import { Narrator } from './narrator.js';
 import { NARR_LEVELS } from './narration-plan.js';
 import { Player } from './player.js';
-import { flagsForPose, HEALTH_FLAGS } from './health.js';
+import { flagsForPose, HEALTH_FLAGS, restPoseFor, swapRest, hiddenPoses } from './health.js';
 
 const SVGNS = 'http://www.w3.org/2000/svg';
 const $ = (s, r = document) => r.querySelector(s);
@@ -216,8 +216,9 @@ function viewLibrary() {
   const grid = el('div', { class: 'grid poses', id: 'pose-grid' }); const count = el('span', { class: 'hint' });
   const draw = () => {
     const favs = store.favorites; const t = q.text.trim().toLowerCase();
+    const hid = hiddenPoses(store.health.flags);
     const list = POSES.filter((p) =>
-      (!q.cat || p.category === q.cat) && (!q.lvl || p.difficulty === +q.lvl) && (!q.fav || favs.includes(p.id)) &&
+      !hid.includes(p.id) && (!q.cat || p.category === q.cat) && (!q.lvl || p.difficulty === +q.lvl) && (!q.fav || favs.includes(p.id)) &&
       (!t || [p.sanskrit, p.en, p.he, p.ru, p.id].some((x) => x.toLowerCase().includes(t))));
     grid.replaceChildren(...list.map((p) => {
       const svg = svgEl('fig card-fig'); renderStatic(svg, p, 1);
@@ -352,7 +353,7 @@ function viewPlan(id) {
   const save = () => { store.upsertPlan(plan); totalEl.textContent = `${T('total')}: ${fmtTotal(plan.items)} \u00b7 ${nPoses(plan.items.length, lang)}`; flashSaved(); };
   const move = (i, d) => { const j = i + d; if (j < 0 || j >= plan.items.length) return; plan.items = reorder(plan.items, i, j); save(); draw(); };
   const row = (it, i) => {
-    const p = POSE_BY_ID[it.pose];
+    const p = POSE_BY_ID[restPoseFor(it.pose, store.health.flags)];
     const svg = svgEl('fig item-fig'); renderStatic(svg, p, it.level);
     const note = el('div', { class: 'clamp-note', role: 'status', 'aria-live': 'polite' });
     const amt = el('input', { class: 'amt', type: 'number', inputmode: 'numeric', min: amountRangeOf(it.unit).min, max: amountRangeOf(it.unit).max, value: it.amount, 'aria-label': T('hold') });
@@ -412,7 +413,7 @@ function viewPlan(id) {
     pregEl.hidden = !needsPregnancyNote(plan.items);
   };
   // picker
-  const pick = el('select', { id: 'pick', 'aria-label': T('addPose') }, POSES.map((p) => el('option', { value: p.id }, `${poseName(p)} — ${p.sanskrit}`)));
+  const pick = el('select', { id: 'pick', 'aria-label': T('addPose') }, POSES.filter((p) => !hiddenPoses(store.health.flags).includes(p.id)).map((p) => el('option', { value: p.id }, `${poseName(p)} — ${p.sanskrit}`)));
   const nameIn = el('input', { type: 'text', id: 'plan-name', value: plan.name, maxlength: 80, 'aria-label': T('planName'), oninput: (e) => { plan.name = e.target.value || T('newPlan'); store.upsertPlan(plan); flashSaved(); } });
   main.append(
     el('a', { class: 'back', href: '#/plans' }, (DIR[lang] === 'rtl' ? '→ ' : '← ') + T('plansTitle')),
@@ -434,8 +435,9 @@ function viewPlan(id) {
 
 // ---------------- player view ----------------
 function viewPlayer(id) {
-  const plan = resolvePlan(id);
-  if (!plan || !plan.items.length) { main.append(el('p', { class: 'empty' }, T('notFound'))); return null; }
+  const plan0 = resolvePlan(id);
+  if (!plan0 || !plan0.items.length) { main.append(el('p', { class: 'empty' }, T('notFound'))); return null; }
+  const plan = { ...plan0, items: swapRest(plan0.items, store.health.flags) };   // pregnancy: final rest on the side
   const box = el('div', { id: 'player-root' }); main.append(box);
   document.body.classList.add('in-player');
   const s = store.settings;

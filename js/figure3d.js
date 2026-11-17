@@ -419,7 +419,7 @@ export class Renderer3D {
         o.obj.position.set(...b.c); o.obj.scale.set(...b.size);
       } else if (o.type === 'cushion') {
         const pl = o.at === 'front' ? [S.bounds.maxX + 20, 0, 0]
-          : o.at === 'knees' ? S.J.kneeR.map((v, i) => (v + S.J.kneeL[i]) / 2)
+          : o.at === 'head' ? S.J.head : o.at === 'knees' ? S.J.kneeR.map((v, i) => (v + S.J.kneeL[i]) / 2)
             : S.J.pelvis, h = Math.max(0.01, o.h * ke);
         o.obj.position.set(pl[0] - 2, h / 2, pl[2]); o.obj.scale.set(o.w, h, 36);
       } else if (o.type === 'wall') {

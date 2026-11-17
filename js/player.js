@@ -11,6 +11,7 @@ import { LEVEL_LABELS } from '../data/poses.js';
 import { transcriptFor } from './transcript.js';
 import { music, MOODS, normMood } from './music.js';
 import { shouldWaitForSide } from './sideswitch.js';
+import { isSavasana } from './health.js';
 
 const el = (tag, attrs = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -277,9 +278,9 @@ export class Player {
     // narration for this slot
     this.evIdx = 0; this.events = [];
     const plan = slotPlan({ lang: this.nlang, level: this.level, poseId: s.pose.id, side: s.side, sides: s.sides, hold: this.holdTotal, lvl: s.level,
-      dur: (id) => this.nar.dur(id), announced: this.announced === i, lastSavasana: s.pose.id === 'savasana' && i === this.list.length - 1, minutes: this.minutes() });
+      dur: (id) => this.nar.dur(id), announced: this.announced === i, lastSavasana: isSavasana(s.pose.id) && i === this.list.length - 1, minutes: this.minutes() });
     this.plan2 = plan; this.events = plan.events;
-    this.closed = closingPlays({ lang: this.nlang, level: this.level, lastSavasana: s.pose.id === 'savasana' && i === this.list.length - 1 });
+    this.closed = closingPlays({ lang: this.nlang, level: this.level, lastSavasana: isSavasana(s.pose.id) && i === this.list.length - 1 });
     if (!this.events.length) this.nar.cancel();
     this.fireEvents(0, !first);
     // read real clip lengths for the next pose in the background
@@ -340,7 +341,7 @@ export class Player {
         const same = n.pose.id === s.pose.id;
         if (same) this.announced = this.idx + 1;
         if (lvl === 'off') { /* silent */ }
-        else if (s.pose.id === 'savasana') this.nar.say(['common.savasana_end'], { flush: true });
+        else if (isSavasana(s.pose.id)) this.nar.say(['common.savasana_end'], { flush: true });
         else if (same) this.nar.say(['common.switch_sides'], { flush: true });
         else if (lvl !== 'name') this.nar.say(['common.next', `pose.${n.pose.id}.name`], { flush: true });
       }

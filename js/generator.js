@@ -1,6 +1,6 @@
 // Deterministic first-time plan generator. Same inputs always give the same plan.
 import { POSES, POSE_BY_ID } from '../data/poses.js';
-import { healthAvoid, cleanHealth } from './health.js';
+import { healthAvoid, cleanHealth, swapRest } from './health.js';
 import { planSeconds, sideCount, DEFAULT_TRANSITION, BREATH_SEC } from './plan.js';
 
 export const FOCUSES = ['general', 'flexibility', 'strength', 'relax', 'back'];
@@ -224,8 +224,9 @@ function generateBeginner({ minutes, focus, avoid }) {
 export function generatePlan({ minutes = 20, focus = 'general', level = 'beginner', avoid = [], health = [] } = {}) {
   const run = (soft) => genCore({ minutes, focus, level, avoid: [...new Set([...avoid, ...healthAvoid(health, { soft })])] });
   const plan = run(true);
-  if (!cleanHealth(health).length || Math.abs(planSeconds(plan.items) - minutes * 60) <= 60) return plan;
-  return run(false);
+  const done = (p) => (cleanHealth(health).length ? { ...p, items: swapRest(p.items, health) } : p);
+  if (!cleanHealth(health).length || Math.abs(planSeconds(plan.items) - minutes * 60) <= 60) return done(plan);
+  return done(run(false));
 }
 function genCore({ minutes, focus, level, avoid }) {
   if (level === 'beginner') return generateBeginner({ minutes, focus, avoid });
