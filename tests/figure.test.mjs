@@ -172,9 +172,27 @@ export default async function figureTests(ok) {
     ok(bx && Math.abs(lowest(E1, 'handR') - bx.top) <= 0.5, 'extended-side-angle L1 lower hand rests on the block top');
     const split = solve(poseFrames(POSES.find((q) => q.id === 'half-split'), 2).hold);
     ok(bend(split.J.pelvis, split.J.spine1, split.J.spine3) <= 10 && bend(split.J.spine1, split.J.spine3, split.head.c) <= 12, 'half-split L2 keeps the spine and neck long');
-    const camel = POSES.find((q) => q.id === 'camel'), C2f = poseFrames(camel, 2), C2 = solve(C2f.hold);
-    ok(C2f.hold.neck[2] >= 20 && C2f.hold.head[2] >= 15, 'camel L2 counter-rotates the neck to neutral');
-    ok(len3(sub3(C2.J.wristR, C2.J.heelR)) <= 22 && len3(sub3(C2.J.wristL, C2.J.heelL)) <= 22, 'camel L2 hands reach the heels');
+    const camel = POSES.find((q) => q.id === 'camel');
+    // camel: figure matches the level text (hips over knees, chest lifting, head follows the spine and stays visible, L1 reads different from L2)
+    {
+      const Cf = [0, 1, 2].map((l) => poseFrames(camel, l)), Cs = Cf.map((f) => solve(f.hold));
+      const arch = (l) => Cf[l].hold.spine1[2] + Cf[l].hold.spine2[2] + Cf[l].hold.spine3[2];
+      const heel = (l) => Math.min(len3(sub3(Cs[l].J.wristR, Cs[l].J.heelR)), len3(sub3(Cs[l].J.wristL, Cs[l].J.heelL)));
+      for (const l of ALL) {
+        const J = Cs[l].J, H = Cf[l].hold;
+        ok(Math.abs(J.hipR[0] - J.kneeR[0]) <= 4 && Math.abs(J.hipL[0] - J.kneeL[0]) <= 4, `camel L${l} hips stay over the knees (${(J.hipR[0] - J.kneeR[0]).toFixed(1)} cm)`);
+        ok(Cs[l].head.c[1] > J.spine3[1] + 8, `camel L${l} head is visible above the chest (${Cs[l].head.c[1].toFixed(0)} vs ${J.spine3[1].toFixed(0)})`);
+        ok(J.spine3[0] < J.pelvis[0] - 8 && J.spine3[1] > J.pelvis[1] + 30, `camel L${l} chest lifts and opens back over the hips`);
+        ok(Cs[l].head.c[0] - J.spine3[0] >= -20, `camel L${l} head does not drop hard back (${(Cs[l].head.c[0] - J.spine3[0]).toFixed(1)} cm behind the chest)`);
+        ok(bend(J.spine1, J.spine3, Cs[l].head.c) <= 45, `camel L${l} head follows the spine curve (${bend(J.spine1, J.spine3, Cs[l].head.c).toFixed(0)} deg off)`);
+        ok(H.neck[2] >= -2 && H.head[2] >= -2, `camel L${l} neck is never extended further back than the spine`);
+      }
+      ok(Math.abs(Cf[0].hold.neck[2]) <= 3 && Math.abs(Cf[0].hold.head[2]) <= 3, 'camel L0 head stays neutral');
+      ok(arch(0) > arch(1) + 15 && arch(1) > arch(2) + 15, `camel arch deepens clearly L0 ${arch(0).toFixed(0)} > L1 ${arch(1).toFixed(0)} > L2 ${arch(2).toFixed(0)}`);
+      ok(len3(sub3(Cs[0].J.wristR, Cs[0].J.hipR)) <= 32 && Cs[0].J.wristR[0] > Cs[0].J.kneeR[0] - 25, 'camel L0 hands rest on the lower back');
+      ok(heel(1) > heel(2) + 8 && heel(1) <= 45, `camel L1 hands reach toward the heels (${heel(1).toFixed(0)} cm), not onto them`);
+      ok(heel(2) <= 22, `camel L2 hands reach the heels (${heel(2).toFixed(0)} cm)`);
+    }
     const plank = solve(poseFrames(POSES.find((q) => q.id === 'plank'), 2).hold);
     ok(bend(plank.J.hipL, plank.J.kneeL, plank.J.ankleL) <= 3 && plank.J.ankleL[1] > plank.J.ankleR[1] + 8, 'plank L2 lifted leg is long, straight, and slightly raised');
   }
