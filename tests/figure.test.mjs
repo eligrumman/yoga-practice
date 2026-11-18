@@ -23,7 +23,7 @@ const CONTACT = [
   ['child', ALL, ['handR', 'handL', 'footR', 'footL']], ['bridge', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['uttanasana', [1, 2], ['handR', 'handL']], ['half-lift', [2], ['handR', 'handL']], ['savasana', ALL, ['handR', 'handL', 'footR', 'footL']],
   ...['mountain', 'upward-salute', 'chair', 'warrior-1', 'warrior-2', 'high-lunge', 'uttanasana', 'half-lift', 'revolved-chair', 'low-lunge', 'half-split',
-    'camel', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist'].map((id) => [id, ALL, ['footR', 'footL']]),
+    'camel', 'garland', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist'].map((id) => [id, ALL, ['footR', 'footL']]),
   ['tree', ALL, ['footR']], ['tree', [0], ['footL']], ['warrior-3', ALL, ['footR']], ['dancer', ALL, ['footR']],
 ];
 const PARTS = { hand: ['palm', 'fing', 'thumb'], foot: ['foot', 'toes'] };
@@ -192,6 +192,34 @@ export default async function figureTests(ok) {
       ok(len3(sub3(Cs[0].J.wristR, Cs[0].J.hipR)) <= 32 && Cs[0].J.wristR[0] > Cs[0].J.kneeR[0] - 25, 'camel L0 hands rest on the lower back');
       ok(heel(1) > heel(2) + 8 && heel(1) <= 45, `camel L1 hands reach toward the heels (${heel(1).toFixed(0)} cm), not onto them`);
       ok(heel(2) <= 22, `camel L2 hands reach the heels (${heel(2).toFixed(0)} cm)`);
+    }
+    // garland (deep squat): figure matches the text (feet flat or on a heel block, knees wide, palms together at the chest, seat on a support at L0/L1, deeper each level)
+    {
+      const gar = POSES.find((q) => q.id === 'garland');
+      const Gf = [0, 1, 2].map((l) => poseFrames(gar, l)), Gs = Gf.map((f) => solve(f.hold));
+      const cush = (l) => (Gf[l].props || []).find((p) => p.type === 'cushion');
+      const pelvisLo = (l) => Math.min(...Gs[l].prims.filter((p) => p.id === 'pelvis').map((p) => primBox(p).lo));
+      for (const l of ALL) {
+        const J = Gs[l].J, H = Gf[l].hold;
+        ok(bend(J.hipR, J.kneeR, J.ankleR) >= 120 && bend(J.hipL, J.kneeL, J.ankleL) >= 120, `garland L${l} knees are deeply bent`);
+        ok(J.kneeR[2] - J.kneeL[2] >= 40 && Math.abs(J.kneeR[2]) > Math.abs(J.ankleR[2]) + 5, `garland L${l} knees are wide, wider than the ankles (${(J.kneeR[2] - J.kneeL[2]).toFixed(0)} cm apart)`);
+        ok(J.pelvis[0] < J.ankleR[0] && J.pelvis[1] < J.kneeR[1] - 8, `garland L${l} hips sit low and back, behind the heels and below the knees`);
+        ok(Gs[l].feet.R.n[1] < -0.9 && Gs[l].feet.L.n[1] < -0.9, `garland L${l} feet are flat (or on the thin heel support)`);
+        ok(Math.abs(J.wristR[2]) <= 6 && Math.abs(J.wristL[2]) <= 6 && J.wristR[1] > J.spine3[1] - 20 && J.wristR[1] < J.spine3[1] + 2, `garland L${l} palms meet at the chest`);
+        ok(Math.hypot(...sub3(J.elbowR, J.kneeR)) <= 30, `garland L${l} elbows reach the knees`);
+        ok(Gs[l].head.c[1] > J.spine3[1] + 8 && Math.abs(H.neck[2]) <= 3 && Math.abs(H.head[2]) <= 3, `garland L${l} head is neutral and sits above the chest`);
+        ok(Math.abs(Gs[l].head.c[0] - J.spine3[0]) <= 14, `garland L${l} neck stays long, head over the chest`);
+      }
+      // L0: block or blanket under the heels (heels rest on it) and a support under the seat
+      const hb = (Gf[0].props || []).find((p) => p.type === 'block' && p.legs);
+      ok(hb && hb.h >= 3 && hb.h <= 8, 'garland L0 has a block or folded blanket under the heels');
+      ok(hb && Math.abs(Gs[0].J.heelR[1] - 3.5 - hb.h) <= 1.5, `garland L0 heels rest on the heel support (heel sole ${(Gs[0].J.heelR[1] - 3.5).toFixed(1)} vs top ${hb && hb.h})`);
+      ok(cush(0) && Math.abs(pelvisLo(0) - cush(0).h) <= 1.5, `garland L0 seat rests on the support (${pelvisLo(0).toFixed(1)} vs ${cush(0) && cush(0).h})`);
+      ok(cush(1) && Math.abs(pelvisLo(1) - cush(1).h) <= 1.5 && cush(1).h < cush(0).h - 1, `garland L1 seat rests on a lower support (${pelvisLo(1).toFixed(1)} vs ${cush(1) && cush(1).h})`);
+      ok((Gf[1].props || []).every((p) => !p.legs) && Math.abs(lowest(Gs[1], 'footR')) <= TOL && Math.abs(lowest(Gs[1], 'footL')) <= TOL, 'garland L1 heels on the floor');
+      ok((Gf[2].props || []).length === 0 && pelvisLo(2) >= 8, `garland L2 has no support and the hips hover (${pelvisLo(2).toFixed(1)} cm above the floor)`);
+      ok(pelvisLo(0) > pelvisLo(1) + 1 && pelvisLo(1) > pelvisLo(2) + 1, `garland deepens L0 ${pelvisLo(0).toFixed(0)} > L1 ${pelvisLo(1).toFixed(0)} > L2 ${pelvisLo(2).toFixed(0)}`);
+      ok(Gs[2].J.spine3[0] > Gs[0].J.spine3[0] + 5, 'garland L2 chest leans forward into the knees more than L0');
     }
     const plank = solve(poseFrames(POSES.find((q) => q.id === 'plank'), 2).hold);
     ok(bend(plank.J.hipL, plank.J.kneeL, plank.J.ankleL) <= 3 && plank.J.ankleL[1] > plank.J.ankleR[1] + 8, 'plank L2 lifted leg is long, straight, and slightly raised');

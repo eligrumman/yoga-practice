@@ -479,7 +479,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 570, `570 v2 segments including pyramid (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 581, `581 v2 segments including garland (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -488,10 +488,10 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|pyramid|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|pyramid|garland|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
   const legacyRuEn = (xs) => xs.filter((s) => !newPoseSegment(s)).map(({ id, ru, en }) => ({ id, ru, en }));
   ok(JSON.stringify(legacyRuEn(SEGS_NOW)) === JSON.stringify(legacyRuEn(legacy)), 'pre-existing ru/en legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 54, 'legacy narration adds only the 54 required new-pose segments');
+  ok(SEGS_NOW.length === legacy.length + 60, 'legacy narration adds only the 60 required new-pose segments');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
@@ -604,8 +604,8 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 570 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 570 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 287 * 3, 'narration-script.json has 287 legacy entries in each language');
+  ok(v2s.length === 581 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 581 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 293 * 3, 'narration-script.json has 293 legacy entries in each language');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');

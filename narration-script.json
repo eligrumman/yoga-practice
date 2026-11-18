@@ -2670,6 +2670,96 @@
   "text": "Keep the head and neck comfortable."
  },
  {
+  "id": "pose.garland.name",
+  "lang": "he",
+  "text": "זר פרחים (כריעה עמוקה)"
+ },
+ {
+  "id": "pose.garland.name",
+  "lang": "ru",
+  "text": "Гирлянда (глубокий присед)"
+ },
+ {
+  "id": "pose.garland.name",
+  "lang": "en",
+  "text": "Garland (deep squat)"
+ },
+ {
+  "id": "pose.garland.intro",
+  "lang": "he",
+  "text": "תנוחת זר פרחים (כריעה עמוקה)."
+ },
+ {
+  "id": "pose.garland.intro",
+  "lang": "ru",
+  "text": "Поза: Гирлянда (глубокий присед)."
+ },
+ {
+  "id": "pose.garland.intro",
+  "lang": "en",
+  "text": "Pose: Garland (deep squat)."
+ },
+ {
+  "id": "pose.garland.cue.1",
+  "lang": "he",
+  "text": "עמדו ברגליים רחבות מעט מרוחב האגן, כפות הרגליים מופנות מעט החוצה."
+ },
+ {
+  "id": "pose.garland.cue.1",
+  "lang": "ru",
+  "text": "Встаньте, стопы чуть шире таза, носки слегка развёрнуты наружу."
+ },
+ {
+  "id": "pose.garland.cue.1",
+  "lang": "en",
+  "text": "Stand with the feet a little wider than the hips, toes turned slightly out."
+ },
+ {
+  "id": "pose.garland.cue.2",
+  "lang": "he",
+  "text": "כופפו את הברכיים והורידו את האגן לכריעה, עם כפות רגליים שטוחות על הרצפה."
+ },
+ {
+  "id": "pose.garland.cue.2",
+  "lang": "ru",
+  "text": "Согните колени и опустите таз в присед, стопы полностью стоят на полу."
+ },
+ {
+  "id": "pose.garland.cue.2",
+  "lang": "en",
+  "text": "Bend the knees and lower the hips into a squat, with the feet flat on the floor."
+ },
+ {
+  "id": "pose.garland.cue.3",
+  "lang": "he",
+  "text": "הצמידו כפות ידיים בגובה החזה והפעילו את המרפקים בעדינות מול הברכיים, כך שהחזה נשאר פתוח."
+ },
+ {
+  "id": "pose.garland.cue.3",
+  "lang": "ru",
+  "text": "Соедините ладони у груди и мягко упритесь локтями в колени, грудь остаётся открытой."
+ },
+ {
+  "id": "pose.garland.cue.3",
+  "lang": "en",
+  "text": "Press the palms together at the chest and let the elbows meet the knees gently, keeping the chest open."
+ },
+ {
+  "id": "pose.garland.cue.4",
+  "lang": "he",
+  "text": "האריכו את עמוד השדרה והשאירו את הראש ואת הצוואר נינוחים, ונשמו לאט."
+ },
+ {
+  "id": "pose.garland.cue.4",
+  "lang": "ru",
+  "text": "Вытяните позвоночник, голова и шея расслаблены, дышите медленно."
+ },
+ {
+  "id": "pose.garland.cue.4",
+  "lang": "en",
+  "text": "Lengthen the spine, keep the head and neck relaxed, and breathe slowly."
+ },
+ {
   "id": "pose.bridge.name",
   "lang": "he",
   "text": "גשר"
@@ -5750,6 +5840,83 @@
   "id": "pose.pyramid.side",
   "lang": "he",
   "text": "צד שני. החליפו את הרגליים ופסעו קדימה עם הרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.entry.1",
+  "lang": "he",
+  "text": "עמדו עם הרגליים מעט רחבות מרוחב האגן, וסובבו את כפות הרגליים מעט החוצה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.entry.2",
+  "lang": "he",
+  "text": "כופפו את הברכיים והורידו את האגן לאט, ושימו בלוק או כרית מתחתיו אם צריך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.align.1",
+  "lang": "he",
+  "text": "לחצו את כפות הרגליים לרצפה והצמידו כפות ידיים בגובה החזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.align.2",
+  "lang": "he",
+  "text": "דחפו את המרפקים בעדינות אל הברכיים, והאריכו את עמוד השדרה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.breath",
+  "lang": "he",
+  "text": "בשאיפה האריכו את הגב. בנשיפה הרפו את האגן והישארו בנוחות, בלי כאב חד בברכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.mod.L0",
+  "lang": "he",
+  "text": "שבו על בלוק או כרית גבוהה והניחו בלוק או שמיכה מקופלת מתחת לעקבים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.mod.L1",
+  "lang": "he",
+  "text": "הורידו את הכרית לגובה נמוך יותר והשאירו את כפות הרגליים שטוחות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.mod.L2",
+  "lang": "he",
+  "text": "אם הברכיים והקרסוליים נוחים, רדו לכריעה בלי תמיכה והשאירו את החזה פתוח.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.garland.fix.1",
+  "lang": "he",
+  "text": "העקבים נוטים להתרומם והגב להתעגל. הניחו בלוק או שמיכה מקופלת מתחת לעקבים והאריכו את החזה קדימה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.garland.fix.2",
+  "lang": "he",
+  "text": "הברכיים נוטות לקרוס פנימה. כוונו אותן בכיוון האצבעות ודחפו אותן בעדינות החוצה במרפקים.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.garland.exit",
+  "lang": "he",
+  "text": "הניחו ידיים על הרצפה, יישרו את הרגליים לאט ועלו לעמידה.",
   "v2": true,
   "prio": "rest"
  },

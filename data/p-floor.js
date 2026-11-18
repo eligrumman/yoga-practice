@@ -76,6 +76,20 @@ export default [
     ],
   },
   {
+    id: 'garland', sa: 'Malasana', en: 'Garland (deep squat)', he: 'זר פרחים (כריעה עמוקה)', ru: 'Гирлянда (глубокий присед)', cat: 'hip opener', sec: 'floor', flow: 52, d: 2, hold: 30, sides: 'single', tags: ['flex'],
+    cue: {
+      he: ['עמדו ברגליים רחבות מעט מרוחב האגן, כפות הרגליים מופנות מעט החוצה.', 'כופפו את הברכיים והורידו את האגן לכריעה, עם כפות רגליים שטוחות על הרצפה.', 'הצמידו כפות ידיים בגובה החזה והפעילו את המרפקים בעדינות מול הברכיים, כך שהחזה נשאר פתוח.', 'האריכו את עמוד השדרה והשאירו את הראש ואת הצוואר נינוחים, ונשמו לאט.'],
+      en: ['Stand with the feet a little wider than the hips, toes turned slightly out.', 'Bend the knees and lower the hips into a squat, with the feet flat on the floor.', 'Press the palms together at the chest and let the elbows meet the knees gently, keeping the chest open.', 'Lengthen the spine, keep the head and neck relaxed, and breathe slowly.'],
+      ru: ['Встаньте, стопы чуть шире таза, носки слегка развёрнуты наружу.', 'Согните колени и опустите таз в присед, стопы полностью стоят на полу.', 'Соедините ладони у груди и мягко упритесь локтями в колени, грудь остаётся открытой.', 'Вытяните позвоночник, голова и шея расслаблены, дышите медленно.'],
+    },
+    safe: { he: 'בכאבי ברכיים, בפציעה בברך או בקרסול רגיש: אל תרדו לכריעה עמוקה. שבו על בלוק או על כרית מתחת לאגן, והניחו בלוק או שמיכה מקופלת מתחת לעקבים. אם יש כאב חד בברך, צאו מהתנוחה. בהריון, במיוחד בשליש האחרון: פתחו את הרגליים רחב, שבו על תמיכה גבוהה והישענו בעדינות, ובדקו עם איש מקצוע רפואי מה מתאים לכם. עלו לאט כדי למנוע סחרחורת. אין כאן ייעוץ רפואי.', en: 'With knee pain, a knee injury, or a sensitive ankle, do not go into a deep squat. Sit on a block or a cushion under the hips, and place a block or a folded blanket under the heels. If you feel sharp pain in the knee, come out of the pose. During pregnancy, especially the last trimester, set the feet wide, sit on a tall support, lean on it gently, and ask a clinician what suits you. Rise slowly to avoid dizziness. This is not medical advice.', ru: 'При боли в коленях, травме колена или чувствительной лодыжке не опускайтесь в глубокий присед. Сядьте на блок или подушку под таз, а под пятки подложите блок или сложенное одеяло. При резкой боли в колене выйдите из позы. При беременности, особенно в последнем триместре, поставьте стопы шире, сядьте на высокую опору, мягко опирайтесь на неё и уточните у врача, что вам подходит. Поднимайтесь медленно, чтобы не закружилась голова. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'בלוק או שמיכה מקופלת מתחת לעקבים, ובלוק או כרית גבוהה מתחת לאגן; שבו עליהם והניחו כפות ידיים בגובה החזה.', en: 'A block or folded blanket under the heels, and a block or tall cushion under the hips; sit on it with the palms together at the chest.', ru: 'Блок или сложенное одеяло под пятками и блок или высокая подушка под тазом; сядьте на опору, ладони у груди.', props: [{ type: 'block', legs: ['R', 'L'], h: 4 }, { type: 'cushion', h: 28, w: 34 }] },
+      { he: 'כפות הרגליים שטוחות על הרצפה, והאגן נתמך על כרית נמוכה מתחתיו.', en: 'Feet flat on the floor, with the hips resting on a lower cushion beneath them.', ru: 'Стопы полностью на полу, таз опирается на невысокую подушку.', props: [{ type: 'cushion', h: 19, w: 34 }] },
+      { he: 'כריעה עמוקה בלי תמיכה, האגן מרחף מעל הרצפה, המרפקים לוחצים בעדינות לברכיים והחזה פתוח.', en: 'A deep squat with no support, the hips hovering above the floor, elbows pressing gently into the knees and the chest open.', ru: 'Глубокий присед без опоры, таз над полом, локти мягко давят на колени, грудь открыта.' },
+    ],
+  },
+  {
     id: 'bridge', sa: 'Setu Bandhasana', en: 'Bridge', he: 'גשר', ru: 'Мост', cat: 'backbend', sec: 'floor', flow: 60, d: 1, hold: 20, sides: 'single',
     tags: ['back', 'strength', 'relax'],
     cue: {

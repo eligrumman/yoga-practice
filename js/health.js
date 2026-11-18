@@ -6,7 +6,7 @@ export const HEALTH_FLAGS = ['knees', 'wrists', 'back', 'neck', 'pressure', 'pre
 // hard = never generated. soft = left out too, unless the remaining poses cannot fill the chosen length (then only the soft ones come back,
 // and the pose page still carries the personal note). Plan lengths and holds are never changed.
 export const HEALTH_HARD = {
-  knees: ['high-lunge', 'low-lunge', 'chair', 'revolved-chair', 'warrior-flow', 'knee-avoid'],
+  knees: ['high-lunge', 'low-lunge', 'garland', 'chair', 'revolved-chair', 'warrior-flow', 'knee-avoid'],
   wrists: ['plank', 'downward-dog', 'crow', 'tabletop', 'cat', 'cow', 'cat-cow', 'sun-salutation-a', 'warrior-flow', 'wrist-avoid'],
   back: ['boat', 'camel', 'locust', 'cobra', 'revolved-chair'],
   neck: ['camel', 'bridge', 'locust', 'cobra', 'plank', 'dancer'],
@@ -29,7 +29,7 @@ export const HEALTH_CARE = {
   back: ['child', 'warrior-2', 'half-lift', 'seated-fold', 'bridge'],
   neck: ['downward-dog', 'legs-up-wall', 'child', 'knees-to-chest'],
   pressure: ['child', 'mountain', 'half-lift', 'upward-salute'],
-  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'uttanasana', 'dancer', 'warrior-3'],
+  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'garland', 'uttanasana', 'dancer', 'warrior-3'],
 };
 
 // Keep only known answers, once each, in a fixed order. Anything else (bad types, "none") is dropped.
