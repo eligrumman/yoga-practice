@@ -221,6 +221,41 @@ export default async function figureTests(ok) {
       ok(pelvisLo(0) > pelvisLo(1) + 1 && pelvisLo(1) > pelvisLo(2) + 1, `garland deepens L0 ${pelvisLo(0).toFixed(0)} > L1 ${pelvisLo(1).toFixed(0)} > L2 ${pelvisLo(2).toFixed(0)}`);
       ok(Gs[2].J.spine3[0] > Gs[0].J.spine3[0] + 5, 'garland L2 chest leans forward into the knees more than L0');
     }
+    // half-split: figure matches the text and the three levels read clearly different (front leg straight with a flexed foot, hips over the back knee, long spine)
+    {
+      const hs = POSES.find((q) => q.id === 'half-split'), Hf = [0, 1, 2].map((l) => poseFrames(hs, l)), Hs = Hf.map((f) => solve(f.hold));
+      const lean = (l) => Math.atan2(Hs[l].J.spine3[0] - Hs[l].J.pelvis[0], Hs[l].J.spine3[1] - Hs[l].J.pelvis[1]) * 180 / Math.PI;
+      for (const l of ALL) {
+        const J = Hs[l].J, H = Hf[l].hold;
+        ok(bend(J.hipR, J.kneeR, J.ankleR) <= 5 && H.ankleR[2] >= 10, `half-split L${l} front leg is straight with the foot flexed`);
+        ok(Math.abs(J.pelvis[0] - J.kneeL[0]) <= 4, `half-split L${l} hips stay over the back knee (${(J.pelvis[0] - J.kneeL[0]).toFixed(1)} cm)`);
+        ok(bend(J.pelvis, J.spine1, J.spine3) <= 12 && bend(J.spine1, J.spine3, Hs[l].head.c) <= 14, `half-split L${l} spine and neck stay long`);
+        ok(lowest(Hs[l], 'footR') <= 3 && J.heelR[1] <= 4, `half-split L${l} front heel rests on the floor`);
+      }
+      ok(lean(0) >= 20 && lean(0) <= 45 && lean(1) >= lean(0) + 12 && lean(2) >= lean(1) + 12, `half-split fold deepens clearly L0 ${lean(0).toFixed(0)} < L1 ${lean(1).toFixed(0)} < L2 ${lean(2).toFixed(0)} deg`);
+      ok(Hf[0].props.length === 0 && Hf[1].props.some((p) => p.type === 'block') && Hf[2].props.length === 0, 'half-split props differ: none, blocks, none');
+      const bx1 = blockBoxes(Hf[1].props, Hs[1], 1).find((b) => b.k === 'R');
+      ok(bx1 && Math.abs(lowest(Hs[1], 'handR') - bx1.top) <= 0.5, 'half-split L1 hands rest on the blocks');
+      ok(Hs[0].J.wristR[0] < Hs[0].J.kneeR[0] + 5 && Hs[0].J.wristR[1] > 40 && len3(sub3(Hs[0].J.wristR, Hs[0].J.kneeR)) <= 40, 'half-split L0 hands rest on the thigh, back fairly upright');
+      ok(len3(sub3(Hs[2].J.wristR, Hs[2].J.ankleR)) <= 20 && len3(sub3(Hs[2].J.wristL, Hs[2].J.ankleR)) <= 32, 'half-split L2 hands hold the front foot');
+      ok(Hs[2].head.c[0] > Hs[1].head.c[0] + 5 && Hs[2].head.c[1] < Hs[1].head.c[1] - 12, 'half-split L2 head is clearly lower and further forward than L1');
+    }
+    // cobbler: L2 is a deep fold from the hips with a long spine, forehead toward the feet; levels differ clearly
+    {
+      const cb = POSES.find((q) => q.id === 'cobbler'), Cf = [0, 1, 2].map((l) => poseFrames(cb, l)), Cs = Cf.map((f) => solve(f.hold));
+      const reach = (l) => Cs[l].head.c[0] - Cs[l].J.pelvis[0];
+      for (const l of ALL) {
+        const J = Cs[l].J;
+        ok(J.kneeR[2] - J.kneeL[2] >= 80, `cobbler L${l} knees fall wide to the sides (${(J.kneeR[2] - J.kneeL[2]).toFixed(0)} cm apart)`);
+        ok(Math.abs(J.ankleR[2]) <= 8 && Math.abs(J.ankleL[2]) <= 8, `cobbler L${l} soles of the feet meet`);
+        ok(len3(sub3(J.wristR, J.ankleR)) <= 24 && len3(sub3(J.wristL, J.ankleL)) <= 24, `cobbler L${l} hands hold the ankles / feet`);
+      }
+      ok(reach(0) <= 20 && reach(1) >= reach(0) + 20 && reach(2) >= reach(1) + 15, `cobbler fold deepens clearly L0 ${reach(0).toFixed(0)} < L1 ${reach(1).toFixed(0)} < L2 ${reach(2).toFixed(0)} cm`);
+      ok(bend(Cs[2].J.pelvis, Cs[2].J.spine1, Cs[2].J.spine3) <= 12 && bend(Cs[2].J.spine1, Cs[2].J.spine3, Cs[2].head.c) <= 12, 'cobbler L2 folds from the hips with a long spine (not rounded)');
+      ok(Cf[2].hold.pelvis.rot[2] >= 40 && Cf[2].hold.pelvis.rot[2] >= Cf[1].hold.pelvis.rot[2] + 15, 'cobbler L2 pelvis tips well forward of L1');
+      ok(Cs[2].head.c[0] > Cs[2].J.ankleR[0] + 20 && Cs[2].head.c[1] < Cs[2].J.ankleR[1] + 55, 'cobbler L2 head comes down toward the feet');
+      ok(Cf[0].props.some((p) => p.type === 'cushion') && Cf[1].props.length === 0 && Cf[2].props.length === 0, 'cobbler props: cushion at L0 only');
+    }
     const plank = solve(poseFrames(POSES.find((q) => q.id === 'plank'), 2).hold);
     ok(bend(plank.J.hipL, plank.J.kneeL, plank.J.ankleL) <= 3 && plank.J.ankleL[1] > plank.J.ankleR[1] + 8, 'plank L2 lifted leg is long, straight, and slightly raised');
   }

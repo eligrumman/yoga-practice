@@ -1,7 +1,7 @@
 {
   "id": "half-split",
   "format": 1,
-  "camera": {"az":28,"el":6},
+  "camera": {"az":18,"el":6},
   "start": {
     "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
     "spine1": [0, 0, 0],
@@ -74,22 +74,22 @@
     {
       "level": 2,
       "hold": {
-        "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 80] },
+        "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 90] },
         "spine1": [0, 0, -5],
         "spine2": [0, 0, -5],
         "spine3": [0, 0, -5],
         "neck": [0, 0, 0],
         "head": [0, 0, 0],
-        "shoulderR": [0, 0, 102.8],
-        "elbowR": [0, 0, 101.7],
+        "shoulderR": [-10, 0, 70],
+        "elbowR": [0, 0, 80],
         "wristR": [0, 0, 0],
-        "hipR": [0, 0, 140.4],
+        "hipR": [0, 0, 150],
         "kneeR": [0, 0, 0],
         "ankleR": [0, 0, 18],
-        "shoulderL": [0, 0, 102.8],
-        "elbowL": [0, 0, 101.7],
+        "shoulderL": [-10, 0, 70],
+        "elbowL": [0, 0, 80],
         "wristL": [0, 0, 0],
-        "hipL": [0, 0, 79.6],
+        "hipL": [0, 0, 89.6],
         "kneeL": [0, 0, 86.3],
         "ankleL": [0, 0, -72.8]
       },
