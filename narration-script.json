@@ -1770,6 +1770,96 @@
   "text": "Bring palms together at the chest and breathe."
  },
  {
+  "id": "pose.eagle.name",
+  "lang": "he",
+  "text": "נשר"
+ },
+ {
+  "id": "pose.eagle.name",
+  "lang": "ru",
+  "text": "Орёл"
+ },
+ {
+  "id": "pose.eagle.name",
+  "lang": "en",
+  "text": "Eagle"
+ },
+ {
+  "id": "pose.eagle.intro",
+  "lang": "he",
+  "text": "תנוחת נשר."
+ },
+ {
+  "id": "pose.eagle.intro",
+  "lang": "ru",
+  "text": "Поза: Орёл."
+ },
+ {
+  "id": "pose.eagle.intro",
+  "lang": "en",
+  "text": "Pose: Eagle."
+ },
+ {
+  "id": "pose.eagle.cue.1",
+  "lang": "he",
+  "text": "עמדו על רגל אחת וכופפו מעט את הברך."
+ },
+ {
+  "id": "pose.eagle.cue.1",
+  "lang": "ru",
+  "text": "Встаньте на одну ногу, слегка согнув колено."
+ },
+ {
+  "id": "pose.eagle.cue.1",
+  "lang": "en",
+  "text": "Stand on one leg with the knee slightly bent."
+ },
+ {
+  "id": "pose.eagle.cue.2",
+  "lang": "he",
+  "text": "הניחו את הרגל השנייה מעל הירך התומכת, בכריכה."
+ },
+ {
+  "id": "pose.eagle.cue.2",
+  "lang": "ru",
+  "text": "Перекиньте вторую ногу через бедро опорной ноги."
+ },
+ {
+  "id": "pose.eagle.cue.2",
+  "lang": "en",
+  "text": "Cross the other thigh over the standing thigh."
+ },
+ {
+  "id": "pose.eagle.cue.3",
+  "lang": "he",
+  "text": "הצליבו את הזרועות, מרפק אחד מתחת לשני."
+ },
+ {
+  "id": "pose.eagle.cue.3",
+  "lang": "ru",
+  "text": "Скрестите руки, один локоть под другим."
+ },
+ {
+  "id": "pose.eagle.cue.3",
+  "lang": "en",
+  "text": "Cross the arms, one elbow under the other."
+ },
+ {
+  "id": "pose.eagle.cue.4",
+  "lang": "he",
+  "text": "הרימו את המרפקים והאריכו את הגב."
+ },
+ {
+  "id": "pose.eagle.cue.4",
+  "lang": "ru",
+  "text": "Поднимите локти и вытяните позвоночник."
+ },
+ {
+  "id": "pose.eagle.cue.4",
+  "lang": "en",
+  "text": "Lift the elbows and lengthen the spine."
+ },
+ {
   "id": "pose.warrior-3.name",
   "lang": "he",
   "text": "לוחם שלוש"
@@ -6097,6 +6187,90 @@
  },
  {
   "id": "pose.tree.side",
+  "lang": "he",
+  "text": "צד שני. העבירו משקל לרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.entry.1",
+  "lang": "he",
+  "text": "עמדו ליד קיר, העבירו את המשקל לרגל אחת וכופפו מעט את הברך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.entry.2",
+  "lang": "he",
+  "text": "הניחו את הרגל השנייה מעל הירך התומכת, או השאירו את אצבעות כף הרגל על הרצפה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.align.1",
+  "lang": "he",
+  "text": "לחצו את רגל העמידה אל הרצפה וקבעו מבט בנקודה מולכם.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.align.2",
+  "lang": "he",
+  "text": "הצליבו את הזרועות, מרפק אחד מתחת לשני, והרימו את המרפקים בלי להרים את הכתפיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.breath",
+  "lang": "he",
+  "text": "נשמו לאט וארוך, והישארו יציבים בלי לנעול את ברך העמידה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.mod.L0",
+  "lang": "he",
+  "text": "השאירו את אצבעות כף הרגל על הרצפה או על בלוק, וכפות הידיים על הכתפיים הנגדיות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.mod.L1",
+  "lang": "he",
+  "text": "הרימו את כף הרגל מהרצפה, שלבו מרפקים והפנו את כפות הידיים זו מול זו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, כרכו את כף הרגל סביב השוק, כרכו את הזרועות עד כפות הידיים והתיישבו קצת יותר עמוק.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.fix.1",
+  "lang": "he",
+  "text": "הברך התומכת נוטה לקרוס פנימה. כוונו אותה בכיוון האצבעות ושמרו עליה רכה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.eagle.fix.2",
+  "lang": "he",
+  "text": "הכתפיים נוטות לעלות לאוזניים. הורידו אותן והרחיקו את המרפקים מהחזה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.eagle.exit",
+  "lang": "he",
+  "text": "שחררו לאט את הזרועות ואת הרגל, ועמדו על שתי הרגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.eagle.side",
   "lang": "he",
   "text": "צד שני. העבירו משקל לרגל השנייה.",
   "v2": true,

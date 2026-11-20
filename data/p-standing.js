@@ -168,6 +168,21 @@ export default [
     ],
   },
   {
+    id: 'eagle', sa: 'Garudasana', en: 'Eagle', he: 'נשר', ru: 'Орёл', cat: 'balance', sec: 'bal', flow: 15, d: 2, hold: 20, sides: 'both',
+    tags: ['strength', 'noback'],
+    cue: {
+      he: ['עמדו על רגל אחת וכופפו מעט את הברך.', 'הניחו את הרגל השנייה מעל הירך התומכת, בכריכה.', 'הצליבו את הזרועות, מרפק אחד מתחת לשני.', 'הרימו את המרפקים והאריכו את הגב.'],
+      en: ['Stand on one leg with the knee slightly bent.', 'Cross the other thigh over the standing thigh.', 'Cross the arms, one elbow under the other.', 'Lift the elbows and lengthen the spine.'],
+      ru: ['Встаньте на одну ногу, слегка согнув колено.', 'Перекиньте вторую ногу через бедро опорной ноги.', 'Скрестите руки, один локоть под другим.', 'Поднимите локти и вытяните позвоночник.'],
+    },
+    safe: { he: 'עמדו ליד קיר. בעיות ברכיים או שיווי משקל: השאירו את אצבעות כף הרגל על הרצפה או על בלוק. בהריון: אפשר להשאיר את הרגל על הרצפה.', en: 'Stand beside a wall. With knee or balance issues, keep the toes of the crossed leg on the floor or a block. In pregnancy, you can keep the foot on the floor.', ru: 'Встаньте у стены. Если есть проблемы с коленями или равновесием, оставьте носок скрещенной ноги на полу или блоке. При беременности можно оставить стопу на полу.' },
+    v: [
+      { he: 'אצבעות כף הרגל על הרצפה או בלוק, כפות ידיים על הכתפיים הנגדיות.', en: 'Toes on the floor or a block, hands on the opposite shoulders.', ru: 'Носок на полу или блоке, ладони на противоположных плечах.', props: [{ type: 'wall' }] },
+      { he: 'כף הרגל באוויר, מרפקים משולבים וכפות ידיים זו מול זו.', en: 'Foot off the floor, elbows crossed and palms facing each other.', ru: 'Стопа в воздухе, локти скрещены, ладони друг к другу.' },
+      { he: 'הרגל כרוכה עד הקרסול, כריכת זרועות מלאה וישיבה עמוקה יותר.', en: 'Leg wrapped with the foot hooked, full arm wrap and a deeper sit.', ru: 'Нога обвита, стопа зацеплена, полный захват руками, сидим глубже.' },
+    ],
+  },
+  {
     id: 'warrior-3', sa: 'Virabhadrasana III', en: 'Warrior III', he: 'לוחם 3', ru: 'Воин три', cat: 'balance', sec: 'bal', flow: 20, d: 2, hold: 20, sides: 'both',
     tags: ['strength', 'noback'],
     cue: {

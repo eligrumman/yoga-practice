@@ -24,12 +24,12 @@ export const HEALTH_SOFT = {
 export const HEALTH_AVOID = Object.fromEntries(HEALTH_FLAGS.map((f) => [f, [...HEALTH_HARD[f], ...HEALTH_SOFT[f]]]));
 // Poses whose own page gets the personal note for an answer (the avoided poses, plus a few that only need care).
 export const HEALTH_CARE = {
-  knees: ['warrior-1', 'warrior-2', 'tree', 'child', 'triangle', 'extended-side-angle'],
+  knees: ['warrior-1', 'warrior-2', 'tree', 'eagle', 'child', 'triangle', 'extended-side-angle'],
   wrists: ['child'],
   back: ['child', 'warrior-2', 'half-lift', 'seated-fold', 'bridge'],
   neck: ['downward-dog', 'legs-up-wall', 'child', 'knees-to-chest'],
   pressure: ['child', 'mountain', 'half-lift', 'upward-salute'],
-  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'garland', 'uttanasana', 'dancer', 'warrior-3'],
+  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'eagle', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'garland', 'uttanasana', 'dancer', 'warrior-3'],
 };
 
 // Keep only known answers, once each, in a fixed order. Anything else (bad types, "none") is dropped.

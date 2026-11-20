@@ -24,7 +24,7 @@ const CONTACT = [
   ['uttanasana', [1, 2], ['handR', 'handL']], ['half-lift', [2], ['handR', 'handL']], ['savasana', ALL, ['handR', 'handL', 'footR', 'footL']],
   ...['mountain', 'upward-salute', 'chair', 'warrior-1', 'warrior-2', 'high-lunge', 'uttanasana', 'half-lift', 'revolved-chair', 'low-lunge', 'half-split',
     'camel', 'garland', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist'].map((id) => [id, ALL, ['footR', 'footL']]),
-  ['tree', ALL, ['footR']], ['tree', [0], ['footL']], ['warrior-3', ALL, ['footR']], ['dancer', ALL, ['footR']],
+  ['tree', ALL, ['footR']], ['tree', [0], ['footL']], ['eagle', ALL, ['footL']], ['warrior-3', ALL, ['footR']], ['dancer', ALL, ['footR']],
 ];
 const PARTS = { hand: ['palm', 'fing', 'thumb'], foot: ['foot', 'toes'] };
 const lowest = (S, part) => { const s = part.slice(-1); const pre = PARTS[part.slice(0, -1)].map((p) => p + s); return Math.min(...S.prims.filter((p) => pre.includes(p.id)).map((p) => primBox(p).lo)); };
@@ -252,6 +252,25 @@ export default async function figureTests(ok) {
         ok(footAng(H) <= 8, `high-lunge L${l} back foot points forward (${footAng(H).toFixed(0)} deg)`);
         ok(H.heelL[1] - W.heelL[1] >= 10 && footAng(W) - footAng(H) >= 30, `warrior-1 vs high-lunge L${l}: back heel height and back foot angle clearly differ`);
       }
+    }
+    // eagle: right leg wraps over the standing left leg (thigh crosses, L2 foot hooked behind the calf), arms cross (right under left), levels differ
+    {
+      const eg = POSES.find((q) => q.id === 'eagle');
+      const Ef = [0, 1, 2].map((l) => poseFrames(eg, l)), Es = Ef.map((f) => solve(f.hold));
+      for (let l = 0; l < 3; l++) {
+        const J = Es[l].J;
+        ok(J.ankleL[1] <= 15 && Math.abs(J.ankleL[2]) <= 12, `eagle L${l} standing foot is on the floor under the hip`);
+        ok(J.kneeR[2] < J.hipR[2] - 15 && J.kneeR[0] >= J.kneeL[0], `eagle L${l} right thigh crosses over the standing thigh (knee z ${J.kneeR[2].toFixed(1)}, hip z ${J.hipR[2].toFixed(1)})`);
+        ok(J.elbowR[2] < J.elbowL[2], `eagle L${l} arms are crossed (right elbow ${J.elbowR[2].toFixed(1)} left of left elbow ${J.elbowL[2].toFixed(1)})`);
+        ok(J.elbowR[1] > J.pelvis[1] + 30 && J.elbowL[1] > J.pelvis[1] + 30, `eagle L${l} elbows are lifted well above the hips`);
+      }
+      ok(Es[0].J.toeR[1] <= 6, `eagle L0 toes of the wrapped leg touch the floor or block (${Es[0].J.toeR[1].toFixed(1)} cm)`);
+      ok(Es[1].J.toeR[1] >= 12 && Es[2].J.toeR[1] >= 8, 'eagle L1 and L2 wrapped foot is off the floor');
+      ok(Es[2].J.toeR[0] < Es[2].J.ankleL[0] - 8 && Es[2].J.ankleR[1] > Es[2].J.ankleL[1] + 8 && Es[2].J.ankleR[1] < Es[2].J.kneeL[1], 'eagle L2 foot hooks behind the standing calf');
+      const wd = (l) => len3(sub3(Es[l].J.wristR, Es[l].J.wristL));
+      ok(wd(2) <= 8 && wd(1) <= 14 && wd(0) >= 25, `eagle wrists come together by level (L0 ${wd(0).toFixed(0)}, L1 ${wd(1).toFixed(0)}, L2 ${wd(2).toFixed(0)} cm)`);
+      ok(Es[0].J.pelvis[1] > Es[1].J.pelvis[1] + 3 && Es[1].J.pelvis[1] > Es[2].J.pelvis[1] + 3, 'eagle sits deeper at each level');
+      ok(Ef[0].props.some((p) => p.type === 'wall'), 'eagle L0 shows a wall to stand beside');
     }
     // cobbler: L2 is a deep fold from the hips with a long spine, forehead toward the feet; levels differ clearly
     {
