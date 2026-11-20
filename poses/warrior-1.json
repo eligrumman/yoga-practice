@@ -1,7 +1,7 @@
 {
   "id": "warrior-1",
   "format": 1,
-  "camera": {"az":28,"el":6},
+  "camera": {"az":52,"el":6},
   "start": {
     "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
     "spine1": [0, 0, 0],
@@ -41,9 +41,9 @@
         "shoulderL": [0, 0, 185],
         "elbowL": [0, 0, 0],
         "wristL": [0, 0, 0],
-        "hipL": [0, 45, -18.4],
+        "hipL": [0, 52, -18.4],
         "kneeL": [0, 0, 0],
-        "ankleL": [6, 0, 27.1]
+        "ankleL": [12, 0, 27.1]
       },
       "props": []
     },

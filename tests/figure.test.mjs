@@ -240,6 +240,19 @@ export default async function figureTests(ok) {
       ok(len3(sub3(Hs[2].J.wristR, Hs[2].J.ankleR)) <= 20 && len3(sub3(Hs[2].J.wristL, Hs[2].J.ankleR)) <= 32, 'half-split L2 hands hold the front foot');
       ok(Hs[2].head.c[0] > Hs[1].head.c[0] + 5 && Hs[2].head.c[1] < Hs[1].head.c[1] - 12, 'half-split L2 head is clearly lower and further forward than L1');
     }
+    // warrior I vs high lunge (L0 and every level): back heel down + back foot turned out ~45 deg vs back heel lifted on the ball of the foot pointing forward
+    {
+      const w1 = POSES.find((q) => q.id === 'warrior-1'), hl = POSES.find((q) => q.id === 'high-lunge');
+      const footAng = (J) => Math.abs(Math.atan2(J.toeL[2] - J.heelL[2], J.toeL[0] - J.heelL[0]) * 180 / Math.PI);
+      for (const l of ALL) {
+        const W = solve(poseFrames(w1, l).hold).J, H = solve(poseFrames(hl, l).hold).J;
+        ok(W.heelL[1] <= 5, `warrior-1 L${l} back heel is down (${W.heelL[1].toFixed(1)} cm)`);
+        ok(footAng(W) >= 33 && footAng(W) <= 55, `warrior-1 L${l} back foot turned out about 45 deg (${footAng(W).toFixed(0)})`);
+        ok(H.heelL[1] >= 14, `high-lunge L${l} back heel is lifted (${H.heelL[1].toFixed(1)} cm)`);
+        ok(footAng(H) <= 8, `high-lunge L${l} back foot points forward (${footAng(H).toFixed(0)} deg)`);
+        ok(H.heelL[1] - W.heelL[1] >= 10 && footAng(W) - footAng(H) >= 30, `warrior-1 vs high-lunge L${l}: back heel height and back foot angle clearly differ`);
+      }
+    }
     // cobbler: L2 is a deep fold from the hips with a long spine, forehead toward the feet; levels differ clearly
     {
       const cb = POSES.find((q) => q.id === 'cobbler'), Cf = [0, 1, 2].map((l) => poseFrames(cb, l)), Cs = Cf.map((f) => solve(f.hold));
