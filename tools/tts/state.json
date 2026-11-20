@@ -551,5 +551,11 @@
 "he|pose.dancer.mod.L2": "50f7423c0232ecf0",
 "he|pose.dancer.exit": "52f6a073478e76c0",
 "he|pose.dancer.side": "a72eb707521bf8be",
-"he|pose.boat.entry.1": "7ab35e39a30a64cf"
+"he|pose.boat.entry.1": "7ab35e39a30a64cf",
+"he|pose.boat.entry.2": "4ec9861843792cc5",
+"he|pose.boat.align.1": "25fe8a50884a4f3b",
+"he|pose.boat.align.2": "fd974f7ecdd070eb",
+"he|pose.boat.align.3": "ee153963d2e77c9d",
+"he|pose.boat.breath": "0bac8397fb5eb4c7",
+"he|pose.boat.mod.L0": "a846d16721f6d2ae"
 }

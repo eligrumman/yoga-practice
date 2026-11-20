@@ -14,6 +14,12 @@ On a per-day 429 it stops cleanly; just run again the next day. Per-minute 429: 
 Every MP3 is verified (duration > 0.5s, >25% of 50ms windows non-silent); failures are deleted and logged.
 Log: `tools/tts/run.log` (no secrets). Status: `tools/tts/status.txt` (`complete` / `pending N`).
 
+## Scope (Owner decision 2026-11-20)
+- Default `--lang he`: only Hebrew is recorded. Existing ru/en audio and text are untouched; `--lang he,ru,en` resumes them (283 en + 260 ru pending).
+- Hebrew legacy cues (`pose.<id>.cue.N`, 189 segments) are skipped: every pose has v2 lines and the Hebrew plan never plays a cue (tests/tts.test.mjs). `--include-unused` brings them back. Pose `intro`/`name` and `common.*` are still played and still recorded.
+- Pending Hebrew: 366 before, 171 after (counted 2026-11-20 after the 6-clip trial).
+- `--batch N` (default 1): several lines per API call, split on silence with strict checks and per-item fallback. EXPERIMENTAL and off: on 2026-11-20 the Hebrew model left only 0.5-0.6 s between lines even when asked for 3 s (2/2 batches rejected, 8 calls spent), so lines cannot be told apart from in-sentence pauses. Failed batch audio is kept in `tools/tts/batch-debug/` (gitignored). Offline tests: `python3 tools/tts/test_generate.py`.
+
 ## Priority order
 common.* (he, ru, en) -> pose names -> intros/cues of poses used in `data/plan*.js` -> everything else. Within each tier: Hebrew, Russian, English.
 

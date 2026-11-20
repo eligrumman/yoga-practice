@@ -9,3 +9,4 @@ dev/
 review/
 .claude/
 tools/tts/status.txt
+tools/tts/batch-debug/

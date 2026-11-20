@@ -29,7 +29,7 @@ fi
 
 [ -f narration-script.json ] || { log "no narration-script.json yet"; exit 0; }
 
-/usr/bin/python3 tools/tts/generate.py --max-calls 90 >> tools/tts/launchd.out 2>&1
+/usr/bin/python3 tools/tts/generate.py --lang he --max-calls 90 >> tools/tts/launchd.out 2>&1
 GEN_RC=$?
 [ "$GEN_RC" -eq 0 ] || log "generate.py exited with code $GEN_RC (publishing skipped)"
 
