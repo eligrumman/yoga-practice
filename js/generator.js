@@ -18,9 +18,9 @@ const WEIGHTS = {
 const FOCUS_TAG = { general: null, flexibility: 'flex', strength: 'strength', relax: 'relax', back: 'back' };
 const BREATH_POSES = new Set(['tabletop', 'cat', 'cow']);
 // relax plans: no lunge, backbend, plank or boat peaks
-const RELAX_OUT = new Set(['low-lunge', 'high-lunge', 'cobra', 'locust', 'camel', 'bridge', 'plank', 'boat', 'warrior-3', 'dancer']);
+const RELAX_OUT = new Set(['low-lunge', 'high-lunge', 'cobra', 'upward-dog', 'locust', 'camel', 'bridge', 'plank', 'boat', 'warrior-3', 'dancer']);
 // Plans with prone, supine, twist or balance poses get a short pregnancy line on the plan screen (Savasana alone does not count)
-const SUPINE_OR_PRONE = new Set(['cobra', 'locust', 'bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']);
+const SUPINE_OR_PRONE = new Set(['cobra', 'upward-dog', 'locust', 'bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']);
 export const needsPregnancyNote = (items) => items.some((it) => { const p = POSE_BY_ID[it.pose]; return !!p && (SUPINE_OR_PRONE.has(p.id) || p.category === 'twist' || p.category === 'balance'); });
 export const isBackbend = (id) => POSE_BY_ID[id]?.category === 'backbend';
 // First-time plans finish with enough quiet time to settle: 3 min at 20, 5 min at 30.
@@ -50,7 +50,7 @@ const SEQ = [
   ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'pyramid', 'high-lunge', 'tree', 'eagle', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'garland', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
-  ['prone', ['cobra', 'locust', 'child']],
+  ['prone', ['cobra', 'upward-dog', 'locust', 'child']],
   ['seated', ['easy-seat', 'cobbler', 'seated-fold', 'seated-twist', 'boat']],
   // legs-up-wall sits before the twist so the plan can close twist -> savasana
   ['supine', ['bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'pigeon', 'hand-to-toe', 'legs-up-wall', 'supine-twist']],
@@ -87,6 +87,7 @@ function candidates({ focus, level, avoid }) {
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
     && p.id !== 'eagle' // library-only for now (Owner: not in generator auto-plans)
     && p.id !== 'garland' // library-only for now (Owner: not in generator auto-plans)
+    && p.id !== 'upward-dog' // library-only (Owner: not in generator auto-plans)
     && p.id !== 'pyramid' // library-only for now (Owner: not in generator auto-plans)
     && !(focus === 'back' && p.id === 'cobra') // back plans skip Cobra (as the hand-made back-relief preset); Child and supine poses replace it
     && (p.id !== 'extended-side-angle' || (level !== 'beginner' && focus === 'general'))

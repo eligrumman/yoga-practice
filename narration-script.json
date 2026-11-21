@@ -2580,6 +2580,96 @@
   "text": "Legs stay on the floor."
  },
  {
+  "id": "pose.upward-dog.name",
+  "lang": "he",
+  "text": "כלב מביט מעלה"
+ },
+ {
+  "id": "pose.upward-dog.name",
+  "lang": "ru",
+  "text": "Собака мордой вверх"
+ },
+ {
+  "id": "pose.upward-dog.name",
+  "lang": "en",
+  "text": "Upward-Facing Dog"
+ },
+ {
+  "id": "pose.upward-dog.intro",
+  "lang": "he",
+  "text": "תנוחת כלב מביט מעלה."
+ },
+ {
+  "id": "pose.upward-dog.intro",
+  "lang": "ru",
+  "text": "Поза: Собака мордой вверх."
+ },
+ {
+  "id": "pose.upward-dog.intro",
+  "lang": "en",
+  "text": "Pose: Upward-Facing Dog."
+ },
+ {
+  "id": "pose.upward-dog.cue.1",
+  "lang": "he",
+  "text": "שכבו על הבטן, כפות הידיים לצד החזה והכתפיים מעל פרקי הידיים."
+ },
+ {
+  "id": "pose.upward-dog.cue.1",
+  "lang": "ru",
+  "text": "Лягте на живот, ладони рядом с грудью, плечи над запястьями."
+ },
+ {
+  "id": "pose.upward-dog.cue.1",
+  "lang": "en",
+  "text": "Lie on your belly with palms beside the chest and shoulders over the wrists."
+ },
+ {
+  "id": "pose.upward-dog.cue.2",
+  "lang": "he",
+  "text": "בשאיפה לחצו בכפות הידיים ויישרו את הזרועות, והרימו את החזה קדימה ולמעלה."
+ },
+ {
+  "id": "pose.upward-dog.cue.2",
+  "lang": "ru",
+  "text": "На вдохе надавите ладонями в пол, выпрямите руки и поднимите грудь вперёд и вверх."
+ },
+ {
+  "id": "pose.upward-dog.cue.2",
+  "lang": "en",
+  "text": "Inhale, press the palms down, straighten the arms, and lift the chest forward and up."
+ },
+ {
+  "id": "pose.upward-dog.cue.3",
+  "lang": "he",
+  "text": "ברמה המלאה הירכיים והברכיים באוויר, ועל הרצפה רק כפות הידיים וגב כפות הרגליים."
+ },
+ {
+  "id": "pose.upward-dog.cue.3",
+  "lang": "ru",
+  "text": "В полной версии бёдра и колени оторваны от пола; на полу только ладони и подъёмы стоп."
+ },
+ {
+  "id": "pose.upward-dog.cue.3",
+  "lang": "en",
+  "text": "In the full version the thighs and knees are off the floor; only the palms and the tops of the feet touch it."
+ },
+ {
+  "id": "pose.upward-dog.cue.4",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים ושמרו את הצוואר ארוך."
+ },
+ {
+  "id": "pose.upward-dog.cue.4",
+  "lang": "ru",
+  "text": "Отведите плечи от ушей и держите шею длинной."
+ },
+ {
+  "id": "pose.upward-dog.cue.4",
+  "lang": "en",
+  "text": "Draw the shoulders away from the ears and keep the neck long."
+ },
+ {
   "id": "pose.locust.name",
   "lang": "he",
   "text": "ארבה"
@@ -6926,6 +7016,83 @@
   "text": "בנשיפה הורידו את החזה לאט אל הרצפה.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.upward-dog.entry.1",
+  "lang": "he",
+  "text": "שכבו על הבטן, כפות הידיים לצד החזה והכתפיים מעל פרקי הידיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.entry.2",
+  "lang": "he",
+  "text": "בשאיפה לחצו בכפות הידיים, יישרו את הזרועות והרימו את החזה קדימה ולמעלה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.align.1",
+  "lang": "he",
+  "text": "ברמה המלאה הירכיים והברכיים באוויר, ועל הרצפה רק כפות הידיים וגב כפות הרגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.align.2",
+  "lang": "he",
+  "text": "הרחיקו את הכתפיים מהאוזניים ושמרו את הצוואר ארוך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.breath",
+  "lang": "he",
+  "text": "נשמו לאט, ואל תרימו יותר ממה שהגב התחתון מרגיש בו בנוחות.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.mod.L0",
+  "lang": "he",
+  "text": "השאירו את הירכיים על הרצפה, יישרו את הזרועות והרימו את החזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.mod.L1",
+  "lang": "he",
+  "text": "הרימו את הירכיים מעט מהרצפה, ועצרו אם הגב התחתון נלחץ.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.mod.L2",
+  "lang": "he",
+  "text": "הרימו ירכיים וברכיים מהרצפה, וגב כפות הרגליים לוחץ למטה, והכתפיים מעל פרקי הידיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.upward-dog.fix.1",
+  "lang": "he",
+  "text": "הכתפיים נוטות לעלות אל האוזניים ופרקי הידיים לקבל את כל המשקל. לחצו את כפות הידיים לרצפה ומשכו את הכתפיים לאחור.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.upward-dog.fix.2",
+  "lang": "he",
+  "text": "הגב התחתון נוטה להתכווץ. הורידו את הירכיים אל הרצפה, והאריכו את החזה במקום להתקפל לאחור.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.upward-dog.exit",
+  "lang": "he",
+  "text": "בנשיפה הורידו את הירכיים ואת החזה לאט אל הרצפה.",
+  "v2": true,
+  "prio": "rest"
  },
  {
   "id": "pose.locust.entry.1",

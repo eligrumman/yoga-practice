@@ -19,7 +19,7 @@ const CONTACT = [
   ['triangle', ALL, ['footR', 'footL']],
   ['extended-side-angle', ALL, ['footR', 'footL']], ['extended-side-angle', [2], ['handR']],
   ['wide-legged-fold', ALL, ['footR', 'footL']],
-  ['downward-dog', ALL, ['handR', 'handL', 'footR', 'footL']], ['cobra', ALL, ['handR', 'handL', 'footR', 'footL']],
+  ['downward-dog', ALL, ['handR', 'handL', 'footR', 'footL']], ['cobra', ALL, ['handR', 'handL', 'footR', 'footL']], ['upward-dog', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['child', ALL, ['handR', 'handL', 'footR', 'footL']], ['bridge', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['uttanasana', [1, 2], ['handR', 'handL']], ['half-lift', [2], ['handR', 'handL']], ['savasana', ALL, ['handR', 'handL', 'footR', 'footL']],
   ...['mountain', 'upward-salute', 'chair', 'warrior-1', 'warrior-2', 'high-lunge', 'uttanasana', 'half-lift', 'revolved-chair', 'low-lunge', 'half-split',
@@ -96,9 +96,28 @@ export default async function figureTests(ok) {
     for (const l of levels) { const S = solve(poseFrames(P, l).hold); for (const part of parts) { const lo = lowest(S, part); ok(lo <= TOL, `${id} L${l} ${part} on the floor (${lo.toFixed(2)} <= ${TOL})`); } }
   }
   // ---- flat palms: the palm normal points down in the weight-bearing poses
-  for (const id of ['tabletop', 'cat', 'cow', 'plank', 'downward-dog', 'cobra', 'crow']) {
+  for (const id of ['tabletop', 'cat', 'cow', 'plank', 'downward-dog', 'cobra', 'upward-dog', 'crow']) {
     const P = POSES.find((q) => q.id === id);
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
+  }
+  // ---- upward-facing dog: straight arms, shoulders over the wrists, thighs lift with the level, clearly not cobra
+  {
+    const ud = POSES.find((q) => q.id === 'upward-dog'), cobra = POSES.find((q) => q.id === 'cobra');
+    const lowOf = (S, ids) => Math.min(...S.prims.filter((p) => ids.includes(p.id)).map((p) => primBox(p).lo));
+    const thighLift = []; 
+    for (const l of ALL) {
+      const F = poseFrames(ud, l), S = solve(F.hold), J = S.J;
+      for (const side of ['R', 'L']) {
+        ok(Math.abs(F.hold['elbow' + side][0]) + Math.abs(F.hold['elbow' + side][1]) + Math.abs(F.hold['elbow' + side][2]) <= 1, `upward-dog L${l} ${side} arm is straight`);
+        ok(Math.hypot(J['wrist' + side][0] - J['shoulder' + side][0], J['wrist' + side][2] - J['shoulder' + side][2]) <= 3, `upward-dog L${l} ${side} shoulder over the wrist`);
+        ok(J['shoulder' + side][1] > 60, `upward-dog L${l} ${side} chest lifted high on straight arms (${J['shoulder' + side][1].toFixed(1)})`);
+      }
+      thighLift.push(Math.min(lowOf(S, ['thighR']), lowOf(S, ['thighL'])));
+      const Sc = solve(poseFrames(cobra, Math.min(l + 1, 2)).hold);
+      ok(J.shoulderR[1] > Sc.J.shoulderR[1] + 4 || l === 0, `upward-dog L${l} chest higher than cobra`);
+    }
+    ok(thighLift[0] < 4 && thighLift[1] >= 3 && thighLift[2] >= 7 && thighLift[2] > thighLift[1] && thighLift[1] >= thighLift[0], `upward-dog thighs lift with the level (${thighLift.map((v) => v.toFixed(1)).join(' / ')})`);
+    ok(solve(poseFrames(ud, 2).hold).J.kneeR[1] > 8, 'upward-dog L2 knees are off the floor');
   }
   // ---- wide-legged fold: the palms rest on the block tops that the renderers draw (blockBoxes is the shared box both use)
   const wide = POSES.find((q) => q.id === 'wide-legged-fold');

@@ -7,11 +7,11 @@ export const HEALTH_FLAGS = ['knees', 'wrists', 'back', 'neck', 'pressure', 'pre
 // and the pose page still carries the personal note). Plan lengths and holds are never changed.
 export const HEALTH_HARD = {
   knees: ['high-lunge', 'low-lunge', 'garland', 'chair', 'revolved-chair', 'warrior-flow', 'knee-avoid'],
-  wrists: ['plank', 'downward-dog', 'crow', 'tabletop', 'cat', 'cow', 'cat-cow', 'sun-salutation-a', 'warrior-flow', 'wrist-avoid'],
-  back: ['boat', 'camel', 'locust', 'cobra', 'revolved-chair'],
-  neck: ['camel', 'bridge', 'locust', 'cobra', 'plank', 'dancer'],
+  wrists: ['plank', 'downward-dog', 'upward-dog', 'crow', 'tabletop', 'cat', 'cow', 'cat-cow', 'sun-salutation-a', 'warrior-flow', 'wrist-avoid'],
+  back: ['boat', 'camel', 'locust', 'cobra', 'upward-dog', 'revolved-chair'],
+  neck: ['camel', 'bridge', 'locust', 'cobra', 'upward-dog', 'plank', 'dancer'],
   pressure: ['pyramid', 'wide-legged-fold', 'downward-dog', 'sun-salutation-a', 'warrior-flow', 'blood-pressure-avoid'],
-  pregnancy: ['cobra', 'locust', 'camel', 'bridge', 'boat', 'plank', 'crow', 'revolved-chair', 'warrior-flow', 'sun-salutation-a', 'pregnancy-avoid'],
+  pregnancy: ['cobra', 'upward-dog', 'locust', 'camel', 'bridge', 'boat', 'plank', 'crow', 'revolved-chair', 'warrior-flow', 'sun-salutation-a', 'pregnancy-avoid'],
 };
 export const HEALTH_SOFT = {
   knees: ['half-split', 'pigeon', 'cobbler', 'figure-four'],
