@@ -55,8 +55,8 @@ export default [
     },
     safe: { he: 'כאבי פרקי ידיים או גב תחתון: הישארו בקוברה נמוכה על האמות או בקוברה. אל תרימו את הירכיים אם הגב התחתון נלחץ. בהריון: דלגו, ובחרו בתנוחה על הצד או בישיבה; התייעצו עם איש מקצוע רפואי.', en: 'Wrist or lower-back pain: stay in low forearm cobra or cobra. Keep the thighs down if the lower back feels pinched. Pregnancy: skip it, choose a side-lying or seated pose, and ask your clinician.', ru: 'При боли в запястьях или пояснице оставайтесь в низкой кобре на предплечьях или в кобре. Если поясница сжимается, оставьте бёдра на полу. При беременности пропустите позу, выберите позу на боку или сидя, и спросите врача.' },
     v: [
-      { he: 'הירכיים נשארות על הרצפה, זרועות ישרות והחזה מורם.', en: 'Thighs rest on the floor, arms straight, chest lifted.', ru: 'Бёдра на полу, руки прямые, грудь поднята.' },
-      { he: 'הירכיים מורמות מעט מהרצפה.', en: 'Thighs lift slightly off the floor.', ru: 'Бёдра слегка оторваны от пола.' },
+      { he: 'הירכיים והברכיים על הרצפה, המרפקים מכופפים מעט והחזה מורם.', en: 'Thighs and knees rest on the floor, elbows slightly bent, chest lifted.', ru: 'Бёдра и колени на полу, локти слегка согнуты, грудь поднята.' },
+      { he: 'הברכיים קרובות לרצפה, הירכיים והאגן מורמים מעט, הזרועות ישרות.', en: 'Knees stay close to the floor, thighs and pelvis lift slightly, arms straight.', ru: 'Колени у пола, бёдра и таз слегка приподняты, руки прямые.' },
       { he: 'ירכיים וברכיים באוויר, גב כפות הרגליים על הרצפה, כתפיים מעל פרקי הידיים.', en: 'Thighs and knees off the floor, tops of the feet down, shoulders over the wrists.', ru: 'Бёдра и колени над полом, подъёмы стоп на полу, плечи над запястьями.' },
     ],
   },

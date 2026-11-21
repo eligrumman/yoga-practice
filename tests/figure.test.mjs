@@ -100,24 +100,24 @@ export default async function figureTests(ok) {
     const P = POSES.find((q) => q.id === id);
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
   }
-  // ---- upward-facing dog: straight arms, shoulders over the wrists, thighs lift with the level, clearly not cobra
+  // ---- upward-facing dog: L0 everything below the waist rests on the floor (bent elbows), L1 knees near the floor with pelvis just lifted, L2 clear gap under thighs, knees and shins
   {
     const ud = POSES.find((q) => q.id === 'upward-dog'), cobra = POSES.find((q) => q.id === 'cobra');
     const lowOf = (S, ids) => Math.min(...S.prims.filter((p) => ids.includes(p.id)).map((p) => primBox(p).lo));
-    const thighLift = []; 
-    for (const l of ALL) {
-      const F = poseFrames(ud, l), S = solve(F.hold), J = S.J;
-      for (const side of ['R', 'L']) {
-        ok(Math.abs(F.hold['elbow' + side][0]) + Math.abs(F.hold['elbow' + side][1]) + Math.abs(F.hold['elbow' + side][2]) <= 1, `upward-dog L${l} ${side} arm is straight`);
-        ok(Math.hypot(J['wrist' + side][0] - J['shoulder' + side][0], J['wrist' + side][2] - J['shoulder' + side][2]) <= 3, `upward-dog L${l} ${side} shoulder over the wrist`);
-        ok(J['shoulder' + side][1] > 60, `upward-dog L${l} ${side} chest lifted high on straight arms (${J['shoulder' + side][1].toFixed(1)})`);
-      }
-      thighLift.push(Math.min(lowOf(S, ['thighR']), lowOf(S, ['thighL'])));
-      const Sc = solve(poseFrames(cobra, Math.min(l + 1, 2)).hold);
-      ok(J.shoulderR[1] > Sc.J.shoulderR[1] + 4 || l === 0, `upward-dog L${l} chest higher than cobra`);
+    const m = ALL.map((l) => { const F = poseFrames(ud, l), S = solve(F.hold); return { l, F, S, J: S.J, thigh: Math.min(lowOf(S, ['thighR']), lowOf(S, ['thighL'])), shank: Math.min(lowOf(S, ['shankR']), lowOf(S, ['shankL'])), pelvis: lowOf(S, ['pelvis']) }; });
+    const [m0, m1, m2] = m;
+    ok(m0.thigh <= 2.5 && m0.shank <= 1.5 && m0.pelvis <= 3.5, `upward-dog L0 thighs, knees and pelvis rest on the floor (thigh ${m0.thigh.toFixed(1)}, shank ${m0.shank.toFixed(1)}, pelvis ${m0.pelvis.toFixed(1)})`);
+    ok(m0.F.hold.elbowR[2] >= 30 && m0.F.hold.elbowR[2] <= 70, 'upward-dog L0 elbows are bent (gentle version)');
+    ok(m1.shank <= 1.5 && m1.thigh <= 4.5 && m1.pelvis >= 4 && m1.pelvis <= 9, `upward-dog L1 knees stay near the floor, pelvis just lifted (shank ${m1.shank.toFixed(1)}, thigh ${m1.thigh.toFixed(1)}, pelvis ${m1.pelvis.toFixed(1)})`);
+    ok(m2.thigh >= 10 && m2.shank >= 3 && m2.J.kneeR[1] >= 18 && m2.pelvis >= 20, `upward-dog L2 visible gap under thighs, knees and shins (thigh ${m2.thigh.toFixed(1)}, shank ${m2.shank.toFixed(1)}, knee ${m2.J.kneeR[1].toFixed(1)}, pelvis ${m2.pelvis.toFixed(1)})`);
+    ok(m0.pelvis < m1.pelvis && m1.pelvis < m2.pelvis && m0.J.shoulderR[1] < m1.J.shoulderR[1] && m1.J.shoulderR[1] < m2.J.shoulderR[1], 'upward-dog levels rise: pelvis and shoulders higher at each level');
+    for (const mm of [m1, m2]) for (const side of ['R', 'L']) {
+      const { l, F, J } = mm;
+      ok(Math.abs(F.hold['elbow' + side][0]) + Math.abs(F.hold['elbow' + side][1]) + Math.abs(F.hold['elbow' + side][2]) <= 1, `upward-dog L${l} ${side} arm is straight`);
+      ok(Math.hypot(J['wrist' + side][0] - J['shoulder' + side][0], J['wrist' + side][2] - J['shoulder' + side][2]) <= 3, `upward-dog L${l} ${side} shoulder over the wrist`);
+      ok(J['shoulder' + side][1] > 65, `upward-dog L${l} ${side} chest lifted high on straight arms (${J['shoulder' + side][1].toFixed(1)})`);
     }
-    ok(thighLift[0] < 4 && thighLift[1] >= 3 && thighLift[2] >= 7 && thighLift[2] > thighLift[1] && thighLift[1] >= thighLift[0], `upward-dog thighs lift with the level (${thighLift.map((v) => v.toFixed(1)).join(' / ')})`);
-    ok(solve(poseFrames(ud, 2).hold).J.kneeR[1] > 8, 'upward-dog L2 knees are off the floor');
+    ok(m1.J.shoulderR[1] > solve(poseFrames(cobra, 2).hold).J.shoulderR[1] + 4, 'upward-dog chest higher than the full cobra');
   }
   // ---- wide-legged fold: the palms rest on the block tops that the renderers draw (blockBoxes is the shared box both use)
   const wide = POSES.find((q) => q.id === 'wide-legged-fold');
