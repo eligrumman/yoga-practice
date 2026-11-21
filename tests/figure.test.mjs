@@ -262,7 +262,15 @@ export default async function figureTests(ok) {
         ok(J.ankleL[1] <= 15 && Math.abs(J.ankleL[2]) <= 12, `eagle L${l} standing foot is on the floor under the hip`);
         ok(J.kneeR[2] < J.hipR[2] - 15 && J.kneeR[0] >= J.kneeL[0], `eagle L${l} right thigh crosses over the standing thigh (knee z ${J.kneeR[2].toFixed(1)}, hip z ${J.hipR[2].toFixed(1)})`);
         ok(J.elbowR[2] < J.elbowL[2], `eagle L${l} arms are crossed (right elbow ${J.elbowR[2].toFixed(1)} left of left elbow ${J.elbowL[2].toFixed(1)})`);
-        ok(J.elbowR[1] > J.pelvis[1] + 30 && J.elbowL[1] > J.pelvis[1] + 30, `eagle L${l} elbows are lifted well above the hips`);
+        ok(J.elbowR[1] > J.pelvis[1] + 20 && J.elbowL[1] > J.pelvis[1] + 20, `eagle L${l} elbows are lifted well above the hips`);
+        // the hands must not cover the face: no overlap with the head, and the highest point of the hands is no higher than the nose centre
+        const hb = primBox(Es[l].prims.find((p) => p.id === 'h_head')), nb = primBox(Es[l].prims.find((p) => p.id === 'h_nose')), noseY = (nb.lo + nb.hi) / 2;
+        for (const b of Es[l].prims.filter((p) => /^(palm|fing|thumb)[RL]$/.test(p.id)).map((p) => [p.id, primBox(p)])) {
+          const [id, bx] = b;
+          const hit = Math.min(bx.xh, hb.xh) > Math.max(bx.xl, hb.xl) && Math.min(bx.hi, hb.hi) > Math.max(bx.lo, hb.lo) && Math.min(bx.zh, hb.zh) > Math.max(bx.zl, hb.zl);
+          ok(!hit, `eagle L${l} ${id} does not overlap the head box`);
+          ok(bx.hi <= noseY + 0.5, `eagle L${l} ${id} stays at or below nose height (${bx.hi.toFixed(1)} vs ${noseY.toFixed(1)})`);
+        }
       }
       ok(Es[0].J.toeR[1] <= 6, `eagle L0 toes of the wrapped leg touch the floor or block (${Es[0].J.toeR[1].toFixed(1)} cm)`);
       ok(Es[1].J.toeR[1] >= 12 && Es[2].J.toeR[1] >= 8, 'eagle L1 and L2 wrapped foot is off the floor');

@@ -1847,17 +1847,17 @@
  {
   "id": "pose.eagle.cue.4",
   "lang": "he",
-  "text": "הרימו את המרפקים והאריכו את הגב."
+  "text": "הרימו את המרפקים לגובה החזה, כפות הידיים מתחת לאף, והאריכו את הגב."
  },
  {
   "id": "pose.eagle.cue.4",
   "lang": "ru",
-  "text": "Поднимите локти и вытяните позвоночник."
+  "text": "Поднимите локти на уровень груди, ладони ниже носа, чтобы лицо оставалось открытым, и вытяните позвоночник."
  },
  {
   "id": "pose.eagle.cue.4",
   "lang": "en",
-  "text": "Lift the elbows and lengthen the spine."
+  "text": "Lift the elbows to chest height, hands below the nose so the face stays clear, and lengthen the spine."
  },
  {
   "id": "pose.warrior-3.name",
@@ -6216,7 +6216,7 @@
  {
   "id": "pose.eagle.align.2",
   "lang": "he",
-  "text": "הצליבו את הזרועות, מרפק אחד מתחת לשני, והרימו את המרפקים בלי להרים את הכתפיים.",
+  "text": "הצליבו את הזרועות, מרפק אחד מתחת לשני, והרימו את המרפקים לגובה החזה בלי להרים את הכתפיים. שמרו את כפות הידיים מתחת לאף, כדי שהפנים יישארו פתוחות.",
   "v2": true,
   "prio": "rest"
  },
