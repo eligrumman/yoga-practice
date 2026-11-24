@@ -149,6 +149,8 @@ body.in-player{overflow:hidden}
 .fs-ring .count{position:absolute;inset:0;display:grid;place-items:center;font-size:.62rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);background:none;padding:0;border-radius:0;inset-inline-end:auto;top:0}
 .fs-ring .count.trans{font-size:1rem;color:var(--accent)}
 .player.fs .notice{margin:2px 10px;text-align:center;flex:none}
+.player.fs .tap-resume{margin:6px auto;display:block;flex:none;min-height:44px}
+.player.fs .tap-resume[hidden]{display:none}
 .fs-stage{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,45fr) minmax(0,55fr);gap:6px;padding:0 10px;padding-bottom:0;transition:padding-bottom .3s}
 .player.fs.bar-on .fs-stage,.player.fs.pinned .fs-stage{padding-bottom:var(--bar-h)}
 .player.fs .p-fig{position:relative;min-height:0;display:grid;place-items:center}

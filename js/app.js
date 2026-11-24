@@ -49,6 +49,7 @@ function applyNarr() {
   narrator.setLang(s.narrLang || lang); narrator.mute = s.mute; narrator.volume = s.volume;
 }
 applyNarr(); narrator.loadManifest();
+narrator.bindGestureUnlock(); // first tap anywhere unlocks the shared audio element (autoplay policy)
 
 // plans with breath-counted items run as long as the breathing: show an approximate total
 const fmtTotal = (items) => (hasBreaths(items) ? approxMin(planSeconds(items), lang) : fmtTime(planSeconds(items)));

@@ -62,6 +62,7 @@ export class Player {
     this.elLines = el('ol', { class: 'tx-lines', 'aria-label': T('transcript') });
     this.elCap = el('div', { class: 'caption fs-cap', 'aria-live': 'polite' });
     this.elNotice = el('div', { class: 'notice', hidden: true });
+    this.btnResume = el('button', { class: 'btn primary tap-resume', 'data-act': 'tap-resume', type: 'button', hidden: !this.nar.blocked, onclick: () => this.nar.unlock() }, '🔊 ' + T('tapResume'));
     this.btnReady = el('button', { class: 'btn primary ready-side', 'data-act': 'ready-side', type: 'button', hidden: true, onclick: () => this.sideReady() }, T('readySide'));
     this.elReadyLive = el('div', { class: 'sr-only', role: 'status', 'aria-live': 'assertive' });
     this.btnSkipIntro = el('button', { class: 'btn skip-intro', hidden: true, onclick: () => this.skipIntro() }, T('skipIntro'));
@@ -94,7 +95,7 @@ export class Player {
         el('button', { class: 'fs-exit', onclick: () => this.exit(), 'aria-label': T('exit'), title: T('exit') }, '✕'),
         el('div', { class: 'fs-title' }, this.elName, el('div', { class: 'fs-meta' }, this.elSub, ' ', this.elBarTxt)),
         el('div', { class: 'fs-ring' }, ring, this.elCount)),
-      this.elNotice,
+      this.elNotice, this.btnResume,
       el('div', { class: 'fs-stage' },
         el('div', { class: 'p-fig' }, this.svg, viewToggle(), this.elSide),
         el('div', { class: 'fs-tx' }, this.elCap, this.btnReady, this.elReadyLive, this.btnSkipIntro, this.elLines, this.elNextBig)),
@@ -114,6 +115,7 @@ export class Player {
     document.addEventListener('visibilitychange', this._vis);
     this.nar.onCaption = (t, id) => this.caption(t, id);
     this.nar.onSpeaking = (v) => { music.duck(v); if (!v) this.setOn(null, true); };
+    this.nar.onBlocked = (b) => { if (this.btnResume) { this.btnResume.hidden = !b; if (b) this.showBar(); } };
     this.nar.onNotice = (k) => { this.elNotice.hidden = false; this.elNotice.textContent = k === 'novoice' ? T('noVoice') : T('noSpeech'); };
     this.refreshMute();
     this.armHide();
@@ -442,7 +444,7 @@ export class Player {
   releaseWake() { try { this.wake?.release(); } catch { /* none */ } this.wake = null; }
   destroy() {
     this._ro?.disconnect(); clearInterval(this.timer); clearTimeout(this.hideT); this.anim.destroy(); this.nar.cancel(); this.releaseWake(); music.stop(); this.exitFs();
-    document.removeEventListener('visibilitychange', this._vis); this.nar.onCaption = () => {}; this.nar.onSpeaking = () => {};
+    document.removeEventListener('visibilitychange', this._vis); this.nar.onCaption = () => {}; this.nar.onSpeaking = () => {}; this.nar.onBlocked = () => {};
   }
   exit(home) { this.destroy(); this.onExit?.(home); }
 }

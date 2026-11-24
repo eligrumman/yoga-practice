@@ -165,6 +165,7 @@ const T = {
   pinBar: { he: 'נעץ את הסרגל', ru: 'Закрепить панель', en: 'Pin the controls' },
   showBar: { he: 'הצג בקרים', ru: 'Показать управление', en: 'Show controls' },
   noVoice: { he: 'לא נמצא קול בשפה זו במכשיר. מוצגות כתוביות בלבד.', ru: 'На устройстве нет голоса для этого языка. Показаны только субтитры.', en: 'No voice for this language on this device. Showing captions only.' },
+  tapResume: { he: 'הקשו כאן כדי להפעיל את הקול', ru: 'Нажмите, чтобы включить звук', en: 'Tap to resume sound' },
   noSpeech: { he: 'הדפדפן אינו תומך בהקראה. מוצגות כתוביות בלבד.', ru: 'Браузер не поддерживает озвучивание. Показаны только субтитры.', en: 'This browser has no speech support. Showing captions only.' },
   // history
   history: { he: 'היסטוריית תרגול', ru: 'История практик', en: 'Practice history' },

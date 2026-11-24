@@ -714,6 +714,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 await (await import('./figure.test.mjs')).default(ok);
 await (await import('./health.test.mjs')).default(ok);
 await (await import('./tts.test.mjs')).default(ok);
+await (await import('./narrator.test.mjs')).default(ok); // narrator queue robustness + he id coverage
 // ---- 7-day starter progress
 {
   const { cleanStarterDays, nextStarterDay, STARTER_DAYS, store } = await import('../js/store.js');
