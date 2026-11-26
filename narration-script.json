@@ -1860,6 +1860,96 @@
   "text": "Lift the elbows to chest height, hands below the nose so the face stays clear, and lengthen the spine."
  },
  {
+  "id": "pose.half-moon.name",
+  "lang": "he",
+  "text": "חצי ירח"
+ },
+ {
+  "id": "pose.half-moon.name",
+  "lang": "ru",
+  "text": "Полумесяц"
+ },
+ {
+  "id": "pose.half-moon.name",
+  "lang": "en",
+  "text": "Half Moon"
+ },
+ {
+  "id": "pose.half-moon.intro",
+  "lang": "he",
+  "text": "תנוחת חצי ירח."
+ },
+ {
+  "id": "pose.half-moon.intro",
+  "lang": "ru",
+  "text": "Поза: Полумесяц."
+ },
+ {
+  "id": "pose.half-moon.intro",
+  "lang": "en",
+  "text": "Pose: Half Moon."
+ },
+ {
+  "id": "pose.half-moon.cue.1",
+  "lang": "he",
+  "text": "עמדו על רגל אחת וכופפו מעט את הברך."
+ },
+ {
+  "id": "pose.half-moon.cue.1",
+  "lang": "ru",
+  "text": "Встаньте на одну ногу, слегка смягчив колено."
+ },
+ {
+  "id": "pose.half-moon.cue.1",
+  "lang": "en",
+  "text": "Stand on one leg with the knee slightly soft."
+ },
+ {
+  "id": "pose.half-moon.cue.2",
+  "lang": "he",
+  "text": "הניחו יד אחת על בלוק והטו את הגו הצידה."
+ },
+ {
+  "id": "pose.half-moon.cue.2",
+  "lang": "ru",
+  "text": "Поставьте одну руку на блок и наклоните корпус вбок."
+ },
+ {
+  "id": "pose.half-moon.cue.2",
+  "lang": "en",
+  "text": "Place one hand on a block and tip the torso sideways."
+ },
+ {
+  "id": "pose.half-moon.cue.3",
+  "lang": "he",
+  "text": "הרימו את הרגל השנייה עד גובה האגן, בקו אחד עם הגו."
+ },
+ {
+  "id": "pose.half-moon.cue.3",
+  "lang": "ru",
+  "text": "Поднимите вторую ногу до высоты таза, на одной линии с корпусом."
+ },
+ {
+  "id": "pose.half-moon.cue.3",
+  "lang": "en",
+  "text": "Lift the other leg to hip height, in one line with the torso."
+ },
+ {
+  "id": "pose.half-moon.cue.4",
+  "lang": "he",
+  "text": "פתחו את החזה והושיטו את היד העליונה כלפי מעלה."
+ },
+ {
+  "id": "pose.half-moon.cue.4",
+  "lang": "ru",
+  "text": "Раскройте грудь и вытяните верхнюю руку вверх."
+ },
+ {
+  "id": "pose.half-moon.cue.4",
+  "lang": "en",
+  "text": "Open the chest and reach the top arm up."
+ },
+ {
   "id": "pose.warrior-3.name",
   "lang": "he",
   "text": "לוחם שלוש"
@@ -6361,6 +6451,90 @@
  },
  {
   "id": "pose.eagle.side",
+  "lang": "he",
+  "text": "צד שני. העבירו משקל לרגל השנייה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.entry.1",
+  "lang": "he",
+  "text": "עמדו ליד קיר, העבירו את המשקל לרגל אחת וכופפו מעט את הברך.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.entry.2",
+  "lang": "he",
+  "text": "הניחו יד אחת על בלוק לפני כף הרגל, והטו את הגו הצידה בלי למהר.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.align.1",
+  "lang": "he",
+  "text": "הרימו את הרגל השנייה עד גובה האגן, ושמרו את האגן והכתפיים אחד מעל השני.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.align.2",
+  "lang": "he",
+  "text": "פתחו את החזה, הושיטו את היד העליונה כלפי מעלה, ושמרו על רגל העמידה ישרה אך לא נעולה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.breath",
+  "lang": "he",
+  "text": "נשמו לאט וארוך, קבעו מבט יציב והישארו יציבים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.mod.L0",
+  "lang": "he",
+  "text": "הצמידו את הגב והאגן אל הקיר, והניחו את היד על בלוק גבוה מתחת לכתף.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.mod.L1",
+  "lang": "he",
+  "text": "הניחו את היד על בלוק נמוך, בלי קיר, והרימו את הרגל עד גובה האגן.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.mod.L2",
+  "lang": "he",
+  "text": "אם מתאים לכם, הניחו את כף היד או את קצות האצבעות על הרצפה והרימו את היד העליונה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.fix.1",
+  "lang": "he",
+  "text": "האגן נוטה להתגלגל קדימה והרגל המורמת צונחת. הניחו את היד על בלוק גבוה יותר ופתחו את החזה כלפי הצד.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.half-moon.fix.2",
+  "lang": "he",
+  "text": "ברך העמידה נוטה להינעל. רככו אותה מעט ולחצו את כף הרגל אל הרצפה.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.half-moon.exit",
+  "lang": "he",
+  "text": "הורידו את הרגל לאט, שחררו את היד וקומו לאט ועמדו על שתי הרגליים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.half-moon.side",
   "lang": "he",
   "text": "צד שני. העבירו משקל לרגל השנייה.",
   "v2": true,

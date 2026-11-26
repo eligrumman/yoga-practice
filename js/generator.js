@@ -47,7 +47,7 @@ function separateBackbends(items, level) {
 const SEQ = [
   ['seated-warm', ['gentle-flow']],
   ['allfours', ['tabletop', 'cat-cow', 'sun-salutation-a', 'cat', 'cow', 'downward-dog', 'plank', 'crow']],
-  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'pyramid', 'high-lunge', 'tree', 'eagle', 'warrior-3', 'dancer', 'uttanasana']],
+  ['stand', ['mountain', 'upward-salute', 'chair', 'revolved-chair', 'warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'half-lift', 'wide-legged-fold', 'pyramid', 'high-lunge', 'tree', 'eagle', 'half-moon', 'warrior-3', 'dancer', 'uttanasana']],
   ['kneel', ['low-lunge', 'half-split', 'garland', 'camel']],
   // prone block: a backbend is always followed by Child (its counterpose), then the practice sits up for the seated work
   ['prone', ['cobra', 'upward-dog', 'locust', 'child']],
@@ -86,6 +86,7 @@ function candidates({ focus, level, avoid }) {
     && p.id !== 'warrior-flow' // inserted explicitly below only for eligible standing blocks
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated
     && p.id !== 'eagle' // library-only for now (Owner: not in generator auto-plans)
+    && p.id !== 'half-moon' // library-only for now (Owner: not in generator auto-plans)
     && p.id !== 'garland' // library-only for now (Owner: not in generator auto-plans)
     && p.id !== 'upward-dog' // library-only (Owner: not in generator auto-plans)
     && p.id !== 'pyramid' // library-only for now (Owner: not in generator auto-plans)

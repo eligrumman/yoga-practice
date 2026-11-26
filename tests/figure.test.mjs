@@ -24,7 +24,7 @@ const CONTACT = [
   ['uttanasana', [1, 2], ['handR', 'handL']], ['half-lift', [2], ['handR', 'handL']], ['savasana', ALL, ['handR', 'handL', 'footR', 'footL']],
   ...['mountain', 'upward-salute', 'chair', 'warrior-1', 'warrior-2', 'high-lunge', 'uttanasana', 'half-lift', 'revolved-chair', 'low-lunge', 'half-split',
     'camel', 'garland', 'easy-seat', 'cobbler', 'seated-fold', 'seated-twist'].map((id) => [id, ALL, ['footR', 'footL']]),
-  ['tree', ALL, ['footR']], ['tree', [0], ['footL']], ['eagle', ALL, ['footL']], ['warrior-3', ALL, ['footR']], ['dancer', ALL, ['footR']],
+  ['tree', ALL, ['footR']], ['tree', [0], ['footL']], ['eagle', ALL, ['footL']], ['half-moon', ALL, ['footR']], ['warrior-3', ALL, ['footR']], ['dancer', ALL, ['footR']],
 ];
 const PARTS = { hand: ['palm', 'fing', 'thumb'], foot: ['foot', 'toes'] };
 const lowest = (S, part) => { const s = part.slice(-1); const pre = PARTS[part.slice(0, -1)].map((p) => p + s); return Math.min(...S.prims.filter((p) => pre.includes(p.id)).map((p) => primBox(p).lo)); };
@@ -298,6 +298,29 @@ export default async function figureTests(ok) {
       ok(wd(2) <= 8 && wd(1) <= 14 && wd(0) >= 25, `eagle wrists come together by level (L0 ${wd(0).toFixed(0)}, L1 ${wd(1).toFixed(0)}, L2 ${wd(2).toFixed(0)} cm)`);
       ok(Es[0].J.pelvis[1] > Es[1].J.pelvis[1] + 3 && Es[1].J.pelvis[1] > Es[2].J.pelvis[1] + 3, 'eagle sits deeper at each level');
       ok(Ef[0].props.some((p) => p.type === 'wall'), 'eagle L0 shows a wall to stand beside');
+    }
+    // half moon: standing right leg straight under the hip, lifted left leg level with the hip and straight, hips stacked, torso horizontal,
+    // top arm vertical; bottom hand on a drawn block (L0 tall + wall, L1 low) or on the floor (L2); levels differ in hand height
+    {
+      const hm = POSES.find((q) => q.id === 'half-moon'); ok(!!hm && hm.sides === 'both', 'half-moon exists and is two-sided');
+      const hands = [];
+      for (const l of ALL) {
+        const F = poseFrames(hm, l), S = solve(F.hold), J = S.J, boxes = blockBoxes(F.props, S, 1);
+        ok(lowest(S, 'footR') <= TOL, `half-moon L${l} standing foot on the floor (${lowest(S, 'footR').toFixed(2)})`);
+        ok(!(bend(J.hipR, J.kneeR, J.ankleR) > 6) && !(bend(J.hipL, J.kneeL, J.ankleL) > 6), `half-moon L${l} both legs straight`);
+        ok(Math.abs(J.ankleR[0] - J.hipR[0]) < 6 && Math.abs(J.ankleR[2] - J.hipR[2]) < 6, `half-moon L${l} standing leg vertical under the hip`);
+        ok(Math.abs(J.ankleL[1] - J.hipL[1]) <= 6 && J.hipL[2] - J.ankleL[2] > 80, `half-moon L${l} lifted leg parallel to the floor at hip height (ankle ${J.ankleL[1].toFixed(1)} vs hip ${J.hipL[1].toFixed(1)})`);
+        ok(J.hipL[1] - J.hipR[1] > 15 && Math.abs(J.hipL[2] - J.hipR[2]) < 4 && Math.abs(J.hipL[0] - J.hipR[0]) < 4, `half-moon L${l} hips stacked (one above the other)`);
+        ok(Math.abs(J.shoulderL[2] - J.shoulderR[2]) < 22 && J.shoulderL[1] - J.shoulderR[1] > 30, `half-moon L${l} shoulders stacked, chest open to the side`);
+        ok(J.wristL[1] > J.shoulderL[1] + 40 && Math.abs(J.wristL[2] - J.shoulderL[2]) < 8, `half-moon L${l} top arm reaches straight up`);
+        ok(Math.abs(J.shoulderR[2] - J.wristR[2]) < 6, `half-moon L${l} bottom arm vertical under the shoulder`);
+        const palms = S.prims.filter((p) => ['palm', 'fing', 'thumb'].includes(p.id.slice(0, -1)) && p.id.endsWith('R')), hand = Math.min(...palms.map((p) => primBox(p).lo));
+        const bx = boxes.find((b) => b.k === 'R'); hands.push(bx ? bx.top : hand);
+        if (l < 2) ok(!!bx && Math.abs(hand - bx.top) <= 0.5, `half-moon L${l} hand on the block it is drawn on (${hand.toFixed(2)} vs ${bx ? bx.top.toFixed(2) : 'none'})`);
+        else ok(!bx && hand <= TOL, `half-moon L${l} hand or fingertips on the floor (${hand.toFixed(2)})`);
+        ok(F.props.some((p) => p.type === 'wall') === (l === 0), `half-moon wall only at L0 (L${l})`);
+      }
+      ok(hands[0] > hands[1] + 6 && hands[1] > hands[2] + 4, `half-moon the supporting hand gets lower by level (${hands.map((h) => h.toFixed(1)).join(', ')})`);
     }
     // cobbler: L2 is a deep fold from the hips with a long spine, forehead toward the feet; levels differ clearly
     {

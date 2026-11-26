@@ -73,7 +73,7 @@ export class Player {
     this.elBar = el('div', { class: 'bar-fill' });
     this.btnPause = el('button', { class: 'btn big-btn', 'data-act': 'pause', onclick: () => this.togglePause() }, '⏸');
     this.btnPause.setAttribute('aria-label', T('pause')); this.btnPause.title = T('pause');
-    const ib = (act, icon, label, fn, cls = '') => el('button', { class: 'btn icon ' + cls, 'data-act': act, onclick: fn, 'aria-label': label, title: label }, icon);
+    const ib = (act, icon, label, fn, cls = '') => el('button', { class: 'btn icon ' + cls, 'data-act': act, onclick: fn, 'aria-label': label, title: label }, cls === 'txt' ? el('bdi', { dir: 'ltr', class: 'ltr-num' }, icon) : icon);
     this.btnMute = el('button', { class: 'btn', onclick: () => this.toggleMute() }, '');
     this.settingsBox = this.buildSettings();
     this.btnSettings = ib('settings', '⚙', T('settings'), () => { this.settingsBox.hidden = !this.settingsBox.hidden; this.btnSettings.setAttribute('aria-expanded', String(!this.settingsBox.hidden)); this.showBar(); });

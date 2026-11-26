@@ -183,6 +183,21 @@ export default [
     ],
   },
   {
+    id: 'half-moon', sa: 'Ardha Chandrasana', en: 'Half Moon', he: 'חצי ירח', ru: 'Полумесяц', cat: 'balance', sec: 'bal', flow: 18, d: 2, hold: 20, sides: 'both',
+    tags: ['strength', 'noback'],
+    cue: {
+      he: ['עמדו על רגל אחת וכופפו מעט את הברך.', 'הניחו יד אחת על בלוק והטו את הגו הצידה.', 'הרימו את הרגל השנייה עד גובה האגן, בקו אחד עם הגו.', 'פתחו את החזה והושיטו את היד העליונה כלפי מעלה.'],
+      en: ['Stand on one leg with the knee slightly soft.', 'Place one hand on a block and tip the torso sideways.', 'Lift the other leg to hip height, in one line with the torso.', 'Open the chest and reach the top arm up.'],
+      ru: ['Встаньте на одну ногу, слегка смягчив колено.', 'Поставьте одну руку на блок и наклоните корпус вбок.', 'Поднимите вторую ногу до высоты таза, на одной линии с корпусом.', 'Раскройте грудь и вытяните верхнюю руку вверх.'],
+    },
+    safe: { he: 'התחילו ליד קיר. בעיות שיווי משקל, סחרחורות או לחץ דם: הניחו את היד על בלוק גבוה, קומו לאט ועצרו אם מסתחרר. בהריון: הישארו ליד הקיר, שמרו את ברך העמידה רכה ואל תרימו את הרגל גבוה.', en: 'Start beside a wall. With balance problems, dizziness or blood pressure concerns, rest the hand on a tall block and stop if you feel light-headed. In pregnancy, keep the standing knee soft, stay close to the wall and do not lift the leg high.', ru: 'Начните у стены. При проблемах с равновесием, головокружении или давлении поставьте руку на высокий блок и остановитесь, если закружилась голова. При беременности держите опорное колено мягким, оставайтесь у стены и не поднимайте ногу высоко.' },
+    v: [
+      { he: 'הגב לקיר, יד על בלוק גבוה מתחת לכתף.', en: 'Back to the wall, hand on a tall block under the shoulder.', ru: 'Спиной к стене, рука на высоком блоке под плечом.', props: [{ type: 'wall' }] },
+      { he: 'בלוק נמוך מתחת ליד, בלי קיר.', en: 'Low block under the hand, no wall.', ru: 'Низкий блок под рукой, без стены.' },
+      { he: 'כף היד או קצות האצבעות על הרצפה, היד העליונה למעלה.', en: 'Hand or fingertips on the floor, top arm up.', ru: 'Ладонь или кончики пальцев на полу, верхняя рука вверх.' },
+    ],
+  },
+  {
     id: 'warrior-3', sa: 'Virabhadrasana III', en: 'Warrior III', he: 'לוחם 3', ru: 'Воин три', cat: 'balance', sec: 'bal', flow: 20, d: 2, hold: 20, sides: 'both',
     tags: ['strength', 'noback'],
     cue: {

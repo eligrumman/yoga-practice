@@ -28,8 +28,8 @@ export const HEALTH_CARE = {
   wrists: ['child'],
   back: ['child', 'warrior-2', 'half-lift', 'seated-fold', 'bridge'],
   neck: ['downward-dog', 'legs-up-wall', 'child', 'knees-to-chest'],
-  pressure: ['child', 'mountain', 'half-lift', 'upward-salute'],
-  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'eagle', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'garland', 'uttanasana', 'dancer', 'warrior-3'],
+  pressure: ['child', 'half-moon', 'mountain', 'half-lift', 'upward-salute'],
+  pregnancy: ['warrior-1', 'warrior-2', 'triangle', 'extended-side-angle', 'tree', 'eagle', 'half-moon', 'child', 'cobbler', 'savasana', 'savasana-side', 'legs-up-wall', 'downward-dog', 'figure-four', 'pigeon', 'low-lunge', 'high-lunge', 'chair', 'wide-legged-fold', 'pyramid', 'garland', 'uttanasana', 'dancer', 'warrior-3'],
 };
 
 // Keep only known answers, once each, in a fixed order. Anything else (bad types, "none") is dropped.
