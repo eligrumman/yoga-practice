@@ -767,5 +767,18 @@
 "he|pose.half-moon.exit": "46582b2f7f27e9c3",
 "he|pose.half-moon.side": "135f0a9e70787aee",
 "he|pose.half-moon.name": "3f6755a38fe0afef",
-"he|pose.half-moon.intro": "fe4740602d8f11d2"
+"he|pose.half-moon.intro": "fe4740602d8f11d2",
+"he|pose.chaturanga.fix.1": "abe4e69ca482759f",
+"he|pose.chaturanga.fix.2": "f519c594ec84f884",
+"he|pose.chaturanga.entry.1": "8ee3bd182d6b95f2",
+"he|pose.chaturanga.entry.2": "6ab173a1b3f53964",
+"he|pose.chaturanga.align.1": "7dc22243c4e86fe2",
+"he|pose.chaturanga.align.2": "08f27a9fa39bd696",
+"he|pose.chaturanga.breath": "bc7779ba034596b6",
+"he|pose.chaturanga.mod.L0": "2fb21a883e4c6cb1",
+"he|pose.chaturanga.mod.L1": "7b27fd317842b264",
+"he|pose.chaturanga.mod.L2": "c46ab50c501c359e",
+"he|pose.chaturanga.exit": "3f0e35c44dc0cabd",
+"he|pose.chaturanga.name": "357f1338fa27d0bd",
+"he|pose.chaturanga.intro": "049d24e393fc6ae2"
 }
