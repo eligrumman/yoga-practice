@@ -31,6 +31,21 @@ export default [
     ],
   },
   {
+    id: 'chaturanga', sa: 'Chaturanga Dandasana', en: 'Chaturanga', he: 'קרש נמוך', ru: 'Чатуранга', cat: 'floor/seated', sec: 'floor', flow: 60, d: 3, hold: 10, sides: 'single',
+    tags: ['strength', 'advanced'],
+    cue: {
+      he: ['מקרש חזק, הזיזו את הכתפיים מעט קדימה ושמרו על קו אחד מהראש ועד העקבים.', 'כופפו את המרפקים לאחור, צמודים לצלעות, והורידו את הגוף לאט עד שהכתפיים בגובה המרפקים.', 'שמרו על צוואר ארוך ומבט מעט קדימה על הרצפה. אל תתנו לאגן לצנוח או לעלות.', 'נשמו חלק ורציף. אם הקו נשבר, רדו אל הברכיים או אל הבטן.'],
+      en: ['From a strong plank, shift the shoulders slightly forward and keep one line from head to heels.', 'Bend the elbows back, hugging the ribs, and lower slowly until the shoulders are level with the elbows.', 'Keep the neck long and the gaze a little ahead on the floor. Do not let the hips sag or lift.', 'Breathe smoothly and continuously. If the line breaks, drop to the knees or the belly.'],
+      ru: ['Из крепкой планки слегка сместите плечи вперёд и держите одну линию от головы до пяток.', 'Согните локти назад, прижимая их к рёбрам, и медленно опускайтесь, пока плечи не окажутся на уровне локтей.', 'Держите шею длинной, взгляд чуть вперёд на пол. Не давайте тазу проваливаться или подниматься.', 'Дышите ровно и непрерывно. Если линия нарушена, опуститесь на колени или на живот.'],
+    },
+    safe: { he: 'תנאי מקדים: חמש נשימות נוחות בקרש, שורשי כף יד וכתפיים ללא כאב. התחילו על הברכיים, ואל תרדו נמוך מגובה הכתפיים והמרפקים. כאב בשורש כף היד, במרפק או בכתף, הריון או לחץ דם שאינו מאוזן: דלגו. אין כאן ייעוץ רפואי.', en: 'Prerequisites: five comfortable plank breaths, with wrists and shoulders free of pain. Start on the knees and never lower the shoulders below the elbows. Skip with wrist, elbow or shoulder pain, during pregnancy, or with uncontrolled blood pressure. This is not medical advice.', ru: 'Условия: пять спокойных дыханий в планке, запястья и плечи без боли. Начните с колен и не опускайте плечи ниже локтей. Пропустите при боли в запястье, локте или плече, во время беременности или при неконтролируемом давлении. Это не медицинская рекомендация.' },
+    v: [
+      { he: 'על הברכיים: הורידו את החזה לאט עד שהמרפקים בזווית ישרה.', en: 'On the knees: lower the chest slowly until the elbows make a right angle.', ru: 'На коленях: медленно опустите грудь, пока локти не образуют прямой угол.' },
+      { he: 'על קצות הבהונות: רדו רק חצי הדרך ועלו חזרה לקרש.', en: 'On the toes: lower only half way and press back up to plank.', ru: 'На носках: опуститесь только наполовину и вернитесь в планку.' },
+      { he: 'קרש נמוך מלא: גוף ישר, מרפקים צמודים לצלעות והכתפיים בגובה המרפקים.', en: 'Full low plank: straight body, elbows hugging the ribs, shoulders level with the elbows.', ru: 'Полная низкая планка: тело прямое, локти прижаты к рёбрам, плечи на уровне локтей.' },
+    ],
+  },
+  {
     id: 'cobra', sa: 'Bhujangasana', en: 'Cobra', he: 'קוברה', ru: 'Кобра', cat: 'backbend', sec: 'floor', flow: 30, d: 1, hold: 20, sides: 'single',
     tags: ['back', 'flex', 'strength'],
     cue: {

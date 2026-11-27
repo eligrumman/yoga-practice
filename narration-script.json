@@ -2580,6 +2580,96 @@
   "text": "Breathe smoothly and continuously. If that is difficult, reduce the load."
  },
  {
+  "id": "pose.chaturanga.name",
+  "lang": "he",
+  "text": "קרש נמוך"
+ },
+ {
+  "id": "pose.chaturanga.name",
+  "lang": "ru",
+  "text": "Чатуранга"
+ },
+ {
+  "id": "pose.chaturanga.name",
+  "lang": "en",
+  "text": "Chaturanga"
+ },
+ {
+  "id": "pose.chaturanga.intro",
+  "lang": "he",
+  "text": "תנוחת קרש נמוך."
+ },
+ {
+  "id": "pose.chaturanga.intro",
+  "lang": "ru",
+  "text": "Поза: Чатуранга."
+ },
+ {
+  "id": "pose.chaturanga.intro",
+  "lang": "en",
+  "text": "Pose: Chaturanga."
+ },
+ {
+  "id": "pose.chaturanga.cue.1",
+  "lang": "he",
+  "text": "מקרש חזק, הזיזו את הכתפיים מעט קדימה ושמרו על קו אחד מהראש ועד העקבים."
+ },
+ {
+  "id": "pose.chaturanga.cue.1",
+  "lang": "ru",
+  "text": "Из крепкой планки слегка сместите плечи вперёд и держите одну линию от головы до пяток."
+ },
+ {
+  "id": "pose.chaturanga.cue.1",
+  "lang": "en",
+  "text": "From a strong plank, shift the shoulders slightly forward and keep one line from head to heels."
+ },
+ {
+  "id": "pose.chaturanga.cue.2",
+  "lang": "he",
+  "text": "כופפו את המרפקים לאחור, צמודים לצלעות, והורידו את הגוף לאט עד שהכתפיים בגובה המרפקים."
+ },
+ {
+  "id": "pose.chaturanga.cue.2",
+  "lang": "ru",
+  "text": "Согните локти назад, прижимая их к рёбрам, и медленно опускайтесь, пока плечи не окажутся на уровне локтей."
+ },
+ {
+  "id": "pose.chaturanga.cue.2",
+  "lang": "en",
+  "text": "Bend the elbows back, hugging the ribs, and lower slowly until the shoulders are level with the elbows."
+ },
+ {
+  "id": "pose.chaturanga.cue.3",
+  "lang": "he",
+  "text": "שמרו על צוואר ארוך ומבט מעט קדימה על הרצפה. אל תתנו לאגן לצנוח או לעלות."
+ },
+ {
+  "id": "pose.chaturanga.cue.3",
+  "lang": "ru",
+  "text": "Держите шею длинной, взгляд чуть вперёд на пол. Не давайте тазу проваливаться или подниматься."
+ },
+ {
+  "id": "pose.chaturanga.cue.3",
+  "lang": "en",
+  "text": "Keep the neck long and the gaze a little ahead on the floor. Do not let the hips sag or lift."
+ },
+ {
+  "id": "pose.chaturanga.cue.4",
+  "lang": "he",
+  "text": "נשמו חלק ורציף. אם הקו נשבר, רדו אל הברכיים או אל הבטן."
+ },
+ {
+  "id": "pose.chaturanga.cue.4",
+  "lang": "ru",
+  "text": "Дышите ровно и непрерывно. Если линия нарушена, опуститесь на колени или на живот."
+ },
+ {
+  "id": "pose.chaturanga.cue.4",
+  "lang": "en",
+  "text": "Breathe smoothly and continuously. If the line breaks, drop to the knees or the belly."
+ },
+ {
   "id": "pose.cobra.name",
   "lang": "he",
   "text": "קוברה"
@@ -7111,6 +7201,83 @@
   "id": "pose.plank.exit",
   "lang": "he",
   "text": "הורידו את הברכיים ונוחו.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.entry.1",
+  "lang": "he",
+  "text": "התחילו בקרש חזק, כפות הידיים מתחת לכתפיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.entry.2",
+  "lang": "he",
+  "text": "העבירו את הכתפיים מעט קדימה, ושמרו על קו אחד מהראש ועד העקבים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.align.1",
+  "lang": "he",
+  "text": "כופפו את המרפקים לאחור, צמודים לצלעות, והורידו את הגוף לאט.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.align.2",
+  "lang": "he",
+  "text": "עצרו כשהכתפיים בגובה המרפקים, ואל תרדו נמוך מזה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.breath",
+  "lang": "he",
+  "text": "נשמו חלק ורציף. אם הקו נשבר, רדו אל הברכיים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.mod.L0",
+  "lang": "he",
+  "text": "על הברכיים, הורידו את החזה לאט עד שהמרפקים בזווית ישרה.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.mod.L1",
+  "lang": "he",
+  "text": "על קצות הבהונות, רדו רק חצי הדרך והישארו חזקים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.mod.L2",
+  "lang": "he",
+  "text": "אם התנאים המקדימים מתקיימים, רדו לקרש נמוך, גוף ישר ומרפקים צמודים.",
+  "v2": true,
+  "prio": "rest"
+ },
+ {
+  "id": "pose.chaturanga.fix.1",
+  "lang": "he",
+  "text": "הכתפיים נוטות לצנוח נמוך מהמרפקים. עצרו כשהן בגובה המרפקים והישארו חזקים.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.chaturanga.fix.2",
+  "lang": "he",
+  "text": "האגן נוטה לצנוח או לעלות. כווצו את הבטן ושמרו על קו אחד מהראש ועד העקבים.",
+  "v2": true,
+  "prio": "fix"
+ },
+ {
+  "id": "pose.chaturanga.exit",
+  "lang": "he",
+  "text": "דחפו את הרצפה וחזרו לקרש, או רדו בעדינות אל הבטן.",
   "v2": true,
   "prio": "rest"
  },

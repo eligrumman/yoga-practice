@@ -14,6 +14,7 @@ const CONTACT = [
   ['tabletop', [0, 1], ['handR', 'handL', 'footR', 'footL']], ['tabletop', [2], ['handR', 'footL']],
   ['cat', ALL, ['handR', 'handL', 'footR', 'footL']], ['cow', ALL, ['handR', 'handL', 'footR', 'footL']], ['cat-cow', ALL, ['handR', 'handL', 'footR', 'footL']],
   ['plank', [0, 1], ['handR', 'handL', 'footR', 'footL']], ['plank', [2], ['handR', 'handL', 'footR']],
+  ['chaturanga', ALL, ['handR', 'handL']], ['chaturanga', [1, 2], ['footR', 'footL']],
   ['crow', [0], ['handR', 'handL', 'footR', 'footL']], ['crow', [1], ['handR', 'handL', 'footR']], ['crow', [2], ['handR', 'handL']],
   ['pigeon', [1], ['footR', 'footL']], ['pigeon', [2], ['handR', 'handL', 'footR', 'footL']],
   ['triangle', ALL, ['footR', 'footL']],
@@ -96,7 +97,7 @@ export default async function figureTests(ok) {
     for (const l of levels) { const S = solve(poseFrames(P, l).hold); for (const part of parts) { const lo = lowest(S, part); ok(lo <= TOL, `${id} L${l} ${part} on the floor (${lo.toFixed(2)} <= ${TOL})`); } }
   }
   // ---- flat palms: the palm normal points down in the weight-bearing poses
-  for (const id of ['tabletop', 'cat', 'cow', 'plank', 'downward-dog', 'cobra', 'upward-dog', 'crow']) {
+  for (const id of ['tabletop', 'cat', 'cow', 'plank', 'chaturanga', 'downward-dog', 'cobra', 'upward-dog', 'crow']) {
     const P = POSES.find((q) => q.id === id);
     for (const l of id === 'tabletop' ? [1] : ALL) { const S = solve(poseFrames(P, l).hold); ok(S.hands.R.n[1] < -0.9 && S.hands.L.n[1] < -0.9, `${id} L${l} palms flat (${S.hands.R.n[1].toFixed(2)})`); }
   }
@@ -321,6 +322,26 @@ export default async function figureTests(ok) {
         ok(F.props.some((p) => p.type === 'wall') === (l === 0), `half-moon wall only at L0 (L${l})`);
       }
       ok(hands[0] > hands[1] + 6 && hands[1] > hands[2] + 4, `half-moon the supporting hand gets lower by level (${hands.map((h) => h.toFixed(1)).join(', ')})`);
+    }
+    // chaturanga: L0 knees down (shins rest on the floor, body one line from the knees), L1 half way (shoulders between plank and low),
+    // L2 low plank (straight legs and body, elbows at a right angle hugging the ribs, upper arm level with the floor, forearm vertical)
+    {
+      const ch = POSES.find((q) => q.id === 'chaturanga'); ok(!!ch && ch.sides === 'single', 'chaturanga exists and is one-sided');
+      const Cs = ALL.map((l) => solve(poseFrames(ch, l).hold)), shy = Cs.map((S) => S.J.shoulderR[1] - Math.min(...S.prims.map((p) => primBox(p).lo)));
+      ok(Math.min(...Cs[0].prims.filter((p) => p.id === 'shankR').map((p) => primBox(p).lo)) <= TOL, 'chaturanga L0 shins rest on the floor');
+      for (const l of ALL) {
+        const J = Cs[l].J, ankleDrop = l === 0 ? 0 : 1;
+        ok(Math.abs(J.shoulderR[2] - J.elbowR[2]) < 3, `chaturanga L${l} elbows hug the ribs (elbow in line with the shoulder, ${(J.elbowR[2] - J.shoulderR[2]).toFixed(1)})`);
+        if (l !== 1) ok(Math.abs(bend(J.shoulderR, J.elbowR, J.wristR) - 90) <= 6, `chaturanga L${l} elbows at a right angle (${bend(J.shoulderR, J.elbowR, J.wristR).toFixed(1)})`);
+        if (l !== 1) ok(Math.abs(J.wristR[0] - J.elbowR[0]) < 4, `chaturanga L${l} forearm vertical`);
+        if (ankleDrop) ok(!(bend(J.hipR, J.kneeR, J.ankleR) > 4), `chaturanga L${l} legs straight`);
+        else ok(bend(J.hipR, J.kneeR, J.ankleR) > 70, 'chaturanga L0 knees bent, shins up');
+        ok(J.head[1] > 25, `chaturanga L${l} head clear of the floor (${J.head[1].toFixed(1)})`);
+      }
+      ok(Math.abs(Cs[2].J.elbowR[1] - Cs[2].J.shoulderR[1]) < 4, 'chaturanga L2 upper arm level (shoulder at elbow height)');
+      ok(Cs[1].J.shoulderR[1] > Cs[2].J.shoulderR[1] + 10 && Cs[1].J.shoulderR[1] < 60, `chaturanga L1 shoulders half way (${Cs[1].J.shoulderR[1].toFixed(1)} vs ${Cs[2].J.shoulderR[1].toFixed(1)})`);
+      ok(Cs[0].J.hipR[1] < Cs[1].J.hipR[1] - 8, 'chaturanga L0 is lower than L1 at the hips');
+      ok(shy.every((v) => Number.isFinite(v)), 'chaturanga shoulder heights finite');
     }
     // cobbler: L2 is a deep fold from the hips with a long spine, forehead toward the feet; levels differ clearly
     {
