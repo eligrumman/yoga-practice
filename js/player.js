@@ -78,7 +78,7 @@ export class Player {
     this.settingsBox = this.buildSettings();
     this.btnSettings = ib('settings', '⚙', T('settings'), () => { this.settingsBox.hidden = !this.settingsBox.hidden; this.btnSettings.setAttribute('aria-expanded', String(!this.settingsBox.hidden)); this.showBar(); });
     this.btnSettings.setAttribute('aria-expanded', 'false');
-    this.pinned = !!this.st.barPin;
+    this.pinned = !this.st.barAuto; // bar stays visible by default (phones: reachable without a tap); the handle switches to auto-hide
     this.btnHandle = el('button', { class: 'fs-handle', 'aria-pressed': String(this.pinned), onclick: () => this.handleClick() }, el('span', { class: 'fs-grip' }));
     this.btnHandle.setAttribute('aria-label', T('pinBar')); this.btnHandle.title = T('pinBar');
     this.bar = el('div', { class: 'p-ctrl', id: 'p-ctrl' },
@@ -138,7 +138,7 @@ export class Player {
   }
   handleClick() {
     if (!this.barOn) return this.showBar();
-    this.pinned = !this.pinned; store.saveSettings({ barPin: this.pinned }); this.st = store.settings;
+    this.pinned = !this.pinned; store.saveSettings({ barAuto: !this.pinned }); this.st = store.settings;
     this.pl.classList.toggle('pinned', this.pinned); this.btnHandle.setAttribute('aria-pressed', String(this.pinned));
     this.armHide();
   }

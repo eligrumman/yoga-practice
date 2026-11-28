@@ -8,7 +8,7 @@ export AGENT_BROWSER_SESSION="smoke-$$-$RANDOM"
 AB=agent-browser
 fail() { echo "SMOKE FAIL ($LANG_ ${W}px): $*"; $AB close >/dev/null 2>&1; exit 1; }
 BASE="${URL%%[?#]*}"; X="?x=$RANDOM$RANDOM"
-$AB set viewport "$W" 900 >/dev/null 2>&1
+$AB set viewport "$W" "${H:-900}" >/dev/null 2>&1
 $AB open "$BASE$X" >/dev/null || fail "cannot open $BASE"
 $AB eval "localStorage.setItem('hyf.healthSeen', 'true'); localStorage.setItem('hyf.lang', JSON.stringify('$LANG_')); localStorage.setItem('hyf.plans', JSON.stringify([{id:'smoke',name:'Smoke',updated:Date.now(),items:[{pose:'mountain',level:0,unit:'sec',amount:5},{pose:'child',level:0,unit:'sec',amount:5}]}])); localStorage.setItem('hyf.settings', JSON.stringify({mute:true,beep:false,wake:false}));" >/dev/null
 $AB open "$BASE$X#/player/smoke" >/dev/null
@@ -16,6 +16,11 @@ $AB reload >/dev/null; sleep 2
 $AB errors --clear >/dev/null 2>&1
 PNAME=$($AB eval "document.querySelector('.p-name')?.textContent || ''" | tr -d '"')
 [ -n "$PNAME" ] || fail "player did not render a pose name"
+# controls bar must be inside the viewport even after the old 4 s auto-hide window (it is pinned by default)
+sleep 5
+BAR=$($AB eval "(()=>{const c=document.querySelector('.p-ctrl');if(!c)return 'none';const r=c.getBoundingClientRect();return (r.top>=0&&r.bottom<=innerHeight+1&&r.height>0)?'inside':'outside '+Math.round(r.top)+'-'+Math.round(r.bottom)+' of '+innerHeight})()" | tr -d '"')
+echo "controls bar: $BAR"
+[ "$BAR" = inside ] || fail "controls bar not inside the viewport ($BAR)"
 # Hebrew starts with an intro phase (the first skip only skips the intro), so skip until the finish screen shows (max 6 clicks)
 for i in 1 2 3 4 5 6; do
   [ "$($AB eval "!!document.querySelector('.finish')")" = true ] && break
