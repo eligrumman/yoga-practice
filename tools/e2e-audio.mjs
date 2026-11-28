@@ -127,11 +127,13 @@ async function runEngine(name) {
   await page.reload({ waitUntil: 'load' });
   await page.waitForTimeout(1500);
   await page.screenshot({ path: join(dir, '01-home.png') });
-  // tap the play button of the starter card (a real touch/mouse gesture)
-  const card = page.locator(`#starter .btn.primary`).first();
+  // tap the play button of the --plan card on home (a real touch/mouse gesture); older builds without data-plan: the first starter card
+  const byId = page.locator(`button[data-plan="${PLAN}"]`).first();
+  const card = (await byId.count()) ? byId : page.locator(`#starter .btn.primary`).first();
+  await card.scrollIntoViewIfNeeded();
   const isTouch = !!ctxOpts.hasTouch;
   if (isTouch) await card.tap(); else await card.click();
-  log(`tapped play on starter card (${isTouch ? 'touch' : 'mouse'})`);
+  log(`tapped play on the ${PLAN} card (${isTouch ? 'touch' : 'mouse'})`);
   const tPlay = Date.now();
   const exp = await expectedIds(PLAN);
   log(`expected intro: ${exp.intro.join(', ')}; pose-1 t=0: ${exp.first.join(', ')}`);

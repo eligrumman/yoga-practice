@@ -109,7 +109,7 @@ function presetCard(p, done = []) {
     el('p', {}, p.desc[lang]),
     needsPregnancyNote(p.items) ? el('p', { class: 'hint small preg-note' }, T('pregNote')) : null,
     el('div', { class: 'row-btns' },
-      el('button', { class: 'btn primary', onclick: () => go(`/player/preset:${p.id}`) }, '▶ ' + T('play')),
+      el('button', { class: 'btn primary', 'data-plan': p.id, onclick: () => go(`/player/preset:${p.id}`) }, '▶ ' + T('play')),
       el('button', { class: 'btn', onclick: () => copyPreset(p) }, T('copy'))));
 }
 function starterProgressBlock() {
