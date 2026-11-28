@@ -352,9 +352,9 @@ ok(streak([{ date: d(0), counted: false }], new Date(2026, 10, 13)) === 0, 'only
 ok(histMinutes({ minutes: 1, seconds: 30 }) === '<1' && histMinutes({ minutes: 20 }) === '20' && histMinutes({ minutes: 7, seconds: 400 }) === '7', 'history minutes label');
 
 // ---- two-sided poses and sides label
-const BOTH = ['warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe', 'pyramid', 'eagle', 'half-moon'];
+const BOTH = ['warrior-1', 'warrior-2', 'warrior-flow', 'triangle', 'extended-side-angle', 'high-lunge', 'tree', 'warrior-3', 'dancer', 'revolved-chair', 'low-lunge', 'half-split', 'seated-twist', 'supine-twist', 'figure-four', 'pigeon', 'hand-to-toe', 'pyramid', 'eagle', 'half-moon', 'qg-knee-eight', 'qg-foot-boat'];
 const gotBoth = POSES.filter((p) => p.sides === 'both').map((p) => p.id).sort();
-ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 20 two-sided poses (got ${gotBoth.join(',')})`);
+ok(JSON.stringify(gotBoth) === JSON.stringify([...BOTH].sort()), `exactly the 22 two-sided poses (got ${gotBoth.join(',')})`);
 for (const l of LANGS) {
   const p = POSE_BY_ID.triangle;
   ok(p[l] && p.cues[l].length === 4 && p.safety[l] && p.variations.every((v) => v[l]), `triangle i18n ${l}`);
@@ -479,7 +479,7 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
     for (const id of NP.poseV2Ids(p.id)) ok(segText(id, 'he').length > 2, `v2 segText ${id}`);
   }
   ok(Object.keys(POSE_V2).length === POSES.length, 'v2 has exactly the poses we have');
-  ok(SEGMENTS_V2.length === 627, `627 v2 segments including eagle, upward-dog, half-moon and chaturanga (have ${SEGMENTS_V2.length})`);
+  ok(SEGMENTS_V2.length === 762, `762 v2 segments including chaturanga and the 135 qigong class lines (have ${SEGMENTS_V2.length})`);
   ok(new Set(SEGMENTS_V2.map((s) => s.id)).size === SEGMENTS_V2.length, 'v2 ids unique');
   for (const s of SEGMENTS_V2) ok(!hasLatin(s.he) && !hasDigit(s.he) && hebrew(s.he), `v2 ${s.id} Hebrew only, no Latin/digits`);
   ok(SEGMENTS_V2.every((s) => !SEGMENTS_V2.some((o) => o !== s && o.id === s.id)), 'v2 ids do not collide');
@@ -488,10 +488,10 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
 
   // ru/en narration unchanged (snapshot of the pre-v2 data)
   const legacy = JSON.parse(readFileSync(new URL('./fixtures/narration-legacy.json', import.meta.url), 'utf8'));
-  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|pyramid|garland|eagle|half-moon|chaturanga|upward-dog|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow)\./.test(s.id);
+  const newPoseSegment = (s) => /^pose\.(crow|pigeon|triangle|wide-legged-fold|pyramid|garland|eagle|half-moon|chaturanga|upward-dog|extended-side-angle|sun-salutation-a|gentle-flow|warrior-flow|qg-[a-z-]+)\./.test(s.id);
   const legacyRuEn = (xs) => xs.filter((s) => !newPoseSegment(s)).map(({ id, ru, en }) => ({ id, ru, en }));
   ok(JSON.stringify(legacyRuEn(SEGS_NOW)) === JSON.stringify(legacyRuEn(legacy)), 'pre-existing ru/en legacy SEGMENTS identical to the snapshot');
-  ok(SEGS_NOW.length === legacy.length + 84, 'legacy narration adds only the 84 required new-pose segments');
+  ok(SEGS_NOW.length === legacy.length + 84 + 80, 'legacy narration adds only the 84 required new-pose segments plus 80 for the 16 qigong exercises');
 
   // setting migration + defaults
   ok(NP.resolveNarration({ density: 'minimal' }) === 'name' && NP.resolveNarration({ density: 'standard' }) === 'short' && NP.resolveNarration({ density: 'full' }) === 'full', 'dens migration minimal/standard/full');
@@ -604,8 +604,9 @@ for (const l of LANGS) ok(tr('clearFilters', l) !== 'clearFilters', `clear-filte
   // TTS priority: intro -> close -> beginner poses -> rest, hebrew v2 before the legacy segments
   const script = JSON.parse(readFileSync(new URL('../narration-script.json', import.meta.url), 'utf8'));
   const v2s = script.filter((s) => s.v2);
-  ok(v2s.length === 627 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 627 Hebrew v2 entries');
-  ok(script.filter((s) => !s.v2).length === 317 * 3, 'narration-script.json has 317 legacy entries in each language');
+  ok(v2s.length === 762 && v2s.every((s) => s.lang === 'he'), 'narration-script.json has 762 Hebrew v2 entries');
+  ok(script.filter((s) => !s.v2).length === 397 * 3, 'narration-script.json has 397 legacy entries in each language');
+  ok(script.filter((s) => s.prio === 'class').every((s) => s.lang === 'he' && /^pose\.qg-/.test(s.id)) && script.filter((s) => s.prio === 'class').length === 135 + 32, 'class prio: the qigong Hebrew v2 lines plus their he name/intro');
   const beg = new Set(POSES.filter((p) => p.difficulty === 1 || BEGINNER_EXTRA.has(p.id)).map((p) => p.id));
   ok(v2s.filter((s) => s.prio === 'intro').length === 8 && v2s.filter((s) => s.prio === 'close').length === 8, 'prio intro/close counts');
   ok(v2s.filter((s) => s.prio === 'beginner').every((s) => beg.has(s.id.split('.')[1])) && v2s.filter((s) => s.prio === 'rest').every((s) => !beg.has(s.id.split('.')[1])), 'prio beginner/rest by pose');

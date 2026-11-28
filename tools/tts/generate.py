@@ -4,7 +4,7 @@ Usage: python3 tools/tts/generate.py [--script narration-script.json] [--max-cal
 Default language is Hebrew only (Owner 2026-11-20). --batch N puts up to N consecutive Hebrew lines in ONE API call and splits the audio on the long silences
 between them (EXPERIMENTAL, off by default: see --batch); every batch is validated (cut count, gap sizes, per-line duration vs letters) and any doubt falls back to per-item calls for that batch only.
 The API key is read at runtime from env GEMINI_API_KEY or from the .env file (path in KEY_ENV_FILES). It is never printed or stored."""
-import os, sys, json, time, re, wave, base64, hashlib, subprocess, argparse, tempfile, urllib.request, urllib.error
+import os, sys, json, time, re, wave, base64, hashlib, subprocess, argparse, tempfile, shutil, urllib.request, urllib.error
 from pathlib import Path
 import array
 
@@ -192,13 +192,13 @@ def plan_rank():
             rank.setdefault(m.group(1), len(rank))
     return rank
 
-V2_PRIO = {'intro': 0, 'close': 1, 'beginner': 2, 'fix': 3, 'rest': 4}
+V2_PRIO = {'intro': 0, 'close': 1, 'class': 1.5, 'beginner': 2, 'fix': 3, 'rest': 4}  # class = the featured qigong class (Hebrew name/intro + v2 lines)
 
 def priority(seg, rank):
     """Hebrew v2 segments first (intro -> close -> beginner-plan poses -> fix (common mistakes) -> rest), then the old order (common, names, plan poses, rest)."""
     i = seg['id']; lang = LANG_ORDER.index(seg['lang']) if seg['lang'] in LANG_ORDER else 9
     m = re.match(r'pose\.([^.]+)\.(\w+)', i)
-    if seg.get('v2'):
+    if seg.get('v2') or seg.get('prio') == 'class':
         pr = V2_PRIO.get(seg.get('prio'), 4)
         return (pr, 0, rank.get(m[1], 9999) if m else 0, 0)  # 0: stable sort keeps script (play) order inside a group
     if i.startswith('common.'): tier, sub = 4, 0
@@ -240,7 +240,24 @@ class Runner:
         update_manifest(self.state, self.out_dir)
         log(f"OK {s['lang']}/{s['id']} dur={dur:.2f}s speech={ratio:.2f} {tag}")
 
+    def known(self):
+        """(lang, text sha) -> an mp3 already recorded for that exact text (any id)."""
+        out = {}
+        for k, h in self.state.items():
+            lang, i = k.split('|', 1); f = self.out_dir / lang / f'{i}.mp3'
+            if f.exists(): out.setdefault((lang, h), f)
+        return out
+    def reuse(self, s):
+        """same language + same text already recorded under another id: copy that mp3, no API call."""
+        src = self.known().get((s['lang'], sha(s['text'])))
+        if not src or src == self.path(s): return False
+        out = self.path(s); out.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(src, out)
+        ok, dur, ratio = verify(out)
+        if not ok: out.unlink(); return False
+        self.commit(s, out, dur, ratio, f'reuse {src.stem}'); return True
+
     def single(self, s):
+        if self.reuse(s): return True
         out = self.path(s)
         raw, rate = self.call(s['text'], s['lang'])
         to_mp3(raw, rate, out)
@@ -281,7 +298,9 @@ class Runner:
 
     def per_item(self, group):
         for s in group:
-            if not self.budget(): log('call budget reached, stopping'); return
+            if not self.budget():
+                if self.reuse(s): continue
+                log('call budget reached, stopping'); return
             try: self.single(s)
             except Quota: raise
             except Exception as e: self.errors += 1; log(f"ERROR {s['lang']}/{s['id']}: {str(e)[:300]}")
@@ -312,8 +331,10 @@ def main():
     KEY = get_key()
     r = Runner(out_dir, state, sp); r.max_calls = a.max_calls
     try:
-        for g in groups:
-            if not r.budget(): log('call budget reached, stopping'); break
+        for k, g in enumerate(groups):
+            if not r.budget():
+                n = sum(1 for gg in groups[k:] for x in gg if r.reuse(x))
+                log(f'call budget reached, stopping (reused {n} more clips without calls)'); break
             try:
                 if len(g) == 1: r.per_item(g)
                 else: r.batch(g)

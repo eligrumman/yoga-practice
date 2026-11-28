@@ -4755,6 +4755,1238 @@
   "text": "Let the breath return to its natural rhythm."
  },
  {
+  "id": "pose.qg-ground.name",
+  "lang": "he",
+  "text": "הרגשת הקרקע",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.name",
+  "lang": "ru",
+  "text": "Почувствовать землю"
+ },
+ {
+  "id": "pose.qg-ground.name",
+  "lang": "en",
+  "text": "Sensing the ground"
+ },
+ {
+  "id": "pose.qg-ground.intro",
+  "lang": "he",
+  "text": "הרגשת הקרקע",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.intro",
+  "lang": "ru",
+  "text": "Упражнение: Почувствовать землю."
+ },
+ {
+  "id": "pose.qg-ground.intro",
+  "lang": "en",
+  "text": "Exercise: Sensing the ground."
+ },
+ {
+  "id": "pose.qg-ground.cue.1",
+  "lang": "he",
+  "text": "הרפו את כל הגוף."
+ },
+ {
+  "id": "pose.qg-ground.cue.1",
+  "lang": "ru",
+  "text": "Расслабьте всё тело."
+ },
+ {
+  "id": "pose.qg-ground.cue.1",
+  "lang": "en",
+  "text": "Let your whole body relax."
+ },
+ {
+  "id": "pose.qg-ground.cue.2",
+  "lang": "he",
+  "text": "הרגישו את כפות הרגליים על הרצפה."
+ },
+ {
+  "id": "pose.qg-ground.cue.2",
+  "lang": "ru",
+  "text": "Почувствуйте стопы на полу."
+ },
+ {
+  "id": "pose.qg-ground.cue.2",
+  "lang": "en",
+  "text": "Feel your feet on the floor."
+ },
+ {
+  "id": "pose.qg-ground.cue.3",
+  "lang": "he",
+  "text": "העבירו את המשקל לאט מרגל לרגל."
+ },
+ {
+  "id": "pose.qg-ground.cue.3",
+  "lang": "ru",
+  "text": "Медленно переносите вес с ноги на ногу."
+ },
+ {
+  "id": "pose.qg-ground.cue.3",
+  "lang": "en",
+  "text": "Slowly shift your weight from foot to foot."
+ },
+ {
+  "id": "pose.qg-hand-channels.name",
+  "lang": "he",
+  "text": "ניקוי ערוצי האנרגיה בידיים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.name",
+  "lang": "ru",
+  "text": "Очищение каналов рук"
+ },
+ {
+  "id": "pose.qg-hand-channels.name",
+  "lang": "en",
+  "text": "Cleansing the hand channels"
+ },
+ {
+  "id": "pose.qg-hand-channels.intro",
+  "lang": "he",
+  "text": "ניקוי ערוצי האנרגיה בידיים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.intro",
+  "lang": "ru",
+  "text": "Упражнение: Очищение каналов рук."
+ },
+ {
+  "id": "pose.qg-hand-channels.intro",
+  "lang": "en",
+  "text": "Exercise: Cleansing the hand channels."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.1",
+  "lang": "he",
+  "text": "התחילו ביד שמאל, מהזרת. החליקו על כל אצבע פעמיים."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.1",
+  "lang": "ru",
+  "text": "Начните с левой руки, с мизинца. Проведите по каждому пальцу дважды."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.1",
+  "lang": "en",
+  "text": "Start with the left hand, from the little finger. Slide along each finger twice."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.2",
+  "lang": "he",
+  "text": "דמיינו שאתם סוחטים החוצה את האנרגיה הישנה, כמו דרך צינור."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.2",
+  "lang": "ru",
+  "text": "Представьте, что выжимаете старую энергию, как через трубку."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.2",
+  "lang": "en",
+  "text": "Imagine squeezing old energy out, as if through a pipe."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.3",
+  "lang": "he",
+  "text": "אחר כך היד השנייה, ואותו דבר ברגליים."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.3",
+  "lang": "ru",
+  "text": "Потом другая рука, и так же по ногам."
+ },
+ {
+  "id": "pose.qg-hand-channels.cue.3",
+  "lang": "en",
+  "text": "Then the other hand, and the same along the legs."
+ },
+ {
+  "id": "pose.qg-heel-drops.name",
+  "lang": "he",
+  "text": "קפיצות על העקבים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.name",
+  "lang": "ru",
+  "text": "Встряхивание на пятках"
+ },
+ {
+  "id": "pose.qg-heel-drops.name",
+  "lang": "en",
+  "text": "Heel drops"
+ },
+ {
+  "id": "pose.qg-heel-drops.intro",
+  "lang": "he",
+  "text": "קפיצות על העקבים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.intro",
+  "lang": "ru",
+  "text": "Упражнение: Встряхивание на пятках."
+ },
+ {
+  "id": "pose.qg-heel-drops.intro",
+  "lang": "en",
+  "text": "Exercise: Heel drops."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.1",
+  "lang": "he",
+  "text": "הבהונות כאילו דבוקות לרצפה."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.1",
+  "lang": "ru",
+  "text": "Пальцы ног будто приклеены к полу."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.1",
+  "lang": "en",
+  "text": "Toes stay as if glued to the floor."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.2",
+  "lang": "he",
+  "text": "דחיפה קטנה למעלה, ואז תנו לגוף ליפול על העקבים."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.2",
+  "lang": "ru",
+  "text": "Небольшой толчок вверх, и дайте телу опуститься на пятки."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.2",
+  "lang": "en",
+  "text": "A small push up, then let the body drop onto the heels."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.3",
+  "lang": "he",
+  "text": "כל הגוף רפוי, גם השוקיים."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.3",
+  "lang": "ru",
+  "text": "Всё тело расслаблено, икры тоже."
+ },
+ {
+  "id": "pose.qg-heel-drops.cue.3",
+  "lang": "en",
+  "text": "The whole body stays loose, calves too."
+ },
+ {
+  "id": "pose.qg-release-down.name",
+  "lang": "he",
+  "text": "שחרור המתח לאדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.name",
+  "lang": "ru",
+  "text": "Напряжение уходит в землю"
+ },
+ {
+  "id": "pose.qg-release-down.name",
+  "lang": "en",
+  "text": "Releasing tension to the ground"
+ },
+ {
+  "id": "pose.qg-release-down.intro",
+  "lang": "he",
+  "text": "שחרור המתח לאדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.intro",
+  "lang": "ru",
+  "text": "Упражнение: Напряжение уходит в землю."
+ },
+ {
+  "id": "pose.qg-release-down.intro",
+  "lang": "en",
+  "text": "Exercise: Releasing tension to the ground."
+ },
+ {
+  "id": "pose.qg-release-down.cue.1",
+  "lang": "he",
+  "text": "עמדו רגועים והקשיבו לגוף."
+ },
+ {
+  "id": "pose.qg-release-down.cue.1",
+  "lang": "ru",
+  "text": "Стойте спокойно и прислушайтесь к телу."
+ },
+ {
+  "id": "pose.qg-release-down.cue.1",
+  "lang": "en",
+  "text": "Stand calmly and listen to your body."
+ },
+ {
+  "id": "pose.qg-release-down.cue.2",
+  "lang": "he",
+  "text": "הרגישו איך כל המיותר זורם לאדמה."
+ },
+ {
+  "id": "pose.qg-release-down.cue.2",
+  "lang": "ru",
+  "text": "Почувствуйте, как всё лишнее уходит в землю."
+ },
+ {
+  "id": "pose.qg-release-down.cue.2",
+  "lang": "en",
+  "text": "Feel everything extra flowing down into the ground."
+ },
+ {
+  "id": "pose.qg-release-down.cue.3",
+  "lang": "he",
+  "text": "הנשימה חופשית."
+ },
+ {
+  "id": "pose.qg-release-down.cue.3",
+  "lang": "ru",
+  "text": "Дыхание свободное."
+ },
+ {
+  "id": "pose.qg-release-down.cue.3",
+  "lang": "en",
+  "text": "Breathe freely."
+ },
+ {
+  "id": "pose.qg-sky-press.name",
+  "lang": "he",
+  "text": "אנרגיית השמיים לאדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.name",
+  "lang": "ru",
+  "text": "Энергия неба в землю"
+ },
+ {
+  "id": "pose.qg-sky-press.name",
+  "lang": "en",
+  "text": "Sky energy to the earth"
+ },
+ {
+  "id": "pose.qg-sky-press.intro",
+  "lang": "he",
+  "text": "אנרגיית השמיים לאדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.intro",
+  "lang": "ru",
+  "text": "Упражнение: Энергия неба в землю."
+ },
+ {
+  "id": "pose.qg-sky-press.intro",
+  "lang": "en",
+  "text": "Exercise: Sky energy to the earth."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.1",
+  "lang": "he",
+  "text": "בשאיפה, הרימו את הידיים ואספו אנרגיה מהשמיים."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.1",
+  "lang": "ru",
+  "text": "На вдохе поднимите руки и соберите энергию неба."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.1",
+  "lang": "en",
+  "text": "Inhale, raise your arms and gather energy from the sky."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.2",
+  "lang": "he",
+  "text": "בנשיפה, כמו בוכנה, דחפו את המיותר דרך הגוף לאדמה."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.2",
+  "lang": "ru",
+  "text": "На выдохе, как поршнем, протолкните всё лишнее через тело в землю."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.2",
+  "lang": "en",
+  "text": "Exhale, like a piston, press everything extra down through the body into the ground."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.3",
+  "lang": "he",
+  "text": "הכתפיים נשארות רפויות."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.3",
+  "lang": "ru",
+  "text": "Плечи остаются расслабленными."
+ },
+ {
+  "id": "pose.qg-sky-press.cue.3",
+  "lang": "en",
+  "text": "Keep the shoulders relaxed."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.name",
+  "lang": "he",
+  "text": "ז'גונקה מהעקב",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.name",
+  "lang": "ru",
+  "text": "Жгонка от пятки"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.name",
+  "lang": "en",
+  "text": "Swing twist from the heel"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.intro",
+  "lang": "he",
+  "text": "ז'גונקה מהעקב",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.intro",
+  "lang": "ru",
+  "text": "Упражнение: Жгонка от пятки."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.intro",
+  "lang": "en",
+  "text": "Exercise: Swing twist from the heel."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.1",
+  "lang": "he",
+  "text": "דחיפה מהעקב של רגל אחת, וכל הגוף הרפוי מסתובב לצד השני."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.1",
+  "lang": "ru",
+  "text": "Толчок от пятки одной ноги, и свободное тело поворачивается в другую сторону."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.1",
+  "lang": "en",
+  "text": "Push from one heel and let the loose body swing to the other side."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.2",
+  "lang": "he",
+  "text": "ואז דחיפה מהעקב של הרגל השנייה."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.2",
+  "lang": "ru",
+  "text": "Затем толчок от пятки другой ноги."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.2",
+  "lang": "en",
+  "text": "Then push from the other heel."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.3",
+  "lang": "he",
+  "text": "הידיים חופשיות, הגוף זז מעצמו."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.3",
+  "lang": "ru",
+  "text": "Руки свободны, тело движется само."
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.cue.3",
+  "lang": "en",
+  "text": "Arms are free; the body moves by itself."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.name",
+  "lang": "he",
+  "text": "ז'גונקה משתי הרגליים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.name",
+  "lang": "ru",
+  "text": "Жгонка от обеих ног"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.name",
+  "lang": "en",
+  "text": "Swing twist from both legs"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.intro",
+  "lang": "he",
+  "text": "ז'גונקה משתי הרגליים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.intro",
+  "lang": "ru",
+  "text": "Упражнение: Жгонка от обеих ног."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.intro",
+  "lang": "en",
+  "text": "Exercise: Swing twist from both legs."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.1",
+  "lang": "he",
+  "text": "כופפו קצת את הברכיים."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.1",
+  "lang": "ru",
+  "text": "Немного согните колени."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.1",
+  "lang": "en",
+  "text": "Bend your knees a little."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.2",
+  "lang": "he",
+  "text": "דחפו משתי הרגליים ביחד, והידיים זזות לבד."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.2",
+  "lang": "ru",
+  "text": "Толкнитесь обеими ногами, и руки двигаются сами."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.2",
+  "lang": "en",
+  "text": "Push from both legs together and let the arms move by themselves."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.3",
+  "lang": "he",
+  "text": "הידיים חופשיות, כמו שוטים."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.3",
+  "lang": "ru",
+  "text": "Руки свободны, как плети."
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.cue.3",
+  "lang": "en",
+  "text": "Arms are free, like whips."
+ },
+ {
+  "id": "pose.qg-arm-whips.name",
+  "lang": "he",
+  "text": "ידיים כמו שוטים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.name",
+  "lang": "ru",
+  "text": "Руки как плети"
+ },
+ {
+  "id": "pose.qg-arm-whips.name",
+  "lang": "en",
+  "text": "Arm whips"
+ },
+ {
+  "id": "pose.qg-arm-whips.intro",
+  "lang": "he",
+  "text": "ידיים כמו שוטים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.intro",
+  "lang": "ru",
+  "text": "Упражнение: Руки как плети."
+ },
+ {
+  "id": "pose.qg-arm-whips.intro",
+  "lang": "en",
+  "text": "Exercise: Arm whips."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.1",
+  "lang": "he",
+  "text": "תנו לידיים להתנדנד."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.1",
+  "lang": "ru",
+  "text": "Позвольте рукам раскачиваться."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.1",
+  "lang": "en",
+  "text": "Let your arms swing."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.2",
+  "lang": "he",
+  "text": "הגוף מניע אותן, והן פשוט תלויות."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.2",
+  "lang": "ru",
+  "text": "Их двигает тело, руки просто висят."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.2",
+  "lang": "en",
+  "text": "The body moves them; they just hang."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.3",
+  "lang": "he",
+  "text": "ואז לכיוון השני."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.3",
+  "lang": "ru",
+  "text": "Затем в другую сторону."
+ },
+ {
+  "id": "pose.qg-arm-whips.cue.3",
+  "lang": "en",
+  "text": "Then the other direction."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.name",
+  "lang": "he",
+  "text": "שמונה באגן",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.name",
+  "lang": "ru",
+  "text": "Восьмёрка тазом"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.name",
+  "lang": "en",
+  "text": "Pelvis figure eight"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.intro",
+  "lang": "he",
+  "text": "שמונה באגן",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.intro",
+  "lang": "ru",
+  "text": "Упражнение: Восьмёрка тазом."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.intro",
+  "lang": "en",
+  "text": "Exercise: Pelvis figure eight."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.1",
+  "lang": "he",
+  "text": "ידיים על המותניים."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.1",
+  "lang": "ru",
+  "text": "Руки на талии."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.1",
+  "lang": "en",
+  "text": "Hands on your waist."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.2",
+  "lang": "he",
+  "text": "ציירו שמונה עם האגן."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.2",
+  "lang": "ru",
+  "text": "Нарисуйте тазом восьмёрку."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.2",
+  "lang": "en",
+  "text": "Draw a figure eight with your pelvis."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.3",
+  "lang": "he",
+  "text": "הכתפיים רגועות, הברכיים רכות."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.3",
+  "lang": "ru",
+  "text": "Плечи спокойны, колени мягкие."
+ },
+ {
+  "id": "pose.qg-pelvis-eight.cue.3",
+  "lang": "en",
+  "text": "Shoulders calm, knees soft."
+ },
+ {
+  "id": "pose.qg-knee-eight.name",
+  "lang": "he",
+  "text": "שמונה בברך",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.name",
+  "lang": "ru",
+  "text": "Восьмёрка коленом"
+ },
+ {
+  "id": "pose.qg-knee-eight.name",
+  "lang": "en",
+  "text": "Knee figure eight"
+ },
+ {
+  "id": "pose.qg-knee-eight.intro",
+  "lang": "he",
+  "text": "שמונה בברך",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.intro",
+  "lang": "ru",
+  "text": "Упражнение: Восьмёрка коленом."
+ },
+ {
+  "id": "pose.qg-knee-eight.intro",
+  "lang": "en",
+  "text": "Exercise: Knee figure eight."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.1",
+  "lang": "he",
+  "text": "הרימו רגל אחת."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.1",
+  "lang": "ru",
+  "text": "Поднимите одну ногу."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.1",
+  "lang": "en",
+  "text": "Lift one leg."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.2",
+  "lang": "he",
+  "text": "ציירו שמונה עם הברך."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.2",
+  "lang": "ru",
+  "text": "Нарисуйте коленом восьмёрку."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.2",
+  "lang": "en",
+  "text": "Draw a figure eight with the knee."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.3",
+  "lang": "he",
+  "text": "אפשר להיעזר בידיים או בקיר לשיווי משקל."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.3",
+  "lang": "ru",
+  "text": "Для равновесия можно опереться на стену."
+ },
+ {
+  "id": "pose.qg-knee-eight.cue.3",
+  "lang": "en",
+  "text": "Use your hands or a wall for balance."
+ },
+ {
+  "id": "pose.qg-foot-boat.name",
+  "lang": "he",
+  "text": "סירה בכף הרגל",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.name",
+  "lang": "ru",
+  "text": "Лодочка стопой"
+ },
+ {
+  "id": "pose.qg-foot-boat.name",
+  "lang": "en",
+  "text": "Foot boat"
+ },
+ {
+  "id": "pose.qg-foot-boat.intro",
+  "lang": "he",
+  "text": "סירה בכף הרגל",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.intro",
+  "lang": "ru",
+  "text": "Упражнение: Лодочка стопой."
+ },
+ {
+  "id": "pose.qg-foot-boat.intro",
+  "lang": "en",
+  "text": "Exercise: Foot boat."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.1",
+  "lang": "he",
+  "text": "כף הרגל היא כמו סירה."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.1",
+  "lang": "ru",
+  "text": "Стопа как лодочка."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.1",
+  "lang": "en",
+  "text": "Your foot is like a boat."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.2",
+  "lang": "he",
+  "text": "החרטום מצייר שמונה לפניכם."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.2",
+  "lang": "ru",
+  "text": "Её нос рисует перед Вами восьмёрку."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.2",
+  "lang": "en",
+  "text": "Its bow draws a figure eight in front of you."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.3",
+  "lang": "he",
+  "text": "ואחר כך העקב מוביל את השמונה."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.3",
+  "lang": "ru",
+  "text": "Потом восьмёрку ведёт пятка."
+ },
+ {
+  "id": "pose.qg-foot-boat.cue.3",
+  "lang": "en",
+  "text": "Then the heel leads the eight."
+ },
+ {
+  "id": "pose.qg-palm-rub.name",
+  "lang": "he",
+  "text": "שפשוף כפות הידיים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.name",
+  "lang": "ru",
+  "text": "Растирание ладоней"
+ },
+ {
+  "id": "pose.qg-palm-rub.name",
+  "lang": "en",
+  "text": "Palm rubbing"
+ },
+ {
+  "id": "pose.qg-palm-rub.intro",
+  "lang": "he",
+  "text": "שפשוף כפות הידיים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.intro",
+  "lang": "ru",
+  "text": "Упражнение: Растирание ладоней."
+ },
+ {
+  "id": "pose.qg-palm-rub.intro",
+  "lang": "en",
+  "text": "Exercise: Palm rubbing."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.1",
+  "lang": "he",
+  "text": "שפשפו את כפות הידיים עד שהן חמות."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.1",
+  "lang": "ru",
+  "text": "Растирайте ладони, пока они не станут тёплыми."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.1",
+  "lang": "en",
+  "text": "Rub your palms until they are warm."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.2",
+  "lang": "he",
+  "text": "הכתפיים רפויות, רק הידיים עובדות."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.2",
+  "lang": "ru",
+  "text": "Плечи расслаблены, работают только руки."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.2",
+  "lang": "en",
+  "text": "Shoulders loose; only the hands work."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.3",
+  "lang": "he",
+  "text": "הרגישו את החום בין כפות הידיים."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.3",
+  "lang": "ru",
+  "text": "Почувствуйте тепло между ладонями."
+ },
+ {
+  "id": "pose.qg-palm-rub.cue.3",
+  "lang": "en",
+  "text": "Feel the warmth between your palms."
+ },
+ {
+  "id": "pose.qg-child-prays.name",
+  "lang": "he",
+  "text": "ילד קטן מתפלל לבודהה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.name",
+  "lang": "ru",
+  "text": "Маленький ребёнок молится Будде"
+ },
+ {
+  "id": "pose.qg-child-prays.name",
+  "lang": "en",
+  "text": "Little child prays to the Buddha"
+ },
+ {
+  "id": "pose.qg-child-prays.intro",
+  "lang": "he",
+  "text": "ילד קטן מתפלל לבודהה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.intro",
+  "lang": "ru",
+  "text": "Упражнение: Маленький ребёнок молится Будде."
+ },
+ {
+  "id": "pose.qg-child-prays.intro",
+  "lang": "en",
+  "text": "Exercise: Little child prays to the Buddha."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.1",
+  "lang": "he",
+  "text": "רגליים ברוחב הכתפיים, הברכיים רכות."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.1",
+  "lang": "ru",
+  "text": "Стопы на ширине плеч, колени мягкие."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.1",
+  "lang": "en",
+  "text": "Feet shoulder-width apart, knees soft."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.2",
+  "lang": "he",
+  "text": "ידיים צמודות מול החזה."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.2",
+  "lang": "ru",
+  "text": "Ладони сложены перед грудью."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.2",
+  "lang": "en",
+  "text": "Palms pressed together in front of the chest."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.3",
+  "lang": "he",
+  "text": "סובבו את פרקי הידיים, שמונה פעמים פנימה ושמונה החוצה."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.3",
+  "lang": "ru",
+  "text": "Вращайте запястьями, восемь раз внутрь и восемь наружу."
+ },
+ {
+  "id": "pose.qg-child-prays.cue.3",
+  "lang": "en",
+  "text": "Circle the wrists, eight times inward and eight outward."
+ },
+ {
+  "id": "pose.qg-big-buddha.name",
+  "lang": "he",
+  "text": "בודהה גדול סורק את האדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.name",
+  "lang": "ru",
+  "text": "Большой Будда сканирует землю"
+ },
+ {
+  "id": "pose.qg-big-buddha.name",
+  "lang": "en",
+  "text": "Big Buddha scans the earth"
+ },
+ {
+  "id": "pose.qg-big-buddha.intro",
+  "lang": "he",
+  "text": "בודהה גדול סורק את האדמה",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.intro",
+  "lang": "ru",
+  "text": "Упражнение: Большой Будда сканирует землю."
+ },
+ {
+  "id": "pose.qg-big-buddha.intro",
+  "lang": "en",
+  "text": "Exercise: Big Buddha scans the earth."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.1",
+  "lang": "he",
+  "text": "דמיינו שאתם בודהה ענקי, וכפות הידיים מרגישות את האדמה."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.1",
+  "lang": "ru",
+  "text": "Представьте себя огромным Буддой, ладони чувствуют землю."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.1",
+  "lang": "en",
+  "text": "Imagine you are a giant Buddha; your palms sense the earth."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.2",
+  "lang": "he",
+  "text": "פתחו את הידיים לצדדים, והרגישו איך החזה נפתח."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.2",
+  "lang": "ru",
+  "text": "Раскройте руки в стороны и почувствуйте, как раскрывается грудь."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.2",
+  "lang": "en",
+  "text": "Open your arms wide to the sides and feel the chest open."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.3",
+  "lang": "he",
+  "text": "בנשיפה, סגרו את הידיים קדימה. בשאיפה, הצמידו את השכמות."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.3",
+  "lang": "ru",
+  "text": "На выдохе сведите руки вперёд. На вдохе сведите лопатки."
+ },
+ {
+  "id": "pose.qg-big-buddha.cue.3",
+  "lang": "en",
+  "text": "Exhale, close the arms forward. Inhale, draw the shoulder blades together."
+ },
+ {
+  "id": "pose.qg-crane.name",
+  "lang": "he",
+  "text": "עגור שותה מים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.name",
+  "lang": "ru",
+  "text": "Журавль пьёт воду"
+ },
+ {
+  "id": "pose.qg-crane.name",
+  "lang": "en",
+  "text": "Crane drinks water"
+ },
+ {
+  "id": "pose.qg-crane.intro",
+  "lang": "he",
+  "text": "עגור שותה מים",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.intro",
+  "lang": "ru",
+  "text": "Упражнение: Журавль пьёт воду."
+ },
+ {
+  "id": "pose.qg-crane.intro",
+  "lang": "en",
+  "text": "Exercise: Crane drinks water."
+ },
+ {
+  "id": "pose.qg-crane.cue.1",
+  "lang": "he",
+  "text": "מתחו את הסנטר קדימה, ואז עשו חצי עיגול גדול."
+ },
+ {
+  "id": "pose.qg-crane.cue.1",
+  "lang": "ru",
+  "text": "Вытяните подбородок вперёд и нарисуйте большой полукруг."
+ },
+ {
+  "id": "pose.qg-crane.cue.1",
+  "lang": "en",
+  "text": "Stretch your chin forward, then draw a big half circle."
+ },
+ {
+  "id": "pose.qg-crane.cue.2",
+  "lang": "he",
+  "text": "שמונה פעמים לכל צד."
+ },
+ {
+  "id": "pose.qg-crane.cue.2",
+  "lang": "ru",
+  "text": "Восемь раз в каждую сторону."
+ },
+ {
+  "id": "pose.qg-crane.cue.2",
+  "lang": "en",
+  "text": "Eight times to each side."
+ },
+ {
+  "id": "pose.qg-crane.cue.3",
+  "lang": "he",
+  "text": "ואז העגור שותה מים, פעמיים."
+ },
+ {
+  "id": "pose.qg-crane.cue.3",
+  "lang": "ru",
+  "text": "Потом журавль пьёт воду, дважды."
+ },
+ {
+  "id": "pose.qg-crane.cue.3",
+  "lang": "en",
+  "text": "Then the crane drinks water, twice."
+ },
+ {
+  "id": "pose.qg-dragon.name",
+  "lang": "he",
+  "text": "מערבולת הדרקון",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.name",
+  "lang": "ru",
+  "text": "Водоворот дракона"
+ },
+ {
+  "id": "pose.qg-dragon.name",
+  "lang": "en",
+  "text": "Dragon whirlpool"
+ },
+ {
+  "id": "pose.qg-dragon.intro",
+  "lang": "he",
+  "text": "מערבולת הדרקון",
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.intro",
+  "lang": "ru",
+  "text": "Упражнение: Водоворот дракона."
+ },
+ {
+  "id": "pose.qg-dragon.intro",
+  "lang": "en",
+  "text": "Exercise: Dragon whirlpool."
+ },
+ {
+  "id": "pose.qg-dragon.cue.1",
+  "lang": "he",
+  "text": "עמדו בפישוק רחב ויציב, ידיים חמות על הכליות."
+ },
+ {
+  "id": "pose.qg-dragon.cue.1",
+  "lang": "ru",
+  "text": "Встаньте широко и устойчиво, тёплые ладони на почках."
+ },
+ {
+  "id": "pose.qg-dragon.cue.1",
+  "lang": "en",
+  "text": "Stand in a wide, steady stance, warm hands on your kidneys."
+ },
+ {
+  "id": "pose.qg-dragon.cue.2",
+  "lang": "he",
+  "text": "סובבו את האגן, שמונה פעמים שמאלה ושמונה ימינה."
+ },
+ {
+  "id": "pose.qg-dragon.cue.2",
+  "lang": "ru",
+  "text": "Вращайте тазом, восемь раз влево и восемь вправо."
+ },
+ {
+  "id": "pose.qg-dragon.cue.2",
+  "lang": "en",
+  "text": "Circle the pelvis, eight times left and eight times right."
+ },
+ {
+  "id": "pose.qg-dragon.cue.3",
+  "lang": "he",
+  "text": "בסוף, שלוש דחיפות מהעקבים."
+ },
+ {
+  "id": "pose.qg-dragon.cue.3",
+  "lang": "ru",
+  "text": "В конце три толчка пятками."
+ },
+ {
+  "id": "pose.qg-dragon.cue.3",
+  "lang": "en",
+  "text": "At the end, three pushes from the heels."
+ },
+ {
   "id": "session.intro.arrive",
   "lang": "he",
   "text": "ברוכים הבאים. מצאו תנוחה נוחה והניחו לגוף להתיישב.",
@@ -9142,5 +10374,950 @@
   "text": "הישארו ככל שנוח לכם. כשתרצו, התיישבו לאט בעזרת הידיים.",
   "v2": true,
   "prio": "beginner"
+ },
+ {
+  "id": "pose.qg-ground.entry.1",
+  "lang": "he",
+  "text": "עכשיו הרפו את כל הגוף, והרגישו את כפות הרגליים על הרצפה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.align.1",
+  "lang": "he",
+  "text": "הרגישו את הגוף במרחב, והעבירו את המשקל מרגל לרגל.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.mod.L0",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.mod.L1",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.mod.L2",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.fix.1",
+  "lang": "he",
+  "text": "הרגישו את העקבים והבהונות על המזרן.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-ground.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.entry.1",
+  "lang": "he",
+  "text": "עכשיו בואו ננקה את ערוצי האנרגיה בידיים. קודם היד השמאלית. התחילו מהזרת, פעמיים כל אצבע.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.align.1",
+  "lang": "he",
+  "text": "דמיינו את האנרגיה הישנה שהצטברה, וסחטו אותה החוצה כאילו דרך צינור, לאדמה. אחר כך היד השנייה, ואותו דבר ברגליים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.mod.L0",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.mod.L1",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.mod.L2",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.fix.1",
+  "lang": "he",
+  "text": "כשהאצבעות רפויות, זה לא כואב. כשמתכווצים, כואב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-hand-channels.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.entry.1",
+  "lang": "he",
+  "text": "עכשיו קפצו על העקבים. הבהונות כאילו דבוקות לרצפה. תנו דחיפה קטנה למעלה, ואז פשוט תנו לגוף ליפול.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.align.1",
+  "lang": "he",
+  "text": "כל הגוף רפוי, גם הרגליים. האנרגיה עולה מהאדמה ומגיעה לכליות. פתאום בא לצחוק, בא לחייך.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.mod.L0",
+  "lang": "he",
+  "text": "אם הברכיים או הגב רגישים, רק הרימו והורידו את העקבים בעדינות, בלי קפיצה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.mod.L1",
+  "lang": "he",
+  "text": "אם הברכיים או הגב רגישים, רק הרימו והורידו את העקבים בעדינות, בלי קפיצה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.mod.L2",
+  "lang": "he",
+  "text": "אם הברכיים או הגב רגישים, רק הרימו והורידו את העקבים בעדינות, בלי קפיצה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.fix.1",
+  "lang": "he",
+  "text": "כשקופצים עם השרירים, המתח רק גדל. השרירים רק דוחפים, והגוף נופל.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-heel-drops.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.entry.1",
+  "lang": "he",
+  "text": "נוחו רגע. עמדו רגועים והקשיבו לגוף.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.align.1",
+  "lang": "he",
+  "text": "הרגישו איך כל המתח זורם מכם לאדמה, ומשחרר אתכם מכל מה שתקוע.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.mod.L0",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.mod.L1",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.mod.L2",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.fix.1",
+  "lang": "he",
+  "text": "הרגישו מה קורה בפנים עכשיו.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-release-down.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.entry.1",
+  "lang": "he",
+  "text": "עכשיו הרימו את הידיים למעלה. בשאיפה, אספו אנרגיה מהשמיים. בנשיפה, כמו בוכנה, דחפו את כל מה שמיותר דרך הגוף לאדמה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.align.1",
+  "lang": "he",
+  "text": "ועוד פעם. ידיים למעלה, שאפו, ומהקודקוד דחפו את האנרגיה הישנה מכל הגוף לאדמה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.mod.L0",
+  "lang": "he",
+  "text": "הרימו את הידיים רק עד גובה שנוח לכתפיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.mod.L1",
+  "lang": "he",
+  "text": "הרימו את הידיים רק עד גובה שנוח לכתפיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.mod.L2",
+  "lang": "he",
+  "text": "הרימו את הידיים רק עד גובה שנוח לכתפיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.fix.1",
+  "lang": "he",
+  "text": "הכתפיים נשארות רפויות, גם כשהידיים למעלה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-sky-press.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.entry.1",
+  "lang": "he",
+  "text": "עכשיו תרגיל שנקרא ז'גונקה. הדחיפה הראשונה מהעקב של רגל אחת, וכל הגוף הרפוי עף לצד השני.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.align.1",
+  "lang": "he",
+  "text": "הדחיפה השנייה מהעקב של הרגל השנייה. הקשיבו איך הדחיפה עוברת דרך כל הגוף.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.mod.L0",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.mod.L1",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.mod.L2",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.fix.1",
+  "lang": "he",
+  "text": "הגוף זז מעצמו, רק תנו לתנועה לעבור. תנועה אחת, בלי מתח.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-heel.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.entry.1",
+  "lang": "he",
+  "text": "עכשיו הדחיפה משתי הרגליים ביחד. כופפו קצת את הברכיים ודחפו מהרגליים, ואז הידיים זזות לבד.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.align.1",
+  "lang": "he",
+  "text": "הידיים חופשיות, כמו שוטים. הדחיפה מתחילה את התנועה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.mod.L0",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.mod.L1",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.mod.L2",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.fix.1",
+  "lang": "he",
+  "text": "הרגליים רק עוזרות, בלי מאמץ מיותר.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-zhgonka-legs.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.entry.1",
+  "lang": "he",
+  "text": "זה מעולה למפרקים. קודם תנו לידיים להתנדנד, ואז, הופ! הידיים הכי רחוק אחורה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.align.1",
+  "lang": "he",
+  "text": "ועכשיו לכיוון השני.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.mod.L0",
+  "lang": "he",
+  "text": "התנדנדו בתנועה קטנה, בלי לזרוק את הידיים בכוח.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.mod.L1",
+  "lang": "he",
+  "text": "התנדנדו בתנועה קטנה, בלי לזרוק את הידיים בכוח.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.mod.L2",
+  "lang": "he",
+  "text": "התנדנדו בתנועה קטנה, בלי לזרוק את הידיים בכוח.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.fix.1",
+  "lang": "he",
+  "text": "הגוף מניע אותן, והן פשוט תלויות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-arm-whips.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.entry.1",
+  "lang": "he",
+  "text": "עכשיו קצת חימום לאגן. ציירו שמונה עם האגן.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.align.1",
+  "lang": "he",
+  "text": "ועכשיו לכיוון השני.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.mod.L0",
+  "lang": "he",
+  "text": "ציירו שמונה קטנה, והברכיים רכות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.mod.L1",
+  "lang": "he",
+  "text": "ציירו שמונה קטנה, והברכיים רכות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.mod.L2",
+  "lang": "he",
+  "text": "ציירו שמונה קטנה, והברכיים רכות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.fix.1",
+  "lang": "he",
+  "text": "התנועה באה מהאגן, והכתפיים נשארות רגועות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-pelvis-eight.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.entry.1",
+  "lang": "he",
+  "text": "הרימו רגל אחת, וציירו שמונה עם הברך.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.align.1",
+  "lang": "he",
+  "text": "זה פותח את האגן ומזרים דם לכל הגוף. כל מה שתקוע משתחרר.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.mod.L0",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.mod.L1",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.mod.L2",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.fix.1",
+  "lang": "he",
+  "text": "אפשר להיעזר בידיים לשיווי משקל.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-knee-eight.side",
+  "lang": "he",
+  "text": "עכשיו הרגל השנייה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.entry.1",
+  "lang": "he",
+  "text": "ועכשיו הסירה: כף הרגל היא כמו סירה. החרטום שלה מצייר שמונה לפניכם, גדולה כמה שאפשר.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.align.1",
+  "lang": "he",
+  "text": "ועכשיו העקב מצייר את השמונה. העקב קדימה, עכשיו הוא מוביל.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.mod.L0",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.mod.L1",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.mod.L2",
+  "lang": "he",
+  "text": "אם אתם רוצים, אפשר להישען על קיר או על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.fix.1",
+  "lang": "he",
+  "text": "ורק עקבו אחרי התנועה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-foot-boat.side",
+  "lang": "he",
+  "text": "עכשיו הרגל השנייה. קודם החרטום, ואחר כך העקב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.entry.1",
+  "lang": "he",
+  "text": "עכשיו עוברים לצ'י גונג. שפשפו את כפות הידיים עד שהן חמות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.align.1",
+  "lang": "he",
+  "text": "הרגישו את החום בין כפות הידיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.mod.L0",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.mod.L1",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.mod.L2",
+  "lang": "he",
+  "text": "אפשר גם לשבת על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.fix.1",
+  "lang": "he",
+  "text": "הכתפיים רפויות, רק הידיים עובדות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-palm-rub.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.entry.1",
+  "lang": "he",
+  "text": "התרגיל ילד קטן מתפלל לבודהה. רגליים ברוחב הכתפיים, כפות הרגליים מקבילות, והברכיים כפופות קצת, כמו קפיץ.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.entry.2",
+  "lang": "he",
+  "text": "קצה הלשון נוגע בחך, וכאילו הקודקוד תלוי על חוט דק.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.align.1",
+  "lang": "he",
+  "text": "ידיים בנמסטה. דמיינו מולכם אדם שאתם רוצים להיות כמוהו, אולי מורה, או חבר.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.align.2",
+  "lang": "he",
+  "text": "עכשיו סובבו את פרקי הידיים. שמונה פעמים פנימה, ושמונה החוצה. ספרו בלב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.mod.L0",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.mod.L1",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.mod.L2",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.fix.1",
+  "lang": "he",
+  "text": "כשהברכיים נעולות, האנרגיה לא זורמת. אז פשוט עמדו בקלות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-child-prays.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.entry.1",
+  "lang": "he",
+  "text": "התרגיל בודהה גדול סורק את האדמה. דמיינו שאתם בודהה ענקי, עד השמיים, וכפות הידיים הענקיות מרגישות את האדמה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.align.1",
+  "lang": "he",
+  "text": "פתחו את הידיים לצדדים, כמה שאפשר, והרגישו איך החזה נפתח.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.align.2",
+  "lang": "he",
+  "text": "בנשיפה, סגרו את הידיים קדימה. בשאיפה, הצמידו את השכמות. אחרי שמונה, הפכו את הידיים והביטו בשמיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.mod.L0",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.mod.L1",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.mod.L2",
+  "lang": "he",
+  "text": "אם עמידה ארוכה קשה, אפשר לעשות את התרגיל בישיבה על כיסא.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.fix.1",
+  "lang": "he",
+  "text": "חשוב לעבוד עם בית החזה, וכל החסימות האלה משתחררות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-big-buddha.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.entry.1",
+  "lang": "he",
+  "text": "התרגיל הזה נקרא עגור שותה מים. דמיינו שאתם עגור גדול ויפה, על שפת אגם צלול.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.align.1",
+  "lang": "he",
+  "text": "קודם מתחו את הסנטר קדימה, ואז עשו חצי עיגול גדול.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.align.2",
+  "lang": "he",
+  "text": "העגור מנקה את הנוצות. שמונה פעמים שמאלה, שמונה פעמים ימינה, ואז שותה מים, פעמיים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.mod.L0",
+  "lang": "he",
+  "text": "הקטינו את העיגול אם הצוואר רגיש. התנועה איטית ורכה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.mod.L1",
+  "lang": "he",
+  "text": "הקטינו את העיגול אם הצוואר רגיש. התנועה איטית ורכה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.mod.L2",
+  "lang": "he",
+  "text": "הקטינו את העיגול אם הצוואר רגיש. התנועה איטית ורכה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.fix.1",
+  "lang": "he",
+  "text": "הסנטר מוביל, והצוואר לא נלחץ לאחור.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-crane.exit",
+  "lang": "he",
+  "text": "לאט לאט, ומסיימים.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.entry.1",
+  "lang": "he",
+  "text": "דמיינו שאתם דרקון ענק. עמדו בפישוק רחב ויציב, שפשפו את הידיים והניחו אותן על הכליות.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.align.1",
+  "lang": "he",
+  "text": "מסתובבים, תמיד קודם שמאלה. שמונה פעמים שמאלה, שמונה פעמים ימינה.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.align.2",
+  "lang": "he",
+  "text": "ואז שלוש דחיפות מהעקבים, והדרקון קופץ החוצה מהאגם.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.breath",
+  "lang": "he",
+  "text": "הנשימה חופשית.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.mod.L0",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.mod.L1",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.mod.L2",
+  "lang": "he",
+  "text": "התחילו בתנועה קטנה, והגדילו רק כמה שנוח לגב.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.fix.1",
+  "lang": "he",
+  "text": "הברכיים רכות, והתנועה באה מהאגן.",
+  "v2": true,
+  "prio": "class"
+ },
+ {
+  "id": "pose.qg-dragon.exit",
+  "lang": "he",
+  "text": "איזה כיף. זהו, סיימנו.",
+  "v2": true,
+  "prio": "class"
  }
 ]

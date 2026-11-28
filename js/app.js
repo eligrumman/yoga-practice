@@ -1,5 +1,5 @@
 import { POSES, POSE_BY_ID, CATEGORIES, CATEGORY_LABELS, LEVEL_LABELS, FLOW_LABEL } from '../data/poses.js';
-import { PRESETS, STARTER_PATH, ALL_PRESETS } from '../data/plans-preset.js';
+import { PRESETS, STARTER_PATH, ALL_PRESETS, FEATURED } from '../data/plans-preset.js';
 import { Figure, Animator, renderStatic, viewToggle } from './figure.js';
 import { attachSpecs } from './specs.js';
 import { planSeconds, fmtTime, hasBreaths, itemSeconds, exportPlanJSON, parsePlanJSON, mergeHistory, mergeFavorites, cleanItem, BREATH_SEC, holdSeconds, clampAmount, amountRange as amountRangeOf, dropIndex, reorder } from './plan.js';
@@ -129,6 +129,7 @@ function viewHome() {
       el('div', { class: 'row-btns' },
         el('button', { class: 'btn primary xl', id: 'btn-gen', onclick: openGenerator }, '✨ ' + T('firstPlan')),
         el('a', { class: 'btn xl', href: '#/library' }, T('navLibrary')))),
+    el('section', { class: 'featured' }, el('h2', {}, T('featured')), el('div', { class: 'grid cards', id: 'featured' }, FEATURED.map((p) => presetCard(p)))),
     el('section', {}, el('h2', {}, T('presets')), el('div', { class: 'grid cards', id: 'presets' }, PRESETS.map((p) => presetCard(p)))),
     el('section', {}, el('h2', {}, T('starter')), el('p', { class: 'hint' }, T('starterHint')), starterProgressBlock(), el('div', { class: 'grid cards', id: 'starter' }, STARTER_PATH.map((p) => presetCard(p, store.starterDone)))),
     settingsSection(),
@@ -197,7 +198,7 @@ function openGenerator() {
     el('fieldset', {}, el('legend', {}, T('genLevel')), radios('lev', GEN_LEVELS.map((l) => [l, T('glevel', l)]), level, (v) => { level = v; })),
     store.health.flags.length ? el('p', { class: 'hint small', id: 'gen-health' }, T('healthGenNote').replace('{list}', healthList(store.health.flags))) : null,
     el('details', {}, el('summary', {}, T('genAvoid')),
-      el('div', { class: 'avoid' }, POSES.filter((p) => p.section !== 'rest').map((p) =>
+      el('div', { class: 'avoid' }, POSES.filter((p) => p.section !== 'rest' && p.section !== 'qigong').map((p) =>
         el('label', { class: 'chip sm' }, el('input', { type: 'checkbox', onchange: (e) => { e.target.checked ? avoid.add(p.id) : avoid.delete(p.id); } }), el('span', {}, poseName(p)))))),
     el('div', { class: 'row-btns' },
       el('button', { class: 'btn primary', id: 'gen-go', value: 'go', onclick: (e) => {

@@ -58,7 +58,10 @@ for (const p of POSES) {
   const nm = {};
   for (const l of LANGS) nm[l] = SPOKEN_NAME[p.id]?.[l] || p[l];
   SEGMENTS.push({ id: `pose.${p.id}.name`, ...nm });
-  SEGMENTS.push({ id: `pose.${p.id}.intro`, he: INTRO.he(nm.he), ru: INTRO.ru(nm.ru), en: INTRO.en(nm.en) });
+  // qigong exercises are not "poses": the intro is the exercise name itself
+  SEGMENTS.push(p.category === 'qigong'
+    ? { id: `pose.${p.id}.intro`, he: nm.he, ru: `Упражнение: ${nm.ru}.`, en: `Exercise: ${nm.en}.` }
+    : { id: `pose.${p.id}.intro`, he: INTRO.he(nm.he), ru: INTRO.ru(nm.ru), en: INTRO.en(nm.en) });
   const n = Math.max(p.cues.he.length, p.cues.ru.length, p.cues.en.length);
   for (let i = 0; i < n; i++) {
     SEGMENTS.push({ id: `pose.${p.id}.cue.${i + 1}`, he: p.cues.he[i], ru: p.cues.ru[i], en: p.cues.en[i] });

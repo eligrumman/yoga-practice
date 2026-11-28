@@ -1,6 +1,7 @@
 // Narration v2, HEBREW ONLY. Editable source of truth for the new spoken segments (old cue/intro/common ids stay in narration.js).
 // Segment ids: session.intro.*, session.close.*, pose.<id>.entry.<n>, .align.<n>, .fix.<n> (common mistakes), .breath, .mod.L0|L1|L2, .exit, .side (two-sided poses only).
 // No Latin letters or digits in spoken text (tests enforce it). pauseAfter = intended silence in seconds after the clip.
+import { QIGONG_V2 } from './narration-he-qigong.js';
 export const INTRO = {
   arrive:   { id: 'session.intro.arrive',   he: 'ברוכים הבאים. מצאו תנוחה נוחה והניחו לגוף להתיישב.', pauseAfter: 2 },
   breath:   { id: 'session.intro.breath',   he: 'שאפו עמוק דרך האף, ונשפו לאט.', pauseAfter: 3 },
@@ -945,6 +946,8 @@ export const FIX = {
   "savasana-side": ["הכתף התחתונה נוטה להיכנס אל הצוואר. הרחיקו אותה קלות מהאוזן.", "אם משהו לא נוח, החליפו צד או הוסיפו כרית. אפשר לשאול רופא או מיילדת."],
 };
 for (const [pid, f] of Object.entries(FIX)) POSE_V2[pid].fix = f;
+// qigong and joint warm-up exercises (their fix lines are inside each entry)
+Object.assign(POSE_V2, QIGONG_V2);
 
 export const MOD_LEVELS = ['L0', 'L1', 'L2'];
 // Flat list of every v2 segment: [{id, he}]. Hebrew only; ru/en have no v2 segments.

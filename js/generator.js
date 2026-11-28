@@ -20,8 +20,10 @@ const BREATH_POSES = new Set(['tabletop', 'cat', 'cow']);
 // relax plans: no lunge, backbend, plank or boat peaks
 const RELAX_OUT = new Set(['low-lunge', 'high-lunge', 'cobra', 'upward-dog', 'locust', 'camel', 'bridge', 'plank', 'boat', 'warrior-3', 'dancer']);
 // Plans with prone, supine, twist or balance poses get a short pregnancy line on the plan screen (Savasana alone does not count)
+// qigong exercises with bouncing, swinging twists, one-leg balance or a wide rotating stance
+const QIGONG_PREG = new Set(['qg-heel-drops', 'qg-zhgonka-heel', 'qg-zhgonka-legs', 'qg-knee-eight', 'qg-foot-boat', 'qg-dragon']);
 const SUPINE_OR_PRONE = new Set(['cobra', 'upward-dog', 'locust', 'bridge', 'knees-to-chest', 'happy-baby', 'figure-four', 'hand-to-toe', 'legs-up-wall', 'supine-twist']);
-export const needsPregnancyNote = (items) => items.some((it) => { const p = POSE_BY_ID[it.pose]; return !!p && (SUPINE_OR_PRONE.has(p.id) || p.category === 'twist' || p.category === 'balance'); });
+export const needsPregnancyNote = (items) => items.some((it) => { const p = POSE_BY_ID[it.pose]; return !!p && (SUPINE_OR_PRONE.has(p.id) || QIGONG_PREG.has(p.id) || p.category === 'twist' || p.category === 'balance'); });
 export const isBackbend = (id) => POSE_BY_ID[id]?.category === 'backbend';
 // First-time plans finish with enough quiet time to settle: 3 min at 20, 5 min at 30.
 export const savasanaCap = (minutes) => minutes >= 30 ? 300 : minutes >= 20 ? 180 : Math.max(60, grid(minutes * 60 * 0.15));
@@ -82,6 +84,7 @@ function candidates({ focus, level, avoid }) {
   const out = (p) => focus === 'relax' && RELAX_OUT.has(p.id);
   const okLevel = (p) => (level === 'beginner' ? p.difficulty === 1 || BEGINNER_EXTRA.has(p.id) : p.difficulty <= maxD);
   return POSES.filter((p) => p.section !== 'rest'
+    && p.category !== 'qigong' // qigong class exercises: only in their own preset and the library
     && p.id !== 'sun-salutation-a' // inserted explicitly below only for eligible 20+ minute non-beginner plans
     && p.id !== 'warrior-flow' // inserted explicitly below only for eligible standing blocks
     && p.id !== 'crow' // arm-balance gate: library-only; never auto-generated

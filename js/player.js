@@ -434,7 +434,7 @@ export class Player {
   checkin(feel) {
     const box = this.root.querySelector('#checkin'); if (!box) return;
     const cur = { id: this.plan.id, minutes: Math.round(this.totalAll / 60), level: this.plan.preset?.level };
-    const pick = suggestNext(feel, cur, ALL_PRESETS.filter((p) => !p.day));
+    const pick = suggestNext(feel, cur, ALL_PRESETS.filter((p) => !p.day && !p.featured));
     box.innerHTML = '';
     if (!pick) return;
     box.append(el('p', { class: 'small', id: 'checkin-next' }, `${this.T('nextSuggest')}: ${pick.name[this.lang]} (${pick.minutes} ${this.T('min')})`),

@@ -85,5 +85,36 @@ class Split(unittest.TestCase):
         bad = [exp[0], exp[1] * 0.4, exp[2]]                       # truncated line
         self.assertEqual(G.ratio_outliers(G.piece_ratios(bad, texts)), [1])
 
+class ClassAndReuse(unittest.TestCase):
+    def test_class_lines_after_close_before_beginner(self):
+        segs = [
+            {'id': 'pose.b.entry.1', 'lang': 'he', 'text': 'ב', 'v2': True, 'prio': 'beginner'},
+            {'id': 'pose.qg-x.name', 'lang': 'he', 'text': 'שם', 'prio': 'class'},
+            {'id': 'pose.qg-x.entry.1', 'lang': 'he', 'text': 'כניסה', 'v2': True, 'prio': 'class'},
+            {'id': 'session.close.line', 'lang': 'he', 'text': 'סוף', 'v2': True, 'prio': 'close'},
+            {'id': 'pose.qg-x.intro', 'lang': 'ru', 'text': 'Упражнение'},
+        ]
+        order = [s['id'] + '|' + s['lang'] for s in sorted(segs, key=lambda s: G.priority(s, {}))]
+        self.assertEqual(order, ['session.close.line|he', 'pose.qg-x.name|he', 'pose.qg-x.entry.1|he', 'pose.b.entry.1|he', 'pose.qg-x.intro|ru'])
+    def test_same_text_reuses_clip_without_call(self):
+        import json, tempfile
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d); (d / 'he').mkdir()
+            (d / 'he' / 'pose.a.breath.mp3').write_bytes(b'x' * 2000)
+            state = {'he|pose.a.breath': G.sha('הנשימה חופשית.')}
+            r = G.Runner(d, state, d / 'state.json'); r.max_calls = 0
+            calls = []
+            r.call = lambda *a: calls.append(a)
+            saved = G.verify, G.log; G.verify = lambda p: (True, 2.0, 0.8); G.log = lambda m: None
+            try:
+                r.per_item([{'id': 'pose.qg-x.breath', 'lang': 'he', 'text': 'הנשימה חופשית.'},
+                            {'id': 'pose.qg-x.exit', 'lang': 'he', 'text': 'טקסט חדש.'}])
+            finally: G.verify, G.log = saved
+            self.assertEqual(calls, [])
+            self.assertEqual((d / 'he' / 'pose.qg-x.breath.mp3').read_bytes(), b'x' * 2000)
+            self.assertEqual(state['he|pose.qg-x.breath'], G.sha('הנשימה חופשית.'))
+            self.assertNotIn('he|pose.qg-x.exit', state)
+            self.assertIn('he/pose.qg-x.breath', json.loads((d / 'manifest.json').read_text()))
+
 if __name__ == '__main__':
     unittest.main(verbosity=1)

@@ -1,0 +1,114 @@
+{
+  "id": "qg-crane",
+  "format": 1,
+  "camera": {"az":14,"el":6},
+  "start": {
+    "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
+    "spine1": [0, 0, 0],
+    "spine2": [0, 0, 0],
+    "spine3": [0, 0, 0],
+    "neck": [0, 0, 0],
+    "head": [0, 0, 0],
+    "shoulderR": [0, 0, -2],
+    "elbowR": [0, 0, 2],
+    "wristR": [0, 0, 0],
+    "hipR": [0, 0, 0],
+    "kneeR": [0, 0, 0],
+    "ankleR": [0, 0, 0],
+    "shoulderL": [0, 0, -2],
+    "elbowL": [0, 0, 2],
+    "wristL": [0, 0, 0],
+    "hipL": [0, 0, 0],
+    "kneeL": [0, 0, 0],
+    "ankleL": [0, 0, 0]
+  },
+  "levels": [
+    {
+      "level": 0,
+      "hold": {
+        "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
+        "spine1": [0, 0, 0],
+        "spine2": [0, 0, 0],
+        "spine3": [0, 0, -3.2],
+        "neck": [0, 0, 32],
+        "head": [0, 0, -30.4],
+        "shoulderR": [12, 0, -16.4],
+        "elbowR": [0, 0, 8.4],
+        "wristR": [0, 0, 0],
+        "hipR": [0, 0, 4],
+        "kneeR": [0, 0, 9.6],
+        "ankleR": [0, 0, 5.6],
+        "shoulderL": [12, 0, -16.4],
+        "elbowL": [0, 0, 8.4],
+        "wristL": [0, 0, 0],
+        "hipL": [0, 0, 4],
+        "kneeL": [0, 0, 9.6],
+        "ankleL": [0, 0, 5.6]
+      },
+      "alt": {
+        "spine3": [0, 0, 0],
+        "neck": [0, 0, 40],
+        "head": [0, 0, 8]
+      },
+      "props": []
+    },
+    {
+      "level": 1,
+      "hold": {
+        "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
+        "spine1": [0, 0, 0],
+        "spine2": [0, 0, 0],
+        "spine3": [0, 0, -4],
+        "neck": [0, 0, 40],
+        "head": [0, 0, -38],
+        "shoulderR": [15, 0, -20],
+        "elbowR": [0, 0, 10],
+        "wristR": [0, 0, 0],
+        "hipR": [0, 0, 5],
+        "kneeR": [0, 0, 12],
+        "ankleR": [0, 0, 7],
+        "shoulderL": [15, 0, -20],
+        "elbowL": [0, 0, 10],
+        "wristL": [0, 0, 0],
+        "hipL": [0, 0, 5],
+        "kneeL": [0, 0, 12],
+        "ankleL": [0, 0, 7]
+      },
+      "alt": {
+        "spine3": [0, 0, 0],
+        "neck": [0, 0, 50],
+        "head": [0, 0, 10]
+      },
+      "props": []
+    },
+    {
+      "level": 2,
+      "hold": {
+        "pelvis": { "pos": [0, 0, 0], "rot": [0, 0, 0] },
+        "spine1": [0, 0, 0],
+        "spine2": [0, 0, 0],
+        "spine3": [0, 0, -4],
+        "neck": [0, 0, 40],
+        "head": [0, 0, -38],
+        "shoulderR": [15, 0, -20],
+        "elbowR": [0, 0, 10],
+        "wristR": [0, 0, 0],
+        "hipR": [0, 0, 5],
+        "kneeR": [0, 0, 12],
+        "ankleR": [0, 0, 7],
+        "shoulderL": [15, 0, -20],
+        "elbowL": [0, 0, 10],
+        "wristL": [0, 0, 0],
+        "hipL": [0, 0, 5],
+        "kneeL": [0, 0, 12],
+        "ankleL": [0, 0, 7]
+      },
+      "alt": {
+        "spine3": [0, 0, 0],
+        "neck": [0, 0, 50],
+        "head": [0, 0, 10]
+      },
+      "props": []
+    }
+  ]
+}

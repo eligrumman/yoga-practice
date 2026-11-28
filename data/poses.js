@@ -3,11 +3,12 @@ import warm from './p-warm.js';
 import standing from './p-standing.js';
 import floor from './p-floor.js';
 import rest from './p-rest.js';
+import qigong from './p-qigong.js';
 
 export const CATEGORIES = [
   'warm-up', 'standing', 'balance', 'forward fold', 'backbend', 'twist',
   'hip opener', 'inversion-light', 'floor/seated', 'supine', 'rest',
-  'arm balance',
+  'arm balance', 'qigong',
 ];
 export const CATEGORY_LABELS = {
   'warm-up': { he: 'חימום', en: 'Warm-up', ru: 'Разминка' },
@@ -22,6 +23,7 @@ export const CATEGORY_LABELS = {
   'floor/seated': { he: 'ישיבה / רצפה', en: 'Floor / seated', ru: 'Сидя / на полу' },
   supine: { he: 'שכיבה על הגב', en: 'Supine', ru: 'Лёжа на спине' },
   rest: { he: 'מנוחה', en: 'Rest', ru: 'Отдых' },
+  qigong: { he: "צ'יגונג", en: 'Qigong', ru: 'Цигун' },
 };
 export const LEVEL_LABELS = [
   { he: 'מתחילים', en: 'Beginner', ru: 'Начинающий' },
@@ -30,7 +32,7 @@ export const LEVEL_LABELS = [
 ];
 export const FLOW_LABEL = { he: 'זרימה', en: 'Flow', ru: 'Поток' };
 
-const RAW = [...warm, ...standing, ...floor, ...rest];
+const RAW = [...warm, ...standing, ...floor, ...rest, ...qigong];
 
 export const POSES = RAW.map((r) => ({
   id: r.id,

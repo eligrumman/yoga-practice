@@ -234,4 +234,24 @@ export const STARTER_PATH = [
   },
 ];
 
-export const ALL_PRESETS = [...PRESETS, ...STARTER_PATH];
+// Featured class: qigong and joint warm-up, standing, in the class order with close to the class timings.
+// Shown first on the home screen; not offered by the end-of-session suggestion.
+export const FEATURED = [
+  {
+    id: 'qigong-joints', minutes: 33, level: 0, featured: true,
+    name: { he: "צ'יגונג וחימום מפרקים", ru: 'Цигун и суставная разминка', en: 'Qigong and joint warm-up' },
+    desc: {
+      he: "שיעור בעמידה: הרגשת הקרקע, ניקוי ערוצי האנרגיה, ז'גונקה, שמיניות במפרקים, ואחריהם תרגילי צ'יגונג: ילד קטן מתפלל לבודהה, בודהה גדול, עגור שותה מים ומערבולת הדרקון.",
+      ru: 'Занятие стоя: почувствовать землю, очищение каналов, жгонка, восьмёрки в суставах, а затем упражнения цигун: ребёнок молится Будде, большой Будда, журавль пьёт воду и водоворот дракона.',
+      en: 'A standing class: sensing the ground, cleansing the channels, swing twists, figure eights for the joints, then qigong: the child prays to the Buddha, the big Buddha, the crane drinks water and the dragon whirlpool.',
+    },
+    items: [
+      s('qg-ground', 0, 35), s('qg-hand-channels', 0, 108), s('qg-heel-drops', 0, 84), s('qg-release-down', 0, 70),
+      s('qg-sky-press', 0, 66), s('qg-zhgonka-heel', 0, 96), s('qg-zhgonka-legs', 0, 60), s('qg-arm-whips', 0, 74),
+      s('qg-pelvis-eight', 0, 25), s('qg-knee-eight', 0, 35), s('qg-foot-boat', 0, 55), s('qg-palm-rub', 0, 30),
+      s('qg-child-prays', 0, 206), s('qg-big-buddha', 0, 295), s('qg-crane', 0, 288), s('qg-dragon', 0, 281),
+    ],
+  },
+];
+
+export const ALL_PRESETS = [...PRESETS, ...STARTER_PATH, ...FEATURED];

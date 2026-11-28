@@ -9,6 +9,7 @@ const T = {
   navLibrary: { he: 'תנוחות', ru: 'Позы', en: 'Poses' },
   navPlans: { he: 'התכניות שלי', ru: 'Мои планы', en: 'My plans' },
   presets: { he: 'תכניות מוכנות', ru: 'Готовые программы', en: 'Ready-made plans' },
+  featured: { he: 'השיעור המומלץ', ru: 'Рекомендуемое занятие', en: 'Featured class' },
   starter: { he: 'מסלול פתיחה של 7 ימים', ru: 'Семидневный курс для начинающих', en: '7-day starter path' },
   starterProgress: { he: 'הושלמו {n} מתוך 7 ימים', ru: 'Пройдено дней: {n} из 7', en: '{n} of 7 days done' },
   starterNext: { he: 'היום הבא: יום {n}', ru: 'Следующий день: {n}', en: 'Next: day {n}' },
