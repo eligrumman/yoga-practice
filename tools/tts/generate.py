@@ -300,7 +300,7 @@ class Runner:
         for s in group:
             if not self.budget():
                 if self.reuse(s): continue
-                log('call budget reached, stopping'); return
+                log('call budget reached'); return
             try: self.single(s)
             except Quota: raise
             except Exception as e: self.errors += 1; log(f"ERROR {s['lang']}/{s['id']}: {str(e)[:300]}")
@@ -331,10 +331,8 @@ def main():
     KEY = get_key()
     r = Runner(out_dir, state, sp); r.max_calls = a.max_calls
     try:
-        for k, g in enumerate(groups):
-            if not r.budget():
-                n = sum(1 for gg in groups[k:] for x in gg if r.reuse(x))
-                log(f'call budget reached, stopping (reused {n} more clips without calls)'); break
+        for g in groups:
+            if not r.budget(): log('call budget reached, stopping'); break
             try:
                 if len(g) == 1: r.per_item(g)
                 else: r.batch(g)
@@ -343,6 +341,10 @@ def main():
                 r.errors += 1; log(f"ERROR batch {g[0]['id']}...: {str(e)[:300]}")
     except Quota as e:
         log('DAILY QUOTA reached, stopping cleanly: ' + str(e)[:200])
+    # budget or quota stop: lines whose exact text is already recorded under another id still get their clip (a copy, no call)
+    left = [s for s in todo if not (state.get(f"{s['lang']}|{s['id']}") == sha(s['text']) and r.path(s).exists())]
+    n = sum(1 for s in left if r.reuse(s))
+    if n: log(f'reused {n} more clips without calls')
     update_manifest(state, out_dir)
     remaining = len([s for s in segs if state.get(f"{s['lang']}|{s['id']}") != sha(s['text'])])
     log(f'done={r.done} errors={r.errors} calls={r.calls} remaining={remaining}')

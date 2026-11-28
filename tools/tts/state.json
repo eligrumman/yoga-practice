@@ -938,5 +938,9 @@
 "he|pose.qg-crane.fix.1": "0ebb2ccaf3964d06",
 "he|pose.qg-crane.exit": "6c65a1606462c0f4",
 "he|pose.qg-dragon.name": "92d063f9e6494683",
-"he|pose.qg-dragon.intro": "92d063f9e6494683"
+"he|pose.qg-dragon.intro": "92d063f9e6494683",
+"he|pose.qg-dragon.breath": "2a24cbff15e96eb3",
+"he|pose.qg-dragon.mod.L0": "1e68d50dc17fb5c1",
+"he|pose.qg-dragon.mod.L1": "1e68d50dc17fb5c1",
+"he|pose.qg-dragon.mod.L2": "1e68d50dc17fb5c1"
 }
